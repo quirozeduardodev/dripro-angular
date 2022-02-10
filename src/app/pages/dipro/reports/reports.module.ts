@@ -16,8 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from './forms/forms.module';
 import { CreateComponent } from './create/create.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { InfiniteReportsComponent } from './components/infinite-reports/infinite-reports.component';
 import { InfiniteReportsGridComponent } from './components/infinite-reports-grid/infinite-reports-grid.component';
+import { ReportsService } from './services/reports.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { InfiniteReportsGridComponent } from './components/infinite-reports-grid
     EditComponent,
     ScreeningComponent,
     FiltersSheetComponent,
-    InfiniteReportsComponent,
     InfiniteReportsGridComponent,
     QuestionComponent
   ],
@@ -42,5 +41,8 @@ import { InfiniteReportsGridComponent } from './components/infinite-reports-grid
     FormsModule,
     InfiniteScrollModule,
   ],
+  providers: [
+    ReportsService
+  ]
 })
 export class ReportsModule {}

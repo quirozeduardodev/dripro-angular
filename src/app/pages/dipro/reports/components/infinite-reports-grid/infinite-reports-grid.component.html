@@ -2,7 +2,7 @@
 [ngStyle]="{'grid-template-columns': 'repeat(' + itemsPerRow + ', 1fr)'}"
 infiniteScroll [alwaysCallback]="true"
      [scrollWindow]="false" (scrolled)="wrapperScrolled($event)" [infiniteScrollDistance]="5" [immediateCheck]="true">
-  <ng-container *ngFor="let report of shortedReports">
+  <ng-container *ngFor="let report of reports">
     <div #cardContainer class="card-container"
          [style.height]="(cardContainer.offsetWidth > 0 ? cardContainer.offsetWidth : 1) * itemAspectRatio + 'px'"
          [style.maxHeight]="(cardContainer.offsetWidth > 0 ? cardContainer.offsetWidth : 1) * itemAspectRatio + 'px'">
@@ -22,7 +22,7 @@ infiniteScroll [alwaysCallback]="true"
   <ng-container *ngIf="showButtonLoadData">
     <div #cardContainer class="card-container" [style.height]="(cardContainer.offsetWidth > 0 ? cardContainer.offsetWidth : 1) * itemAspectRatio + 'px'">
       <div class="flex h-full justify-center items-center">
-        <button type="button" class="btn btn-accent btn-stroked btn-rounded-full" (click)="loadData.next()">Load More</button>
+        <button type="button" class="btn btn-accent btn-stroked btn-rounded-full" (click)="reportsService.fetchOnlineData()">Load More</button>
       </div>
     </div>
   </ng-container>

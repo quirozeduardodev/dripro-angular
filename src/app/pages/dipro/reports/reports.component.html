@@ -7,9 +7,8 @@
           {{'pages.dipro.reports.filters' | translate}}
         </button>
       </div>
-      <app-infinite-reports-grid class="infinite-reports" [reports]="reportsMerged" [shortBy]="filters.shortBy"
+      <app-infinite-reports-grid class="infinite-reports"
         [showButtonLoadData]="hasMoreOnlineData && !isLoadingNewData"
-        (loadData)="loadData()"
         (deleteItem)="deleteItem($event.id)"
         (openItem)="$event.isOnline ? openOnlineReport($event.id) : openLocalReport($event.id)">
       </app-infinite-reports-grid>
