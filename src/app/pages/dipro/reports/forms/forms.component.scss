@@ -1,0 +1,10 @@
+.content {
+  max-width: 800px;
+  width: 100%;
+}
+
+::ng-deep {
+  .input-text {
+    @apply text-sm sm:text-base relative w-full border bg-white focus:outline-none rounded border-gray-400 placeholder-gray-400 focus:border-red-500 px-2 py-3 focus:ring-0 my-1;
+  }
+}

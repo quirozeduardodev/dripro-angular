@@ -1,0 +1,54 @@
+<ion-content>
+  <div class="wrapper flex flex-col justify-center place-items-center h-full w-full">
+    <div class="logo justify-center flex place-items-center w-full">
+      <img src="assets/images/icon.png" alt="Logo Cummins">
+    </div>
+    <div class="w-full content">
+      <form [formGroup]="formGroupLogin" (submit)="submit()">
+        <div class="flex flex-col mx-14">
+          <app-error-message class="flex justify-center" *ngIf="isInvalidCredentials" [message]="'Invalid Credentials'"></app-error-message>
+          <div class="flex flex-col my-2">
+            <div class="relative">
+              <div class="absolute flex border border-transparent left-0 top-0 h-full w-10">
+                <div class="flex items-center justify-center rounded-tl rounded-bl z-10 bg-transparent text-gray-600 text-lg h-full w-full">
+                  <i class="mdi mdi-account text-xl"></i>
+                </div>
+              </div>
+              <input type="email" formControlName="username" placeholder="{{'pages.auth.login.email' | translate}}" class="text-sm relative w-full focus:outline-none border bg-white rounded border-gray-600 placeholder-gray-400 focus:border-red-500 py-2 pr-2 pl-12 focus:ring-0">
+            </div>
+            <app-validator-message [control]="formGroupLogin.controls.username"></app-validator-message>
+          </div>
+          <div class="flex flex-col my-2">
+            <div class="relative">
+              <div class="absolute flex border border-transparent left-0 top-0 h-full w-10">
+                <div class="flex items-center justify-center rounded-tl rounded-bl z-10 bg-transparent text-gray-600 text-lg h-full w-full">
+                  <i class="mdi mdi-key-variant text-xl"></i>
+                </div>
+              </div>
+
+              <input formControlName="password" placeholder="{{'pages.auth.login.password' | translate}}" [type]="isVisiblePassword ? 'text' : 'password'" class="text-sm relative w-full focus:outline-none border bg-white rounded border-gray-600 placeholder-gray-400 focus:border-red-500 py-2 pr-2 pl-12 focus:ring-0 pr-8">
+
+              <div class="absolute flex border border-transparent right-0 top-0 h-full w-10 cursor-pointer" (click)="isVisiblePassword = !isVisiblePassword">
+                <div class="flex items-center justify-center rounded-tl rounded-bl z-10 bg-transparent text-gray-600 text-lg h-full w-full">
+                  <i class="mdi text-xl" [ngClass]="isVisiblePassword ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"></i>
+                </div>
+              </div>
+
+            </div>
+            <app-validator-message [control]="formGroupLogin.controls.password"></app-validator-message>
+          </div>
+          <button type="submit" class="mt-4 w-full bg-black hover:bg-gray-900 text-white py-2 px-4 rounded">
+            <ng-container *ngIf="!isLogging">
+              {{'pages.auth.login.submit' | translate}}
+            </ng-container>
+            <ng-container *ngIf="isLogging">
+              <div class="animate-spin"><i class="mdi mdi-loading text-xl"></i></div>
+            </ng-container>
+          </button>
+          <a class="text-red-600 w-full text-center my-2 cursor-pointer" (click)="goToForgotPassword()">Forgot Password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
+

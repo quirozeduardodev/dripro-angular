@@ -1,0 +1,46 @@
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .control-content {
+    position: relative;
+    ::ng-deep {
+      form-text-field {
+        width: 100%;
+        .control-content {
+          input {
+            padding-right: 45px;
+          }
+        }
+      }
+    }
+
+    .icon-content {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 10px;
+
+      .icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .wrapper-dialog {
+    max-height: 350px;
+    display: flex;
+    flex-direction: column;
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+  }
+}

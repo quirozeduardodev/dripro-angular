@@ -1,0 +1,3 @@
+.input-text {
+  @apply text-sm relative w-full focus:outline-none border bg-white rounded border-gray-600 placeholder-gray-400 focus:border-red-500 py-2 px-2 focus:ring-0 text-black;
+}

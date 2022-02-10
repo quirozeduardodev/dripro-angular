@@ -1,0 +1,9 @@
+.wrapper-main {
+  height: calc(100vh - 56px);
+
+  ion-header {
+    ion-toolbar {
+      --border-style: none;
+    }
+  }
+}

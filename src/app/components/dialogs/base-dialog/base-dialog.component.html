@@ -1,0 +1,10 @@
+<app-overlay [isVisible]="showOverlay">
+  <div class="w-full h-full flex justify-center items-center" (click)="overlayClose ? close() : null">
+    <div class="flex p-5">
+      <div class="bg-white rounded-2xl p-3"
+           [@dialog]="showDialog" (click)="$event.stopPropagation()">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</app-overlay>

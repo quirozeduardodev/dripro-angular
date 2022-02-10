@@ -1,0 +1,23 @@
+<div class="control-content" [class.control-disabled]="isDisabled">
+  <div *ngFor="let image of value; let i = index" class="image-container">
+    <img [src]="getImageValue(image)" alt="Image" class="image" (click)="openPreview($event, image)">
+    <button *ngIf="!isDisabled" class="remove-button" type="button" (click)="removeImageAt(i)">
+      <i class="icon mdi mdi-minus-circle-outline"></i>
+    </button>
+  </div>
+  <button type="button" *ngIf="!isDisabled" class="add-button" (click)="takePicture()" [disabled]="isDisabled">
+    <i class="mdi mdi-camera-plus icon"></i>
+  </button>
+</div>
+<app-validator-message [control]="control"></app-validator-message>
+
+<app-base-dialog #dialog>
+  <div class="preview-image-container">
+    <div class="actions-content">
+      <button class="close-button" type="button" (click)="dialog?.close()">
+        <i class="mdi mdi-close"></i>
+      </button>
+    </div>
+    <img [src]="getImageValue(previewImage)" alt="Image" class="image">
+  </div>
+</app-base-dialog>

@@ -1,0 +1,11 @@
+<div class="control-content" [class.control-disabled]="isDisabled">
+  <mat-checkbox *ngFor="let option of options"
+                (change)="optionChanged(option, $event.checked)"
+                [checked]="value.includes(option.value)"
+                [disabled]="isDisabled">
+    <span>
+      {{option.label}}
+    </span>
+  </mat-checkbox>
+</div>
+<app-validator-message [control]="ngControl?.control ?? null"></app-validator-message>

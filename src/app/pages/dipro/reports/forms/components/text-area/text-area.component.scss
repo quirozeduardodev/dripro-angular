@@ -1,0 +1,55 @@
+$primary-color: var(--dipro-forms-primary-color, #ec0909FF);
+$primary-color-disabled: var(--dipro-forms-primary-color-disabled, #B0B0B0);
+
+/*
+Specific values for this control
+ */
+$border-color-disabled: var(--dipro-forms-text-area-border-color, $primary-color-disabled);
+$border-color: var(--dipro-forms-text-area-border-disabled-color, #4f4f4f);
+$border-radius: var(--dipro-forms-text-area-border-radius, 0.25em);
+$border-width: var(--dipro-forms-text-area-border-radius, 1px);
+$font-size: var(--dipro-forms-text-area-font-size, 1em);
+$text-color: var(--dipro-forms-text-area-color, #000000);
+$placeholder-color: var(--dipro-forms-text-area-placeholder-color, #565656);
+$content-padding: var(--dipro-forms-text-area-content-padding, (0.7em 0.75em 0.7em 0.75em));
+$bg-color: var(--dipro-forms-text-area-background-color, #FFFFFF);
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .control-content {
+    width: 100%;
+    background: $bg-color;
+
+    &.control-disabled {
+      textarea {
+        border-color: $border-color-disabled;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      font-size: $font-size;
+      padding: $content-padding;
+      color: $text-color;
+      background: $bg-color;
+
+      border: {
+        radius: $border-radius;
+        color: $border-color;
+        width: $border-width;
+        style: solid;
+      };
+
+      &::placeholder {
+        color: $placeholder-color;
+        font-size: $font-size;
+      }
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+      }
+    }
+  }
+}

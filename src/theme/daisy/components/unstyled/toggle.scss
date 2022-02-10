@@ -1,0 +1,5 @@
+.toggle{
+  &:focus {
+    @apply outline-none;
+  }
+}

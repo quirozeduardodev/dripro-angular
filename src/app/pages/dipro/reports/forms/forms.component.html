@@ -1,0 +1,20 @@
+<div *ngIf="type && (hasPermission | async) === true" class="flex justify-center h-full">
+  <div class="content px-4">
+    <app-jsa-on-site #formulary *ngIf="type === 'jsa-onSite'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-jsa-on-site>
+    <app-jsa-on-field-generic #formulary *ngIf="type === 'jsa-onField-generic'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-jsa-on-field-generic>
+    <app-jsa-on-field-power-generation #formulary *ngIf="type === 'jsa-onField-powerGeneration'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-jsa-on-field-power-generation>
+    <app-jsa-on-field-marine #formulary *ngIf="type === 'jsa-onField-marine'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-jsa-on-field-marine>
+    <app-jsa-warehouse #formulary *ngIf="type === 'jsa-warehouse'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-jsa-warehouse>
+    <app-service-generic #formulary *ngIf="type === 'service-generic'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-service-generic>
+    <app-service-maintenance #formulary *ngIf="type === 'service-preventiveMaintenance'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-service-maintenance>
+    <app-ingersoll-rand-rotary-contact-cooled-rotary #formulary *ngIf="type === 'ingersollRand-rotaryContactCooledRotary'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-ingersoll-rand-rotary-contact-cooled-rotary>
+    <app-ingersoll-rand-rotary-oil-free-sierra #formulary *ngIf="type === 'ingersollRand-rotaryOilFreeSierra'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-ingersoll-rand-rotary-oil-free-sierra>
+    <app-ingersoll-rand-hl-eh-hb #formulary *ngIf="type === 'ingersollRand-hlEhHb'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-ingersoll-rand-hl-eh-hb>
+    <app-ingersoll-rand-rotary-oil-free-nirvana #formulary *ngIf="type === 'ingersollRand-rotaryOilFreeNirvana'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-ingersoll-rand-rotary-oil-free-nirvana>
+    <app-ingersoll-rand-refrigerated-dryer-system #formulary *ngIf="type === 'ingersollRand-refrigeratedDryerSystem'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-ingersoll-rand-refrigerated-dryer-system>
+    <app-ingersoll-rand-rotary-contact-cooled-nirvana #formulary *ngIf="type === 'ingersollRand-rotaryContactCooledNirvana'" [answers]="answers" (onSave)="onSave.emit($event)" (onSubmit)="onSubmit.emit($event)" [readOnly]="readOnly"></app-ingersoll-rand-rotary-contact-cooled-nirvana>
+  </div>
+</div>
+<div *ngIf="type && (hasPermission | async) === false" class="w-full h-full flex justify-center items-center">
+  <span class="text-center">This Report was not found or you don't have enough permissions</span>
+</div>

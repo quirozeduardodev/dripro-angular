@@ -1,0 +1,15 @@
+<ion-router-outlet *ngIf="isBootstrapInitialized | async"></ion-router-outlet>
+
+<div *ngIf="!(isBootstrapInitialized | async)" class="w-screen h-screen absolute bg-white">
+  <app-center-loading></app-center-loading>
+</div>
+
+<div *ngIf="hasBootstrapInitializationError | async" class="w-screen h-screen absolute bg-white">
+  <div class="w-full h-full flex justify-center items-center">
+    <div style="height: 50px">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="startBootstrap()">
+        Try Again
+      </button>
+    </div>
+  </div>
+</div>

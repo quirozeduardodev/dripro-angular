@@ -1,0 +1,61 @@
+$primary-color: var(--dipro-forms-primary-color, #ec0909FF);
+$primary-color-disabled: var(--dipro-forms-primary-color-disabled, #B0B0B0);
+/*
+Specific values for this control
+ */
+$border-color: var(--dipro-forms-button-group-border-color, #ec0909FF);
+$border-radius: var(--dipro-forms-button-group-border-radius, 0.25em);
+$border-width: var(--dipro-forms-button-group-border-radius, 1px);
+$font-size: var(--dipro-forms-button-group-font-size, 1em);
+$text-color: var(--dipro-forms-button-group-color, #1a1a1a);
+$content-padding: var(--dipro-forms-button-group-content-padding, (0.4em 0.75em 0.4em 0.75em));
+$bg-color: var(--dipro-forms-button-group-background-color, #FFFFFF);
+
+$active-text-color: var(--dipro-forms-button-group-active-color, #ffffff);
+$active-bg-color: var(--dipro-forms-button-group-active-background-color, #ec0909FF);
+$opacity-disabled: var(--dipro-forms-button-group-opacity-disabled, 0.8);
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .control-content {
+    width: 100%;
+    display: flex;
+
+    &.control-disabled {
+      opacity: $opacity-disabled;
+      button {
+        cursor: auto;
+      }
+    }
+
+    button {
+      padding: $content-padding;
+      border: {
+        style: solid;
+        width: $border-width;
+        color: $border-color;
+      };
+      background: $bg-color;
+      color: $text-color;
+      font-size: $font-size;
+      width: 100%;
+
+      &:first-child {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+      &:last-child {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+
+      &.button-active {
+        background: $active-bg-color;
+        color: $active-text-color;
+      }
+    }
+  }
+}

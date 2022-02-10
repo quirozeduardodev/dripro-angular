@@ -1,0 +1,308 @@
+<form (submit)="submit()" [formGroup]="formGroup">
+  <div class="w-full flex flex-col">
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.date' | translate}}</label>
+      <form-text-field formControlName="date" [placeholder]="'forms.common.labels.date' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
+      <form-text-field formControlName="job_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.name' | translate}}</label>
+      <form-text-field formControlName="name_people" [placeholder]="'forms.common.labels.name' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.wwid' | translate}}</label>
+      <form-text-field formControlName="wwid" [placeholder]="'forms.common.labels.wwid' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col" *ngIf="businessUnits$">
+      <label class="my-1">{{'forms.common.labels.bussinesUnit' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.bussinesUnit' | translate" formControlName="unidad">
+        <form-option *ngFor="let option of (businessUnits$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 w-full flex justify-between">
+      <span>{{'forms.common.labels.isAccompained' | translate}}</span>
+      <mat-slide-toggle formControlName="accompanied"></mat-slide-toggle>
+    </div>
+    <div *ngIf="formGroup.controls.accompanied.value === true" class="w-full flex flex-col my-3">
+      <span>{{'forms.common.labels.selectYourPartner' | translate}}</span>
+      <form-multi-select formControlName="teammate_name" [placeholder]="'forms.common.labels.selectYourPartner' | translate">
+        <form-option *ngFor="let user of (technicians$ | async) || []" [value]="user.name" [label]="user.name"></form-option>
+      </form-multi-select>
+    </div>
+    <div class="my-2 w-full flex flex-col justify-between">
+      <span>{{'forms.common.labels.extern' | translate}}</span>
+      <form-chip-list [placeholder]="'forms.common.labels.extern' | translate" formControlName="tageditor"></form-chip-list>
+    </div>
+    <div class="my-2 flex flex-col" *ngIf="businessUnits$">
+      <label class="my-1">{{'forms.common.labels.taskCategory' | translate}}</label>
+      <form-search-select formControlName="task_category_warehouse" [placeholder]="'forms.common.labels.taskCategory' | translate">
+        <form-option *ngFor="let option of (categoriesUnits$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.categoryDescription' | translate}}</label>
+      <form-text-field formControlName="task_description" [placeholder]="'forms.common.labels.categoryDescription' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.fillLocation' | translate}}</label>
+      <form-text-field formControlName="location" [placeholder]="'forms.common.labels.fillLocation' | translate"></form-text-field>
+    </div>
+    <ng-container *ngFor="let section of groupSections">
+      <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+        <span class="text-white text-lg font-medium">{{section.label | translate}}</span>
+      </div>
+      <div class="my-4 flex flex-col" *ngFor="let question of section.questions">
+        <label class="my-1">{{question.label | translate}}</label>
+        <form-button-group class="mt-3" [formControlName]="question.formControlName">
+          <form-option *ngFor="let option of commonOptions" [label]="option.label | translate" [value]="option.value"></form-option>
+        </form-button-group>
+        <div *ngIf="question.subOptions" class="w-full flex flex-col px-3">
+          <div *ngIf="question.subOptions.fCNRiskLevel && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
+            <span class="my-2">{{'forms.common.labels.riskLevel' | translate}}</span>
+            <form-search-select [placeholder]="'forms.common.labels.riskLevel' | translate" [formControlName]="question.subOptions.fCNRiskLevel">
+              <form-option *ngFor="let option of nopOptionLevelRisk"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
+            </form-search-select>
+          </div>
+          <div *ngIf="question.subOptions.fCNControlled && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
+            <span class="my-2">{{'forms.common.labels.controlled' | translate}}</span>
+            <form-search-select [placeholder]="'forms.common.labels.controlled' | translate" [formControlName]="question.subOptions.fCNControlled">
+              <form-option *ngFor="let option of nopOptionControlled"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
+            </form-search-select>
+          </div>
+          <div *ngIf="question.subOptions.fCNCauseAnalysis && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
+            <span class="my-2">{{'forms.common.labels.analisisCause' | translate}}</span>
+            <form-search-select [placeholder]="'forms.common.labels.analisisCause' | translate" [formControlName]="question.subOptions.fCNCauseAnalysis">
+              <form-option *ngFor="let option of nopOptionCauseAnalysis"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
+            </form-search-select>
+            <div *ngIf="question.subOptions.fCNCauseAnalysisOther && formGroup.controls[question.subOptions.fCNCauseAnalysis].value === 9" class="my-1 flex flex-col mt-3">
+              <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
+              <form-text-field [formControlName]="question.subOptions.fCNCauseAnalysisOther"  [placeholder]="'forms.common.labels.message' | translate"></form-text-field>
+            </div>
+          </div>
+          <div *ngIf="question.subOptions.fCNTaken && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
+            <span class="my-2">{{'forms.common.labels.actionsTaken' | translate}}</span>
+            <form-search-select [placeholder]="'forms.common.labels.actionsTaken' | translate" [formControlName]="question.subOptions.fCNTaken">
+              <form-option *ngFor="let option of nopOptinsTaken"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
+            </form-search-select>
+            <div *ngIf="question.subOptions.fCNTakenOther && formGroup.controls[question.subOptions.fCNTaken].value === 10" class="my-1 flex flex-col mt-3">
+              <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
+              <form-text-field [formControlName]="question.subOptions.fCNTakenOther"  [placeholder]="'forms.common.labels.message' | translate"></form-text-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+        <span class="text-white text-lg font-medium">{{'forms.jsa.common.solitaryWork.title' | translate}}</span>
+      </div>
+      <div class="my-3 flex flex-col">
+        <label class="my-1">{{'forms.jsa.common.solitaryWork.question1' | translate}}</label>
+        <form-button-group class="mt-12" [formControlName]="'warehouse71_quest'">
+          <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
+          <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
+        </form-button-group>
+        <div *ngIf="formGroup.controls.warehouse71_quest.value === 1" class="my-1 flex flex-col mt-3">
+          <label class="my-1">Proporcione detalles de medidas especiales de seguridad y plan de emergencia.</label>
+          <form-text-field [formControlName]="'warehouse71_1_quest'"  [placeholder]="'forms.common.labels.details'| translate"></form-text-field>
+        </div>
+      </div>
+    </ng-container>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.extra.label1' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label2' | translate}}</span>
+    </div>
+    <div class="border rounded border-gray-500 px-3 py-5 my-2" *ngFor="let item of checkboxesP1">
+      <mat-checkbox class="example-margin" [formControlName]="item.formControlName">{{item.label | translate}}</mat-checkbox>
+      <div *ngIf="formGroup.controls[item.formControlName].value === true" class="flex flex-col">
+        <span>{{'forms.jsa.warehouse.extra.question1' | translate}}</span>
+        <form-text-area [formControlName]="item.formControlName1"></form-text-area>
+        <span>{{'forms.jsa.warehouse.extra.question2' | translate}}</span>
+        <form-text-area [formControlName]="item.formControlName2"></form-text-area>
+      </div>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.extra.label3' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label4' | translate}}</span>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label5' | translate}}</span>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.unnusualDangers.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse78_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option4' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option5' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option6' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option7' | translate"></form-option>
+        <form-option [value]="8" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option8' | translate"></form-option>
+        <form-option [value]="9" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option9' | translate"></form-option>
+        <form-option [value]="10" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option10' | translate"></form-option>
+        <form-option [value]="11" [label]="'forms.jsa.warehouse.hazards.unnusualDangers.option11' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.access.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse79_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.access.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.access.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.access.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.access.option4' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.neat.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse80_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.neat.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.neat.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.neat.option3' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.fire.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse81_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.fire.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.fire.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.fire.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.fire.option4' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.warehouse.hazards.fire.option5' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.slip.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse82_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.slip.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.slip.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.slip.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.slip.option4' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.warehouse.hazards.slip.option5' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.warehouse.hazards.slip.option6' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.warehouse.hazards.slip.option7' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.interaction.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse83_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.interaction.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.interaction.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.interaction.option3' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.environment.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse84_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.environment.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.environment.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.environment.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.environment.option4' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.ergonomic.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse85_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.ergonomic.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.ergonomic.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.ergonomic.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.ergonomic.option4' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.warehouse.hazards.ergonomic.option5' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.warehouse.hazards.ergonomic.option6' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.warehouse.hazards.ergonomic.option7' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <span class="my-2">{{'forms.jsa.warehouse.hazards.weather.title' | translate}}</span>
+      <form-checkbox-group class="ml-3" formControlName="warehouse86_quest">
+        <form-option [value]="1" [label]="'forms.jsa.warehouse.hazards.weather.option1' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.warehouse.hazards.weather.option2' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.warehouse.hazards.weather.option3' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.warehouse.hazards.weather.option4' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.warehouse.hazards.weather.option5' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.warehouse.hazards.weather.option6' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.warehouse.hazards.weather.option7' | translate"></form-option>
+      </form-checkbox-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.jsa.warehouse.extra.label6' | translate}}</label>
+      <form-text-field [formControlName]="'different_unusual'"  [placeholder]="''"></form-text-field>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.extra.label7' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label8' | translate}}</span>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.jsa.warehouse.extra.label9' | translate}}</label>
+      <form-text-field [formControlName]="'name_manager'"  [placeholder]="'forms.jsa.warehouse.extra.label9' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.jsa.warehouse.extra.label10' | translate}}</label>
+      <form-text-field [formControlName]="'phone_manager'"  [placeholder]="'forms.jsa.warehouse.extra.label10' | translate"></form-text-field>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label11' | translate}}</span>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.extra.label12' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label13' | translate}}</span>
+    </div>
+    <div class="my-3 flex flex-col">
+      <label class="my-1">{{'forms.jsa.common.doesNeedLoto' | translate}}</label>
+      <form-button-group class="mt-12" formControlName="lotus_quest">
+        <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
+      </form-button-group>
+    </div>
+    <div *ngIf="formGroup.controls.lotus_quest.value === 1" class="flex flex-col">
+      <div class="my-2 flex flex-col">
+        <span class="my-2">{{'forms.jsa.common.lotus.part1.title' | translate}}</span>
+        <form-checkbox-group class="ml-3" formControlName="loto">
+          <form-option [value]="1" [label]="(1 + ' - ' + ('forms.jsa.common.lotus.part1.step1' | translate))"></form-option>
+          <form-option [value]="2" [label]="(2 + ' - ' + ('forms.jsa.common.lotus.part1.step2' | translate))"></form-option>
+          <form-option [value]="3" [label]="(3 + ' - ' + ('forms.jsa.common.lotus.part1.step3' | translate))"></form-option>
+          <form-option [value]="4" [label]="(4 + ' - ' + ('forms.jsa.common.lotus.part1.step4' | translate))"></form-option>
+          <form-option [value]="5" [label]="(5 + ' - ' + ('forms.jsa.common.lotus.part1.step5' | translate))"></form-option>
+          <form-option [value]="6" [label]="(6 + ' - ' + ('forms.jsa.common.lotus.part1.step6' | translate))"></form-option>
+          <form-option [value]="7" [label]="(7 + ' - ' + ('forms.jsa.common.lotus.part1.step7' | translate))"></form-option>
+          <form-option [value]="8" [label]="(8 + ' - ' + ('forms.jsa.common.lotus.part1.step8' | translate))"></form-option>
+        </form-checkbox-group>
+      </div>
+      <div class="my-2 flex flex-col">
+        <span class="my-2">{{'forms.jsa.common.lotus.part2.title' | translate}}</span>
+        <form-checkbox-group class="ml-3" formControlName="loto_energies">
+          <form-option [value]="1" [label]="1 + ' - ' + ( 'forms.jsa.common.lotus.part2.step1' | translate)"></form-option>
+          <form-option [value]="2" [label]="2 + ' - ' + ( 'forms.jsa.common.lotus.part2.step2' | translate)"></form-option>
+          <form-option [value]="3" [label]="3 + ' - ' + ( 'forms.jsa.common.lotus.part2.step3' | translate)"></form-option>
+          <form-option [value]="4" [label]="4 + ' - ' + ( 'forms.jsa.common.lotus.part2.step4' | translate)"></form-option>
+          <form-option [value]="5" [label]="5 + ' - ' + ( 'forms.jsa.common.lotus.part2.step5' | translate)"></form-option>
+        </form-checkbox-group>
+      </div>
+    </div>
+    <div class="my-3">
+      <form-image-picker formControlName="photos"></form-image-picker>
+    </div>
+    <div *ngIf="!readOnly" class="w-full flex my-5 px-3">
+      <button type="submit" class="w-full btn btn-flat btn-accent btn-rounded-full">{{'forms.common.labels.submit' | translate}}</button>
+    </div>
+  </div>
+</form>

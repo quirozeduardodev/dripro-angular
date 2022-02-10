@@ -1,0 +1,68 @@
+<ion-app>
+  <ion-menu #ionMenu side="start" menuId="first" contentId="main">
+    <div class="h-full bg-black flex flex-col">
+      <div class="flex justify-center py-5 mt-4">
+        <img style="width: 50%;" src="assets/images/logo.png" alt="Cummins Logo" class="filter invert">
+      </div>
+      <div class="flex flex-col justify-between h-full">
+        <div class="flex flex-col divide-y divide-gray-400 px-2">
+          <div *ngFor="let item of menu" class="w-full py-1">
+            <div class="hover:bg-gray-500 cursor-pointer rounded-md"
+                 [ngClass]="currentRoute == item.route ? 'bg-gray-800': ''" (click)="changePage(item.route)">
+              <div class="py-2 px-4 w-full">
+            <span class="font-semibold text-lg text-white">
+            <i class="m-2" [ngClass]="item.faIcon"></i>
+              {{item.title | translate}}
+          </span>
+              </div>
+            </div>
+          </div>
+          <div class="w-full py-1">
+            <div class="hover:bg-gray-500 cursor-pointer rounded-md" (click)="signOut()">
+              <div class="p-2 px-4 w-full">
+                <span class="font-semibold text-lg text-white">
+                <i class="m-2 mdi mdi-login-variant text-xl"></i>
+                  {{'pages.dipro.layouts.drawer.menu.logout' | translate}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center pb-4">
+          <span class="text-gray-500">Version 1.8.5 Build 4</span>
+        </div>
+      </div>
+    </div>
+  </ion-menu>
+  <ion-header>
+    <ion-toolbar mode="ios">
+      <ion-buttons slot="start">
+        <ion-menu-button mode="md"></ion-menu-button>
+      </ion-buttons>
+      <div class="flex flex-col">
+        <span>{{title}}</span>
+        <span *ngIf="subTitle && subTitle.trim().length > 0" class="font-light text-xs">{{subTitle}}</span>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="main">
+    <ng-content></ng-content>
+  </ion-content>
+</ion-app>
+
+<app-base-dialog #logoutDialog>
+  <div class="flex flex-col justify-center">
+    <div class="p-3 flex justify-center">
+      <span class="text-black font-bold text-lg">Close session</span>
+    </div>
+    <div class="p-3 flex justify-center">
+      <span class="text-black">Are you sure?</span>
+    </div>
+    <div class="flex">
+      <button class="mx-1 btn btn-primary btn-stroked" (click)="logoutDialog.close()">Cancel</button>
+      <button class="mx-1 btn btn-accent btn-flat" (click)="logout()">Aceptar</button>
+    </div>
+  </div>
+</app-base-dialog>
+
+<app-change-password-dialog #changePasswordDialog></app-change-password-dialog>

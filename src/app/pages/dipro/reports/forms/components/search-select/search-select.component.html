@@ -1,0 +1,18 @@
+<div class="control-content" [class.control-disabled]="isDisabled">
+  <form-text-field [placeholder]="placeholder" [formControl]="formControlTextValue"></form-text-field>
+  <div class="icon-content">
+    <i class="mdi mdi-chevron-down icon"></i>
+  </div>
+</div>
+<app-validator-message [control]="control"></app-validator-message>
+
+<app-base-dialog #dialog>
+  <div class="wrapper-dialog">
+    <form-text-field [placeholder]="placeholder" [formControl]="formControlFilter"></form-text-field>
+    <div class="list">
+      <button type="button" *ngFor="let item of options; let i = index"
+              class="my-1 px-1 py-2 hover:bg-gray-100 cursor-pointer focus:bg-gray-200"
+              (click)="selectItem(item)" [autofocus]="i === 0">{{item.label}}</button>
+    </div>
+  </div>
+</app-base-dialog>

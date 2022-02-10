@@ -1,0 +1,7 @@
+<app-back-layout [title]="'pages.dipro.reports.screening.title' | translate">
+  <div class="flex w-full h-full justify-center items-center">
+    <div class="question-content p-4">
+      <app-question [rootQuestion]="question" (onFinish)="onFinishQuestion($event)"></app-question>
+    </div>
+  </div>
+</app-back-layout>

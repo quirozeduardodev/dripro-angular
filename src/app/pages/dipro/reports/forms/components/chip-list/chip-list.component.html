@@ -1,0 +1,17 @@
+<div class="control-content" [class.control-disabled]="isDisabled">
+  <mat-chip-list #chipList [disabled]="isDisabled">
+    <mat-chip
+      *ngFor="let item of value"
+      (removed)="remove(item)">
+      {{item}}
+      <button matChipRemove>
+        <i class="mdi mdi-close-circle remove-icon"></i>
+      </button>
+    </mat-chip>
+    <input [disabled]="isDisabled"
+      [placeholder]="placeholder ?? ''"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</div>

@@ -1,0 +1,480 @@
+{
+  "components": {
+    "validator_message": {
+      "required": "This field is required",
+      "email": "This field is not a valid email",
+      "invalid": "This field is invalid",
+      "min":"This field must be greeter than",
+      "max": "This field must be lower than",
+      "requiredTrue": "This field mus be true",
+      "minLength": "This field must contains at least $1 chars",
+      "maxLength":"This field must contains less than $1 chars",
+      "pattern": "This field is invalid",
+      "nullValidator":"This field must be null",
+      "compose": "This field is invalid",
+      "composeAsync": "This field is invalid"
+    }
+  },
+  "pages": {
+    "auth": {
+      "login": {
+        "email": "Email",
+        "password": "Password",
+        "submit": "Login",
+        "forgot_password": "Forgot Password"
+      },
+      "forgot_password": {
+        "components": {
+          "processStatusDialog": {
+            "close": "Close",
+            "sending":  "We are sending a new password to your email",
+            "success": "We have sent you a new password, please verify your email",
+            "error":  "An error has occurred, try again later",
+            "unknownEmail": "The email is not registered, please type a valid email"
+          }
+        },
+        "email": "Email",
+        "reset_password": "Reset password",
+        "login": "Login"
+      }
+    },
+    "dipro": {
+      "layouts": {
+        "drawer": {
+          "components": {
+            "changePasswordDialog": {
+              "title": "Change Password",
+              "message": "You have restored your password, please enter a new password",
+              "newPassword": "New Password",
+              "error": "The password could not be changed",
+              "accept": "Accept",
+              "later": "Later"
+            }
+          },
+          "menu": {
+            "reports": "Reports",
+            "manuals": "Manuals",
+            "offlineData":  "Offline Data",
+            "settings": "Settings",
+            "logout": "Logout"
+          }
+        }
+      },
+      "reports": {
+        "components": {
+          "filtersSheet": {
+            "close": "Close",
+            "localReports": "Local Reports",
+            "localReportsDisclaimer": "All offline reports will be shown",
+            "offlineReports": "Offline Reports",
+            "reports": "Reports",
+            "jsa": "JSA",
+            "service": "Service",
+            "ingersollRand": "Ingersoll Rand",
+            "orderBy": "Order by",
+            "ascendant": "Ascendant",
+            "descendant": "Descendant"
+          }
+        },
+        "create": {
+          "title": "Create report"
+        },
+        "edit": {
+          "title": "Editing report"
+        },
+        "view": {
+          "title": "Viewing report"
+        },
+        "screening": {
+          "components": {
+            "question": {
+              "back": "Back",
+              "next": "Next",
+              "finish": "Finish"
+            }
+          },
+          "title": "Create Report",
+          "question": {
+            "name": "What kind of report will you create?",
+            "options": {
+              "jsa": {
+                "name": "JSA",
+                "question": {
+                  "name": "What kind of service?",
+                  "options": {
+                    "onSite": {
+                      "name": "On Site"
+                    },
+                    "onField": {
+                      "name": "On Field",
+                      "question": {
+                        "name": "Which is the category?",
+                        "options": {
+                          "generic": {
+                            "name": "Generic"
+                          },
+                          "powerGeneration": {
+                            "name": "Power Generation"
+                          },
+                          "marine": {
+                            "name": "Marine"
+                          }
+                        }
+                      }
+                    },
+                    "warehouse": {
+                      "name": "Warehouse"
+                    }
+                  }
+                }
+              },
+              "service": {
+                "name": "Service",
+                "question": {
+                  "name": "What kind of service?",
+                  "options": {
+                    "generic": {
+                      "name": "Generic"
+                    },
+                    "preventiveMaintenance": {
+                      "name": "Preventive Maintenance"
+                    }
+                  }
+                }
+              },
+              "ingersoll": {
+                "name": "Ingersoll Rand",
+                "question": {
+                  "name": "What kind of compressor?",
+                  "options": {
+                    "rotaryContactCooledRotary": {
+                      "name": "Rotary Contact Cooled Rotary"
+                    },
+                    "rotaryOilFreeSierra": {
+                      "name": "Rotary Oil Free Sierra"
+                    },
+                    "hl-eh-hb": {
+                      "name": "HL-EH-HB Desiccant Dryer"
+                    },
+                    "rotaryOilFreeNirvana": {
+                      "name": "Rotary Oil Free Nirvana"
+                    },
+                    "refrigeratedDryerSystem": {
+                      "name": "Refrigerated NVC Dryer & System"
+                    },
+                    "rotaryContactCooledNirvana": {
+                      "name": "Rotary Contact Cooled-Nirvana"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "title": "Reports",
+        "filters": "Filters",
+        "jsa": "JSA",
+        "service": "Service",
+        "ingersollRand": "Ingersoll Rand"
+      },
+      "offlineData": {
+        "title": "Offline Data",
+        "lastUpdated": "Last Updated",
+        "never": "Never",
+        "syncAll": "Synchronize All",
+        "answers":  "Answers",
+        "categories": "Categories",
+        "contacts":  "Contacts",
+        "countries": "Countries",
+        "customers":  "Customers",
+        "delays": "Delays",
+        "generators":  "Generators",
+        "locations": "Locations",
+        "motors":  "Motors",
+        "qtas": "QTAs",
+        "types":  "Types",
+        "units": "Units",
+        "users":  "Users",
+        "technicians": "Technicians"
+      },
+      "settings": {
+        "components": {
+          "changePasswordDialog": {
+            "title": "Change Password",
+            "newPassword": "New Password",
+            "error": "The password could not be changed",
+            "accept": "Accept",
+            "cancel": "Cancel"
+          }
+        },
+        "title": "Settings",
+        "language": {
+          "title": "Language",
+          "spanish": "Spanish",
+          "portuguese": "Portuguese",
+          "english": "English",
+          "chinese": "Chinese"
+        },
+        "security": {
+          "title":  "Security",
+          "changePassword": "Change my password"
+        },
+        "client": {
+          "title":  "Client"
+        }
+      }
+    }
+  },
+  "reports": {
+    "common": {
+      "names": {
+        "unknown": "Unknown",
+        "jsa": "JSA",
+        "jsa-onSite": "On Site",
+        "jsa-onField": "On Field",
+        "jsa-onField-generic": "Generic",
+        "jsa-onField-powerGeneration": "Power Generation",
+        "jsa-onField-marine": "Marine",
+        "jsa-warehouse": "Warehouse",
+
+        "service": "Service",
+        "service-generic": "Generic",
+        "service-preventiveMaintenance": "Preventive Maintenance",
+
+        "ingersollRand": "Ingersoll Rand",
+        "ingersollRand-rotaryContactCooledRotary": "Rotary Contact Cooled Rotary",
+        "ingersollRand-rotaryOilFreeSierra": "Rotary Oil Free Sierra",
+        "ingersollRand-hlEhHb": "HL-EH-HB Desiccant Dryer",
+        "ingersollRand-rotaryOilFreeNirvana": "Rotary Oil Free Nirvana",
+        "ingersollRand-refrigeratedDryerSystem": "Refrigerated NVC Dryer & System",
+        "ingersollRand-rotaryContactCooledNirvana": "Rotary Contact Cooled-Nirvana"
+      }
+    }
+  },
+  "forms": {
+    "common": {
+      "labels": {
+        "date": "Fecha",
+        "jobOrder": "Orden de trabajo",
+        "name": "Nombre",
+        "wwid": "WWID",
+        "bussinesUnit": "Unidad de negocio",
+        "isAccompained": "¿Esta acompañado?",
+        "selectYourPartner": "Selecciona a tu(s) compañero(s)",
+        "extern": "Externo",
+        "taskCategory": "Categoria de la tarea",
+        "categoryDescription": "Descripción de la tarea",
+        "fillLocation": "Ubicación",
+        "riskLevel": "Nivel de riesgo",
+        "controlled": "Controlado",
+        "analisisCause": "Análisis Causa",
+        "actionsTaken": "Medidas Tomadas",
+        "message": "Mensaje",
+        "low": "Bajo",
+        "medium": "Medio",
+        "high": "Alto",
+        "extreme": "Extremo",
+        "details": "Detalles",
+        "submit": "Submit",
+        "send": "Send",
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "options": {
+        "yes": "Yes",
+        "no": "No",
+        "na": "N/A"
+      }
+    },
+    "jsa": {
+      "common": {
+        "doesNeedLoto": "¿Hacer Loto?",
+        "lotus": {
+          "part1": {
+            "title": "PROCEDIMIENTO DE BLOQUEO Y ETIQUETADO (LOTO)",
+            "step1": "Entender el equipo",
+            "step2": "Informar a los Empleados Afectados",
+            "step3": "Apague y Des-Energize",
+            "step4": "Aislar la Máquina de todas las Fuentes de Energía",
+            "step5": "Bloqueo de la Energía",
+            "step6": "Control de Energía Secundaria o Almacenada",
+            "step7": "Verificar el Bloqueo",
+            "step8": "Mantener el Bloqueo"
+          },
+          "part2": {
+            "title": "5 PASOS PARA LIBERAR EL BLOQUEO Y ETIQUETADO DE ENERGÍAS (LOTO)",
+            "step1": "Asegúrese de que el área esté libre de personal y herramientas",
+            "step2": "Retirar los Bloqueos",
+            "step3": "Notificar a los Empleados Afectados que el bloqueo ha sido eliminado",
+            "step4": "Prueba la máquina o equipo",
+            "step5": "Notificar a los empleados afectados que la máquina está lista para ser utilizada"
+          }
+        },
+        "solitaryWork": {
+          "title": "Trabajo Solitario",
+          "question1": "¿La tarea requiere trabajar sólo o sin supervisión?"
+        },
+        "causeAnalysis": {
+          "environment": "Ambiente (clima, condiciones de altitud, instalaciones)",
+          "design": "Diseño de espacio de trabajo",
+          "training": "Entrenamiento inadecuado o incompleto",
+          "equipment": "Equipos o herramientas dañadas",
+          "tools": "Herramientas/Equipos no disponibles",
+          "maintenance": "Mantenimiento preventivo sin finalizar",
+          "proccess": "Procesos o procedimientos inadecuados",
+          "irregular": "Superficies de trabajo o caminos irregulares",
+          "other": "Otra"
+        },
+        "optionsTaken": {
+          "secured": "Asegurado",
+          "blocked": "Bloqueado",
+          "trainedEmploye": "Empleado entrenado",
+          "trained": "Entrenado, Instalado, Limpiado",
+          "protected": "Protegido",
+          "epp": "Provisto (EPP)",
+          "replaced": "Reemplazado",
+          "removed": "Removido",
+          "repaired": "Reparado",
+          "other": "Otro"
+        }
+      },
+      "warehouse": {
+        "covidPrevention": {
+          "title": "Prevención COVID",
+          "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
+          "question2": "¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?",
+          "question3": "¿Se cuenta con agua y jabón para la limieza de manos?",
+          "question4": "¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?",
+          "question5": "¿Cuentas con gel sanitizante para limpieza de manos?"
+        },
+        "preparation": {
+          "title": "Preparación",
+          "question1": "¿Está capacitado y autorizado para realizar todas las tareas necesarias para este trabajo?",
+          "question2": "¿Los arreglos de respuesta a emergencia están implementados y entendidos?",
+          "question3": "¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?"
+        },
+        "toolsAndEquipment": {
+          "title": "Herramientas y Equipo",
+          "question1": "¿Las herramientas y equipos son adecuados y están libre de daños?",
+          "question2": "¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?"
+        },
+        "access": {
+          "title": "Levantamiento y Acceso",
+          "question1": "¿El levantamiento manual de piezas está dentro de su capacidad?",
+          "question2": "¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?",
+          "question3": "¿Hay un acceso seguro a la zona de trabajo y equipos?"
+        },
+        "epp": {
+          "title": "Equipo de Proteccion Personal (EPP)",
+          "question1": "¿El EPP está disponible para la tarea?",
+          "question2": "¿El EPP es adecuado y está libre de daños?"
+        },
+        "checkboxesP1": {
+          "chbx1": "VEHÍCULOS EN MOVIMIENTO",
+          "chbx2": "TRABAJO CON ELECTRICIDAD",
+          "chbx3": "OPERACIÓN DE LEVANTAMIENTO DE CARGAS",
+          "chbx4": "TRABAJOS DE ALTURA",
+          "chbx5": "INCENDIO, EXPLOSIÓN O ARCO ELECTRICO",
+          "chbx6": "OTRO"
+        },
+        "hazards": {
+          "unnusualDangers": {
+            "title": "Peligros inusuales",
+            "option1": "Gas Natural (GNG/LNG)",
+            "option2": "Animales o insectos",
+            "option3": "Gases de escape",
+            "option4": "Alto nivel de ruido",
+            "option5": "Trabajos en caliente",
+            "option6": "Espacios de trabajo restringido",
+            "option7": "Entrada a espacios confinados",
+            "option8": "Peligros de higiene",
+            "option9": "Gas o liquido inflamable",
+            "option10": "Aire Comprimido",
+            "option11": "Seguridad de la batería"
+          },
+          "access": {
+            "title": "Accesso al (los) Equipo(s)",
+            "option1": "Escalera o Escalera de Mano",
+            "option2": "Plataforma de Acceso Estático",
+            "option3": "Plataforma de Trabajo Móvil",
+            "option4": "Taburete o Grada de Trabajo"
+          },
+          "neat": {
+            "title": "Orden y limpieza",
+            "option1": "Establecer orden en el área de trabajo",
+            "option2": "Disponer / Desechar",
+            "option3": "Limpieza"
+          },
+          "fire": {
+            "title": "Línea de Fuego",
+            "option1": "Golpeado(a) por o contra",
+            "option2": "Atrapado(a) por",
+            "option3": "Energía Peligrosa",
+            "option4": "Polvo o Suciedad",
+            "option5": "Peligro de Proyectil"
+          },
+          "slip": {
+            "title": "Resbalones, Tropiezos, Caídas",
+            "option1": "Suelo Húmedo o Aceitoso",
+            "option2": "Cables sobre el piso",
+            "option3": "Los desniveles del terreno / Grava",
+            "option4": "Área elevada / Mezanine",
+            "option5": "Azotea",
+            "option6": "Nieve, Barro o Hielo",
+            "option7": "Fosa en el Piso"
+          },
+          "interaction": {
+            "title": "Interacción con otras Personas",
+            "option1": "Trabajo con Contratistas",
+            "option2": "Público en General",
+            "option3": "Cliente/Empleados"
+          },
+          "environment": {
+            "title": "Impacto Ambiental",
+            "option1": "Fugas o Derrames",
+            "option2": "Vapores o Humo",
+            "option3": "Eliminación de Residuos",
+            "option4": "Uso de Productos Químicos"
+          },
+          "ergonomic": {
+            "title": "Ergonomía",
+            "option1": "Fuerza Excesiva",
+            "option2": "Trabajo Repetitivo",
+            "option3": "Postura Estresante",
+            "option4": "Estrés de Contacto",
+            "option5": "Arrodillándose / Arrastrándose",
+            "option6": "Vibración",
+            "option7": "Levantamiento de Objetos Pesados"
+          },
+          "weather": {
+            "title": "Condiciones Climáticas",
+            "option1": "Calor Extremo",
+            "option2": "Frío Extremo",
+            "option3": "Fuertes Vientos",
+            "option4": "Condiciones de Tormenta",
+            "option5": "Lluvia",
+            "option6": "Nieve / Hielo",
+            "option7": "Gran Altitud"
+          }
+        },
+        "extra": {
+          "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+          "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
+          "label5": "Identificación de los peligros(dar click si el peligro está presente)",
+          "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+          "label7": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES ",
+          "label8": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+          "label9": "Nombre del Gerente:",
+          "label10": "Teléfono de Contacto del Gerente:",
+          "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+          "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+          "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+          "question1": "Poner en práctica Controles Establecidos",
+          "question2": "¿Qué es extraño, inusual o diferente hoy?"
+        }
+      }
+    }
+  }
+}

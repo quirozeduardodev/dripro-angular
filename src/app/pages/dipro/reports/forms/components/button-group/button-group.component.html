@@ -1,0 +1,6 @@
+<div class="control-content" [class.control-disabled]="isDisabled">
+  <button type="button" *ngFor="let option of options"
+          [ngClass]="value === option.value ? 'button-active' : ''"
+          (click)="selectItem(option.value)" [disabled]="isDisabled">{{option.label}}</button>
+</div>
+<app-validator-message [control]="control"></app-validator-message>

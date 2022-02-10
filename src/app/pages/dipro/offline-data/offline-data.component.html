@@ -1,0 +1,26 @@
+<app-drawer [title]="'pages.dipro.offlineData.title' | translate">
+  <div class="w-full flex flex-col justify-center items-center">
+    <div class="w-full flex justify-center py-2 my-4">
+      <button class="btn btn-flat btn-rounded-full btn-accent" (click)="offlineDataService.synchronizeAll()">{{'pages.dipro.offlineData.syncAll' | translate}}</button>
+    </div>
+    <div class="data-content flex flex-col justify-center divide-y p-3 border rounded border-gray-200">
+      <div *ngFor="let item of dataToSync" class="w-full flex justify-between my-1">
+        <div class="w-full flex flex-col">
+          <span class="font-medium text-lg">{{item.name | translate}} ({{item.handler.total | async}})</span>
+          <span class="font-light text-xs">{{'pages.dipro.offlineData.lastUpdated' | translate}}: {{(item.handler.synchronizedAt | async) ? ((item.handler.synchronizedAt | async) | tz) : ('pages.dipro.offlineData.never' | translate)}}</span>
+        </div>
+        <div class="flex">
+          <button class="mx-1 btn btn-icon btn-lg" (click)="item.handler.synchronize()">
+            <i *ngIf="(item.handler.state | async) === 'idle'" class="mdi mdi-sync-circle text-blue-500"></i>
+            <i *ngIf="(item.handler.state | async) === 'synchronizationFailed'" class="mdi mdi-sync-alert text-red-500"></i>
+            <i *ngIf="(item.handler.state | async) === 'synchronizing'" class="animate-spin mdi mdi-sync-circle text-blue-500"></i>
+            <i *ngIf="(item.handler.state | async) === 'synchronized'" class="mdi mdi-sync-circle text-green-500"></i>
+          </button>
+          <button class="mx-1 btn btn-icon btn-lg" (click)="item.handler.delete()">
+            <i class="mdi mdi-trash-can text-red-500"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-drawer>

@@ -1,0 +1,6 @@
+{
+	"appId": "com.transom.dipro",
+	"appName": "Dipro",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

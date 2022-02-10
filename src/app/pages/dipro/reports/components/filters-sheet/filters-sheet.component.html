@@ -1,0 +1,28 @@
+<app-sheet #filterSheet (visibleChange)="sheetVisible($event)">
+  <div class="filters w-full flex flex-col py-2">
+    <div class="w-full flex justify-end px-5 mb-2">
+      <button class="btn btn-sm btn-rounded-full btn-accent" (click)="applyClose()">{{'pages.dipro.reports.components.filtersSheet.close' | translate}}</button>
+    </div>
+    <div class="w-full border-t overflow-y-auto border-gray-200 my-1"></div>
+    <div *ngIf="filters" class="flex flex-col w-full">
+      <div class="w-full px-3 py-2 flex-wrap">
+        <p class="text-black text-sm font-semibold">{{'pages.dipro.reports.components.filtersSheet.localReports' | translate}}</p>
+        <p class="text-black text-xs">{{'pages.dipro.reports.components.filtersSheet.localReportsDisclaimer' | translate}}</p>
+        <button class="btn btn-sm btn-accent btn-stroked mx-1" (click)="updateFilters({offline: !filters.offline})" [ngClass]="filters.offline ? 'btn-flat' : ''">{{'pages.dipro.reports.components.filtersSheet.offlineReports' | translate}}</button>
+      </div>
+      <div class="w-full border-t border-gray-200 my-1"></div>
+      <div class="w-full px-3 py-2 flex-wrap">
+        <p class="text-black text-sm font-semibold">{{'pages.dipro.reports.components.filtersSheet.reports' | translate}}</p>
+        <button class="btn btn-sm btn-accent btn-stroked mx-1" (click)="updateFilters({type: 'JSA'})" [ngClass]="filters.type === 'JSA' ? 'btn-flat' : ''">{{'pages.dipro.reports.components.filtersSheet.jsa' | translate}}</button>
+        <button class="btn btn-sm btn-accent btn-stroked mx-1" (click)="updateFilters({type: 'SERVICE'})" [ngClass]="filters.type === 'SERVICE' ? 'btn-flat' : ''">{{'pages.dipro.reports.components.filtersSheet.service' | translate}}</button>
+        <button class="btn btn-sm btn-accent btn-stroked mx-1" (click)="updateFilters({type: 'INGERSOLL'})" [ngClass]="filters.type === 'INGERSOLL' ? 'btn-flat' : ''">{{'pages.dipro.reports.components.filtersSheet.ingersollRand' | translate}}</button>
+      </div>
+      <div class="w-full border-t border-gray-200 my-1"></div>
+      <div class="w-full px-3 py-2 flex-wrap">
+        <p class="text-black text-sm font-semibold">{{'pages.dipro.reports.components.filtersSheet.orderBy' | translate}}</p>
+        <button class="btn btn-sm btn-accent btn-stroked mx-1" (click)="updateFilters({shortBy: 'asc'})" [ngClass]="filters.shortBy === 'asc' ? 'btn-flat' : ''">{{'pages.dipro.reports.components.filtersSheet.ascendant' | translate}}</button>
+        <button class="btn btn-sm btn-accent btn-stroked mx-1" (click)="updateFilters({shortBy: 'desc'})" [ngClass]="filters.shortBy === 'desc' ? 'btn-flat' : ''">{{'pages.dipro.reports.components.filtersSheet.descendant' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</app-sheet>

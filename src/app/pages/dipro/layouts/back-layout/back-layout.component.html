@@ -1,0 +1,20 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar mode="ios">
+      <ion-buttons slot="start">
+        <button (click)="backAction()" class="p-2">
+          <i class="mdi mdi-arrow-left text-2xl"></i>
+        </button>
+      </ion-buttons>
+      <ion-title>
+        <div class="flex flex-col">
+          <span>{{title}}</span>
+          <span *ngIf="subTitle && subTitle.trim().length > 0" class="font-light text-xs">{{subTitle}}</span>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="main">
+    <ng-content></ng-content>
+  </ion-content>
+</ion-app>

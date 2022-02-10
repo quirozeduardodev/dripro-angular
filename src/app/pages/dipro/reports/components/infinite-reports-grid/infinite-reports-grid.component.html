@@ -1,0 +1,29 @@
+<div #mainWrapper class="main-wrapper"
+[ngStyle]="{'grid-template-columns': 'repeat(' + itemsPerRow + ', 1fr)'}"
+infiniteScroll [alwaysCallback]="true"
+     [scrollWindow]="false" (scrolled)="wrapperScrolled($event)" [infiniteScrollDistance]="5" [immediateCheck]="true">
+  <ng-container *ngFor="let report of shortedReports">
+    <div #cardContainer class="card-container"
+         [style.height]="(cardContainer.offsetWidth > 0 ? cardContainer.offsetWidth : 1) * itemAspectRatio + 'px'"
+         [style.maxHeight]="(cardContainer.offsetWidth > 0 ? cardContainer.offsetWidth : 1) * itemAspectRatio + 'px'">
+      <div class="card-content" (click)="openReport(report, $event)">
+        <div class="card-header">
+          <i class="mdi text-xl m-1" [ngClass]="report.isOnline ? 'text-blue-600 mdi-cloud-check' : 'text-gray-600 mdi-cloud-alert'"></i>
+          <div *ngIf="report.isOnline"></div>
+          <button *ngIf="!report.isOnline" class="btn btn-icon btn-warn" (click)="deleteReport(report, $event)"><i class="mdi mdi-trash-can text-red-600  text-xl"></i></button>
+        </div>
+        <div class="card-title">
+          <span *ngFor="let text of (getListOfNames(report) | async); let i = index" [style.fontWeight]="600 - ((i > 2 ? 2 : i) * 200)">{{text}}</span>
+        </div>
+        <div>{{report.timestamp | tz}}</div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="showButtonLoadData">
+    <div #cardContainer class="card-container" [style.height]="(cardContainer.offsetWidth > 0 ? cardContainer.offsetWidth : 1) * itemAspectRatio + 'px'">
+      <div class="flex h-full justify-center items-center">
+        <button type="button" class="btn btn-accent btn-stroked btn-rounded-full" (click)="loadData.next()">Load More</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

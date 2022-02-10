@@ -1,0 +1,54 @@
+$margin-selects: var(--dipro-forms-multi-select-margin-selects, (0.25em 0));
+$button-add-size: var(--dipro-forms-multi-select-button-add-size, 30px);
+$button-remove-size: var(--dipro-forms-multi-select-button-remove-size, 20px);
+$button-add-color: var(--dipro-forms-multi-select-button-add-color, #ec0909FF);
+$button-remove-color: var(--dipro-forms-multi-select-button-remove-size, #ec0909FF);
+
+:host {
+  .control-content {
+    display: flex;
+    flex-direction: column;
+
+    &.control-disabled {
+      .select-container {
+        .button-remove {
+          cursor: auto;
+        }
+      }
+      .actions-container {
+        .button-add {
+          cursor: auto;
+        }
+      }
+    }
+
+    .select-container {
+      display: flex;
+      .select {
+        width: 100%;
+        margin: $margin-selects;
+      }
+      .button-remove {
+        margin: 0.5em;
+        cursor: pointer;
+        i {
+          font-size: $button-remove-size;
+          color: $button-add-color;
+        }
+      }
+    }
+
+    .actions-container {
+      display: flex;
+      justify-content: center;
+
+      .button-add {
+        cursor: pointer;
+        i {
+          color: $button-add-color;
+          font-size: $button-add-size;
+        }
+      }
+    }
+  }
+}

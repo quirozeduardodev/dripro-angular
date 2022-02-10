@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .control-content {
+    display: flex;
+    flex-direction: column;
+    & > * {
+      margin: 0.5em 0;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<app-back-layout [title]="'pages.dipro.reports.view.title' | translate" [subTitle]="getSubTitle() | async">
+  <app-center-loading *ngIf="isLoading"></app-center-loading>
+  <app-forms *ngIf="reportType && !isLoading" #form [type]="reportType" [answers]="answers" [readOnly]="true"></app-forms>
+  <div *ngIf="!reportType && !isLoading" class="w-full h-full flex justify-center items-center">
+    <span>Not found</span>
+  </div>
+</app-back-layout>

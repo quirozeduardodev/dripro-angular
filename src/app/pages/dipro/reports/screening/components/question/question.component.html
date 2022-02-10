@@ -1,0 +1,18 @@
+<div class="wrapper flex flex-col" *ngIf="rootQuestion && !nextQuestion">
+  <div class="flex justify-center my-2">
+    <span class="font-medium text-xl mx-2">{{rootQuestion.name | translate}}</span>
+  </div>
+  <div *ngFor="let option of rootQuestion.options" class="flex justify-start mt-2">
+    <label class="pr-2">
+      <input type="radio" name="options" class="radio" [ngClass]="formControlOptions.value === option.value ? 'radio-accent' : 'radio-primary'" [formControl]="formControlOptions" [value]="option.value">
+      <span class="ml-2 ">{{option.name | translate}}</span>
+    </label>
+  </div>
+  <app-validator-message [control]="formControlOptions"></app-validator-message>
+  <div class="flex justify-center mt-5">
+    <button *ngIf="!isRoot" class="btn btn-primary btn-stroked w-full mx-1" (click)="back()">{{'pages.dipro.reports.screening.components.question.back' | translate}}</button>
+    <button *ngIf="!(formControlOptions.value && !getNextQuestionFromValue(formControlOptions.value))" class="btn btn-primary btn-flat w-full mx-1" (click)="next()">{{'pages.dipro.reports.screening.components.question.next' | translate}}</button>
+    <button *ngIf="formControlOptions.value && !getNextQuestionFromValue(formControlOptions.value)" class="btn btn-primary btn-flat w-full mx-1" (click)="finish()">{{'pages.dipro.reports.screening.components.question.finish' | translate}}</button>
+  </div>
+</div>
+<app-question *ngIf="nextQuestion" [(rootQuestion)]="nextQuestion" [prePath]="buildPath" (onFinish)="onFinish.emit($event)"></app-question>

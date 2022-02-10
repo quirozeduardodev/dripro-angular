@@ -1,0 +1,7 @@
+.divider{
+  @apply flex items-center;
+  &:before, &:after{
+    content: '';
+    @apply flex-grow;
+  }
+}

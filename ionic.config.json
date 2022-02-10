@@ -1,0 +1,7 @@
+{
+  "name": "dipro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,62 @@
+.radio {
+  @apply appearance-none w-4 h-4 rounded-full border border-gray-600 border-opacity-20 cursor-pointer;
+  transition: background, box-shadow 0.2s ease-in-out;
+  &:focus-visible {
+    --focus-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffffff;
+  }
+  &:checked{
+    @apply bg-white;
+    animation: radiomark 0.2s  ease-in-out;
+    box-shadow: 0 0 0 4px #ffffff inset, 0 0 0 4px #ffffff inset;
+  }
+
+  &-primary{
+    @apply border-black hover:border-black;
+    &:focus-visible {
+      --focus-shadow: 0 0 0 2px hsl(#ffffff), 0 0 0 4px hsl(#ffffff);
+    }
+    &:checked{
+      @apply bg-black border-black text-black;
+    }
+  }
+
+  &-accent{
+    @apply border-red-600 hover:border-red-600;
+    &:focus-visible {
+      --focus-shadow: 0 0 0 2px hsl(#ffffff), 0 0 0 4px hsl(#ffffff);
+    }
+    &:checked{
+      @apply bg-red-600 border-red-600 text-black;
+    }
+  }
+
+  &-warn{
+    @apply border-red-500 hover:border-red-500;
+    &:focus-visible {
+      --focus-shadow: 0 0 0 2px hsl(#ffffff), 0 0 0 4px hsl(#ffffff);
+    }
+    &:checked{
+      @apply bg-red-500 border-red-500 text-black;
+    }
+  }
+  &:disabled{
+    @apply opacity-20 cursor-not-allowed;
+  }
+}
+
+@keyframes radiomark {
+  0% {
+    box-shadow: 0 0 0 12px #ffffff inset, 0 0 0 12px #ffffff inset, var(--focus-shadow);
+  }
+  50% {
+    box-shadow: 0 0 0 3px #ffffff inset, 0 0 0 3px #ffffff inset, var(--focus-shadow);
+  }
+  100% {
+    box-shadow: 0 0 0 4px #ffffff inset, 0 0 0 4px #ffffff inset, var(--focus-shadow);
+  }
+}
+
+/* backward comptability */
+.radio-mark {
+  @apply hidden;
+}

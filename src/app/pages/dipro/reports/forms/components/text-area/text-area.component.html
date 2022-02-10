@@ -1,0 +1,11 @@
+<div class="control-content" [class.control-disabled]="isDisabled" [class.control-has-error]="abstractControl?.invalid && abstractControl?.touched">
+  <textarea [rows]="rows"
+         [disabled]="isDisabled"
+         (focusout)="onTouched()"
+         (keyup)="onChanged($event)"
+         [value]="value"
+            [placeholder]="placeholder ?? ''">
+
+  </textarea>
+</div>
+<app-validator-message [control]="abstractControl"></app-validator-message>

@@ -1,0 +1,5 @@
+<app-back-layout [title]="'pages.dipro.reports.edit.title' | translate"
+[subTitle]="getSubTitle() | async"
+[canBack]="canBack" (onBackPressed)="saveChanges()">
+  <app-forms #form *ngIf="localReport" [type]="localReport.type" [answers]="localReport?.answers ?? {}" (onSave)="saveChanges()"></app-forms>
+</app-back-layout>
