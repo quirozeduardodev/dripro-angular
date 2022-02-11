@@ -7,6 +7,7 @@ import * as CryptoJS from 'crypto-js';
 import { UnitOfWorkDatabase } from '../../../../database/unit-of-work.database';
 import { LocalReport } from '../../../../database/models/local_report';
 import { delay, timeout } from 'rxjs/operators';
+import { ReportsService } from '../services/reports.service';
 
 @Component({
   selector: 'app-create',
@@ -38,7 +39,8 @@ export class CreateComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private reportEndpointService: ReportEndpointService,
-    private unitOfWorkDatabase: UnitOfWorkDatabase
+    private unitOfWorkDatabase: UnitOfWorkDatabase,
+    private reportsService: ReportsService
   ) {}
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class CreateComponent implements OnInit, OnDestroy {
             })
             .pipe(delay(500))
             .subscribe((value) => {
+              this.reportsService.refreshLocalData();
               this.router.navigate([`/reports/edit/${value.id}`], {
                 replaceUrl: true,
               });

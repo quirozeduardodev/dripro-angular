@@ -34,6 +34,7 @@ import {UnitEndpointService} from "./services/endpoints/unit-endpoint.service";
 import {UserEndpointService} from "./services/endpoints/user-endpoint.service";
 import {OfflineDataService} from "./services/offline-data.service";
 import {ComponentsModule} from "./components/components.module";
+import { ApplicationEndpointService } from './services/endpoints/application-endpoint.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -79,6 +80,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReportEndpointService,
     ManualEndpointService,
     AnswerEndpointService,
+    ApplicationEndpointService,
     CategoryEndpointService,
     ContactEndpointService,
     CategoryEndpointService,

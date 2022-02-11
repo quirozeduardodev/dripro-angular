@@ -1,4 +1,4 @@
-import {ShortType} from "../short.type";
+import { ShortType } from '../short.type';
 
 export interface ReportFiltersRequest {
   type: 'JSA' | 'SERVICE' | 'INGERSOLL';

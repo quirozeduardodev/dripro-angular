@@ -5,9 +5,9 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { LocalReport } from 'src/app/database/models/local_report';
 import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { ReportEndpointService } from 'src/app/services/endpoints/report-endpoint.service';
-import { ReportFiltersRequest } from 'src/app/types/request/report-filters.request';
 import { PaginateResponse } from 'src/app/types/response/paginate.response';
 import { BasicReportResponse } from 'src/app/types/response/report.response';
+import { FiltersReports } from '../components/filters-sheet/filters-sheet.component';
 
 export interface MergedReport {
   id: any;
@@ -23,7 +23,7 @@ export class ReportsService {
 
   private _localReportsLoader: LocalReportsLoader;
   private _onlineReportsLoader: OnlineReportsLoader;
-  private _filters: ReportFiltersRequest | null = null;
+  private _filters: FiltersReports | null = null;
   constructor(
     private _reportEndpointService: ReportEndpointService,
     private _unitOfWorkDatabase: UnitOfWorkDatabase
@@ -50,10 +50,10 @@ export class ReportsService {
     this._onlineReportsLoader.fetchData();
   }
 
-  public updateFilters(filters: ReportFiltersRequest): void {
+  public updateFilters(filters: FiltersReports): void {
     this._filters = filters;
     this._onlineReportsLoader.setFilters(this._filters);
-    this._localReportsLoader.refreshData();
+    this._localReportsLoader.setFilters(this._filters);
   }
 
 
@@ -70,11 +70,11 @@ export class ReportsService {
         createdAt: item.createdAt ? moment(item.createdAt) : moment(),
         isOnline: true
       }));
-    const shortBy = this._filters?.shortByDateTime === 'asc' ? 'asc' : 'desc';
+    const shortBy = this._filters?.shortBy === 'asc' ? 'asc' : 'desc';
     const result: MergedReport[] = await [...localReports, ...onlineReports].sort((a, b) => {
       if (a.createdAt.isBefore(b.createdAt)) {
         return shortBy === 'desc' ? 1 : -1;
-      } else if(a.createdAt.isBefore(b.createdAt)) {
+      } else if(a.createdAt.isAfter(b.createdAt)) {
         return shortBy === 'desc' ? -1 : 1;
       } else {
         return 0;
@@ -122,31 +122,43 @@ abstract class BaseHandlerLoader<TData> {
 }
 
 class LocalReportsLoader extends BaseHandlerLoader<LocalReport[]> {
+  private _filters: FiltersReports | null = null;
   constructor(private _unitOfWorkDatabase: UnitOfWorkDatabase) {
     super();
   }
 
+  public setFilters(filters: FiltersReports): void {
+    this._filters = filters;
+    this.refreshData();
+  }
+
   public refreshData(): void {
-    if(this.getState() === 'loading') {
+    if(this.getState() === 'loading' || !this._filters) {
       return;
     }
-    this._unitOfWorkDatabase.localReportRepository.all()
-    .pipe(catchError(error => of([])))
-    .subscribe(result => {
-      this.setData(result);
-    });
+    if(this._filters.offline) {
+      this.setState('loading');
+      this._unitOfWorkDatabase.localReportRepository.allByRootType(this._filters.type)
+      .pipe(catchError(error => of([])))
+      .subscribe(result => {
+        this.setState('idle');
+        this.setData(result);
+      });
+    } else {
+      this.setData([]);
+    }
   }
 }
 
 class OnlineReportsLoader extends BaseHandlerLoader<BasicReportResponse[]> {
 
   private _pagination: PaginateResponse<BasicReportResponse> | null =  null;
-  private _filters: ReportFiltersRequest | null = null;
+  private _filters: FiltersReports | null = null;
   constructor(private _reportEndpointService: ReportEndpointService) {
     super();
   }
 
-  public setFilters(filters: ReportFiltersRequest): void {
+  public setFilters(filters: FiltersReports): void {
     this._filters = filters;
     this.fetchData(true);
   }
@@ -155,15 +167,20 @@ class OnlineReportsLoader extends BaseHandlerLoader<BasicReportResponse[]> {
     if(this.getState() === 'loading') {
       return;
     }
+    this.setState('loading');
     const page = reset ? 1 :
       (this._pagination ? (this._pagination.page + 1 <= this._pagination.pages ? this._pagination.page + 1 : -1) : 1);
     if(page < 0) {
       return;
     }
     if(this._filters) {
-      this._reportEndpointService.pagination(this._filters, page)
+      this._reportEndpointService.pagination({
+        type: this._filters.type,
+        shortByDateTime: this._filters.shortBy
+      }, page)
       .pipe(catchError(error => of(null)))
       .subscribe(result => {
+        this.setState('idle');
         this._pagination = result;
         if(reset) {
           this.setData(this._pagination?.data || []);

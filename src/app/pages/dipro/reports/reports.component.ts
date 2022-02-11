@@ -44,10 +44,7 @@ export class ReportsComponent implements OnInit {
 
   cleanOnlineReports(): void {
     if(this.filters) {
-      this.reportsService.updateFilters({
-        type: this.filters.type,
-        shortByDateTime: this.filters.shortBy
-      });
+      this.reportsService.updateFilters(this.filters);
     }
   }
 

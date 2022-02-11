@@ -7,6 +7,7 @@ import { UnitOfWorkDatabase } from '../../../../database/unit-of-work.database';
 import { catchError, map } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { BaseDialogComponent } from 'src/app/components/dialogs/base-dialog/base-dialog.component';
 
 @Component({
   selector: 'app-edit',
@@ -15,10 +16,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class EditComponent implements OnInit, OnDestroy {
   @ViewChild('form') form: FormsComponent | null = null;
+  @ViewChild('dialogSavedChanges') dialogSavedChanges: BaseDialogComponent | null = null;
 
   subTitleTr: string = 'reports.common.names.unknown';
 
   isLoading = true;
+  isReviewing: boolean = false;
   subscriptionParams: Subscription | null = null;
   pauseSubscription: Subscription | null = null;
 
@@ -51,10 +54,10 @@ export class EditComponent implements OnInit, OnDestroy {
         this.unitOfWorkDatabase.localReportRepository
           .update(this.localReport)
           .pipe(
-            map((value) => true),
+            map(() => true),
             catchError((err) => of(true))
           )
-          .subscribe((value) => {});
+          .subscribe(() => {});
       }
     });
   }
@@ -89,6 +92,38 @@ export class EditComponent implements OnInit, OnDestroy {
         });
     } else {
       this.canBack?.next(true);
+    }
+  }
+
+  saveChangesConfirmation(): void {
+    if (this.localReport) {
+      this.localReport.answers = this.form?.value ?? {};
+      this.unitOfWorkDatabase.localReportRepository
+        .update(this.localReport)
+        .pipe(
+          map((value) => true),
+          catchError((err) => of(true))
+        )
+        .subscribe((value) => {
+          this.dialogSavedChanges?.open();
+        });
+    } else {
+    }
+  }
+
+  submitChanges(): void {
+    if (this.localReport) {
+      this.localReport.answers = this.form?.value ?? {};
+      this.unitOfWorkDatabase.localReportRepository
+        .update(this.localReport)
+        .pipe(
+          map((value) => true),
+          catchError((err) => of(true))
+        )
+        .subscribe((value) => {
+          this.isReviewing = true;
+        });
+    } else {
     }
   }
 }

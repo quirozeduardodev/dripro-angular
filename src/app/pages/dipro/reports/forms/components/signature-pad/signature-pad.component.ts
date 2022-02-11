@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
   AfterContentInit,
   AfterViewInit,
@@ -6,26 +7,32 @@ import {
   forwardRef,
   HostListener,
   Input,
-  OnDestroy
+  OnDestroy,
+  Optional,
+  Self,
 } from '@angular/core';
-import * as SignaturePadNative from "signature_pad";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import * as SignaturePadNative from 'signature_pad';
+import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export const SIGNATURE_PAD_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => SignaturePadComponent),
-  multi: true
-};
-
+// export const SIGNATURE_PAD_VALUE_ACCESSOR: any = {
+//   provide: NG_VALUE_ACCESSOR,
+//   useExisting: forwardRef(() => SignaturePadComponent),
+//   multi: true,
+// };
 
 @Component({
   selector: 'form-signature-pad',
   templateUrl: './signature-pad.component.html',
   styleUrls: ['./signature-pad.component.scss'],
-  providers: [SIGNATURE_PAD_VALUE_ACCESSOR]
+  // providers: [SIGNATURE_PAD_VALUE_ACCESSOR],
 })
-export class SignaturePadComponent implements AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
-  @Input() public options: SignaturePadNative.Options = {minWidth: 1, maxWidth: 1};
+export class SignaturePadComponent
+  implements AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor
+{
+  @Input() public options: SignaturePadNative.Options = {
+    minWidth: 1,
+    maxWidth: 1,
+  };
   @Input() isDrawing: boolean = true;
 
   private signaturePad: any;
@@ -37,10 +44,12 @@ export class SignaturePadComponent implements AfterContentInit, AfterViewInit, O
   private _value: any | null = null;
   private _mainWrapperObserver: ResizeObserver | null = null;
 
-  mainSize: {width: number; height: number} = {width: 1, height: 1};
-  constructor(elementRef: ElementRef) {
-    // no op
+  mainSize: { width: number; height: number } = { width: 1, height: 1 };
+  constructor(elementRef: ElementRef, @Self() @Optional() public ngControl?: NgControl) {
     this.elementRef = elementRef;
+    if (ngControl) {
+      ngControl.valueAccessor = this;
+    }
   }
 
   get value(): any | null {
@@ -92,7 +101,7 @@ export class SignaturePadComponent implements AfterContentInit, AfterViewInit, O
     this._mainWrapperObserver = new ResizeObserver((entries, observer) => {
       const width = entries[0].contentRect.width;
       const height = entries[0].contentRect.height;
-      this.mainSize = {width, height};
+      this.mainSize = { width, height };
       this.resizeCanvas();
     });
     this._mainWrapperObserver?.observe(this.elementRef.nativeElement);
@@ -120,5 +129,10 @@ export class SignaturePadComponent implements AfterContentInit, AfterViewInit, O
   // Returns signature image as data URL (see https://mdn.io/todataurl for the list of possible paramters)
   public toDataURL(imageType?: string, quality?: number): string {
     return this.signaturePad.toDataURL(imageType, quality); // save image as data URL
+  }
+
+  buttonActionClicked($event: MouseEvent): void {
+    $event.stopPropagation();
+    this.isDrawing = !this.isDrawing;
   }
 }

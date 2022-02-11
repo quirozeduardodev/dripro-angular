@@ -1,6 +1,6 @@
 import * as moment from 'moment-timezone';
 
-export interface DelayResponse {
+export interface ApplicationResponse {
   id: number;
   name: string;
   status: boolean;

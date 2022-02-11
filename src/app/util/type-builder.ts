@@ -21,6 +21,7 @@ import { MotorResponse } from '../types/response/motor.response';
 import { QTAResponse } from '../types/response/qta.response';
 import { TypeResponse } from '../types/response/type.response';
 import { UnitResponse } from '../types/response/unit.response';
+import { ApplicationResponse } from '../types/response/application.response';
 export class TypeBuilder {
   public static async basicAnswer(
     data: any
@@ -45,6 +46,24 @@ export class TypeBuilder {
     return await TypeBuilder.arrayBuilder<BasicAnswerResponse>(
       data,
       TypeBuilder.basicAnswer
+    );
+  }
+  public static async application(data: any): Promise<ApplicationResponse | null> {
+    if (data) {
+      return {
+        id: data.id,
+        name: data.name,
+        status: data.status === true,
+        createdAt: data.created_at ? moment(data.created_at) : null,
+        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+      };
+    }
+    return null;
+  }
+  public static async applications(data: any[]): Promise<ApplicationResponse[]> {
+    return await TypeBuilder.arrayBuilder<CategoryResponse>(
+      data,
+      TypeBuilder.application
     );
   }
   public static async category(data: any): Promise<CategoryResponse | null> {

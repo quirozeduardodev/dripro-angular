@@ -1,7 +1,19 @@
-import {Component, Input, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {Platform} from "@ionic/angular";
-import {Subscription} from "rxjs";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 const sheetAnimationDuration = 175;
 
@@ -11,22 +23,25 @@ const sheetAnimationDuration = 175;
   styleUrls: ['./base-dialog.component.scss'],
   animations: [
     trigger('dialog', [
-      state('true', style({
-        transform: 'scale(1)',
-        opacity: 1
-      })),
-      state('false', style({
-        transform: 'scale(0.2)',
-        opacity: 0.5
-      })),
-      transition('* => *', [
-        animate(`${sheetAnimationDuration}ms`)
-      ]),
-    ])
-  ]
+      state(
+        'true',
+        style({
+          transform: 'scale(1)',
+          opacity: 1,
+        })
+      ),
+      state(
+        'false',
+        style({
+          transform: 'scale(0.2)',
+          opacity: 0.5,
+        })
+      ),
+      transition('* => *', [animate(`${sheetAnimationDuration}ms`)]),
+    ]),
+  ],
 })
 export class BaseDialogComponent implements OnInit, OnDestroy {
-
   @Input() visible = true;
   @Input() overlayClose = true;
   showOverlay = false;
@@ -38,15 +53,9 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
 
   constructor(private platform: Platform) {}
 
-  ngOnInit() {
-    this._backButtonSubscription = this.platform.backButton.subscribeWithPriority(100, processNextHandler => {
-
-    });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['visible']) {
-      if (changes['visible'].currentValue === true) {
+  onChanges(changes: SimpleChanges): void {
+    if (changes.visible) {
+      if (changes.visible.currentValue === true) {
         this.open();
       } else {
         this.close();
@@ -54,8 +63,19 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngOnInit() {
+    this._backButtonSubscription =
+      this.platform.backButton.subscribeWithPriority(
+        100,
+        (processNextHandler) => {}
+      );
+  }
+
   close(): void {
-    if (this._status === DialogStatus.closed || this._status === DialogStatus.closing) {
+    if (
+      this._status === DialogStatus.closed ||
+      this._status === DialogStatus.closing
+    ) {
       return;
     }
     this._status = DialogStatus.closing;
@@ -67,7 +87,10 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
   }
 
   open(): void {
-    if (this._status === DialogStatus.opened || this._status === DialogStatus.opening) {
+    if (
+      this._status === DialogStatus.opened ||
+      this._status === DialogStatus.opening
+    ) {
       return;
     }
     this._status = DialogStatus.opening;
@@ -79,7 +102,10 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
   }
 
   toggle(): void {
-    if (this._status == DialogStatus.opened || this._status == DialogStatus.opening) {
+    if (
+      this._status === DialogStatus.opened ||
+      this._status === DialogStatus.opening
+    ) {
       this.close();
     } else {
       this.open();
@@ -95,5 +121,5 @@ enum DialogStatus {
   opened,
   opening,
   closing,
-  closed
+  closed,
 }

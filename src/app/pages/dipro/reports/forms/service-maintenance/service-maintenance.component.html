@@ -1,3 +1,214 @@
-<p>
-  service-maintenance works!
-</p>
+<form (submit)="submit()" [formGroup]="formGroup">
+  <div class="w-full flex flex-col">
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
+      <form-text-field formControlName="job_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.noJsa' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.noJsa' | translate" formControlName="no_jsa">
+        <form-option *ngFor="let option of (jsaReports$ | async) || []"
+                     [value]="option.folio"
+                     [label]="option.folio"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.bussinesUnit' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.bussinesUnit' | translate" formControlName="unidad">
+        <form-option *ngFor="let option of (businessUnits$ | async) || []"
+                     [value]="option.name"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.client' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.client' | translate" formControlName="customer">
+        <form-option *ngFor="let option of (customers$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.serviceLocation' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.serviceLocation' | translate" formControlName="location">
+        <form-option *ngFor="let option of (locations$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.locationGps' | translate}}</label>
+      <form-text-field formControlName="location_gps" [placeholder]="'forms.common.labels.locationGps' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.contact' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.contact' | translate" formControlName="contact">
+        <form-option *ngFor="let option of (contacts$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.phone' | translate}}</label>
+      <form-text-field formControlName="phone" [placeholder]="'forms.common.labels.phone' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.branch' | translate}}</label>
+      <form-text-field formControlName="sucursal" [placeholder]="'forms.common.labels.branch' | translate"></form-text-field>
+    </div>
+    <div class="my-2 w-full flex justify-between">
+      <span>{{'forms.common.labels.isAccompained' | translate}}</span>
+      <mat-slide-toggle formControlName="accompanied"></mat-slide-toggle>
+    </div>
+    <div *ngIf="formGroup.controls.accompanied.value === true" class="w-full flex flex-col my-3">
+      <span>{{'forms.common.labels.selectYourPartner' | translate}}</span>
+      <form-multi-select formControlName="teammate_name" [placeholder]="'forms.common.labels.selectYourPartner' | translate">
+        <form-option *ngFor="let item of (technicians$ | async) || []" [value]="item.name" [label]="item.name"></form-option>
+      </form-multi-select>
+    </div>
+    <div class="my-2 w-full flex flex-col justify-between">
+      <span>{{'forms.common.labels.extern' | translate}}</span>
+      <form-chip-list [placeholder]="'forms.common.labels.extern' | translate" formControlName="tageditor"></form-chip-list>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.jobType' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.jobType' | translate" formControlName="type_job">
+        <form-option *ngFor="let option of (jobTypes$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.jobType' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.jobType' | translate" formControlName="type_job">
+        <form-option *ngFor="let option of (jobTypes$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.application' | translate}}</label>
+      <form-search-select [placeholder]="'forms.preventiveMaintenance.generic.application' | translate" formControlName="application">
+        <form-option *ngFor="let option of (applications$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.preventiveMaintenance.generic.equipmentData' | translate}}</span>
+    </div>
+    <div class="w-full border my-2 p-2 flex flex-col">
+      <span>{{'forms.preventiveMaintenance.generic.equipment' | translate}}</span>
+      <form-text-field formControlName="model" [placeholder]="'forms.preventiveMaintenance.generic.model' | translate"></form-text-field>
+      <div class="w-full flex my-2 items-end">
+        <div class="w-full pr-1 flex flex-col">
+          <span class="text-center font-light">{{'forms.preventiveMaintenance.generic.measurementNumber' | translate}}</span>
+          <form-text-field formControlName="model_num" [placeholder]="'forms.preventiveMaintenance.generic.measurementNumber' | translate"></form-text-field>
+        </div>
+        <div class="w-full pl-1">
+          <form-search-select [placeholder]="'forms.preventiveMaintenance.generic.measurementType' | translate" formControlName="model_type">
+            <form-option *ngFor="let option of measurementTypes"
+                         [value]="option.id"
+                         [label]="option.name"></form-option>
+          </form-search-select>
+        </div>
+      </div>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.generatorModel' | translate}}</label>
+      <form-search-select [placeholder]="'forms.preventiveMaintenance.generic.generatorModel' | translate" formControlName="model_gene">
+        <form-option *ngFor="let option of (generators$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.generatorSeriesNumber' | translate}}</label>
+      <form-text-field formControlName="num_serie_gen" [placeholder]="'forms.preventiveMaintenance.generic.generatorSeriesNumber' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.motorModel' | translate}}</label>
+      <form-search-select [placeholder]="'forms.preventiveMaintenance.generic.motorModel' | translate" formControlName="model_motor">
+        <form-option *ngFor="let option of (motors$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.motorSeriesNumber' | translate}}</label>
+      <form-text-field formControlName="num_serie_motor" [placeholder]="'forms.preventiveMaintenance.generic.motorSeriesNumber' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.powerKW' | translate}}</label>
+      <form-text-field formControlName="potencia" [placeholder]="'forms.preventiveMaintenance.generic.powerKW' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.QTAModel' | translate}}</label>
+      <form-search-select [placeholder]="'forms.preventiveMaintenance.generic.QTAModel' | translate" formControlName="model_qta">
+        <form-option *ngFor="let option of (qtas$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.QTASeriesNumber' | translate}}</label>
+      <form-text-field formControlName="num_serie_qta" [placeholder]="'forms.preventiveMaintenance.generic.QTASeriesNumber' | translate"></form-text-field>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-sm font-medium">{{'forms.preventiveMaintenance.generic.sectionDescription1' | translate}}</span>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.symptoms' | translate}}</label>
+      <form-text-area formControlName="symptom" [placeholder]="'forms.preventiveMaintenance.generic.symptoms' | translate"></form-text-area>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.problem' | translate}}</label>
+      <form-text-area formControlName="problem" [placeholder]="'forms.preventiveMaintenance.generic.problem' | translate"></form-text-area>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.cause' | translate}}</label>
+      <form-text-area formControlName="cause" [placeholder]="'forms.preventiveMaintenance.generic.cause' | translate"></form-text-area>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.solution' | translate}}</label>
+      <form-text-area formControlName="solution" [placeholder]="'forms.preventiveMaintenance.generic.solution' | translate"></form-text-area>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.pending' | translate}}</label>
+      <form-text-area formControlName="pending" [placeholder]="'forms.preventiveMaintenance.generic.pending' | translate"></form-text-area>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.equipmentAvailable' | translate}}</label>
+      <form-button-group class="mt-4" formControlName="available">
+        <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
+      </form-button-group>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.signatureClient' | translate}}</label>
+      <div class="w-full flex justify-center">
+        <form-signature-pad [isDrawing]="false" formControlName="signature_client"></form-signature-pad>
+      </div>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.technician' | translate}}</label>
+      <form-search-select [placeholder]="'forms.preventiveMaintenance.generic.technician' | translate" formControlName="name_technician">
+        <form-option *ngFor="let option of (technicians$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.preventiveMaintenance.generic.signaturetechnician' | translate}}</label>
+      <div class="w-full flex justify-center">
+        <form-signature-pad [isDrawing]="false" formControlName="signature_technician"></form-signature-pad>
+      </div>
+    </div>
+    <div *ngIf="!readOnly" class="w-full flex my-5 px-3">
+      <button type="button" class="w-full btn btn-flat btn-accent btn-rounded-full" (click)="onSave.next()">{{'forms.common.labels.save' | translate}}</button>
+    </div>
+    <div *ngIf="!readOnly" class="w-full flex my-5 px-3">
+      <button type="submit" class="w-full btn btn-flat btn-accent btn-rounded-full">{{'forms.common.labels.submit' | translate}}</button>
+    </div>
+  </div>
+</form>

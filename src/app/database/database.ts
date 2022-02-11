@@ -9,6 +9,7 @@ export class DataBase extends Dexie {
       'local_reports': '++id, hash, type, answers',
       /// Online
       'answers': '++id, userId, countryId, type, folio',
+      'applications': '++id, name',
       'categories': '++id, name',
       'contacts': '++id, name',
       'countries': '++id, name',
