@@ -49,7 +49,10 @@ export function createTranslateLoader(http: HttpClient) {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        IonicModule.forRoot(),
+        IonicModule.forRoot({
+          rippleEffect: false,
+          mode: 'md'
+        }),
         TranslateModule.forRoot({
             defaultLanguage: 'en_US',
             loader: {

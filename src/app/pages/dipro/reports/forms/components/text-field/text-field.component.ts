@@ -1,5 +1,18 @@
-import {Component, forwardRef, Input, OnInit, Optional, Self} from '@angular/core';
-import {AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from "@angular/forms";
+/* eslint-disable @typescript-eslint/member-ordering */
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnInit,
+  Optional,
+  Self,
+} from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+} from '@angular/forms';
 
 // export const TEXT_FIELD_VALUE_ACCESSOR: any = {
 //   provide: NG_VALUE_ACCESSOR,
@@ -14,7 +27,6 @@ import {AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} fro
   // providers: [TEXT_FIELD_VALUE_ACCESSOR]
 })
 export class TextFieldComponent implements OnInit, ControlValueAccessor {
-
   @Input() placeholder: string | null = null;
 
   private _onChange: (val: any) => void = (value: number) => {};
@@ -38,11 +50,10 @@ export class TextFieldComponent implements OnInit, ControlValueAccessor {
     return this.ngControl?.control ?? null;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   registerOnChange(fn: (_: any) => void): void {
-   this._onChange = fn;
+    this._onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {

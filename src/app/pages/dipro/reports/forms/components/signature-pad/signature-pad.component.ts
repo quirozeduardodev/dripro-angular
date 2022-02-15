@@ -12,7 +12,7 @@ import {
   Self,
 } from '@angular/core';
 import * as SignaturePadNative from 'signature_pad';
-import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // export const SIGNATURE_PAD_VALUE_ACCESSOR: any = {
 //   provide: NG_VALUE_ACCESSOR,
@@ -134,5 +134,9 @@ export class SignaturePadComponent
   buttonActionClicked($event: MouseEvent): void {
     $event.stopPropagation();
     this.isDrawing = !this.isDrawing;
+  }
+
+  get abstractControl(): AbstractControl | null {
+    return this.ngControl?.control ?? null;
   }
 }

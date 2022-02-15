@@ -21,6 +21,7 @@ import {ChipListComponent} from "./chip-list/chip-list.component";
 import {MatChipsModule} from "@angular/material/chips";
 import {TextAreaComponent} from "./text-area/text-area.component";
 import {MultiSelectComponent} from "./multi-select/multi-select.component";
+import { MultiplierContainerComponent } from './multiplier-container/multiplier-container.component';
 
 
 
@@ -38,8 +39,8 @@ import {MultiSelectComponent} from "./multi-select/multi-select.component";
     TextAreaComponent,
     SelectComponent,
     ChipListComponent,
-    MultiSelectComponent
-
+    MultiSelectComponent,
+    MultiplierContainerComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +66,8 @@ import {MultiSelectComponent} from "./multi-select/multi-select.component";
     TextAreaComponent,
     SelectComponent,
     ChipListComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    MultiplierContainerComponent
   ]
 })
 export class FormComponentsModule { }

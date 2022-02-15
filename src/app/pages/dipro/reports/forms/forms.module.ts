@@ -34,6 +34,8 @@ import {
 import { ServiceGenericComponent } from './service-generic/service-generic.component';
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/reports/', '.json');
+  import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ export const createTranslateLoader = (http: HttpClient) =>
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSlideToggleModule,
+    MatRadioModule,
     TranslateModule,
   ],
   exports: [FormsComponent],

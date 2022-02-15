@@ -1,10 +1,13 @@
-<canvas (load)="resizeCanvas()"></canvas>
-<button *ngIf="!isDisabled" class="action-button" type="button" (click)="buttonActionClicked($event)">
-     <i class="mdi" [ngClass]="isDrawing ? 'mdi-pencil-off' : 'mdi-pencil'"></i>
-</button>
-<div *ngIf="!isDrawing || isDisabled" class="signature-pad-img-bg" [ngStyle]="{width: mainSize.width + 'px', height: mainSize.height + 'px'}">
+<div class="control-content">
+     <canvas (load)="resizeCanvas()"></canvas>
+     <button *ngIf="!isDisabled" class="action-button" type="button" (click)="buttonActionClicked($event)">
+          <i class="mdi" [ngClass]="isDrawing ? 'mdi-pencil-off' : 'mdi-pencil'"></i>
+     </button>
+     <div *ngIf="!isDrawing || isDisabled" class="signature-pad-img-bg" [ngStyle]="{width: mainSize.width + 'px', height: mainSize.height + 'px'}">
 
+     </div>
+     <img *ngIf="(!isDrawing || isDisabled ) && value"
+          [ngStyle]="{width: mainSize.width + 'px', height: mainSize.height + 'px'}"
+          [src]="'data:image/png;base64,' + value" [alt]="'Signature'"/>
 </div>
-<img *ngIf="(!isDrawing || isDisabled ) && value"
-     [ngStyle]="{width: mainSize.width + 'px', height: mainSize.height + 'px'}"
-      [src]="'data:image/png;base64,' + value" [alt]="'Signature'"/>
+<app-validator-message [control]="abstractControl"></app-validator-message>
