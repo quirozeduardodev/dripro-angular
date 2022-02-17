@@ -35,6 +35,7 @@ import { ServiceGenericComponent } from './service-generic/service-generic.compo
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/reports/', '.json');
   import {MatRadioModule} from '@angular/material/radio';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ export const createTranslateLoader = (http: HttpClient) =>
     IngersollRandRotaryContactCooledRotaryComponent,
     IngersollRandRotaryContactCooledNirvanaComponent,
     IngersollRandRefrigeratedDryerSystemComponent,
-    IngersollRandHlEhHbComponent,
+    IngersollRandHlEhHbComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +64,7 @@ export const createTranslateLoader = (http: HttpClient) =>
     MatSlideToggleModule,
     MatRadioModule,
     TranslateModule,
+    ScrollingModule
   ],
   exports: [FormsComponent],
 })

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Answer } from 'src/app/database/models/answer';
@@ -21,6 +21,7 @@ import { BaseForm } from '../base-form';
   selector: 'app-service-maintenance',
   templateUrl: './service-maintenance.component.html',
   styleUrls: ['./service-maintenance.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceMaintenanceComponent extends BaseForm implements OnInit {
   jsaReports$: Observable<Answer[]> | null = null;
