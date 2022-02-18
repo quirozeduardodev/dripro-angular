@@ -65,7 +65,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
           formControlName: 'social',
         },
         {
-          label: '¿Se cuenta con agua y jabón para la limieza de manos?',
+          label: '¿Se cuenta con agua y jabón para la limpieza de manos?',
           formControlName: 'hand_cleaning',
         },
         {
