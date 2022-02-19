@@ -1,12 +1,12 @@
 import { AfterContentInit, ContentChildren, Directive, DoCheck, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[appMultiplierFormControl]'
 })
 export class MultiplierFormControlDirective implements DoCheck, AfterContentInit {
 
-  @Input() appMultiplierFormControl: FormGroup | null = null;
+  @Input() appMultiplierFormControl: {[p: string]: AbstractControl} = {};
 
   constructor(private _viewContainer: ViewContainerRef,
     private _template: TemplateRef<MultiplierFormControlContext>) { }
@@ -23,11 +23,27 @@ export class MultiplierFormControlDirective implements DoCheck, AfterContentInit
 
   private _applyChanges() {
     const viewContainer = this._viewContainer;
-
+    let fg: FormGroup | null = null;
+    for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
+      if(!fg) {
+        fg = value.parent as (FormGroup | null);
+      } else {
+        break;
+      }
+    }
     for(let i = 0; i < 7; i++) {
+      const newControls: {[p: string]: AbstractControl} = {};
+      for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
+        newControls[key] = new FormControl(value.value, value.validator);
+      }
+      for (const [key, value] of Object.entries(newControls)) {
+        if(fg) {
+          fg.addControl(`form_builder_multiplier_${key}_${i}`, value);
+        }
+      }
       viewContainer.createEmbeddedView(
         this._template,
-        new MultiplierFormControlContext()
+        newControls
         // currentIndex === null ? undefined : currentIndex
       );
     }
@@ -79,7 +95,6 @@ export class MultiplierFormControlDirective implements DoCheck, AfterContentInit
 
 }
 
-export class MultiplierFormControlContext {
-  constructor(
-  ) {}
+export interface MultiplierFormControlContext {
+  [p: string]: FormControl;
 }

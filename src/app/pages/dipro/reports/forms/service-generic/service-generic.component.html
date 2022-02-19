@@ -1,8 +1,8 @@
 <form (submit)="submit()" [formGroup]="formGroup">
   <div class="w-full flex flex-col">
-    <div *appMultiplierFormControl="formGroup" class="my-2 flex flex-col">
+    <div *appMultiplierFormControl="{job_order: formGroup.controls.job_order}; let xjob_order = job_order" formsControlNames="job_order" class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
-      <form-text-field formControlName="job_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
+      <form-text-field [formControl]="xjob_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.noJsa' | translate}}</label>

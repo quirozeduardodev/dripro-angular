@@ -24,6 +24,7 @@ import { BaseForm } from '../base-form';
   styleUrls: ['./service-generic.component.scss'],
 })
 export class ServiceGenericComponent extends BaseForm implements OnInit {
+  x = 'root';
   jsaReports$: Observable<Answer[]> | null = null;
   businessUnits$: Observable<Unit[]> | null = null;
   customers$: Observable<Customer[]> | null = null;
