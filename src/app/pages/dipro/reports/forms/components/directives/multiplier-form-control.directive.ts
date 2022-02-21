@@ -1,100 +1,154 @@
-import { AfterContentInit, ContentChildren, Directive, DoCheck, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
+export declare type MultiplierStructure = { [p: string]: AbstractControl };
 @Directive({
-  selector: '[appMultiplierFormControl]'
+  selector: '[appMultiplierFormControl]',
 })
-export class MultiplierFormControlDirective implements DoCheck, AfterContentInit {
+export class MultiplierFormControlDirective
+  implements AfterContentInit
+{
+  public static baseId: string = 'form_builder_container_multiplier';
 
-  @Input() appMultiplierFormControl: {[p: string]: AbstractControl} = {};
+  @Input() appMultiplierFormControl: MultiplierStructure = {};
 
-  constructor(private _viewContainer: ViewContainerRef,
-    private _template: TemplateRef<MultiplierFormControlContext>) { }
-
-  ngDoCheck(): void {
-    console.log('ngDoCheck');
-    // this._viewContainer.
-  }
+  private _rootFormGroup: FormGroup | null = null;
+  private _currentId: number = 0;
+  private _formControls: MultiplierStructure[] = [];
+  constructor(
+    private _viewContainer: ViewContainerRef,
+    private _template: TemplateRef<MultiplierFormControlContext>
+  ) {}
 
   ngAfterContentInit(): void {
-    console.log('ngAfterContentInit');
+    this.tryToLoadRootFormGroup().then(() => {
+      this._applyChanges();
+    });
+  }
+
+  addOneMore(): void {
+    const newControls: MultiplierStructure = {};
+    for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
+      newControls[key] = new FormControl(value.value, value.validator);
+    }
+    this._formControls.push(newControls);
     this._applyChanges();
   }
 
   private _applyChanges() {
     const viewContainer = this._viewContainer;
-    let fg: FormGroup | null = null;
-    for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
-      if(!fg) {
-        fg = value.parent as (FormGroup | null);
+    viewContainer.clear();
+    viewContainer.createEmbeddedView(
+      this._template,
+      this.appMultiplierFormControl
+      // currentIndex === null ? undefined : currentIndex
+    );
+    for (let i = 0; i < this._formControls.length; i++) {
+      const item = this._formControls[i];
+      for (const [key, value] of Object.entries(item)) {
+        if (this._rootFormGroup) {
+          this._rootFormGroup.addControl(
+            `${MultiplierFormControlDirective.baseId}-${key}-${i + 1}`,
+            value
+          );
+        }
+      }
+      // viewContainer.createEmbeddedView(
+      //   this._template,
+      //   item
+      //   // currentIndex === null ? undefined : currentIndex
+      // );
+      const tempRef =
+      this._viewContainer.createComponent<RemoveComponent<MultiplierFormControlContext>>(RemoveComponent);
+      tempRef.instance.templateRef = {
+        context: item,
+        templateRef: this._template
+      };
+    }
+    const btnRef =
+      this._viewContainer.createComponent<AddMoreComponent>(AddMoreComponent);
+    btnRef.instance.add.subscribe(() => {
+      this.addOneMore();
+    });
+  }
+
+  private async tryToLoadRootFormGroup(): Promise<void> {
+    this._rootFormGroup = null;
+    for (const [key, value] of await Object.entries(
+      this.appMultiplierFormControl
+    )) {
+      if (!this._rootFormGroup) {
+        this._rootFormGroup = value.parent as FormGroup | null;
       } else {
         break;
       }
     }
-    for(let i = 0; i < 7; i++) {
-      const newControls: {[p: string]: AbstractControl} = {};
-      for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
-        newControls[key] = new FormControl(value.value, value.validator);
-      }
-      for (const [key, value] of Object.entries(newControls)) {
-        if(fg) {
-          fg.addControl(`form_builder_multiplier_${key}_${i}`, value);
-        }
-      }
-      viewContainer.createEmbeddedView(
-        this._template,
-        newControls
-        // currentIndex === null ? undefined : currentIndex
-      );
-    }
-
-    // changes.forEachOperation(
-    //   (
-    //     item: IterableChangeRecord<T>,
-    //     adjustedPreviousIndex: number | null,
-    //     currentIndex: number | null
-    //   ) => {
-    //     if (item.previousIndex == null) {
-    //       // NgForOf is never "null" or "undefined" here because the differ detected
-    //       // that a new item needs to be inserted from the iterable. This implies that
-    //       // there is an iterable value for "_ngForOf".
-    //       viewContainer.createEmbeddedView(
-    //         this._template,
-    //         new NgForOfContext<T, U>(item.item, this._ngForOf!, -1, -1),
-    //         currentIndex === null ? undefined : currentIndex
-    //       );
-    //     } else if (currentIndex == null) {
-    //       viewContainer.remove(
-    //         adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex
-    //       );
-    //     } else if (adjustedPreviousIndex !== null) {
-    //       const view = viewContainer.get(adjustedPreviousIndex)!;
-    //       viewContainer.move(view, currentIndex);
-    //       applyViewChange(view as EmbeddedViewRef<NgForOfContext<T, U>>, item);
-    //     }
-    //   }
-    // );
-
-    // for (let i = 0, ilen = viewContainer.length; i < ilen; i++) {
-    //   const viewRef = <EmbeddedViewRef<NgForOfContext<T, U>>>(
-    //     viewContainer.get(i)
-    //   );
-    //   const context = viewRef.context;
-    //   context.index = i;
-    //   context.count = ilen;
-    //   context.ngForOf = this._ngForOf!;
-    // }
-
-    // changes.forEachIdentityChange((record: any) => {
-    //   const viewRef = <EmbeddedViewRef<NgForOfContext<T, U>>>(
-    //     viewContainer.get(record.currentIndex)
-    //   );
-    //   applyViewChange(viewRef, record);
-    // });
   }
-
 }
-
 export interface MultiplierFormControlContext {
   [p: string]: FormControl;
+}
+
+@Component({
+  template: `
+  <div class="container">
+    <button type="button" (click)="add.emit()">
+      <i class="mdi mdi-plus"></i>
+    </button>
+  </div>`,
+  styles: [
+    `.container {width: 100%; display: flex; justify-content: center; padding-top: 0.25rem;}`,
+    `.container button {color: #ec0909FF}`
+  ]
+})
+export class AddMoreComponent implements OnDestroy {
+  @Output() add: EventEmitter<void> = new EventEmitter<void>();
+
+  ngOnDestroy(): void {
+    this.add.unsubscribe();
+  }
+}
+
+@Component({
+  template: `
+  <div #container class="container">
+  </div>`,
+  styles: [
+    `.container {}`
+  ]
+})
+export class RemoveComponent<T> implements AfterViewInit {
+  @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | null = null;
+  set templateRef(val: {context: any; templateRef: TemplateRef<T>}) {
+    this._templateRef = val;
+    if(this._templateRef && !this.isEmbedded && this.isContentInit) {
+      this.isEmbedded = true;
+      this.container?.createEmbeddedView(this._templateRef.templateRef, this._templateRef.context);
+    }
+  }
+  isEmbedded: boolean = false;
+  isContentInit: boolean = false;
+  private _templateRef: {context: any; templateRef: TemplateRef<T>} | null = null;
+
+  ngAfterViewInit(): void {
+    this.isContentInit = true;
+    if(this._templateRef && !this.isEmbedded) {
+      this.isEmbedded = true;
+      this.container?.createEmbeddedView(this._templateRef.templateRef, this._templateRef.context);
+    }
+  }
 }
