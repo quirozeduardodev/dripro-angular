@@ -43,7 +43,7 @@ export class MultiplierFormControlDirective
   addOneMore(): void {
     const newControls: MultiplierStructure = {};
     for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
-      newControls[key] = new FormControl(value.value, value.validator);
+      newControls[key] = new FormControl(null, value.validator);
     }
     this._formControls.push(newControls);
     this._applyChanges();
@@ -78,6 +78,16 @@ export class MultiplierFormControlDirective
         context: item,
         templateRef: this._template
       };
+      tempRef.instance.remove.subscribe(() => {
+        this._formControls.splice(i, 1);
+        for (const [key, value] of Object.entries(this._rootFormGroup?.controls ?? {})) {
+          if(key.match(`${MultiplierFormControlDirective.baseId}-([a-zA-Z0-9_-]+)-${i + 1}`)) {
+            this._rootFormGroup?.removeControl(key);
+          }
+        }
+        console.log(this._rootFormGroup?.controls);
+        this._applyChanges();
+      });
     }
     const btnRef =
       this._viewContainer.createComponent<AddMoreComponent>(AddMoreComponent);
@@ -125,14 +135,24 @@ export class AddMoreComponent implements OnDestroy {
 
 @Component({
   template: `
-  <div #container class="container">
-  </div>`,
+  <button #button type="button" (click)="remove.emit()">
+      <i class="mdi mdi-minus-circle-outline"></i>
+  </button>`,
   styles: [
-    `.container {}`
+    `:host {position: relative;}`,
+    `:host button {color: #ec0909FF; position: absolute; top: 0; right: 0;}`
   ]
 })
-export class RemoveComponent<T> implements AfterViewInit {
-  @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | null = null;
+export class RemoveComponent<T> implements AfterViewInit, OnDestroy {
+  @ViewChild('button', {read: ViewContainerRef}) container: ViewContainerRef | null = null;
+  @Output() remove: EventEmitter<void> = new EventEmitter<void>();
+  isEmbedded: boolean = false;
+  isContentInit: boolean = false;
+  private _templateRef: {context: any; templateRef: TemplateRef<T>} | null = null;
+
+  constructor(private ref: ChangeDetectorRef) {
+  }
+
   set templateRef(val: {context: any; templateRef: TemplateRef<T>}) {
     this._templateRef = val;
     if(this._templateRef && !this.isEmbedded && this.isContentInit) {
@@ -140,15 +160,17 @@ export class RemoveComponent<T> implements AfterViewInit {
       this.container?.createEmbeddedView(this._templateRef.templateRef, this._templateRef.context);
     }
   }
-  isEmbedded: boolean = false;
-  isContentInit: boolean = false;
-  private _templateRef: {context: any; templateRef: TemplateRef<T>} | null = null;
 
   ngAfterViewInit(): void {
     this.isContentInit = true;
     if(this._templateRef && !this.isEmbedded) {
       this.isEmbedded = true;
       this.container?.createEmbeddedView(this._templateRef.templateRef, this._templateRef.context);
+      this.ref.detectChanges();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.remove.unsubscribe();
   }
 }
