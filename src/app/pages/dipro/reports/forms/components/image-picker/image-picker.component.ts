@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
   AfterViewInit,
   Component,
@@ -72,7 +73,7 @@ export class ImagePickerComponent implements AfterViewInit, OnDestroy, ControlVa
         resultType: CameraResultType.Base64,
         source: CameraSource.Prompt,
         width: 800,
-        height: 1000
+        height: 1000,
       }).then(image => {
         const base64Result: string | null = image.base64String ?? null
         this._value.push(base64Result);

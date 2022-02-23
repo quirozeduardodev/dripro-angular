@@ -1,3 +1,10 @@
-<p>
-  ingersoll-rand-hl-eh-hb works!
-</p>
+<div>
+  <span>asdasd</span>
+  <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+    <mat-radio-group *cdkVirtualFor="let item of items" class="w-full flex justify-between example-item">
+      <mat-radio-button [value]="1">{{item}}</mat-radio-button>
+      <mat-radio-button [value]="2">{{item}}</mat-radio-button>
+      <mat-radio-button [value]="3">{{item}}</mat-radio-button>
+    </mat-radio-group>
+  </cdk-virtual-scroll-viewport>
+</div>

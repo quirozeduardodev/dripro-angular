@@ -1,8 +1,8 @@
 <form (submit)="submit()" [formGroup]="formGroup">
   <div class="w-full flex flex-col">
-    <div *appMultiplierFormControl="{job_order: formGroup.controls.job_order}; let xjob_order = job_order" formsControlNames="job_order" class="my-2 flex flex-col">
+    <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
-      <form-text-field [formControl]="xjob_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
+      <form-text-field formControlName="job_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.noJsa' | translate}}</label>
@@ -183,6 +183,30 @@
         <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
         <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
       </form-button-group>
+    </div>
+    <span>{{'forms.service.generic.photographicEvidence' | translate}}</span>
+    <div class="w-full p-2 my-1 border flex flex-col"
+      *appMultiplierFormControl="{
+        photosz: formGroup.controls.photosz,
+        'photo-description': formGroup.controls['photo-description']};
+      let formGroup">
+      <form-image-picker [formControl]="formGroup.photosz"></form-image-picker>
+      <form-text-field [formControl]="formGroup['photo-description']" [placeholder]="'forms.service.generic.photographicEvidenceDescription' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.inChargeOfTheClient' | translate}}</label>
+      <form-text-field formControlName="responsable" [placeholder]="'forms.service.generic.inChargeOfTheClient' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.department' | translate}}</label>
+      <form-text-field formControlName="department" [placeholder]="'forms.service.generic.department' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col"
+    *appMultiplierFormControl="{
+      email_client: formGroup.controls.email_client};
+      let formGroup">
+      <label class="my-1">{{'forms.service.generic.emailCient' | translate}}</label>
+      <form-text-field [formControl]="formGroup.email_client" [placeholder]="'forms.service.generic.emailClient' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.signatureClient' | translate}}</label>

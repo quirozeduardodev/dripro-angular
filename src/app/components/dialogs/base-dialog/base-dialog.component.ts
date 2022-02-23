@@ -4,9 +4,10 @@ import {
   OnDestroy,
   OnInit,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import {
   animate,
   state,
@@ -14,6 +15,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { OverlayComponent } from '../../overlay/overlay.component';
 
 const sheetAnimationDuration = 175;
 
@@ -44,7 +46,7 @@ const sheetAnimationDuration = 175;
 export class BaseDialogComponent implements OnInit, OnDestroy {
   @Input() visible = true;
   @Input() overlayClose = true;
-  showOverlay = false;
+  @ViewChild('overlay') overlay: OverlayComponent | null = null;
   showDialog = false;
 
   private _backButtonSubscription: Subscription | null = null;
@@ -76,17 +78,19 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
       this._status === DialogStatus.closed ||
       this._status === DialogStatus.closing
     ) {
+      console.log('alreadyCosed');
       return;
     }
     this._status = DialogStatus.closing;
     this.showDialog = false;
-    setTimeout(() => {
-      this.showOverlay = false;
+    timer(sheetAnimationDuration).subscribe(() => {
+      this.overlay?.hide();
       this._status = DialogStatus.closed;
-    }, sheetAnimationDuration);
+    });
   }
 
   open(): void {
+    console.log('open');
     if (
       this._status === DialogStatus.opened ||
       this._status === DialogStatus.opening
@@ -94,11 +98,11 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
       return;
     }
     this._status = DialogStatus.opening;
-    this.showOverlay = true;
+    this.overlay?.show();
     this.showDialog = true;
-    setTimeout(() => {
+    timer(sheetAnimationDuration).subscribe(() => {
       this._status = DialogStatus.opened;
-    }, sheetAnimationDuration);
+    });
   }
 
   toggle(): void {

@@ -4,8 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Answer } from 'src/app/database/models/answer';
 import { Application } from 'src/app/database/models/application';
+import { Category } from 'src/app/database/models/category';
 import { Contact } from 'src/app/database/models/contact';
 import { Customer } from 'src/app/database/models/customer';
+import { Delay } from 'src/app/database/models/delay';
 import { Generator } from 'src/app/database/models/generator';
 import { Location } from 'src/app/database/models/location';
 import { Motor } from 'src/app/database/models/motor';
@@ -35,6 +37,8 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit {
   generators$: Observable<Generator[]> | null = null;
   motors$: Observable<Motor[]> | null = null;
   qtas$: Observable<QTA[]> | null = null;
+  categories$: Observable<Category[]> | null = null;
+  delays$: Observable<Delay[]> | null = null;
   measurementTypes: {id: number; name: string}[] = [
     {
       id: 1,
@@ -309,6 +313,20 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit {
     {label: 'forms.service.preventiveMaintenance.perssao', vFC: 'pressao_vacio', cFC: 'pressao_carga'},
     {label: 'forms.service.preventiveMaintenance.tempo', vFC: 'tempo_vacio', cFC: 'tempo_carga'},
   ];
+  bateries: {label: string; fC: string}[] = [
+    {label: 'forms.service.preventiveMaintenance.vs1', fC: 'vs_1'},
+    {label: 'forms.service.preventiveMaintenance.vs2', fC: 'vs_2'},
+    {label: 'forms.service.preventiveMaintenance.vs3', fC: 'vs_3'},
+    {label: 'forms.service.preventiveMaintenance.vs4', fC: 'vs_4'},
+    {label: 'forms.service.preventiveMaintenance.vs5', fC: 'vs_5'},
+    {label: 'forms.service.preventiveMaintenance.vs6', fC: 'vs_6'},
+    {label: 'forms.service.preventiveMaintenance.vs7', fC: 'vs_7'},
+    {label: 'forms.service.preventiveMaintenance.vs8', fC: 'vs_8'},
+    {label: 'forms.service.preventiveMaintenance.vs9', fC: 'vs_9'},
+    {label: 'forms.service.preventiveMaintenance.vs10', fC: 'vs_10'},
+    {label: 'forms.service.preventiveMaintenance.vs11', fC: 'vs_11'},
+    {label: 'forms.service.preventiveMaintenance.vs12', fC: 'vs_12'},
+  ];
   formGroup = new FormGroup({
     job_order: new FormControl(null, [Validators.required]),
     no_jsa: new FormControl(null, [Validators.required]),
@@ -340,9 +358,6 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit {
     solution: new FormControl(null, [Validators.required]),
     pending: new FormControl(null, [Validators.required]),
     available: new FormControl(null, [Validators.required]),
-    signature_client: new FormControl(null, [Validators.required]),
-    name_technician: new FormControl(null, [Validators.required]),
-    signature_technician: new FormControl(null, [Validators.required]),
     tanq_comb_niv: new FormControl(null, [Validators.required]),
     tanq_comb_fil: new FormControl(null, [Validators.required]),
     tanq_comb_lim: new FormControl(null, [Validators.required]),
@@ -555,6 +570,34 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit {
     pressao_carga: new FormControl(null, [Validators.required]),
     tempo_vacio: new FormControl(null, [Validators.required]),
     tempo_carga: new FormControl(null, [Validators.required]),
+    vs_1: new FormControl(null, [Validators.required]),
+    vs_2: new FormControl(null, [Validators.required]),
+    vs_3: new FormControl(null, [Validators.required]),
+    vs_4: new FormControl(null, [Validators.required]),
+    vs_5: new FormControl(null, [Validators.required]),
+    vs_6: new FormControl(null, [Validators.required]),
+    vs_7: new FormControl(null, [Validators.required]),
+    vs_8: new FormControl(null, [Validators.required]),
+    vs_9: new FormControl(null, [Validators.required]),
+    vs_10: new FormControl(null, [Validators.required]),
+    vs_11: new FormControl(null, [Validators.required]),
+    vs_12: new FormControl(null, [Validators.required]),
+    density_actual: new FormControl(null, [Validators.required]),
+    volt_actual: new FormControl(null, [Validators.required]),
+    comments_actual: new FormControl(null, [Validators.required]),
+    technician_name: new FormControl(null, [Validators.required]),
+    initial_hour: new FormControl(null, [Validators.required]),
+    finally_hour: new FormControl(null, [Validators.required]),
+    category_technician: new FormControl(null, [Validators.required]),
+    demoras_technician: new FormControl(null, [Validators.required]),
+    photosz: new FormControl(null, [Validators.required]),
+    'photo-description': new FormControl(null, [Validators.required]),
+    responsable: new FormControl(null, [Validators.required]),
+    department: new FormControl(null, [Validators.required]),
+    email_client: new FormControl(null, [Validators.required, Validators.email]),
+    signature_client: new FormControl(null, [Validators.required]),
+    name_technician: new FormControl(null, [Validators.required]),
+    signature_technician: new FormControl(null, [Validators.required]),
   });
 
   constructor(
@@ -576,6 +619,8 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit {
     this.generators$ = this.unitOfWorkDatabase.generatorRepository.all();
     this.motors$ = this.unitOfWorkDatabase.motorRepository.all();
     this.qtas$ = this.unitOfWorkDatabase.QTARepository.all();
+    this.categories$ = this.unitOfWorkDatabase.categoryRepository.all();
+    this.delays$ = this.unitOfWorkDatabase.delayRepository.all();
   }
 
   submit(): void {

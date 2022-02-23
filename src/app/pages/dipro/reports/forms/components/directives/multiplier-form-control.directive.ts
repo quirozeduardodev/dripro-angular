@@ -54,7 +54,9 @@ export class MultiplierFormControlDirective
     viewContainer.clear();
     viewContainer.createEmbeddedView(
       this._template,
-      this.appMultiplierFormControl
+      {
+        $implicit: this.appMultiplierFormControl
+      }
       // currentIndex === null ? undefined : currentIndex
     );
     for (let i = 0; i < this._formControls.length; i++) {
@@ -67,15 +69,12 @@ export class MultiplierFormControlDirective
           );
         }
       }
-      // viewContainer.createEmbeddedView(
-      //   this._template,
-      //   item
-      //   // currentIndex === null ? undefined : currentIndex
-      // );
       const tempRef =
       this._viewContainer.createComponent<RemoveComponent<MultiplierFormControlContext>>(RemoveComponent);
       tempRef.instance.templateRef = {
-        context: item,
+        context: {
+          $implicit: item
+        },
         templateRef: this._template
       };
       tempRef.instance.remove.subscribe(() => {
@@ -102,7 +101,7 @@ export class MultiplierFormControlDirective
       this.appMultiplierFormControl
     )) {
       if (!this._rootFormGroup) {
-        this._rootFormGroup = value.parent as FormGroup | null;
+        this._rootFormGroup = value.parent as FormGroup;
       } else {
         break;
       }
@@ -110,7 +109,7 @@ export class MultiplierFormControlDirective
   }
 }
 export interface MultiplierFormControlContext {
-  [p: string]: FormControl;
+  $implicit: MultiplierStructure;
 }
 
 @Component({
@@ -148,12 +147,12 @@ export class RemoveComponent<T> implements AfterViewInit, OnDestroy {
   @Output() remove: EventEmitter<void> = new EventEmitter<void>();
   isEmbedded: boolean = false;
   isContentInit: boolean = false;
-  private _templateRef: {context: any; templateRef: TemplateRef<T>} | null = null;
+  private _templateRef: {context: T; templateRef: TemplateRef<T>} | null = null;
 
   constructor(private ref: ChangeDetectorRef) {
   }
 
-  set templateRef(val: {context: any; templateRef: TemplateRef<T>}) {
+  set templateRef(val: {context: T; templateRef: TemplateRef<T>}) {
     this._templateRef = val;
     if(this._templateRef && !this.isEmbedded && this.isContentInit) {
       this.isEmbedded = true;

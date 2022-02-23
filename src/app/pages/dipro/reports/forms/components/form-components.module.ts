@@ -22,6 +22,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { TextAreaComponent } from './text-area/text-area.component';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { MultiplierFormControlDirective } from './directives/multiplier-form-control.directive';
+import { RadioGroupComponent } from './radio-group/radio-group.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MultiplierFormControlDirective } from './directives/multiplier-form-con
     TimePickerComponent,
     DatePickerComponent,
     CheckboxGroupComponent,
+    RadioGroupComponent,
     TextFieldComponent,
     TextAreaComponent,
     SelectComponent,
@@ -60,6 +62,7 @@ import { MultiplierFormControlDirective } from './directives/multiplier-form-con
     TimePickerComponent,
     DatePickerComponent,
     CheckboxGroupComponent,
+    RadioGroupComponent,
     TextFieldComponent,
     TextAreaComponent,
     SelectComponent,
