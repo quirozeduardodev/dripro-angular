@@ -202,7 +202,7 @@
       <form-text-field formControlName="department" [placeholder]="'forms.service.generic.department' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col"
-    *appMultiplierFormControl="{
+      *appMultiplierFormControl="{
       email_client: formGroup.controls.email_client};
       let formGroup">
       <label class="my-1">{{'forms.service.generic.emailCient' | translate}}</label>
@@ -223,7 +223,7 @@
       </form-search-select>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.signaturetechnician' | translate}}</label>
+      <label class="my-1">{{'forms.service.generic.signatureTechnician' | translate}}</label>
       <div class="w-full flex justify-center">
         <form-signature-pad [isDrawing]="false" formControlName="signature_technician"></form-signature-pad>
       </div>

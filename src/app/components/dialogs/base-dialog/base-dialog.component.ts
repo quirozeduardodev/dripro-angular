@@ -78,7 +78,6 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
       this._status === DialogStatus.closed ||
       this._status === DialogStatus.closing
     ) {
-      console.log('alreadyCosed');
       return;
     }
     this._status = DialogStatus.closing;
@@ -90,7 +89,6 @@ export class BaseDialogComponent implements OnInit, OnDestroy {
   }
 
   open(): void {
-    console.log('open');
     if (
       this._status === DialogStatus.opened ||
       this._status === DialogStatus.opening

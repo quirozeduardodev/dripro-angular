@@ -89,7 +89,6 @@ export class SignaturePadComponent
 
     this.signaturePad = new SignaturePadNative.default(canvas, this.options);
     this.signaturePad.onBegin = () => {
-      // console.log(this.toDataURL());
     };
     this.signaturePad.onEnd = () => {
       this._value = this.toDataURL().replace('data:image/png;base64,', '');

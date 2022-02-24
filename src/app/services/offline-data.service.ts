@@ -330,10 +330,7 @@ export class OfflineSynchronizeHandler<TResponse, TEntity> {
           );
           return this._repository.bulkUpsert(nData).pipe(
             map((insertedData) => true),
-            catchError((err) => {
-              console.log(err);
-              return of(false);
-            })
+            catchError((err) => of(false))
           );
         }),
         catchError((err) => of(false))

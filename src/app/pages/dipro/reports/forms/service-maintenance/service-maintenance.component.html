@@ -296,10 +296,20 @@
           <form-search-select class="w-full"
             [placeholder]="'forms.service.preventiveMaintenance.delays' | translate"
             [formControl]="formGroup.demoras_technician">
-            <!-- <form-option *ngFor="let option of (technicians$ | async) || []"
+            <form-option *ngFor="let option of (delays$ | async) || []"
                          [value]="option.name"
-                         [label]="option.name"></form-option> -->
+                         [label]="option.name"></form-option>
           </form-search-select>
+        </div>
+      </div>
+      <div class="w-full flex">
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.category' | translate}}</span>
+          <form-time-picker [formControl]="formGroup.initial_hour"></form-time-picker>
+        </div>
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.delays' | translate}}</span>
+          <form-time-picker [formControl]="formGroup.finally_hour"></form-time-picker>
         </div>
       </div>
     </div>
@@ -342,7 +352,7 @@
       </form-search-select>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.signaturetechnician' | translate}}</label>
+      <label class="my-1">{{'forms.service.generic.signatureTechnician' | translate}}</label>
       <div class="w-full flex justify-center">
         <form-signature-pad [isDrawing]="false" formControlName="signature_technician"></form-signature-pad>
       </div>

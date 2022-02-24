@@ -84,7 +84,6 @@ export class MultiplierFormControlDirective
             this._rootFormGroup?.removeControl(key);
           }
         }
-        console.log(this._rootFormGroup?.controls);
         this._applyChanges();
       });
     }

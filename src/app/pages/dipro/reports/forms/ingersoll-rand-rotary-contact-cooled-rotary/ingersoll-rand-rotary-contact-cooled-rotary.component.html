@@ -1,3 +1,40 @@
-<p>
-  ingersoll-rand-rotary-contact-cooled-rotary works!
-</p>
+<form (submit)="submit()" [formGroup]="formGroup">
+  <div class="w-full flex flex-col">
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.bussinesUnit' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.bussinesUnit' | translate" formControlName="unidad">
+        <form-option *ngFor="let option of (businessUnits$ | async) || []"
+                     [value]="option.name"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.client' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.client' | translate" formControlName="customer">
+        <form-option *ngFor="let option of (customers$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.serviceLocation' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.serviceLocation' | translate" formControlName="location">
+        <form-option *ngFor="let option of (locations$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.locationGps' | translate}}</label>
+      <form-text-field formControlName="location_gps" [placeholder]="'forms.common.labels.locationGps' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.common.labels.serviceType' | translate}}</label>
+      <form-search-select [placeholder]="'forms.common.labels.serviceType' | translate" formControlName="location">
+        <form-option *ngFor="let option of (locations$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+  </div>
+</form>
