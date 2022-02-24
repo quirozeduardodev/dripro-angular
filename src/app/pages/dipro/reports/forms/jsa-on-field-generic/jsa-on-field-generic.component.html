@@ -1,37 +1,37 @@
 <form (submit)="submit()" [formGroup]="formGroup">
   <div class="w-full flex flex-col">
     <div class="my-2 flex flex-col">
-      <label class="my-1">Fecha</label>
+      <label class="my-1">{{'forms.common.labels.date' | translate}}</label>
       <form-text-field
         formControlName="date"
-        [placeholder]="'Fecha' | translate"
+        [placeholder]="'forms.common.labels.date' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">Orden de Trabajo</label>
+      <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
       <form-text-field
         formControlName="job_order"
-        [placeholder]="'Orden de Trabajo'"
+        [placeholder]="'forms.common.labels.jobOrder' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">Nombre</label>
+      <label class="my-1">{{'forms.common.labels.name' | translate}}</label>
       <form-text-field
         formControlName="name_people"
-        [placeholder]="'Nombre'"
+        [placeholder]="'forms.common.labels.name' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">WWID</label>
+      <label class="my-1">{{'forms.common.labels.wwid' | translate}}</label>
       <form-text-field
         formControlName="wwid"
-        [placeholder]="'WWID'"
+        [placeholder]="'forms.common.labels.wwid' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col" *ngIf="businessUnits$">
-      <label class="my-1">Unidad de Negocio</label>
+      <label class="my-1">{{'forms.common.labels.bussinesUnit' | translate}}</label>
       <form-search-select
-        placeholder="Unidad de Negocio"
+        [placeholder]="'forms.common.labels.bussinesUnit' | translate"
         formControlName="unidad"
       >
         <form-option
@@ -42,14 +42,14 @@
       </form-search-select>
     </div>
     <div class="w-full flex justify-between my-3">
-      <span>¿Está acompañado?</span>
+      <span>{{'forms.common.labels.isAccompained' | translate}}</span>
       <mat-slide-toggle formControlName="accompanied"></mat-slide-toggle>
     </div>
     <div
       *ngIf="formGroup.controls.accompanied.value === true"
       class="w-full flex flex-col my-3"
     >
-      <span>Seleccione su compañero</span>
+      <span>{{'forms.common.labels.selectYourPartner' | translate}}</span>
       <form-multi-select formControlName="teammate_name">
         <form-option
           *ngFor="let user of (technicians$ | async) || []"
@@ -59,17 +59,17 @@
       </form-multi-select>
     </div>
     <div class="w-full flex flex-col justify-between my-3">
-      <span>Externo</span>
+      <span>{{'forms.common.labels.extern' | translate}}</span>
       <form-chip-list
-        [placeholder]="'Externo' | translate"
+        [placeholder]="'forms.common.labels.extern' | translate"
         formControlName="tageditor"
       ></form-chip-list>
     </div>
     <div class="my-1 flex flex-col" *ngIf="businessUnits$">
-      <label class="my-1">Categoria de la tarea</label>
+      <label class="my-1">{{'forms.common.labels.taskCategory' | translate}}</label>
       <form-search-select
         formControlName="task_category_generic"
-        placeholder="Categoria de la tarea"
+        [placeholder]="'forms.common.labels.taskCategory' | translate"
       >
         <form-option
           *ngFor="let option of (categoriesUnits$ | async) || []"
@@ -79,17 +79,17 @@
       </form-search-select>
     </div>
     <div class="my-1 flex flex-col">
-      <label class="my-1">Descripción de la tarea</label>
+      <label class="my-1">{{'forms.common.labels.categoryDescription' | translate}}</label>
       <form-text-field
         formControlName="task_description"
-        [placeholder]="'Descripción de la tarea'"
+        [placeholder]="'forms.common.labels.categoryDescription' | translate"
       ></form-text-field>
     </div>
     <div class="my-1 flex flex-col">
-      <label class="my-1">Ingresar Ubicación</label>
+      <label class="my-1">{{'forms.common.labels.fillLocation' | translate}}</label>
       <form-text-field
         formControlName="location"
-        [placeholder]="'Ingresar Ubicación'"
+        [placeholder]="'forms.common.labels.fillLocation' | translate"
       ></form-text-field>
     </div>
     <ng-container *ngFor="let section of groupSections">
@@ -109,7 +109,7 @@
         >
           <form-option
             *ngFor="let option of commonOptions"
-            [label]="option.label"
+            [label]="option.label | translate"
             [value]="option.value"
           ></form-option>
         </form-button-group>
@@ -121,15 +121,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Nivel de riesgo</span>
+            <span class="my-2">{{'forms.common.labels.riskLevel' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNRiskLevel"
             >
               <form-option
                 *ngFor="let option of nopOptionLevelRisk"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
           </div>
@@ -140,15 +140,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Controlado</span>
+            <span class="my-2">{{'forms.common.labels.controlled' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNControlled"
             >
               <form-option
                 *ngFor="let option of nopOptionControlled"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
           </div>
@@ -159,15 +159,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Análisis Causa</span>
+            <span class="my-2">{{'forms.common.labels.analisisCause' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNCauseAnalysis"
             >
               <form-option
                 *ngFor="let option of nopOptionCauseAnalysis"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
             <div
@@ -178,10 +178,10 @@
               "
               class="my-1 flex flex-col mt-3"
             >
-              <label class="my-1">Mensaje</label>
+              <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
               <form-text-field
                 [formControlName]="question.subOptions.fCNCauseAnalysisOther"
-                [placeholder]="'Mensaje'"
+                [placeholder]="''"
               ></form-text-field>
             </div>
           </div>
@@ -192,15 +192,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Medidas Tomadas</span>
+            <span class="my-2">{{'forms.common.labels.actionTaken' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNTaken"
             >
               <form-option
                 *ngFor="let option of nopOptinsTaken"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
             <div
@@ -210,10 +210,10 @@
               "
               class="my-1 flex flex-col mt-3"
             >
-              <label class="my-1">Mensaje</label>
+              <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
               <form-text-field
                 [formControlName]="question.subOptions.fCNTakenOther"
-                [placeholder]="'Mensaje'"
+                [placeholder]="''"
               ></form-text-field>
             </div>
           </div>
@@ -223,12 +223,12 @@
     <ng-container>
       <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
         <span class="text-white text-lg font-medium">{{
-          "Trabajo Solitario" | translate
+          'forms.jsa.warehouse.epp.title' | translate
         }}</span>
       </div>
       <div class="my-3 flex flex-col">
         <label class="my-1">{{
-          "¿La tarea requiere trabajar sólo o sin supervisión?" | translate
+          "forms.jsa.warehouse.epp.question1" | translate
         }}</label>
         <form-button-group class="mt-12" [formControlName]="'question71_generic'">
           <form-option [value]="1" [label]="'Si' | translate"></form-option>
