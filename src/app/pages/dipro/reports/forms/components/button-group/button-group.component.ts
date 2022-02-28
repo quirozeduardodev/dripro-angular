@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @angular-eslint/component-selector */
 import {
   AfterContentInit,
   AfterViewInit,
@@ -5,13 +7,21 @@ import {
   ContentChildren,
   ElementRef,
   forwardRef,
-  Input, OnDestroy, Optional,
-  QueryList, Self,
-  ViewChild
+  Input,
+  OnDestroy,
+  Optional,
+  QueryList,
+  Self,
+  ViewChild,
 } from '@angular/core';
-import {AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from "@angular/forms";
-import {OptionComponent} from "../common/option/option.component";
-import {Subscription} from "rxjs";
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+} from '@angular/forms';
+import { OptionComponent } from '../common/option/option.component';
+import { Subscription } from 'rxjs';
 
 // export const BUTTON_GROUP_VALUE_ACCESSOR: any = {
 //   provide: NG_VALUE_ACCESSOR,
@@ -19,16 +29,17 @@ import {Subscription} from "rxjs";
 //   multi: true
 // };
 
-
 @Component({
   selector: 'form-button-group',
   templateUrl: './button-group.component.html',
   styleUrls: ['./button-group.component.scss'],
   // providers: [BUTTON_GROUP_VALUE_ACCESSOR]
 })
-export class ButtonGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
-
-  @ContentChildren(OptionComponent) _optionElements: QueryList<OptionComponent> | null = null;
+export class ButtonGroupComponent
+  implements AfterContentInit, OnDestroy, ControlValueAccessor
+{
+  @ContentChildren(OptionComponent)
+  _optionElements: QueryList<OptionComponent> | null = null;
 
   private _optionElementsSubscription: Subscription | null = null;
 
@@ -48,9 +59,10 @@ export class ButtonGroupComponent implements AfterContentInit, OnDestroy, Contro
 
   ngAfterContentInit(): void {
     this._options = this._optionElements?.toArray() || [];
-    this._optionElementsSubscription = this._optionElements?.changes.subscribe(value => {
-      this._options = this._optionElements?.toArray() || [];
-    }) ?? null;
+    this._optionElementsSubscription =
+      this._optionElements?.changes.subscribe((value) => {
+        this._options = this._optionElements?.toArray() || [];
+      }) ?? null;
   }
 
   get value(): string {
@@ -62,7 +74,10 @@ export class ButtonGroupComponent implements AfterContentInit, OnDestroy, Contro
   }
 
   get textValue(): string {
-    return this._options.find(value => value.value === this._currentValue)?.label ?? '';
+    return (
+      this._options.find((value) => value.value === this._currentValue)
+        ?.label ?? ''
+    );
   }
 
   get options(): OptionComponent[] {
@@ -100,5 +115,4 @@ export class ButtonGroupComponent implements AfterContentInit, OnDestroy, Contro
   ngOnDestroy(): void {
     this._optionElementsSubscription?.unsubscribe();
   }
-
 }

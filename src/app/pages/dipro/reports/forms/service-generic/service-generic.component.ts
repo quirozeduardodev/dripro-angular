@@ -24,6 +24,7 @@ import { BaseForm } from '../base-form';
   styleUrls: ['./service-generic.component.scss'],
 })
 export class ServiceGenericComponent extends BaseForm implements OnInit {
+  x = 'root';
   jsaReports$: Observable<Answer[]> | null = null;
   businessUnits$: Observable<Unit[]> | null = null;
   customers$: Observable<Customer[]> | null = null;
@@ -76,6 +77,11 @@ export class ServiceGenericComponent extends BaseForm implements OnInit {
     solution: new FormControl(null, [Validators.required]),
     pending: new FormControl(null, [Validators.required]),
     available: new FormControl(null, [Validators.required]),
+    photosz: new FormControl(null, [Validators.required]),
+    'photo-description': new FormControl(null, [Validators.required]),
+    responsable: new FormControl(null, [Validators.required]),
+    department: new FormControl(null, [Validators.required]),
+    email_client: new FormControl(null, [Validators.required, Validators.email]),
     signature_client: new FormControl(null, [Validators.required]),
     name_technician: new FormControl(null, [Validators.required]),
     signature_technician: new FormControl(null, [Validators.required]),

@@ -194,7 +194,7 @@
         <span>N/A</span>
       </div>
     </div>
-    <div *ngFor="let option of electricalDataSections" class="flex flex-col">
+    <div *ngFor="let option of electricalDataSections" class="flex flex-col mt-3">
       <div class="w-100 flex justify-between mb-1">
         <span class="font-light">{{option.label| translate}}</span>
         <div class="w-32">
@@ -226,6 +226,135 @@
         <div class="w-full p-1">
           <form-text-field class="small-text-field" [formControlName]="option.cFC"></form-text-field>
         </div>
+      </div>
+    </div>
+    <div class="w-full bg-red-600 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.service.preventiveMaintenance.bateries' | translate}}</span>
+    </div>
+    <div class="w-full my-1 flex">
+      <div class="w-20"></div>
+      <span class="w-100 text-center font-semibold">{{'forms.service.preventiveMaintenance.density' | translate}}</span>
+      <span class="w-100 text-center font-semibold">{{'forms.service.preventiveMaintenance.density' | translate}}</span>
+    </div>
+    <div *ngFor="let option of bateries" class="flex flex-col">
+      <div class="w-full flex">
+        <div class="w-20">
+          <span class="font-light">{{option.label| translate}}</span>
+        </div>
+        <div class="w-full p-1">
+          <form-text-field class="small-text-field" [formControlName]="option.fC"></form-text-field>
+        </div>
+        <div class="w-full p-1">
+          <form-text-field class="small-text-field" [formControlName]="option.fC"></form-text-field>
+        </div>
+      </div>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.preventiveMaintenance.currentDensity' | translate}}</label>
+      <form-text-field formControlName="density_actual" [placeholder]="'forms.service.preventiveMaintenance.currentDensity' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.preventiveMaintenance.currentVolt' | translate}}</label>
+      <form-text-field formControlName="volt_actual" [placeholder]="'forms.service.preventiveMaintenance.currentVolt' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.preventiveMaintenance.currentComments' | translate}}</label>
+      <form-text-field formControlName="comments_actual" [placeholder]="'forms.service.preventiveMaintenance.currentComments' | translate"></form-text-field>
+    </div>
+    <span>{{'forms.service.preventiveMaintenance.technicians' | translate}}</span>
+    <div class="w-full p-2 my-1 border flex flex-col"
+      *appMultiplierFormControl="{
+        technician_name: formGroup.controls.technician_name,
+        initial_hour: formGroup.controls.initial_hour,
+        finally_hour: formGroup.controls.finally_hour,
+        category_technician: formGroup.controls.category_technician,
+        demoras_technician: formGroup.controls.demoras_technician};
+      let formGroup">
+      <div class="w-full flex flex-col justify-center items-center">
+        <span class="font-light">{{'forms.service.preventiveMaintenance.technician' | translate}}</span>
+        <form-search-select class="w-full"
+          [placeholder]="'forms.service.preventiveMaintenance.technician' | translate"
+          [formControl]="formGroup.technician_name">
+          <form-option *ngFor="let option of (technicians$ | async) || []"
+                       [value]="option.name"
+                       [label]="option.name"></form-option>
+        </form-search-select>
+      </div>
+      <div class="w-full flex">
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.category' | translate}}</span>
+          <form-search-select class="w-full"
+            [placeholder]="'forms.service.preventiveMaintenance.category' | translate"
+            [formControl]="formGroup.category_technician">
+            <form-option *ngFor="let option of (categories$ | async) || []"
+                         [value]="option.name"
+                         [label]="option.name"></form-option>
+          </form-search-select>
+        </div>
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.delays' | translate}}</span>
+          <form-search-select class="w-full"
+            [placeholder]="'forms.service.preventiveMaintenance.delays' | translate"
+            [formControl]="formGroup.demoras_technician">
+            <form-option *ngFor="let option of (delays$ | async) || []"
+                         [value]="option.name"
+                         [label]="option.name"></form-option>
+          </form-search-select>
+        </div>
+      </div>
+      <div class="w-full flex">
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.category' | translate}}</span>
+          <form-time-picker [formControl]="formGroup.initial_hour"></form-time-picker>
+        </div>
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.delays' | translate}}</span>
+          <form-time-picker [formControl]="formGroup.finally_hour"></form-time-picker>
+        </div>
+      </div>
+    </div>
+    <span>{{'forms.service.preventiveMaintenance.photographicEvidence' | translate}}</span>
+    <div class="w-full p-2 my-1 border flex flex-col"
+      *appMultiplierFormControl="{
+        photosz: formGroup.controls.photosz,
+        'photo-description': formGroup.controls['photo-description']};
+      let formGroup">
+      <form-image-picker [formControl]="formGroup.photosz"></form-image-picker>
+      <form-text-field [formControl]="formGroup['photo-description']" [placeholder]="'forms.service.preventiveMaintenance.photographicEvidenceDescription' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.inChargeOfTheClient' | translate}}</label>
+      <form-text-field formControlName="responsable" [placeholder]="'forms.service.generic.inChargeOfTheClient' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.department' | translate}}</label>
+      <form-text-field formControlName="department" [placeholder]="'forms.service.generic.department' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col"
+    *appMultiplierFormControl="{
+      email_client: formGroup.controls.email_client};
+      let formGroup">
+      <label class="my-1">{{'forms.service.generic.emailCient' | translate}}</label>
+      <form-text-field [formControl]="formGroup.email_client" [placeholder]="'forms.service.generic.emailClient' | translate"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.signatureClient' | translate}}</label>
+      <div class="w-full flex justify-center">
+        <form-signature-pad [isDrawing]="false" formControlName="signature_client"></form-signature-pad>
+      </div>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.technician' | translate}}</label>
+      <form-search-select [placeholder]="'forms.service.generic.technician' | translate" formControlName="name_technician">
+        <form-option *ngFor="let option of (technicians$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
+      </form-search-select>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.service.generic.signatureTechnician' | translate}}</label>
+      <div class="w-full flex justify-center">
+        <form-signature-pad [isDrawing]="false" formControlName="signature_technician"></form-signature-pad>
       </div>
     </div>
     <div *ngIf="!readOnly" class="w-full flex my-5 px-3">

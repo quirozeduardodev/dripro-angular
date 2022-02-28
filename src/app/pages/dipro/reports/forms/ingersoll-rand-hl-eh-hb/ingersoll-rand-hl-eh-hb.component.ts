@@ -11,6 +11,7 @@ export class IngersollRandHlEhHbComponent extends BaseForm implements OnInit {
   formGroup = new FormGroup({
 
   });
+  items = Array.from({length: 1000}).map((_, i) => `Item #${i}`);
   ngOnInit() {}
 
 }

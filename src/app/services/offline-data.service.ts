@@ -228,6 +228,7 @@ export class OfflineDataService {
 
   public synchronizeAll(): void {
     this.answerSync.synchronize();
+    this.applicationSync.synchronize();
     this.categorySync.synchronize();
     this.contactSync.synchronize();
     this.countrySync.synchronize();
@@ -245,6 +246,7 @@ export class OfflineDataService {
 
   public initialize(): void {
     this.answerSync.initialize();
+    this.applicationSync.initialize();
     this.categorySync.initialize();
     this.contactSync.initialize();
     this.countrySync.initialize();
@@ -262,6 +264,7 @@ export class OfflineDataService {
 
   public delete(): void {
     this.answerSync.initialize();
+    this.applicationSync.initialize();
     this.categorySync.initialize();
     this.contactSync.initialize();
     this.countrySync.initialize();
@@ -330,10 +333,7 @@ export class OfflineSynchronizeHandler<TResponse, TEntity> {
           );
           return this._repository.bulkUpsert(nData).pipe(
             map((insertedData) => true),
-            catchError((err) => {
-              console.log(err);
-              return of(false);
-            })
+            catchError((err) => of(false))
           );
         }),
         catchError((err) => of(false))

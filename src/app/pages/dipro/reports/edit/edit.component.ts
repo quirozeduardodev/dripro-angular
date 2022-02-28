@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseDialogComponent } from 'src/app/components/dialogs/base-dialog/base-dialog.component';
+import { ReportEndpointService } from 'src/app/services/endpoints/report-endpoint.service';
 
 @Component({
   selector: 'app-edit',
@@ -32,6 +33,7 @@ export class EditComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private unitOfWorkDatabase: UnitOfWorkDatabase,
     private translareService: TranslateService,
+    private reportEndpointService: ReportEndpointService,
     private platform: Platform
   ) {}
 
@@ -124,6 +126,56 @@ export class EditComponent implements OnInit, OnDestroy {
           this.isReviewing = true;
         });
     } else {
+    }
+  }
+
+  submitChangesConfirmation(): void {
+    if(this.localReport) {
+      let type = 'unknown';
+        switch (this.localReport.type) {
+          case 'jsa-onSite':
+            type = 'jsa_sitio';
+            break;
+          case 'jsa-onField-generic':
+            type = 'jsa_field_generic';
+            break;
+          case 'jsa-onField-powerGeneration':
+            type = 'jsa_field_power_gen';
+            break;
+          case 'jsa-onField-marine':
+            type = 'jsa_field_marine';
+            break;
+          case 'jsa-warehouse':
+            type = 'warehouse';
+            break;
+          case 'service-generic':
+            type = 'service_generic';
+            break;
+          case 'service-preventiveMaintenance':
+            type = 'service_maintenance';
+            break;
+          case 'ingersollRand-rotaryContactCooledRotary':
+            type = 'rot_contact_rotary';
+            break;
+          case 'ingersollRand-rotaryOilFreeSierra':
+            type = 'rot_oil_free_sierra';
+            break;
+          case 'ingersollRand-hlEhHb':
+            type = 'hl_eh_hb';
+            break;
+          case 'ingersollRand-rotaryContactCooledNirvana':
+            type = 'rot_contact_nirvana';
+            break;
+          case 'ingersollRand-rotaryOilFreeNirvana':
+            type = 'rot_oil_free_nirvana';
+            break;
+          case 'ingersollRand-refrigeratedDryerSystem':
+            type = 'refrigerated';
+            break;
+        }
+      this.reportEndpointService.save({})
+      .subscribe(response => {
+      });
     }
   }
 }

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MultiplierContainerComponent } from './multiplier-container.component';
+import { RadioGroupComponent } from './radio-group.component';
 
-describe('MultiplierContainerComponent', () => {
-  let component: MultiplierContainerComponent;
-  let fixture: ComponentFixture<MultiplierContainerComponent>;
+describe('RadioGroupComponent', () => {
+  let component: RadioGroupComponent;
+  let fixture: ComponentFixture<RadioGroupComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultiplierContainerComponent ],
+      declarations: [ RadioGroupComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MultiplierContainerComponent);
+    fixture = TestBed.createComponent(RadioGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

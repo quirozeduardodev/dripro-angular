@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-overlay',
@@ -7,13 +7,14 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 })
 export class OverlayComponent implements OnInit {
 
-  @Input() isVisible: boolean = false;
+  isVisible: boolean = false;
 
-  constructor() {
+  constructor(private _ref: ChangeDetectorRef) {
   }
 
   toggle(): void {
     this.isVisible = !this.isVisible;
+    this._ref.detectChanges();
   }
 
   hide(): void {
@@ -21,6 +22,7 @@ export class OverlayComponent implements OnInit {
       return;
     }
     this.isVisible = false;
+    this._ref.detectChanges();
   }
 
   show(): void {
@@ -28,6 +30,7 @@ export class OverlayComponent implements OnInit {
       return;
     }
     this.isVisible = true;
+    this._ref.detectChanges();
   }
 
   ngOnInit() {
