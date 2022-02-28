@@ -9,6 +9,8 @@ import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseDialogComponent } from 'src/app/components/dialogs/base-dialog/base-dialog.component';
 import { ReportEndpointService } from 'src/app/services/endpoints/report-endpoint.service';
+import { ReportsService } from '../services/reports.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
@@ -34,7 +36,9 @@ export class EditComponent implements OnInit, OnDestroy {
     private unitOfWorkDatabase: UnitOfWorkDatabase,
     private translareService: TranslateService,
     private reportEndpointService: ReportEndpointService,
-    private platform: Platform
+    private platform: Platform,
+    private location: Location,
+    private reportsService: ReportsService,
   ) {}
 
   ngOnInit(): void {
@@ -131,7 +135,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   submitChangesConfirmation(): void {
     if(this.localReport) {
-      let type = 'unknown';
+      let type: any = 'unknown';
         switch (this.localReport.type) {
           case 'jsa-onSite':
             type = 'jsa_sitio';
@@ -173,8 +177,18 @@ export class EditComponent implements OnInit, OnDestroy {
             type = 'refrigerated';
             break;
         }
-      this.reportEndpointService.save({})
+      this.reportEndpointService.save({
+        answer: this.localReport.answers ?? {},
+        form_name: type,
+        locale: 'es'
+      })
       .subscribe(response => {
+        this.unitOfWorkDatabase.localReportRepository
+        .delete(this.localReport?.id ?? 0)
+        .pipe(catchError(erro => of(null))).subscribe(x => {
+          this.reportsService.reloadAll();
+        this.location.back();
+        });
       });
     }
   }

@@ -50,6 +50,13 @@ export class ReportsService {
     this._onlineReportsLoader.fetchData();
   }
 
+  public reloadAll(): void {
+    if(this._filters) {
+      this._onlineReportsLoader.setFilters(this._filters);
+      this._localReportsLoader.setFilters(this._filters);
+    }
+  }
+
   public updateFilters(filters: FiltersReports): void {
     this._filters = filters;
     this._onlineReportsLoader.setFilters(this._filters);
