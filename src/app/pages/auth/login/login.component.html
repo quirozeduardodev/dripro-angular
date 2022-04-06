@@ -6,7 +6,7 @@
     <div class="w-full content">
       <form [formGroup]="formGroupLogin" (submit)="submit()">
         <div class="flex flex-col mx-14">
-          <app-error-message class="flex justify-center" *ngIf="isInvalidCredentials" [message]="'Invalid Credentials'"></app-error-message>
+          <app-error-message class="flex justify-center" *ngIf="isInvalidCredentials" message="{{'components.validator_message.invalid_credentials' | translate}}"></app-error-message>
           <div class="flex flex-col my-2">
             <div class="relative">
               <div class="absolute flex border border-transparent left-0 top-0 h-full w-10">
@@ -45,7 +45,7 @@
               <div class="animate-spin"><i class="mdi mdi-loading text-xl"></i></div>
             </ng-container>
           </button>
-          <a class="text-red-600 w-full text-center my-2 cursor-pointer" (click)="goToForgotPassword()">Forgot Password?</a>
+          <a class="text-red-600 w-full text-center my-2 cursor-pointer" (click)="goToForgotPassword()">{{'pages.auth.login.forgot_password' | translate}}</a>
         </div>
       </form>
     </div>

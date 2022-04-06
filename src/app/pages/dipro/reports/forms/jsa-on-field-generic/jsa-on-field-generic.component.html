@@ -1,37 +1,37 @@
 <form (submit)="submit()" [formGroup]="formGroup">
   <div class="w-full flex flex-col">
     <div class="my-2 flex flex-col">
-      <label class="my-1">Fecha</label>
+      <label class="my-1">{{'forms.common.labels.date' | translate}}</label>
       <form-text-field
         formControlName="date"
-        [placeholder]="'Fecha' | translate"
+        [placeholder]="'forms.common.labels.date' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">Orden de Trabajo</label>
+      <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
       <form-text-field
         formControlName="job_order"
-        [placeholder]="'Orden de Trabajo'"
+        [placeholder]="'forms.common.labels.jobOrder' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">Nombre</label>
+      <label class="my-1">{{'forms.common.labels.name' | translate}}</label>
       <form-text-field
         formControlName="name_people"
-        [placeholder]="'Nombre'"
+        [placeholder]="'forms.common.labels.name' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">WWID</label>
+      <label class="my-1">{{'forms.common.labels.wwid' | translate}}</label>
       <form-text-field
         formControlName="wwid"
-        [placeholder]="'WWID'"
+        [placeholder]="'forms.common.labels.wwid' | translate"
       ></form-text-field>
     </div>
     <div class="my-2 flex flex-col" *ngIf="businessUnits$">
-      <label class="my-1">Unidad de Negocio</label>
+      <label class="my-1">{{'forms.common.labels.bussinesUnit' | translate}}</label>
       <form-search-select
-        placeholder="Unidad de Negocio"
+        [placeholder]="'forms.common.labels.bussinesUnit' | translate"
         formControlName="unidad"
       >
         <form-option
@@ -42,14 +42,14 @@
       </form-search-select>
     </div>
     <div class="w-full flex justify-between my-3">
-      <span>¿Está acompañado?</span>
+      <span>{{'forms.common.labels.isAccompained' | translate}}</span>
       <mat-slide-toggle formControlName="accompanied"></mat-slide-toggle>
     </div>
     <div
       *ngIf="formGroup.controls.accompanied.value === true"
       class="w-full flex flex-col my-3"
     >
-      <span>Seleccione su compañero</span>
+      <span>{{'forms.common.labels.selectYourPartner' | translate}}</span>
       <form-multi-select formControlName="teammate_name">
         <form-option
           *ngFor="let user of (technicians$ | async) || []"
@@ -59,17 +59,17 @@
       </form-multi-select>
     </div>
     <div class="w-full flex flex-col justify-between my-3">
-      <span>Externo</span>
+      <span>{{'forms.common.labels.extern' | translate}}</span>
       <form-chip-list
-        [placeholder]="'Externo' | translate"
+        [placeholder]="'forms.common.labels.extern' | translate"
         formControlName="tageditor"
       ></form-chip-list>
     </div>
     <div class="my-1 flex flex-col" *ngIf="businessUnits$">
-      <label class="my-1">Categoria de la tarea</label>
+      <label class="my-1">{{'forms.common.labels.taskCategory' | translate}}</label>
       <form-search-select
         formControlName="task_category_generic"
-        placeholder="Categoria de la tarea"
+        [placeholder]="'forms.common.labels.taskCategory' | translate"
       >
         <form-option
           *ngFor="let option of (categoriesUnits$ | async) || []"
@@ -79,17 +79,17 @@
       </form-search-select>
     </div>
     <div class="my-1 flex flex-col">
-      <label class="my-1">Descripción de la tarea</label>
+      <label class="my-1">{{'forms.common.labels.categoryDescription' | translate}}</label>
       <form-text-field
         formControlName="task_description"
-        [placeholder]="'Descripción de la tarea'"
+        [placeholder]="'forms.common.labels.categoryDescription' | translate"
       ></form-text-field>
     </div>
     <div class="my-1 flex flex-col">
-      <label class="my-1">Ingresar Ubicación</label>
+      <label class="my-1">{{'forms.common.labels.fillLocation' | translate}}</label>
       <form-text-field
         formControlName="location"
-        [placeholder]="'Ingresar Ubicación'"
+        [placeholder]="'forms.common.labels.fillLocation' | translate"
       ></form-text-field>
     </div>
     <ng-container *ngFor="let section of groupSections">
@@ -109,7 +109,7 @@
         >
           <form-option
             *ngFor="let option of commonOptions"
-            [label]="option.label"
+            [label]="option.label | translate"
             [value]="option.value"
           ></form-option>
         </form-button-group>
@@ -121,15 +121,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Nivel de riesgo</span>
+            <span class="my-2">{{'forms.common.labels.riskLevel' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNRiskLevel"
             >
               <form-option
                 *ngFor="let option of nopOptionLevelRisk"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
           </div>
@@ -140,15 +140,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Controlado</span>
+            <span class="my-2">{{'forms.common.labels.controlled' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNControlled"
             >
               <form-option
                 *ngFor="let option of nopOptionControlled"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
           </div>
@@ -159,15 +159,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Análisis Causa</span>
+            <span class="my-2">{{'forms.common.labels.analisisCause' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNCauseAnalysis"
             >
               <form-option
                 *ngFor="let option of nopOptionCauseAnalysis"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
             <div
@@ -178,10 +178,10 @@
               "
               class="my-1 flex flex-col mt-3"
             >
-              <label class="my-1">Mensaje</label>
+              <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
               <form-text-field
                 [formControlName]="question.subOptions.fCNCauseAnalysisOther"
-                [placeholder]="'Mensaje'"
+                [placeholder]="''"
               ></form-text-field>
             </div>
           </div>
@@ -192,15 +192,15 @@
             "
             class="my-2 flex flex-col"
           >
-            <span class="my-2">Medidas Tomadas</span>
+            <span class="my-2">{{'forms.common.labels.actionTaken' | translate}}</span>
             <form-search-select
-              placeholder="Nivel de riesgo"
+              placeholder=""
               [formControlName]="question.subOptions.fCNTaken"
             >
               <form-option
                 *ngFor="let option of nopOptinsTaken"
                 [value]="option.value"
-                [label]="option.label"
+                [label]="option.label | translate"
               ></form-option>
             </form-search-select>
             <div
@@ -210,10 +210,10 @@
               "
               class="my-1 flex flex-col mt-3"
             >
-              <label class="my-1">Mensaje</label>
+              <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
               <form-text-field
                 [formControlName]="question.subOptions.fCNTakenOther"
-                [placeholder]="'Mensaje'"
+                [placeholder]="''"
               ></form-text-field>
             </div>
           </div>
@@ -223,44 +223,33 @@
     <ng-container>
       <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
         <span class="text-white text-lg font-medium">{{
-          "Trabajo Solitario" | translate
+          'forms.jsa.site_generic.epp.title' | translate
         }}</span>
       </div>
       <div class="my-3 flex flex-col">
         <label class="my-1">{{
-          "¿La tarea requiere trabajar sólo o sin supervisión?" | translate
+          "forms.jsa.site_generic.epp.question1" | translate
         }}</label>
         <form-button-group class="mt-12" [formControlName]="'question71_generic'">
-          <form-option [value]="1" [label]="'Si' | translate"></form-option>
-          <form-option [value]="2" [label]="'No' | translate"></form-option>
+          <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
+          <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
         </form-button-group>
         <div
           *ngIf="formGroup.controls.question71_generic.value === 1"
           class="my-1 flex flex-col mt-3"
         >
-          <label class="my-1"
-            >Proporcione detalles de medidas especiales de seguridad y plan de
-            emergencia.</label
+          <label class="my-1">{{'forms.jsa.site.details' | translate}}</label
           >
           <form-text-field
             [formControlName]="'question71_1_generic'"
-            [placeholder]="
-              'Proporcione detalles de medidas especiales de seguridad y plan de emergencia.'
-            "
           ></form-text-field>
         </div>
       </div>
     </ng-container>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium"
-        >EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E
-        IMPLEMENTACION DE CONTROLES</span
-      >
+      <span class="text-white text-lg font-medium">{{'forms.jsa.site.evaluation' | translate}}</span>
       <br />
-      <span class="text-white text-sm font-medium"
-        >MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA,
-        TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN</span
-      >
+      <span class="text-white text-sm font-medium">{{'forms.jsa.site.movements' | translate}}</span>
     </div>
     <div
       class="border rounded border-gray-500 px-3 py-5 my-2"
@@ -275,11 +264,11 @@
         *ngIf="formGroup.controls[item.formControlName].value === true"
         class="flex flex-col"
       >
-        <span>Poner en práctica Controles Establecidos</span>
+        <span>{{'forms.jsa.site.practice' | translate}}</span>
         <form-text-area
           [formControlName]="item.formControlName1"
         ></form-text-area>
-        <span>¿Qué es extraño, inusual o diferente hoy?</span>
+        <span>{{'forms.jsa.site.strange' | translate}}</span>
         <form-text-area
           [formControlName]="item.formControlName2"
         ></form-text-area>
@@ -287,296 +276,213 @@
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
       <span class="text-white text-lg font-medium"
-        >EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE
-        RIESGOS E IMPLEMENTSCIÓN DE CONTROLES
+        >{{'forms.jsa.site.evaluation' | translate}}
       </span>
       <br />
       <span class="text-white text-sm font-medium"
-        >Cada sitio de trabajo es diferente, así que debe de identificar kis
-        peligros potenciales antes de comenzar la tarea y tambien cuando la
-        tarea cambia significativamente</span
+        >{{'forms.jsa.site.each_site' | translate}}</span
       >
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
       <span class="text-white text-sm font-medium"
-        >Identificación de los peligros(dar click si el peligro está
-        presente)</span
+        >{{'forms.jsa.site.identification' | translate}}</span
       >
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Peligros inusuales</span>
+      <span class="my-2">{{'forms.jsa.site.unusual_hazards.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question79_generic">
         <form-option
           [value]="1"
-          [label]="'Gas Natural (GNG/LNG)' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.gas' | translate"
         ></form-option>
         <form-option
           [value]="2"
-          [label]="'Animales o insectos' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.animals' | translate"
         ></form-option>
         <form-option
           [value]="3"
-          [label]="'Gases de escape' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.gases' | translate"
         ></form-option>
         <form-option
           [value]="4"
-          [label]="'Alto nivel de ruido' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.high_level' | translate"
         ></form-option>
         <form-option
           [value]="5"
-          [label]="'Trabajos en caliente' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.hot_works' | translate"
         ></form-option>
         <form-option
           [value]="6"
-          [label]="'Espacios de trabajo restringido' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.work_space' | translate"
         ></form-option>
         <form-option
           [value]="7"
-          [label]="'Entrada a espacios confinados' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.confined_space' | translate"
         ></form-option>
         <form-option
           [value]="8"
-          [label]="'Peligros de higiene' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.hygiene_hazards' | translate"
         ></form-option>
         <form-option
           [value]="9"
-          [label]="'Gas o liquido inflamable' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.flammable_gas' | translate"
         ></form-option>
         <form-option
           [value]="10"
-          [label]="'Aire Comprimido' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.compresssd_air' | translate"
         ></form-option>
         <form-option
           [value]="11"
-          [label]="'Seguridad de la batería' | translate"
+          [label]="'forms.jsa.site.unusual_hazards.security' | translate"
         ></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Accesso al (los) Equipo(s)</span>
+      <span class="my-2">{{'forms.jsa.site.access_equipment.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question80_generic">
         <form-option
           [value]="1"
-          [label]="'Escalera o Escalera de Mano' | translate"
+          [label]="'forms.jsa.site.access_equipment.ladders' | translate"
         ></form-option>
         <form-option
           [value]="2"
-          [label]="'Plataforma de Acceso Estático' | translate"
+          [label]="'forms.jsa.site.access_equipment.platform_access' | translate"
         ></form-option>
         <form-option
           [value]="3"
-          [label]="'Plataforma de Trabajo Móvil' | translate"
+          [label]="'forms.jsa.site.access_equipment.platform_work' | translate"
         ></form-option>
         <form-option
           [value]="4"
-          [label]="'Taburete o Grada de Trabajo' | translate"
+          [label]="'forms.jsa.site.access_equipment.stool' | translate"
         ></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Actividades Peligrosas en el Taller</span>
+      <span class="my-2">{{'forms.jsa.site.hazards_activity.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question81_generic">
         <form-option
           [value]="1"
-          [label]="'Pintura con Pistola' | translate"
+          [label]="'forms.jsa.site.hazards_activity.spray_painting' | translate"
         ></form-option>
         <form-option
           [value]="2"
-          [label]="'Celda de Prueba del Motor' | translate"
+          [label]="'forms.jsa.site.hazards_activity.row_testing' | translate"
         ></form-option>
         <form-option
           [value]="3"
-          [label]="'Dyno Chassiss' | translate"
+          [label]="'forms.jsa.site.hazards_activity.dyno_chassiss' | translate"
         ></form-option>
         <form-option
           [value]="4"
-          [label]="'Bahía de lavado' | translate"
+          [label]="'forms.jsa.site.hazards_activity.washing_bay' | translate"
         ></form-option>
         <form-option
           [value]="5"
-          [label]="'Baño Químico' | translate"
+          [label]="'forms.jsa.site.hazards_activity.chemical_bath' | translate"
         ></form-option>
-        <form-option [value]="6" [label]="'Limpieza' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.site.hazards_activity.cleaning' | translate"></form-option>
         <form-option
           [value]="7"
-          [label]="'Inspección de Fosas' | translate"
+          [label]="'forms.jsa.site.hazards_activity.pit_inspection' | translate"
         ></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Orden y limpieza</span>
+      <span class="my-2">{{'forms.jsa.site.order_cleaning.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question82_generic">
         <form-option
           [value]="1"
-          [label]="'Establecer orden en el área de trabajo' | translate"
+          [label]="'forms.jsa.site.order_cleaning.establishing_work_area' | translate"
         ></form-option>
         <form-option
           [value]="2"
-          [label]="'Disponer / Desechar' | translate"
+          [label]="'forms.jsa.site.order_cleaning.dispose_discard' | translate"
         ></form-option>
-        <form-option [value]="3" [label]="'Limpieza' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.site.order_cleaning.cleaning' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Línea de Fuego</span>
+      <span class="my-2">{{'forms.jsa.site.fire_line.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question83_generic">
         <form-option
           [value]="1"
-          [label]="'Golpeado(a) por o contra' | translate"
+          [label]="'forms.jsa.site.fire_line.hit_by_or_against' | translate"
         ></form-option>
         <form-option
           [value]="2"
-          [label]="'Atrapado(a) por' | translate"
+          [label]="'forms.jsa.site.fire_line.trapped_by' | translate"
         ></form-option>
         <form-option
           [value]="3"
-          [label]="'Energía Peligrosa' | translate"
+          [label]="'forms.jsa.site.fire_line.dangerous_energy' | translate"
         ></form-option>
         <form-option
           [value]="4"
-          [label]="'Polvo o Suciedad' | translate"
+          [label]="'forms.jsa.site.fire_line.dust_dirt' | translate"
         ></form-option>
         <form-option
           [value]="5"
-          [label]="'Peligro de Proyectil' | translate"
+          [label]="'forms.jsa.site.fire_line.proyectile_hazard' | translate"
         ></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Resbalones, Tropiezos, Caídas</span>
+      <span class="my-2">{{'forms.jsa.site.slips.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question84_generic">
-        <form-option
-          [value]="1"
-          [label]="'Suelo Húmedo o Aceitoso' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Cables sobre el piso' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Los desniveles del terreno / Grava' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Área elevada / Mezanine' | translate"
-        ></form-option>
-        <form-option [value]="5" [label]="'Azotea' | translate"></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Nieve, Barro o Hielo' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Fosa en el Piso' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.site.slips.wet_oily_soil' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.site.slips.cables_on_floor' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.site.slips.terrain_unevenness' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.site.slips.elevated_area' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.site.slips.rooftop' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.site.slips.snow_mud_or_ice' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.site.slips.pit_in_the_floor' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Interacción con otras Personas</span>
+      <span class="my-2">{{'forms.jsa.site.interaction_other_people.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question85_generic">
-        <form-option
-          [value]="1"
-          [label]="'Trabajo con Contratistas' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Público en General' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Cliente/Empleados' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.site.interaction_other_people.job_contractors' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.site.interaction_other_people.general_public' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.site.interaction_other_people.client_employee' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Impacto Ambiental</span>
+      <span class="my-2">{{'forms.jsa.site.environmental_impact.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question86_generic">
-        <form-option
-          [value]="1"
-          [label]="'Fugas o Derrames' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Vapores o Humo' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Eliminación de Residuos' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Uso de Productos Químicos' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.site.environmental_impact.leaks_or_spills' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.site.environmental_impact.fumes_or_smokes' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.site.environmental_impact.waste_disposal' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.site.environmental_impact.chemical_products' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Ergonomía</span>
+      <span class="my-2">{{'forms.jsa.site.ergonomic.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question87_generic">
-        <form-option
-          [value]="1"
-          [label]="'Fuerza Excesiva' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Trabajo Repetitivo' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Postura Estresante' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Estrés de Contacto' | translate"
-        ></form-option>
-        <form-option
-          [value]="5"
-          [label]="'Arrodillándose / Arrastrándose' | translate"
-        ></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Vibración' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Levantamiento de Objetos Pesados' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.site.ergonomic.excesive_force' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.site.ergonomic.repetitive_job' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.site.ergonomic.estresful' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.site.ergonomic.contact_stress' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.site.ergonomic.kneeling_down' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.site.ergonomic.vibrate' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.site.ergonomic.heavy_lifting' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Condiciones Climáticas</span>
+      <span class="my-2">{{'forms.jsa.site.weather_conditions.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question88_generic">
-        <form-option
-          [value]="1"
-          [label]="'Calor Extremo' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Frío Extremo' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Fuertes Vientos' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Condiciones de Tormenta' | translate"
-        ></form-option>
-        <form-option [value]="5" [label]="'Lluvia' | translate"></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Nieve / Hielo' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Gran Altitud' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.site.weather_conditions.extreme_heat' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.site.weather_conditions.extreme_cold' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.site.weather_conditions.strong_winds' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.site.weather_conditions.storm_conditions' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.site.weather_conditions.rain' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.site.weather_conditions.snown' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.site.weather_conditions.great_altitud' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1"
-        >IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es
-        extraño, inusual o diferente hoy?</label
+        >{{'forms.jsa.site.different_unusual' | translate}}</label
       >
       <form-text-field
         [formControlName]="'different_unusual'"

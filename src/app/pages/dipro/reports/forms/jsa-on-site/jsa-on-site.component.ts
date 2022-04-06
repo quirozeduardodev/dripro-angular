@@ -30,16 +30,27 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
 
   commonOptions: { label: string; value: any }[] = [
     {
-      label: 'Si',
+      label: 'forms.common.options.yes',
       value: 1,
     },
     {
-      label: 'No',
+      label: 'forms.common.options.no',
       value: 2,
     },
     {
-      label: 'N/A',
+      label: 'forms.common.options.na',
       value: 3,
+    },
+  ];
+
+  commonOptionsYesOrNo: { label: string; value: any }[] = [
+    {
+      label: 'forms.common.options.yes',
+      value: 1,
+    },
+    {
+      label: 'forms.common.options.no',
+      value: 2,
     },
   ];
 
@@ -59,39 +70,39 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
     }[];
   }[] = [
     {
-      label: 'Prevención COVID',
+      label: 'forms.jsa.warehouse.covidPrevention.title',
       questions: [
         {
           label:
-            '¿Cuentas con la mascarilla correcta para el trabajo a realizar?',
+            'forms.jsa.warehouse.covidPrevention.question1',
           formControlName: 'skin_face',
         },
         {
           label:
-            '¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?',
+            'forms.jsa.warehouse.covidPrevention.question2',
           formControlName: 'social',
         },
         {
-          label: '¿Se cuenta con agua y jabón para la limieza de manos?',
+          label: 'forms.jsa.warehouse.covidPrevention.question3',
           formControlName: 'hand_cleaning',
         },
         {
           label:
-            '¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?',
+            'forms.jsa.warehouse.covidPrevention.question4',
           formControlName: 'social_precaution',
         },
         {
-          label: '¿Cuentas con gel sanitizante para limpieza de manos?',
+          label: 'forms.jsa.warehouse.covidPrevention.question5',
           formControlName: 'sanitizer',
         },
       ],
     },
     {
-      label: 'Preparación',
+      label: 'forms.jsa.warehouse.preparation.title',
       questions: [
         {
           label:
-            '¿Está capacitado y autorizado para realizar todas las tareas necesarias para este trabajo?',
+            'forms.jsa.warehouse.preparation.question1',
           formControlName: 'site1_quest',
           subOptions: {
             fCNRiskLevel: 'site2_quest',
@@ -104,7 +115,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Los arreglos de respuesta a emergencia están implementados y entendidos?',
+            'forms.jsa.warehouse.preparation.question2',
           formControlName: 'site8_quest',
           subOptions: {
             fCNRiskLevel: 'site9_quest',
@@ -117,7 +128,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?',
+            'forms.jsa.warehouse.preparation.question3',
           formControlName: 'site15_quest',
           subOptions: {
             fCNRiskLevel: 'site16_quest',
@@ -131,11 +142,11 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'Herramientas y Equipo',
+      label: 'forms.jsa.warehouse.toolsAndEquipment.title',
       questions: [
         {
           label:
-            '¿Las herramientas y equipos son adecuados y están libre de daños?',
+            'forms.jsa.warehouse.toolsAndEquipment.question1',
           formControlName: 'site22_quest',
           subOptions: {
             fCNRiskLevel: 'site23_quest',
@@ -148,7 +159,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?',
+            'forms.jsa.warehouse.toolsAndEquipment.question2',
           formControlName: 'site29_quest',
           subOptions: {
             fCNRiskLevel: 'site30_quest',
@@ -162,11 +173,11 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'Levantamiento y Acceso',
+      label: 'forms.jsa.warehouse.access.title',
       questions: [
         {
           label:
-            '¿El levantamiento manual de piezas está dentro de su capacidad?',
+            'forms.jsa.warehouse.access.question1',
           formControlName: 'site36_quest',
           subOptions: {
             fCNRiskLevel: 'site37_quest',
@@ -179,7 +190,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?',
+            'forms.jsa.warehouse.access.question2',
           formControlName: 'site43_quest',
           subOptions: {
             fCNRiskLevel: 'site44_quest',
@@ -191,7 +202,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
           },
         },
         {
-          label: '¿Hay un acceso seguro a la zona de trabajo y equipos?',
+          label: 'forms.jsa.warehouse.access.question3',
           formControlName: 'site50_quest',
           subOptions: {
             fCNRiskLevel: 'site51_quest',
@@ -200,35 +211,6 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
             fCNCauseAnalysisOther: 'site54_quest',
             fCNTaken: 'site55_quest',
             fCNTakenOther: 'site56_quest',
-          },
-        },
-      ],
-    },
-    {
-      label: 'Equipo de Proteccion Personal (EPP)',
-      questions: [
-        {
-          label: '¿El EPP está disponible para la tarea?',
-          formControlName: 'site57_quest',
-          subOptions: {
-            fCNRiskLevel: 'site58_quest',
-            fCNControlled: 'site59_quest',
-            fCNCauseAnalysis: 'site60_quest',
-            fCNCauseAnalysisOther: 'site61_quest',
-            fCNTaken: 'site62_quest',
-            fCNTakenOther: 'site63_quest',
-          },
-        },
-        {
-          label: '¿El EPP es adecuado y está libre de daños?',
-          formControlName: 'site64_quest',
-          subOptions: {
-            fCNRiskLevel: 'site65_quest',
-            fCNControlled: 'site66_quest',
-            fCNCauseAnalysis: 'site67_quest',
-            fCNCauseAnalysisOther: 'site68_quest',
-            fCNTaken: 'site69_quest',
-            fCNTakenOther: 'site70_quest',
           },
         },
       ],
@@ -243,83 +225,83 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
   }[] = [
     {
       formControlName: 'question12_site',
-      label: 'VEHÍCULOS EN MOVIMIENTO',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx1',
       formControlName1: 'name1_question',
       formControlName2: 'name2_question',
     },
     {
       formControlName: 'question13_site',
-      label: 'TRABAJO CON ELECTRICIDAD',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx2',
       formControlName1: 'name3_question',
       formControlName2: 'name4_question',
     },
     {
       formControlName: 'question14_site',
-      label: 'MAQUINARIA EN MOVIMIENTO',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx7',
       formControlName1: 'name5_question',
       formControlName2: 'name6_question',
     },
     {
       formControlName: 'question15_site',
-      label: 'OPERACIÓN DE LEVANTAMIENTO DE CARGAS',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx3',
       formControlName1: 'name7_question',
       formControlName2: 'name8_question',
     },
     {
       formControlName: 'question16_site',
-      label: 'TRABAJOS DE ALTURA',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx4',
       formControlName1: 'name9_question',
       formControlName2: 'name10_question',
     },
     {
       formControlName: 'question17_site',
-      label: 'INCENDIO, EXPLOSIÓN O ARCO ELECTRICO',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx5',
       formControlName1: 'name11_question',
       formControlName2: 'name12_question',
     },
     {
       formControlName: 'question18_site',
-      label: 'OTRO',
+      label: 'forms.jsa.warehouse.checkboxesP1.chbx6',
       formControlName1: 'name13_question',
       formControlName2: 'name14_question',
     },
   ];
 
   nopOptionLevelRisk: { label: string; value: any }[] = [
-    { label: 'Bajo', value: 1 },
-    { label: 'Medio', value: 2 },
-    { label: 'Alto', value: 3 },
-    { label: 'Extremo', value: 4 },
+    { label: 'forms.common.labels.low', value: 1 },
+    { label: 'forms.common.labels.medium', value: 2 },
+    { label: 'forms.common.labels.high', value: 3 },
+    { label: 'forms.common.labels.extreme', value: 4 },
   ];
   nopOptionControlled: { label: string; value: any }[] = [
-    { label: 'Si', value: 1 },
-    { label: 'No', value: 2 },
+    { label: 'forms.common.options.yes', value: 1 },
+    { label: 'forms.common.options.no', value: 2 },
   ];
   nopOptionCauseAnalysis: { label: string; value: any }[] = [
     {
-      label: 'Ambiente (clima, condiciones de altitud, instalaciones)',
+      label: 'forms.common.analisisCause.atmosphere',
       value: 1,
     },
-    { label: 'Diseño de espacio de trabajo', value: 2 },
-    { label: 'Entrenamiento inadecuado o incompleto', value: 3 },
-    { label: 'Equipos o herramientas dañadas', value: 4 },
-    { label: 'Herramientas/Equipos no disponibles', value: 5 },
-    { label: 'Mantenimiento preventivo sin finalizar', value: 6 },
-    { label: 'Procesos o procedimientos inadecuados', value: 7 },
-    { label: 'Superficies de trabajo o caminos irregulares', value: 8 },
-    { label: 'Otra', value: 9 },
+    { label: 'forms.common.analisisCause.design', value: 2 },
+    { label: 'forms.common.analisisCause.training', value: 3 },
+    { label: 'forms.common.analisisCause.teams', value: 4 },
+    { label: 'forms.common.analisisCause.tools', value: 5 },
+    { label: 'forms.common.analisisCause.maintenance', value: 6 },
+    { label: 'forms.common.analisisCause.process', value: 7 },
+    { label: 'forms.common.analisisCause.surfaces', value: 8 },
+    { label: 'forms.common.analisisCause.other', value: 9 },
   ];
   nopOptinsTaken: { label: string; value: any }[] = [
-    { label: 'Asegurado', value: 1 },
-    { label: 'Bloqueado', value: 2 },
-    { label: 'Empleado entrenado', value: 3 },
-    { label: 'Entrenado, Instalado, Limpiado', value: 4 },
-    { label: 'Protegido', value: 5 },
-    { label: 'Provisto (EPP)', value: 6 },
-    { label: 'Reemplazado', value: 7 },
-    { label: 'Removido', value: 8 },
-    { label: 'Reparado', value: 9 },
-    { label: 'Otro', value: 10 },
+    { label: 'forms.common.actionsTaken.insured', value: 1 },
+    { label: 'forms.common.actionsTaken.locked', value: 2 },
+    { label: 'forms.common.actionsTaken.trained', value: 3 },
+    { label: 'forms.common.actionsTaken.trained_installed', value: 4 },
+    { label: 'forms.common.actionsTaken.protected', value: 5 },
+    { label: 'forms.common.actionsTaken.provided', value: 6 },
+    { label: 'forms.common.actionsTaken.superseded', value: 7 },
+    { label: 'forms.common.actionsTaken.removed', value: 8 },
+    { label: 'forms.common.actionsTaken.repaired', value: 9 },
+    { label: 'forms.common.actionsTaken.other', value: 10 },
   ];
 
   formGroup: FormGroup = new FormGroup({

@@ -74,8 +74,12 @@ export class ImagePickerComponent implements AfterViewInit, OnDestroy, ControlVa
         source: CameraSource.Prompt,
         width: 800,
         height: 1000,
+        promptLabelHeader: 'pages.dipro.camera.title | translate',
+        promptLabelPhoto: 'pages.dipro.camera.galery | translate',
+        promptLabelPicture: 'pages.dipro.camera.photo | translate',
+        promptLabelCancel: 'Cancel'
       }).then(image => {
-        const base64Result: string | null = image.base64String ?? null
+        const base64Result: string | null = image.base64String ?? null;
         this._value.push(base64Result);
         /// This is a hack to prevent that writeValue override the selected value
         setTimeout(() => {

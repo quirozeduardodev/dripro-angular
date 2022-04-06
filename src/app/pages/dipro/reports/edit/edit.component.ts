@@ -173,9 +173,9 @@ export class EditComponent implements OnInit, OnDestroy {
             type = 'refrigerated';
             break;
         }
-      this.reportEndpointService.save({})
-      .subscribe(response => {
-      });
+      // this.reportEndpointService.save({})
+      // .subscribe(response => {
+      // });
     }
   }
 }

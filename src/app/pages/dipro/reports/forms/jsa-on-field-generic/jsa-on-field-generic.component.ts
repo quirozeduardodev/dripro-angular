@@ -23,15 +23,15 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
 
   commonOptions: { label: string; value: any }[] = [
     {
-      label: 'Si',
+      label: 'forms.common.options.yes',
       value: 1,
     },
     {
-      label: 'No',
+      label: 'forms.common.options.no',
       value: 2,
     },
     {
-      label: 'N/A',
+      label: 'forms.common.options.na',
       value: 3,
     },
   ];
@@ -52,39 +52,39 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
     }[];
   }[] = [
     {
-      label: 'Prevención COVID',
+      label: 'forms.jsa.warehouse.covidPrevention.title',
       questions: [
         {
           label:
-            '¿Cuentas con la mascarilla correcta para el trabajo a realizar?',
+            'forms.jsa.warehouse.covidPrevention.question1',
           formControlName: 'skin_face',
         },
         {
           label:
-            '¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?',
+            'forms.jsa.warehouse.covidPrevention.question2',
           formControlName: 'social',
         },
         {
-          label: '¿Se cuenta con agua y jabón para la limieza de manos?',
+          label: 'forms.jsa.warehouse.covidPrevention.question3',
           formControlName: 'hand_cleaning',
         },
         {
           label:
-            '¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?',
+            'forms.jsa.warehouse.covidPrevention.question4',
           formControlName: 'social_precaution',
         },
         {
-          label: '¿Cuentas con gel sanitizante para limpieza de manos?',
+          label: 'forms.jsa.warehouse.covidPrevention.question5',
           formControlName: 'sanitizer',
         },
       ],
     },
     {
-      label: 'Preparación',
+      label: 'forms.jsa.warehouse.preparation.title',
       questions: [
         {
           label:
-            '¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?',
+            'forms.jsa.warehouse.preparation_site_generic.question1',
           formControlName: 'question1_generic',
           subOptions: {
             fCNRiskLevel: 'question2_generic',
@@ -97,7 +97,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Los arreglos de respuesta a emergencia están implementados y entendidos?',
+            'forms.jsa.warehouse.preparation.question2',
           formControlName: 'question8_generic',
           subOptions: {
             fCNRiskLevel: 'question9_generic',
@@ -110,7 +110,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?',
+            'forms.jsa.warehouse.preparation.question3',
           formControlName: 'question15_generic',
           subOptions: {
             fCNRiskLevel: 'question16_generic',
@@ -124,11 +124,11 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'Herramientas y Equipo',
+      label: 'forms.jsa.warehouse.toolsAndEquipment.title',
       questions: [
         {
           label:
-            '¿Las herramientas y equipos son adecuados y están libre de daños?',
+            'forms.jsa.warehouse.toolsAndEquipment.question1',
           formControlName: 'question22_generic',
           subOptions: {
             fCNRiskLevel: 'question23_generic',
@@ -141,7 +141,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?',
+            'forms.jsa.warehouse.toolsAndEquipment_site_generic.question2',
           formControlName: 'question29_generic',
           subOptions: {
             fCNRiskLevel: 'question30_generic',
