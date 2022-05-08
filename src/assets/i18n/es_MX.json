@@ -1,41 +1,41 @@
 {
   "components": {
     "validator_message": {
-      "required": "This field is required",
-      "email": "This field is not a valid email",
-      "invalid": "This field is invalid",
-      "min":"This field must be greeter than",
-      "max": "This field must be lower than",
-      "requiredTrue": "This field mus be true",
-      "minLength": "This field must contains at least $1 chars",
-      "maxLength":"This field must contains less than $1 chars",
-      "pattern": "This field is invalid",
-      "nullValidator":"This field must be null",
-      "compose": "This field is invalid",
-      "composeAsync": "This field is invalid"
+      "composeAsync": "Este campo no es válido",
+      "compose": "Este campo no es válido",
+      "email": "Este campo no es un correo electrónico válido.",
+      "invalid": "Este campo no es válido",
+      "max": "Este campo debe ser menor que",
+      "min":"Este campo debe ser mayor que",
+      "required": "Este campo es obligatorio",
+      "requiredTrue": "Este campo debe ser verdad",
+      "maxLength":"Este campo debe contener menos de $1 caracteres",
+      "minLength": "Este campo debe contener al menos $1 caracteres.",
+      "nullValidator":"Este campo debe ser nulo",
+      "pattern": "Este campo no es válido"
     }
   },
   "pages": {
     "auth": {
       "login": {
-        "email": "Email",
-        "password": "Password",
-        "submit": "Login",
-        "forgot_password": "Forgot Password"
+        "email": "Correo electrónico",
+        "forgot_password": "Has olvidado tu contraseña",
+        "password": "Contraseña",
+        "submit": "Iniiciar sesión"
       },
       "forgot_password": {
         "components": {
           "processStatusDialog": {
-            "close": "Close",
-            "sending":  "We are sending a new password to your email",
-            "success": "We have sent you a new password, please verify your email",
-            "error":  "An error has occurred, try again later",
-            "unknownEmail": "The email is not registered, please type a valid email"
+            "close": "Cerca",
+            "error":  "Se ha producido un error, inténtalo de nuevo más tarde",
+            "sending":  "Estamos enviando una nueva contraseña a su correo electrónico.",
+            "success": "Le hemos enviado una nueva contraseña, por favor verifique su correo electrónico.",
+            "unknownEmail": "El correo electrónico no está registrado, escriba un correo electrónico válido"
           }
         },
-        "email": "Email",
-        "reset_password": "Reset password",
-        "login": "Login"
+        "email": "Correo electrónico",
+        "login": "Acceso",
+        "reset_password": "Restablecer la contraseña"
       }
     },
     "dipro": {
@@ -43,101 +43,101 @@
         "drawer": {
           "components": {
             "changePasswordDialog": {
-              "title": "Change Password",
-              "message": "You have restored your password, please enter a new password",
-              "newPassword": "New Password",
-              "error": "The password could not be changed",
-              "accept": "Accept",
-              "later": "Later"
+              "accept": "Aceptar",
+              "error": "La contraseña no se pudo cambiar",
+              "later": "Más tarde",
+              "message": "Ha restaurado su contraseña, ingrese una nueva contraseña",
+              "newPassword": "Nueva contraseña",
+              "title": "Cambia la contraseña"
             }
           },
           "menu": {
-            "reports": "Reports",
-            "manuals": "Manuals",
-            "offlineData":  "Offline Data",
-            "settings": "Settings",
-            "logout": "Logout"
+            "reports": "Reportes",
+            "manuals": "Manuales",
+            "offlineData":  "Datos fuera de línea",
+            "settings": "Ajustes",
+            "logout": "Cerrar sesión"
           }
         }
       },
       "reports": {
         "components": {
           "filtersSheet": {
-            "close": "Close",
-            "localReports": "Local Reports",
-            "localReportsDisclaimer": "All offline reports will be shown",
-            "offlineReports": "Offline Reports",
-            "reports": "Reports",
+            "close": "Cerca",
+            "localReports": "Reportes locales",
+            "localReportsDisclaimer": "Todos los reportes fuera de línea se mostrarán",
+            "offlineReports": "Reportes fuera de línea",
+            "reports": "Reportes",
             "jsa": "JSA",
-            "service": "Service",
+            "service": "Servicio",
             "ingersollRand": "Ingersoll Rand",
-            "orderBy": "Order by",
-            "ascendant": "Ascendant",
-            "descendant": "Descendant"
+            "orderBy": "Ordenar",
+            "ascendant": "Ascendente",
+            "descendant": "Descendiente"
           }
         },
         "create": {
-          "title": "Create report"
+          "title": "Crear reporte"
         },
         "edit": {
-          "title": "Editing report"
+          "title": "Editando reporte"
         },
         "view": {
-          "title": "Viewing report"
+          "title": "Reporte de visualización"
         },
         "screening": {
           "components": {
             "question": {
-              "back": "Back",
-              "next": "Next",
-              "finish": "Finish"
+              "back": "Anterior",
+              "next": "Siguiente",
+              "finish": "Siguiente"
             }
           },
-          "title": "Create Report",
+          "title": "Crear reporte",
           "question": {
-            "name": "What kind of report will you create?",
+            "name": "¿Qué tipo de reporte deseas iniciar?",
             "options": {
               "jsa": {
                 "name": "JSA",
                 "question": {
-                  "name": "What kind of service?",
+                  "name": "¿Qué tipo de servicio?",
                   "options": {
                     "onSite": {
-                      "name": "On Site"
+                      "name": "En sitio"
                     },
                     "onField": {
-                      "name": "On Field",
+                      "name": "En campo",
                       "question": {
-                        "name": "Which is the category?",
+                        "name": "¿Qué categoría de servicio de campo se realizará?",
                         "options": {
                           "generic": {
-                            "name": "Generic"
+                            "name": "Genérico"
                           },
                           "powerGeneration": {
                             "name": "Power Generation"
                           },
                           "marine": {
-                            "name": "Marine"
+                            "name": "Marino"
                           }
                         }
                       }
                     },
                     "warehouse": {
-                      "name": "Warehouse"
+                      "name": "Almacén"
                     }
                   }
                 }
               },
               "service": {
-                "name": "Service",
+                "name": "Servicio",
                 "question": {
-                  "name": "What kind of service?",
+                  "name": "¿Qué tipo de servicio?",
                   "options": {
                     "generic": {
-                      "name": "Generic"
+                      "name": "Genérica"
                     },
                     "preventiveMaintenance": {
-                      "name": "Preventive Maintenance"
+                      "name": "Mantenimiento preventivo"
                     }
                   }
                 }
@@ -145,7 +145,7 @@
               "ingersoll": {
                 "name": "Ingersoll Rand",
                 "question": {
-                  "name": "What kind of compressor?",
+                  "name": "¿Qué tipo de compresor?",
                   "options": {
                     "rotaryContactCooledRotary": {
                       "name": "Rotary Contact Cooled Rotary"
@@ -171,57 +171,56 @@
             }
           }
         },
-        "title": "Reports",
-        "filters": "Filters",
+        "title": "Reportes",
+        "filters": "Filtros",
         "jsa": "JSA",
-        "service": "Service",
+        "service": "Servicio",
         "ingersollRand": "Ingersoll Rand"
       },
       "offlineData": {
-        "title": "Offline Data",
-        "lastUpdated": "Last Updated",
-        "never": "Never",
-        "syncAll": "Synchronize All",
-        "answers":  "Answers",
-        "applications":  "Aplicaciones",
-        "categories": "Categories",
-        "contacts":  "Contacts",
-        "countries": "Countries",
-        "customers":  "Customers",
-        "delays": "Delays",
-        "generators":  "Generators",
-        "locations": "Locations",
-        "motors":  "Motors",
+        "title": "Datos fuera de línea",
+        "lastUpdated": "Última actualización",
+        "never": "Nunca",
+        "syncAll": "Sincronizar todo",
+        "answers":  "Respuestas",
+        "categories": "Categorías",
+        "contacts":  "Contactos",
+        "countries": "Los paises",
+        "customers":  "Clientes",
+        "delays": "Retrasos",
+        "generators":  "Generadores",
+        "locations": "Ubicaciones",
+        "motors":  "Motores",
         "qtas": "QTAs",
-        "types":  "Types",
-        "units": "Units",
-        "users":  "Users",
-        "technicians": "Technicians"
+        "types":  "Tipos",
+        "units": "Unidades",
+        "users":  "Usuarias",
+        "technicians": "Técnicas"
       },
       "settings": {
         "components": {
           "changePasswordDialog": {
-            "title": "Change Password",
-            "newPassword": "New Password",
-            "error": "The password could not be changed",
+            "title": "Cambia la contraseña",
+            "newPassword": "Nueva contraseña",
+            "error": "La contraseña no se pudo cambiar",
             "accept": "Accept",
-            "cancel": "Cancel"
+            "cancel": "Cancelar"
           }
         },
-        "title": "Settings",
+        "title": "Ajustes",
         "language": {
-          "title": "Language",
-          "spanish": "Spanish",
-          "portuguese": "Portuguese",
-          "english": "English",
-          "chinese": "Chinese"
+          "title": "Idioma",
+          "spanish": "Española",
+          "portuguese": "Portuguesa",
+          "english": "Inglesa",
+          "chinese": "China"
         },
         "security": {
-          "title":  "Security",
-          "changePassword": "Change my password"
+          "title":  "Seguridad",
+          "changePassword": "Cambia mi contraseña"
         },
         "client": {
-          "title":  "Client"
+          "title":  "Cliente"
         }
       }
     }
@@ -229,18 +228,19 @@
   "reports": {
     "common": {
       "names": {
-        "unknown": "Unknown",
+        "unknown": "Desconocida",
         "jsa": "JSA",
-        "jsa-onSite": "On Site",
-        "jsa-onField": "On Field",
+        "jsa-onSite": "En sitio",
+        "jsa-onField": "En campo",
         "jsa-onField-general": "General",
+        "jsa-onField-generic": "Genérico",
         "jsa-onField-powerGeneration": "Power Generation",
-        "jsa-onField-marine": "Marine",
-        "jsa-warehouse": "Warehouse",
+        "jsa-onField-marine": "Marino",
+        "jsa-warehouse": "Almacén",
 
-        "service": "Service",
-        "service-generice": "Generic",
-        "service-perventiveMaintenance": "Preventive Maintenance",
+        "service": "Servicio",
+        "service-generice": "Genérica",
+        "service-perventiveMaintenance": "Mantenimiento preventivo",
 
         "ingersollRand": "Ingersoll Rand",
         "ingersollRand-rotaryContactCooledRotary": "Rotary Contact Cooled Rotary",
@@ -263,7 +263,7 @@
         "isAccompained": "¿Esta acompañado?",
         "selectYourPartner": "Selecciona a tu(s) compañero(s)",
         "extern": "Externo",
-        "taskCategory": "Categoria de la tarea",
+        "taskCategory": "Categoría de la tarea",
         "categoryDescription": "Descripción de la tarea",
         "fillLocation": "Ubicación",
         "riskLevel": "Nivel de riesgo",
@@ -275,12 +275,37 @@
         "medium": "Medio",
         "high": "Alto",
         "extreme": "Extremo",
-        "details": "Detalles"
+        "details": "Detalles",
+        "photography": "Subir evidencia fotográfica",
+        "submit": "Guardar"
       },
       "options": {
-        "yes": "Yes",
+        "yes": "Sí",
         "no": "No",
         "na": "N/A"
+      },
+      "analisisCause": {
+        "atmosphere": "Ambiente (clima, condiciones de altitud, instalaciones)",
+        "design": "Diseño de espacio de trabajo",
+        "training": "Entrenamiento inadecuado o incompleto",
+        "teams": "Equipos o herramientas dañadas",
+        "tools": "Herramientas/Equipos no disponibles",
+        "maintenance": "Mantenimiento preventivo sin finalizar",
+        "process": "Procesos o procedimientos inadecuados",
+        "surfaces": "Superficies de trabajo o caminos irregulares",
+        "other": "Otra"
+      },
+      "actionsTaken": {
+        "insured": "Asegurado",
+        "locked": "Bloqueado",
+        "trained": "Empleado entrenado",
+        "trained_installed": "Entrenado, Instalado, Limpiado",
+        "protected": "Protegido",
+        "provided": "Provisto (EPP)",
+        "superseded": "Reemplazado",
+        "removed": "Removido",
+        "repaired": "Reparado",
+        "other": "Otro"
       }
     },
     "jsa": {
@@ -313,7 +338,7 @@
           "title": "Prevención COVID",
           "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
           "question2": "¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?",
-          "question3": "¿Se cuenta con agua y jabón para la limieza de manos?",
+          "question3": "¿Se cuenta con agua y jabón para la limpieza de manos?",
           "question4": "¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?",
           "question5": "¿Cuentas con gel sanitizante para limpieza de manos?"
         },
@@ -335,7 +360,7 @@
           "question3": "¿Hay un acceso seguro a la zona de trabajo y equipos?"
         },
         "epp": {
-          "title": "Equipo de Proteccion Personal (EPP)",
+          "title": "Equipo de Protección Personal (EPP)",
           "question1": "¿El EPP está disponible para la tarea?",
           "question2": "¿El EPP es adecuado y está libre de daños?"
         },
@@ -345,7 +370,122 @@
           "chbx3": "OPERACIÓN DE LEVANTAMIENTO DE CARGAS",
           "chbx4": "TRABAJOS DE ALTURA",
           "chbx5": "INCENDIO, EXPLOSIÓN O ARCO ELECTRICO",
-          "chbx6": "OTRO"
+          "chbx6": "OTRO",
+          "chbx7": "MAQUINARIA EN MOVIMIENTO"
+        }
+      },
+      "site": {
+        "lonely_job": "Trabajo Solitario",
+        "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
+        "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
+        "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+        "practice": "Poner en práctica Controles Establecidos",
+        "strange": "¿Qué es extraño, inusual o diferente hoy?",
+        "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+        "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
+        "identification": "Identificación de los peligros(dar click si el peligro está presente)",
+        "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+        "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
+        "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+        "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+        "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+        "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
+        "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
+        "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
+        "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
+        "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+        "unusual_hazards": {
+          "title": "Peligros inusuales",
+          "gas": "Gas Natural (GNG/LNG)",
+          "animals": "Animales o insectos",
+          "gases": "Gases de escape",
+          "high_level": "Alto nivel de ruido",
+          "hot_works": "Trabajos en caliente",
+          "work_space": "Espacios de trabajo restringido",
+          "confined_space": "Entrada a espacios confinados",
+          "hygiene_hazards": "Peligros de higiene",
+          "flammable_gas": "Gas o liquido inflamable",
+          "compressed_air": "Aire Comprimido",
+          "security": "Seguridad de la batería"
+        },
+        "access_equipment": {
+          "title": "Acceso al (los) Equipo(s)",
+          "ladders": "Escalera o Escalera de Mano",
+          "platform_access": "Plataforma de Acceso Estático",
+          "platform_work": "Plataforma de Trabajo Móvil",
+          "stool": "Taburete o Grada de Trabajo"
+        },
+        "hazards_activity": {
+          "title": "Actividades Peligrosas en el Taller",
+          "spray_painting": "Pintura con Pistola",
+          "row_testing": "Celda de Prueba del Motor",
+          "dyno_chassiss": "Dyno Chassiss",
+          "washing_bay": "Bahía de lavado",
+          "chemical_bath": "Baño Químico",
+          "cleaning": "Limpieza",
+          "pit_inspection": "Inspección de Fosas"
+        },
+        "order_cleaning": {
+          "title": "Orden y limpieza",
+          "establishing_work_area": "Establecer orden en el área de trabajo",
+          "dispose_discard": "Disponer / Desechar",
+          "cleaning": "Limpieza"
+        },
+        "fire_line": {
+          "title": "Línea de Fuego",
+          "hit_by_or_against": "Golpeado(a) por o contra",
+          "trapped_by": "Atrapado(a) por",
+          "dangerous_energy": "Energía Peligrosa",
+          "dust_dirt": "Polvo o Suciedad",
+          "proyectile_hazard": "Peligro de Proyectil"
+        },
+        "slips": {
+          "title": "Resbalones, Tropiezos, Caídas",
+          "wet_oily_soil": "Suelo Húmedo o Aceitoso",
+          "cables_on_floor": "Cables sobre el piso",
+          "terrain_unevenness": "Los desniveles del terreno / Grava",
+          "elevated_area": "Área elevada / Mezanine",
+          "rooftop": "Azotea",
+          "snow_mud_or_ice": "Nieve, Barro o Hielo",
+          "pit_in_the_floor": "Fosa en el Piso"
+        },
+        "interaction_other_people": {
+          "title": "Interacción con otras Personas",
+          "job_contractors": "Trabajo con Contratistas",
+          "general_public": "Público en General",
+          "client_employee": "Cliente/Empleados"
+        },
+        "environmental_impact": {
+          "title": "Impacto Ambiental",
+          "leaks_or_spills": "Fugas o Derrames",
+          "fumes_or_smokes": "Vapores o Humo",
+          "waste_disposal": "Eliminación de Residuos",
+          "chemical_products": "Uso de Productos Químicos"
+        },
+        "ergonomic": {
+          "title": "Ergonomía",
+          "excesive_force": "Fuerza Excesiva",
+          "repetitive_job": "Trabajo Repetitivo",
+          "estresful": "Postura Estresante",
+          "contact_stress": "Estrés de Contacto",
+          "kneeling_down": "Arrodillándose / Arrastrándose",
+          "vibrate": "Vibración",
+          "heavy_lifting": "Levantamiento de Objetos Pesados"
+        },
+        "weather_conditions": {
+          "title": "Condiciones Climáticas",
+          "extreme_heat": "Calor Extremo",
+          "extreme_cold": "Frío Extremo",
+          "strong_winds": "Fuertes Vientos",
+          "storm_conditions": "Condiciones de Tormenta",
+          "rain": "Lluvia",
+          "snown": "Nieve / Hielo",
+          "great_altitud": "Gran Altitud"
+        },
+        "supervisor": {
+          "name": "Nombre del Supervisor",
+          "phone": "Teléfono de Contacto del Supervisor"
         }
       }
     }

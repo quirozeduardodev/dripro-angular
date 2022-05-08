@@ -23,15 +23,15 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
 
   commonOptions: { label: string; value: any }[] = [
     {
-      label: 'Si',
+      label: 'forms.common.options.yes',
       value: 1,
     },
     {
-      label: 'No',
+      label: 'forms.common.options.no',
       value: 2,
     },
     {
-      label: 'N/A',
+      label: 'forms.common.options.na',
       value: 3,
     },
   ];
@@ -65,7 +65,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
           formControlName: 'social',
         },
         {
-          label: '¿Se cuenta con agua y jabón para la limieza de manos?',
+          label: '¿Se cuenta con agua y jabón para la limpieza de manos?',
           formControlName: 'hand_cleaning',
         },
         {
