@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   Directive,
-  ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -16,6 +15,10 @@ import {
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 export declare type MultiplierStructure = { [p: string]: AbstractControl };
+export declare type MultiplierFormControlIn = {
+  answers?: { [p: string]: AbstractControl } | null;
+  formControls: MultiplierStructure;
+};
 @Directive({
   selector: '[appMultiplierFormControl]',
 })
@@ -24,15 +27,21 @@ export class MultiplierFormControlDirective
 {
   public static baseId: string = 'form_builder_container_multiplier';
 
-  @Input() appMultiplierFormControl: MultiplierStructure = {};
+  @Input() appMultiplierFormControl: MultiplierFormControlIn = {
+    formControls: {}
+  };
 
   private _rootFormGroup: FormGroup | null = null;
   private _currentId: number = 0;
-  private _formControls: MultiplierStructure[] = [];
+  private _formControls: {id: number; structure: MultiplierStructure}[] = [];
   constructor(
     private _viewContainer: ViewContainerRef,
     private _template: TemplateRef<MultiplierFormControlContext>
   ) {}
+
+  get isDisabled(): boolean {
+    return this._rootFormGroup ? this._rootFormGroup.disabled : false;
+  }
 
   ngAfterContentInit(): void {
     this.tryToLoadRootFormGroup().then(() => {
@@ -40,12 +49,16 @@ export class MultiplierFormControlDirective
     });
   }
 
-  addOneMore(): void {
+  addOneMore(customId?: number): void {
     const newControls: MultiplierStructure = {};
-    for (const [key, value] of Object.entries(this.appMultiplierFormControl)) {
+    for (const [key, value] of Object.entries(this.appMultiplierFormControl.formControls)) {
       newControls[key] = new FormControl(null, value.validator);
     }
-    this._formControls.push(newControls);
+    this._formControls.push({
+      id: this._currentId + 1,
+      structure: newControls
+    });
+    this._currentId++;
     this._applyChanges();
   }
 
@@ -55,16 +68,16 @@ export class MultiplierFormControlDirective
     viewContainer.createEmbeddedView(
       this._template,
       {
-        $implicit: this.appMultiplierFormControl
+        $implicit: this.appMultiplierFormControl.formControls
       }
       // currentIndex === null ? undefined : currentIndex
     );
     for (let i = 0; i < this._formControls.length; i++) {
       const item = this._formControls[i];
-      for (const [key, value] of Object.entries(item)) {
+      for (const [key, value] of Object.entries(item.structure)) {
         if (this._rootFormGroup) {
           this._rootFormGroup.addControl(
-            `${MultiplierFormControlDirective.baseId}-${key}-${i + 1}`,
+            `${MultiplierFormControlDirective.baseId}-${key}-${item.id}`,
             value
           );
         }
@@ -73,7 +86,7 @@ export class MultiplierFormControlDirective
       this._viewContainer.createComponent<RemoveComponent<MultiplierFormControlContext>>(RemoveComponent);
       tempRef.instance.templateRef = {
         context: {
-          $implicit: item
+          $implicit: item.structure
         },
         templateRef: this._template
       };
@@ -97,11 +110,39 @@ export class MultiplierFormControlDirective
   private async tryToLoadRootFormGroup(): Promise<void> {
     this._rootFormGroup = null;
     for (const [key, value] of await Object.entries(
-      this.appMultiplierFormControl
+      this.appMultiplierFormControl.formControls
     )) {
       if (!this._rootFormGroup) {
         this._rootFormGroup = value.parent as FormGroup;
       } else {
+        break;
+      }
+    }
+    if(this._rootFormGroup) {
+      for (const [key, value] of Object.entries(this.appMultiplierFormControl.formControls)) {
+        for (const [key2, value2] of Object.entries(this.appMultiplierFormControl.answers ?? {})) {
+          const resultMatch = key2.match(`${MultiplierFormControlDirective.baseId}-${key}-([0-9]+)`);
+          if(resultMatch) {
+            const idFnd = Number(resultMatch[1]);
+            const newControls: MultiplierStructure = {};
+            for (const [keyX, valueX] of Object.entries(this.appMultiplierFormControl.formControls)) {
+              newControls[keyX] = new FormControl(null, valueX.validator);
+            }
+            for (const [key3, value3] of Object.entries(newControls)) {
+              for (const [key4, value4] of Object.entries(this.appMultiplierFormControl.answers ?? {})) {
+                if(key4.match(`${MultiplierFormControlDirective.baseId}-${key3}-${idFnd}`)){
+                  newControls[key3].setValue(value4);
+                  break;
+                }
+              }
+            }
+            this._formControls.push({
+              id: idFnd,
+              structure: newControls
+            });
+            this._currentId = idFnd > this._currentId ? idFnd : this._currentId;
+          }
+        }
         break;
       }
     }

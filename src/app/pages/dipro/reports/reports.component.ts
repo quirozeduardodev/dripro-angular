@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { ReportEndpointService } from '../../../services/endpoints/report-endpoint.service';
 import { PaginateResponse } from '../../../types/response/paginate.response';
 import { BasicReportResponse } from '../../../types/response/report.response';
@@ -9,13 +9,16 @@ import { UnitOfWorkDatabase } from '../../../database/unit-of-work.database';
 import { InfiniteReportGridItem } from './components/infinite-reports-grid/infinite-reports-grid.component';
 import { BaseDialogComponent } from 'src/app/components/dialogs/base-dialog/base-dialog.component';
 import { ReportsService } from './services/reports.service';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {UserResponse} from '../../../types/response/user.response';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
 })
-export class ReportsComponent implements OnInit {
+export class ReportsComponent implements OnInit, OnDestroy {
 
   @ViewChild('dialogDelete') dialogDelete: BaseDialogComponent | null = null;
 
@@ -24,14 +27,17 @@ export class ReportsComponent implements OnInit {
   filters: FiltersReports | null = null;
   reportsMerged: InfiniteReportGridItem[] = [];
   isLoadingNewData: boolean = false;
+  user: UserResponse | null = null;
 
+  private _userSubscription: Subscription | null = null;
   private _latstPaginationReportsLoaded: PaginateResponse<BasicReportResponse> | null = null;
   private _localIdSelectedToDelete: number | null = null;
   constructor(
     private unitOfWorkDatabase: UnitOfWorkDatabase,
     private reportEndpointService: ReportEndpointService,
     private router: Router,
-    private reportsService: ReportsService
+    private reportsService: ReportsService,
+    private _authService: AuthService
   ) {}
 
   get hasMoreOnlineData(): boolean {
@@ -40,6 +46,9 @@ export class ReportsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._userSubscription = this._authService.user.subscribe(user => {
+      this.user = user;
+    });
   }
 
   cleanOnlineReports(): void {
@@ -98,5 +107,8 @@ export class ReportsComponent implements OnInit {
         this.reportsService.refreshLocalData();
       });
     }
+  }
+  ngOnDestroy(): void {
+    this._userSubscription?.unsubscribe();
   }
 }

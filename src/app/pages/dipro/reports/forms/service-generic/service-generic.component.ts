@@ -17,6 +17,7 @@ import { User } from 'src/app/database/models/user';
 import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import { BaseForm } from '../base-form';
+import {Delay} from '../../../../../database/models/delay';
 
 @Component({
   selector: 'app-service-generic',
@@ -36,6 +37,8 @@ export class ServiceGenericComponent extends BaseForm implements OnInit {
   generators$: Observable<Generator[]> | null = null;
   motors$: Observable<Motor[]> | null = null;
   qtas$: Observable<QTA[]> | null = null;
+  categories$: Observable<Category[]> | null = null;
+  delays$: Observable<Delay[]> | null = null;
   measurementTypes: {id: number; name: string}[] = [
     {
       id: 1,
@@ -79,6 +82,11 @@ export class ServiceGenericComponent extends BaseForm implements OnInit {
     available: new FormControl(null, [Validators.required]),
     photosz: new FormControl(null, [Validators.required]),
     'photo-description': new FormControl(null, [Validators.required]),
+    technician_name: new FormControl(null, [Validators.required]),
+    initial_hour: new FormControl(null, [Validators.required]),
+    finally_hour: new FormControl(null, [Validators.required]),
+    category_technician: new FormControl(null, [Validators.required]),
+    demoras_technician: new FormControl(null, [Validators.required]),
     responsable: new FormControl(null, [Validators.required]),
     department: new FormControl(null, [Validators.required]),
     email_client: new FormControl(null, [Validators.required, Validators.email]),
@@ -106,6 +114,8 @@ export class ServiceGenericComponent extends BaseForm implements OnInit {
     this.generators$ = this.unitOfWorkDatabase.generatorRepository.all();
     this.motors$ = this.unitOfWorkDatabase.motorRepository.all();
     this.qtas$ = this.unitOfWorkDatabase.QTARepository.all();
+    this.categories$ = this.unitOfWorkDatabase.categoryRepository.all();
+    this.delays$ = this.unitOfWorkDatabase.delayRepository.all();
   }
 
   submit(): void {

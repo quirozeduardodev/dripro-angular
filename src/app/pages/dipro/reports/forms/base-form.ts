@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
-import {FormGroup} from "@angular/forms";
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 export declare type Answers = {[q: string]: any};
 
@@ -17,11 +17,11 @@ export abstract class BaseForm implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["answers"]) {
-      this.updateValue(changes["answers"].currentValue ?? {});
+    if (changes.answers) {
+      this.updateValue(changes.answers.currentValue ?? {});
     }
-    if (changes["readOnly"]) {
-      if (changes["readOnly"].currentValue === true) {
+    if (changes.readOnly) {
+      if (changes.readOnly.currentValue === true) {
         this.formGroup.disable();
       } else {
         this.formGroup.enable();
@@ -31,8 +31,9 @@ export abstract class BaseForm implements OnChanges {
 
   private updateValue(obj: {[p: string]: any}): void {
     for (const [key, value] of Object.entries(obj)) {
-      if (this.formGroup.controls[key]) {
-        this.formGroup.controls[key].setValue(value);
+      const keyEscaped = key.replace(/[\u200B-\u200D\u200B\uFEFF]/g, '');
+      if (this.formGroup.controls[keyEscaped]) {
+        this.formGroup.controls[keyEscaped].setValue(value);
       }
     }
   }

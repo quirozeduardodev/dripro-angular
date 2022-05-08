@@ -47,6 +47,7 @@ const sheetAnimationDuration = 125;
 export class SheetComponent implements OnInit, OnChanges, OnDestroy {
   @Input() visible = true;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() maxWidth: number | string | null = null;
   @ViewChild('overlay') overlay: OverlayComponent | null = null;
 
   showSheet = false;
@@ -56,6 +57,16 @@ export class SheetComponent implements OnInit, OnChanges, OnDestroy {
   private _status: SheetStatus = SheetStatus.closed;
 
   constructor(private platform: Platform) {}
+
+  get maxWidthCss(): string {
+    if(this.maxWidth === null || this.maxWidth === undefined) {
+      return 'auto';
+    }
+    if(!isNaN(this.maxWidth as number)) {
+      return `${this.maxWidth}px`;
+    }
+    return `${this.maxWidth ?? 'auto'}`;
+  }
 
   ngOnInit() {
     this._backButtonSubscription =

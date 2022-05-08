@@ -24,6 +24,14 @@ export class TimePickerComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  get value(): string | null {
+    return this._value;
+  }
+
+  get isDisabled(): boolean {
+    return this._isDisabled;
+  }
+
   ngOnInit() {}
 
   writeValue(obj: any): void {
@@ -40,5 +48,10 @@ export class TimePickerComponent implements OnInit, ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this._isDisabled = isDisabled;
+  }
+
+  changed($event: any): void {
+    this._value = $event;
+    this._onChange(this._value);
   }
 }

@@ -1,19 +1,30 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {SheetComponent} from "../../../../../components/sheet/sheet.component";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {SheetComponent} from '../../../../../components/sheet/sheet.component';
+import {UserResponse} from '../../../../../types/response/user.response';
+import {Subscription} from 'rxjs';
+import {AuthService} from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-filters-sheet',
   templateUrl: './filters-sheet.component.html',
   styleUrls: ['./filters-sheet.component.scss'],
 })
-export class FiltersSheetComponent implements OnInit {
+export class FiltersSheetComponent implements OnInit, OnDestroy {
 
-  filters: FiltersReports | null = null;
   @ViewChild('filterSheet') filterSheet: SheetComponent | null = null;
   @Output() filtersChanged: EventEmitter<FiltersReports> = new EventEmitter<FiltersReports>();
-  constructor() { }
 
-  ngOnInit() {}
+  filters: FiltersReports | null = null;
+  user: UserResponse | null = null;
+
+  private _userSubscription: Subscription | null = null;
+  constructor(private _authService: AuthService) { }
+
+  ngOnInit() {
+    this._userSubscription = this._authService.user.subscribe(user => {
+      this.user = user;
+    });
+  }
 
   open(filters: FiltersReports) {
     this.filters = filters;
@@ -50,6 +61,10 @@ export class FiltersSheetComponent implements OnInit {
     if (!isVisible) {
       this.applyClose();
     }
+  }
+
+  ngOnDestroy(): void {
+    this._userSubscription?.unsubscribe();
   }
 }
 

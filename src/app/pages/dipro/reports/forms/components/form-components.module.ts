@@ -23,6 +23,8 @@ import { TextAreaComponent } from './text-area/text-area.component';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { MultiplierFormControlDirective } from './directives/multiplier-form-control.directive';
 import { RadioGroupComponent } from './radio-group/radio-group.component';
+import {LocationTextFieldComponent} from './location-text-field/location-text-field.component';
+import {StepperComponent} from './stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +38,13 @@ import { RadioGroupComponent } from './radio-group/radio-group.component';
     CheckboxGroupComponent,
     RadioGroupComponent,
     TextFieldComponent,
+    LocationTextFieldComponent,
     TextAreaComponent,
     SelectComponent,
     ChipListComponent,
     MultiSelectComponent,
-    MultiplierFormControlDirective
+    MultiplierFormControlDirective,
+    StepperComponent
   ],
   imports: [
     CommonModule,
@@ -64,11 +68,13 @@ import { RadioGroupComponent } from './radio-group/radio-group.component';
     CheckboxGroupComponent,
     RadioGroupComponent,
     TextFieldComponent,
+    LocationTextFieldComponent,
     TextAreaComponent,
     SelectComponent,
     ChipListComponent,
     MultiSelectComponent,
-    MultiplierFormControlDirective
+    MultiplierFormControlDirective,
+    StepperComponent
   ],
 })
 export class FormComponentsModule {}

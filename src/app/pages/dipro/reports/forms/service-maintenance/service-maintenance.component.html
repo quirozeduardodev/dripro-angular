@@ -24,7 +24,7 @@
       <label class="my-1">{{'forms.common.labels.client' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.client' | translate" formControlName="customer">
         <form-option *ngFor="let option of (customers$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -32,7 +32,7 @@
       <label class="my-1">{{'forms.common.labels.serviceLocation' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.serviceLocation' | translate" formControlName="location">
         <form-option *ngFor="let option of (locations$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -44,7 +44,7 @@
       <label class="my-1">{{'forms.common.labels.contact' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.contact' | translate" formControlName="contact">
         <form-option *ngFor="let option of (contacts$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -74,15 +74,7 @@
       <label class="my-1">{{'forms.common.labels.jobType' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.jobType' | translate" formControlName="type_job">
         <form-option *ngFor="let option of (jobTypes$ | async) || []"
-                     [value]="option.id"
-                     [label]="option.name"></form-option>
-      </form-search-select>
-    </div>
-    <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.common.labels.jobType' | translate}}</label>
-      <form-search-select [placeholder]="'forms.common.labels.jobType' | translate" formControlName="type_job">
-        <form-option *ngFor="let option of (jobTypes$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -90,7 +82,7 @@
       <label class="my-1">{{'forms.service.preventiveMaintenance.application' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.preventiveMaintenance.application' | translate" formControlName="application">
         <form-option *ngFor="let option of (applications$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -118,7 +110,7 @@
       <label class="my-1">{{'forms.service.preventiveMaintenance.generatorModel' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.preventiveMaintenance.generatorModel' | translate" formControlName="model_gene">
         <form-option *ngFor="let option of (generators$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -130,7 +122,7 @@
       <label class="my-1">{{'forms.service.preventiveMaintenance.motorModel' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.preventiveMaintenance.motorModel' | translate" formControlName="model_motor">
         <form-option *ngFor="let option of (motors$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -195,7 +187,7 @@
       </div>
     </div>
     <div *ngFor="let option of electricalDataSections" class="flex flex-col mt-3">
-      <div class="w-100 flex justify-between mb-1">
+      <div class="w-flex flex justify-between mb-1">
         <span class="font-light">{{option.label| translate}}</span>
         <div class="w-32">
           <mat-radio-group class="w-full flex justify-between" [formControlName]="option.rFC">
@@ -211,13 +203,17 @@
       <span class="text-white text-lg font-medium">{{'forms.service.preventiveMaintenance.measurementrs' | translate}}</span>
     </div>
     <div class="w-full my-1 flex">
-      <div class="w-20"></div>
-      <span class="w-100 text-center font-semibold">{{'forms.service.preventiveMaintenance.voidT' | translate}}</span>
-      <span class="w-100 text-center font-semibold">{{'forms.service.preventiveMaintenance.weightT' | translate}}</span>
+      <div class="w-32"></div>
+      <div class="w-full flex justify-center">
+        <span class="text-center font-semibold">{{'forms.service.preventiveMaintenance.voidT' | translate}}</span>
+      </div>
+      <div class="w-full flex justify-center">
+        <span class="text-center font-semibold">{{'forms.service.preventiveMaintenance.weightT' | translate}}</span>
+      </div>
     </div>
     <div *ngFor="let option of measurements" class="flex flex-col">
       <div class="w-full flex">
-        <div class="w-20">
+        <div class="w-32">
           <span class="font-light">{{option.label| translate}}</span>
         </div>
         <div class="w-full p-1">
@@ -233,19 +229,28 @@
     </div>
     <div class="w-full my-1 flex">
       <div class="w-20"></div>
-      <span class="w-100 text-center font-semibold">{{'forms.service.preventiveMaintenance.density' | translate}}</span>
-      <span class="w-100 text-center font-semibold">{{'forms.service.preventiveMaintenance.density' | translate}}</span>
+      <span class="w-full text-center font-semibold">{{'forms.service.preventiveMaintenance.density' | translate}}</span>
+      <span class="w-full text-center font-semibold">{{'forms.service.preventiveMaintenance.density' | translate}}</span>
     </div>
-    <div *ngFor="let option of bateries" class="flex flex-col">
-      <div class="w-full flex">
-        <div class="w-20">
-          <span class="font-light">{{option.label| translate}}</span>
+    <div class="flex flex-wrap">
+      <div class="w-1/2 flex flex-col">
+        <div *ngFor="let option of bateries1" class="flex flex-col">
+          <div class="w-full flex pr-2 items-center">
+            <span class="font-light">{{option.label| translate}}</span>
+            <div class="w-full p-1">
+              <form-text-field class="small-text-field" [formControlName]="option.fC"></form-text-field>
+            </div>
+          </div>
         </div>
-        <div class="w-full p-1">
-          <form-text-field class="small-text-field" [formControlName]="option.fC"></form-text-field>
-        </div>
-        <div class="w-full p-1">
-          <form-text-field class="small-text-field" [formControlName]="option.fC"></form-text-field>
+      </div>
+      <div class="w-1/2 flex flex-col">
+        <div *ngFor="let option of bateries2" class="flex flex-col">
+          <div class="w-full flex pl-2 items-center">
+            <span class="font-light">{{option.label| translate}}</span>
+            <div class="w-full p-1">
+              <form-text-field class="small-text-field" [formControlName]="option.fC"></form-text-field>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -264,11 +269,15 @@
     <span>{{'forms.service.preventiveMaintenance.technicians' | translate}}</span>
     <div class="w-full p-2 my-1 border flex flex-col"
       *appMultiplierFormControl="{
-        technician_name: formGroup.controls.technician_name,
-        initial_hour: formGroup.controls.initial_hour,
-        finally_hour: formGroup.controls.finally_hour,
-        category_technician: formGroup.controls.category_technician,
-        demoras_technician: formGroup.controls.demoras_technician};
+        answers: this.answers,
+        formControls: {
+          technician_name: formGroup.controls.technician_name,
+          initial_hour: formGroup.controls.initial_hour,
+          finally_hour: formGroup.controls.finally_hour,
+          category_technician: formGroup.controls.category_technician,
+          demoras_technician: formGroup.controls.demoras_technician
+        }
+      };
       let formGroup">
       <div class="w-full flex flex-col justify-center items-center">
         <span class="font-light">{{'forms.service.preventiveMaintenance.technician' | translate}}</span>
@@ -282,6 +291,16 @@
       </div>
       <div class="w-full flex">
         <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.startHour' | translate}}</span>
+          <form-time-picker class="w-full" [formControl]="formGroup.initial_hour"></form-time-picker>
+        </div>
+        <div class="w-full p-1 flex flex-col justify-center items-center">
+          <span class="font-light">{{'forms.service.preventiveMaintenance.endHour' | translate}}</span>
+          <form-time-picker class="w-full" [formControl]="formGroup.finally_hour"></form-time-picker>
+        </div>
+      </div>
+      <div class="w-full flex">
+        <div class="w-full p-1 flex flex-col justify-center items-center">
           <span class="font-light">{{'forms.service.preventiveMaintenance.category' | translate}}</span>
           <form-search-select class="w-full"
             [placeholder]="'forms.service.preventiveMaintenance.category' | translate"
@@ -292,9 +311,9 @@
           </form-search-select>
         </div>
         <div class="w-full p-1 flex flex-col justify-center items-center">
-          <span class="font-light">{{'forms.service.preventiveMaintenance.delays' | translate}}</span>
+          <span class="font-light">{{'forms.service.preventiveMaintenance.delay' | translate}}</span>
           <form-search-select class="w-full"
-            [placeholder]="'forms.service.preventiveMaintenance.delays' | translate"
+            [placeholder]="'forms.service.preventiveMaintenance.delay' | translate"
             [formControl]="formGroup.demoras_technician">
             <form-option *ngFor="let option of (delays$ | async) || []"
                          [value]="option.name"
@@ -302,57 +321,55 @@
           </form-search-select>
         </div>
       </div>
-      <div class="w-full flex">
-        <div class="w-full p-1 flex flex-col justify-center items-center">
-          <span class="font-light">{{'forms.service.preventiveMaintenance.category' | translate}}</span>
-          <form-time-picker [formControl]="formGroup.initial_hour"></form-time-picker>
-        </div>
-        <div class="w-full p-1 flex flex-col justify-center items-center">
-          <span class="font-light">{{'forms.service.preventiveMaintenance.delays' | translate}}</span>
-          <form-time-picker [formControl]="formGroup.finally_hour"></form-time-picker>
-        </div>
-      </div>
     </div>
     <span>{{'forms.service.preventiveMaintenance.photographicEvidence' | translate}}</span>
     <div class="w-full p-2 my-1 border flex flex-col"
       *appMultiplierFormControl="{
-        photosz: formGroup.controls.photosz,
-        'photo-description': formGroup.controls['photo-description']};
+        answers: this.answers,
+        formControls: {
+          photosz: formGroup.controls.photosz,
+          'photo-description': formGroup.controls['photo-description']
+        }
+      };
       let formGroup">
       <form-image-picker [formControl]="formGroup.photosz"></form-image-picker>
       <form-text-field [formControl]="formGroup['photo-description']" [placeholder]="'forms.service.preventiveMaintenance.photographicEvidenceDescription' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.inChargeOfTheClient' | translate}}</label>
-      <form-text-field formControlName="responsable" [placeholder]="'forms.service.generic.inChargeOfTheClient' | translate"></form-text-field>
+      <label class="my-1">{{'forms.service.preventiveMaintenance.inChargeOfTheClient' | translate}}</label>
+      <form-text-field formControlName="responsable" [placeholder]="'forms.service.preventiveMaintenance.inChargeOfTheClient' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.department' | translate}}</label>
-      <form-text-field formControlName="department" [placeholder]="'forms.service.generic.department' | translate"></form-text-field>
+      <label class="my-1">{{'forms.service.preventiveMaintenance.department' | translate}}</label>
+      <form-text-field formControlName="department" [placeholder]="'forms.service.preventiveMaintenance.department' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col"
     *appMultiplierFormControl="{
-      email_client: formGroup.controls.email_client};
+        answers: this.answers,
+        formControls: {
+          email_client: formGroup.controls.email_client
+        }
+      };
       let formGroup">
-      <label class="my-1">{{'forms.service.generic.emailCient' | translate}}</label>
-      <form-text-field [formControl]="formGroup.email_client" [placeholder]="'forms.service.generic.emailClient' | translate"></form-text-field>
+      <label class="my-1">{{'forms.service.preventiveMaintenance.emailClient' | translate}}</label>
+      <form-text-field [formControl]="formGroup.email_client" [placeholder]="'forms.service.preventiveMaintenance.emailClient' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.signatureClient' | translate}}</label>
+      <label class="my-1">{{'forms.service.preventiveMaintenance.signatureClient' | translate}}</label>
       <div class="w-full flex justify-center">
         <form-signature-pad [isDrawing]="false" formControlName="signature_client"></form-signature-pad>
       </div>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.technician' | translate}}</label>
-      <form-search-select [placeholder]="'forms.service.generic.technician' | translate" formControlName="name_technician">
+      <label class="my-1">{{'forms.service.preventiveMaintenance.technician' | translate}}</label>
+      <form-search-select [placeholder]="'forms.service.preventiveMaintenance.technician' | translate" formControlName="name_technician">
         <form-option *ngFor="let option of (technicians$ | async) || []"
                      [value]="option.id"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.service.generic.signatureTechnician' | translate}}</label>
+      <label class="my-1">{{'forms.service.preventiveMaintenance.signatureTechnician' | translate}}</label>
       <div class="w-full flex justify-center">
         <form-signature-pad [isDrawing]="false" formControlName="signature_technician"></form-signature-pad>
       </div>

@@ -9,7 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
-import { Answers, BaseForm } from './base-form';
+import { Answers, BaseForm } from "./base-form";
 
 export type ReportType = 'jsa-onSite' |
 'jsa-warehouse' |

@@ -24,7 +24,7 @@
       <label class="my-1">{{'forms.common.labels.client' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.client' | translate" formControlName="customer">
         <form-option *ngFor="let option of (customers$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -32,19 +32,19 @@
       <label class="my-1">{{'forms.common.labels.serviceLocation' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.serviceLocation' | translate" formControlName="location">
         <form-option *ngFor="let option of (locations$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.locationGps' | translate}}</label>
-      <form-text-field formControlName="location_gps" [placeholder]="'forms.common.labels.locationGps' | translate"></form-text-field>
+      <form-location-text-field formControlName="location_gps" [placeholder]="'forms.common.labels.locationGps' | translate"></form-location-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.contact' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.contact' | translate" formControlName="contact">
         <form-option *ngFor="let option of (contacts$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -57,12 +57,12 @@
       <form-text-field formControlName="sucursal" [placeholder]="'forms.common.labels.branch' | translate"></form-text-field>
     </div>
     <div class="my-2 w-full flex justify-between">
-      <span>{{'forms.common.labels.isAccompained' | translate}}</span>
+      <span>{{'forms.common.labels.technician' | translate}}</span>
       <mat-slide-toggle formControlName="accompanied"></mat-slide-toggle>
     </div>
     <div *ngIf="formGroup.controls.accompanied.value === true" class="w-full flex flex-col my-3">
-      <span>{{'forms.common.labels.selectYourPartner' | translate}}</span>
-      <form-multi-select formControlName="teammate_name" [placeholder]="'forms.common.labels.selectYourPartner' | translate">
+      <span>{{'forms.common.labels.pickTechnician' | translate}}</span>
+      <form-multi-select formControlName="teammate_name" [placeholder]="'forms.common.labels.pickTechnician' | translate">
         <form-option *ngFor="let item of (technicians$ | async) || []" [value]="item.name" [label]="item.name"></form-option>
       </form-multi-select>
     </div>
@@ -74,15 +74,7 @@
       <label class="my-1">{{'forms.common.labels.jobType' | translate}}</label>
       <form-search-select [placeholder]="'forms.common.labels.jobType' | translate" formControlName="type_job">
         <form-option *ngFor="let option of (jobTypes$ | async) || []"
-                     [value]="option.id"
-                     [label]="option.name"></form-option>
-      </form-search-select>
-    </div>
-    <div class="my-2 flex flex-col">
-      <label class="my-1">{{'forms.common.labels.jobType' | translate}}</label>
-      <form-search-select [placeholder]="'forms.common.labels.jobType' | translate" formControlName="type_job">
-        <form-option *ngFor="let option of (jobTypes$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -90,7 +82,7 @@
       <label class="my-1">{{'forms.service.generic.application' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.generic.application' | translate" formControlName="application">
         <form-option *ngFor="let option of (applications$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -106,10 +98,11 @@
           <form-text-field formControlName="model_num" [placeholder]="'forms.service.generic.measurementNumber' | translate"></form-text-field>
         </div>
         <div class="w-full pl-1">
+          <span class="text-center font-light">{{'forms.service.generic.measurementType' | translate}}</span>
           <form-search-select [placeholder]="'forms.service.generic.measurementType' | translate" formControlName="model_type">
             <form-option *ngFor="let option of measurementTypes"
                          [value]="option.id"
-                         [label]="option.name"></form-option>
+                         [label]="option.name | translate"></form-option>
           </form-search-select>
         </div>
       </div>
@@ -118,7 +111,7 @@
       <label class="my-1">{{'forms.service.generic.generatorModel' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.generic.generatorModel' | translate" formControlName="model_gene">
         <form-option *ngFor="let option of (generators$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -130,7 +123,7 @@
       <label class="my-1">{{'forms.service.generic.motorModel' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.generic.motorModel' | translate" formControlName="model_motor">
         <form-option *ngFor="let option of (motors$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -146,7 +139,7 @@
       <label class="my-1">{{'forms.service.generic.QTAModel' | translate}}</label>
       <form-search-select [placeholder]="'forms.service.generic.QTAModel' | translate" formControlName="model_qta">
         <form-option *ngFor="let option of (qtas$ | async) || []"
-                     [value]="option.id"
+                     [value]="option.name"
                      [label]="option.name"></form-option>
       </form-search-select>
     </div>
@@ -159,23 +152,23 @@
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.symptoms' | translate}}</label>
-      <form-text-area formControlName="symptom" [placeholder]="'forms.service.generic.symptoms' | translate"></form-text-area>
+      <form-text-area formControlName="symptom"></form-text-area>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.problem' | translate}}</label>
-      <form-text-area formControlName="problem" [placeholder]="'forms.service.generic.problem' | translate"></form-text-area>
+      <form-text-area formControlName="problem"></form-text-area>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.cause' | translate}}</label>
-      <form-text-area formControlName="cause" [placeholder]="'forms.service.generic.cause' | translate"></form-text-area>
+      <form-text-area formControlName="cause"></form-text-area>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.solution' | translate}}</label>
-      <form-text-area formControlName="solution" [placeholder]="'forms.service.generic.solution' | translate"></form-text-area>
+      <form-text-area formControlName="solution"></form-text-area>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.pending' | translate}}</label>
-      <form-text-area formControlName="pending" [placeholder]="'forms.service.generic.pending' | translate"></form-text-area>
+      <form-text-area formControlName="pending"></form-text-area>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.equipmentAvailable' | translate}}</label>
@@ -187,11 +180,64 @@
     <span>{{'forms.service.generic.photographicEvidence' | translate}}</span>
     <div class="w-full p-2 my-1 border flex flex-col"
       *appMultiplierFormControl="{
-        photosz: formGroup.controls.photosz,
-        'photo-description': formGroup.controls['photo-description']};
+        answers: this.answers,
+        formControls: {
+          photosz: formGroup.controls.photosz,
+          'photo-description': formGroup.controls['photo-description']
+          }
+        };
       let formGroup">
       <form-image-picker [formControl]="formGroup.photosz"></form-image-picker>
       <form-text-field [formControl]="formGroup['photo-description']" [placeholder]="'forms.service.generic.photographicEvidenceDescription' | translate"></form-text-field>
+    </div>
+    <div class="w-full p-2 my-1 border flex flex-col"
+      *appMultiplierFormControl="{
+        answers: this.answers,
+        formControls: {
+          technician: formGroup.controls.technician_name,
+          startHour: formGroup.controls.initial_hour,
+          endHour: formGroup.controls.finally_hour,
+          category: formGroup.controls.category_technician,
+          delay: formGroup.controls.demoras_technician
+        }
+      };
+      let formGroup">
+      <div class="w-full flex flex-col">
+        <span class="font-light text-center">{{'forms.service.generic.technician' | translate}}</span>
+        <form-search-select [placeholder]="'forms.service.generic.technician' | translate" [formControl]="formGroup.technician">
+          <form-option *ngFor="let option of (technicians$ | async) || []"
+                       [value]="option.name"
+                       [label]="option.name"></form-option>
+        </form-search-select>
+        <div class="w-full flex">
+          <div class="w-1/2 flex flex-col justify-center">
+            <span class="my-1 font-light text-center">{{'forms.service.generic.startHour' | translate}}</span>
+            <form-time-picker class="mx-1" [formControl]="formGroup.startHour"></form-time-picker>
+          </div>
+          <div class="w-1/2 flex flex-col justify-center">
+            <span class="my-1 font-light text-center">{{'forms.service.generic.endHour' | translate}}</span>
+            <form-time-picker class="mx-1" [formControl]="formGroup.endHour"></form-time-picker>
+          </div>
+        </div>
+        <div class="w-full flex">
+          <div class="w-1/2 flex flex-col justify-center">
+            <span class="my-1 font-light text-center">{{'forms.service.generic.category' | translate}}</span>
+            <form-search-select class="mx-1" [placeholder]="'forms.service.generic.category' | translate" [formControl]="formGroup.category">
+              <form-option *ngFor="let option of (categories$ | async) || []"
+                           [value]="option.name"
+                           [label]="option.name"></form-option>
+            </form-search-select>
+          </div>
+          <div class="w-1/2 flex flex-col justify-center">
+            <span class="my-1 font-light text-center">{{'forms.service.generic.delay' | translate}}</span>
+            <form-search-select class="mx-1" [placeholder]="'forms.service.generic.delay' | translate" [formControl]="formGroup.delay">
+              <form-option *ngFor="let option of (delays$ | async) || []"
+                           [value]="option.name"
+                           [label]="option.name"></form-option>
+            </form-search-select>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.inChargeOfTheClient' | translate}}</label>
@@ -203,9 +249,13 @@
     </div>
     <div class="my-2 flex flex-col"
       *appMultiplierFormControl="{
-      email_client: formGroup.controls.email_client};
+        answers: this.answers,
+        formControls: {
+          email_client: formGroup.controls.email_client
+        }
+      };
       let formGroup">
-      <label class="my-1">{{'forms.service.generic.emailCient' | translate}}</label>
+      <label class="my-1">{{'forms.service.generic.emailClient' | translate}}</label>
       <form-text-field [formControl]="formGroup.email_client" [placeholder]="'forms.service.generic.emailClient' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">

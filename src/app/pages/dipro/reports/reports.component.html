@@ -16,10 +16,10 @@
     <ng-container *ngIf="!filters">
       <div class="w-full h-full flex justify-center items-center">
         <div class="w-full h-full flex flex-col justify-center items-center px-3">
-          <div class="flex flex-col w-full" style="max-width: 550px;">
-            <button class="w-full btn btn-accent btn-stroked my-1" (click)="initialFilters('JSA')">{{'pages.dipro.reports.jsa' | translate}}</button>
-            <button class="w-full btn btn-accent btn-stroked my-1" (click)="initialFilters('SERVICE')">{{'pages.dipro.reports.service' | translate}}</button>
-            <button class="w-full btn btn-accent btn-stroked my-1" (click)="initialFilters('INGERSOLL')">{{'pages.dipro.reports.ingersollRand' | translate}}</button>
+          <div *ngIf="user" class="flex flex-col w-full" style="max-width: 550px;">
+            <button *ngIf="user.formPermissions.jsa" class="w-full btn btn-accent btn-stroked my-1" (click)="initialFilters('JSA')">{{'pages.dipro.reports.jsa' | translate}}</button>
+            <button *ngIf="user.formPermissions.service" class="w-full btn btn-accent btn-stroked my-1" (click)="initialFilters('SERVICE')">{{'pages.dipro.reports.service' | translate}}</button>
+            <button *ngIf="user.formPermissions.ingersollRand" class="w-full btn btn-accent btn-stroked my-1" (click)="initialFilters('INGERSOLL')">{{'pages.dipro.reports.ingersollRand' | translate}}</button>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
 </app-drawer>
 <app-filters-sheet #filter (filtersChanged)="filtersChanged($event)"></app-filters-sheet>
 
-<app-base-dialog #dialogDelete> 
+<app-base-dialog #dialogDelete>
   <div class="flex flex-col justify-center">
     <div class="p-3 flex justify-center">
       <span class="text-black font-bold text-lg">Delete report</span>
