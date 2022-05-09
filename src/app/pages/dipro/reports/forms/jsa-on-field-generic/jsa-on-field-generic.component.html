@@ -69,8 +69,7 @@
       <label class="my-1">{{'forms.common.labels.taskCategory' | translate}}</label>
       <form-search-select
         formControlName="task_category_generic"
-        [placeholder]="'forms.common.labels.taskCategory' | translate"
-      >
+        [placeholder]="'forms.common.labels.taskCategory' | translate">
         <form-option
           *ngFor="let option of (categoriesUnits$ | async) || []"
           [value]="option.id"
@@ -264,13 +263,9 @@
     </div>
     <div
       class="border rounded border-gray-500 px-3 py-5 my-2"
-      *ngFor="let item of checkboxesP1"
-    >
-      <mat-checkbox
-        class="example-margin"
-        [formControlName]="item.formControlName"
-        >{{ item.label | translate }}</mat-checkbox
-      >
+      *ngFor="let item of checkboxesP1">
+      <mat-checkbox class="example-margin"
+        [formControlName]="item.formControlName">{{ item.label | translate }}</mat-checkbox>
       <div
         *ngIf="formGroup.controls[item.formControlName].value === true"
         class="flex flex-col"

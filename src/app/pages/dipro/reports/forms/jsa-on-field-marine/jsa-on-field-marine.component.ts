@@ -324,7 +324,7 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     accompanied: new FormControl(false),
     teammate_name: new FormControl([]),
     tageditor: new FormControl([]),
-    task_category_generic: new FormControl(null, [Validators.required]),
+    task_category_power: new FormControl(null, [Validators.required]),
     task_description: new FormControl(null, [Validators.required]),
     location: new FormControl(null, [Validators.required]),
     skin_face: new FormControl(null, [Validators.required]),

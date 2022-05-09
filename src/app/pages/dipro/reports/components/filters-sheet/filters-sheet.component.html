@@ -1,4 +1,4 @@
-<app-sheet #filterSheet (visibleChange)="sheetVisible($event)">
+<app-sheet #filterSheet (visibleChange)="sheetVisible($event)" [maxWidth]="800">
   <div class="filters w-full flex flex-col py-2">
     <div class="w-full flex justify-end px-5 mb-2">
       <button class="btn btn-sm btn-rounded-full btn-accent" (click)="applyClose()">{{'pages.dipro.reports.components.filtersSheet.close' | translate}}</button>

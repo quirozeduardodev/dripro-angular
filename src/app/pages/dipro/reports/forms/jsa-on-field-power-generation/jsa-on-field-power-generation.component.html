@@ -68,7 +68,7 @@
     <div class="my-1 flex flex-col" *ngIf="businessUnits$">
       <label class="my-1">Categoria de la tarea</label>
       <form-search-select
-        formControlName="task_category_generic"
+        formControlName="task_category_power"
         placeholder="Categoria de la tarea"
       >
         <form-option
@@ -230,12 +230,12 @@
         <label class="my-1">{{
           "¿La tarea requiere trabajar sólo o sin supervisión?" | translate
         }}</label>
-        <form-button-group class="mt-12" [formControlName]="'question71_generic'">
+        <form-button-group class="mt-12" [formControlName]="'question71_powergen'">
           <form-option [value]="1" [label]="'Si' | translate"></form-option>
           <form-option [value]="2" [label]="'No' | translate"></form-option>
         </form-button-group>
         <div
-          *ngIf="formGroup.controls.question71_generic.value === 1"
+          *ngIf="formGroup.controls.question71_powergen.value === 1"
           class="my-1 flex flex-col mt-3"
         >
           <label class="my-1"
@@ -243,7 +243,7 @@
             emergencia.</label
           >
           <form-text-field
-            [formControlName]="'question71_1_generic'"
+            [formControlName]="'question71_1_powergen'"
             [placeholder]="
               'Proporcione detalles de medidas especiales de seguridad y plan de emergencia.'
             "
@@ -305,7 +305,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Peligros inusuales</span>
-      <form-checkbox-group class="ml-3" formControlName="question79_generic">
+      <form-checkbox-group class="ml-3" formControlName="question79_powergen">
         <form-option
           [value]="1"
           [label]="'Gas Natural (GNG/LNG)' | translate"
@@ -354,7 +354,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Accesso al (los) Equipo(s)</span>
-      <form-checkbox-group class="ml-3" formControlName="question80_generic">
+      <form-checkbox-group class="ml-3" formControlName="question80_powergen">
         <form-option
           [value]="1"
           [label]="'Escalera o Escalera de Mano' | translate"
@@ -375,7 +375,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Actividades Peligrosas en el Taller</span>
-      <form-checkbox-group class="ml-3" formControlName="question81_generic">
+      <form-checkbox-group class="ml-3" formControlName="question81_powergen">
         <form-option
           [value]="1"
           [label]="'Pintura con Pistola' | translate"
@@ -405,7 +405,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Orden y limpieza</span>
-      <form-checkbox-group class="ml-3" formControlName="question82_generic">
+      <form-checkbox-group class="ml-3" formControlName="question82_powergen">
         <form-option
           [value]="1"
           [label]="'Establecer orden en el área de trabajo' | translate"
@@ -419,7 +419,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Línea de Fuego</span>
-      <form-checkbox-group class="ml-3" formControlName="question83_generic">
+      <form-checkbox-group class="ml-3" formControlName="question83_powergen">
         <form-option
           [value]="1"
           [label]="'Golpeado(a) por o contra' | translate"
@@ -444,7 +444,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Resbalones, Tropiezos, Caídas</span>
-      <form-checkbox-group class="ml-3" formControlName="question84_generic">
+      <form-checkbox-group class="ml-3" formControlName="question84_powergen">
         <form-option
           [value]="1"
           [label]="'Suelo Húmedo o Aceitoso' | translate"
@@ -474,7 +474,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Interacción con otras Personas</span>
-      <form-checkbox-group class="ml-3" formControlName="question85_generic">
+      <form-checkbox-group class="ml-3" formControlName="question85_powergen">
         <form-option
           [value]="1"
           [label]="'Trabajo con Contratistas' | translate"
@@ -491,7 +491,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Impacto Ambiental</span>
-      <form-checkbox-group class="ml-3" formControlName="question86_generic">
+      <form-checkbox-group class="ml-3" formControlName="question86_powergen">
         <form-option
           [value]="1"
           [label]="'Fugas o Derrames' | translate"
@@ -512,7 +512,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Ergonomía</span>
-      <form-checkbox-group class="ml-3" formControlName="question87_generic">
+      <form-checkbox-group class="ml-3" formControlName="question87_powergen">
         <form-option
           [value]="1"
           [label]="'Fuerza Excesiva' | translate"
@@ -545,7 +545,7 @@
     </div>
     <div class="my-2 flex flex-col">
       <span class="my-2">Condiciones Climáticas</span>
-      <form-checkbox-group class="ml-3" formControlName="question88_generic">
+      <form-checkbox-group class="ml-3" formControlName="question88_powergen">
         <form-option
           [value]="1"
           [label]="'Calor Extremo' | translate"
