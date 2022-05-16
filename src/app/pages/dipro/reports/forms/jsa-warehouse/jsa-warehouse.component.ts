@@ -1,25 +1,26 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { BaseForm } from '../base-form';
+import {BaseForm, OnAnswer} from '../base-form';
 import { Observable } from 'rxjs';
 import { Unit } from '../../../../../database/models/unit';
 import { Category } from '../../../../../database/models/category';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnitOfWorkDatabase } from '../../../../../database/unit-of-work.database';
 import { AuthService } from '../../../../../services/auth.service';
-import * as moment from 'moment-timezone';
-import { take } from 'rxjs/operators';
+import {DateTime} from 'luxon';
+import {map, take} from 'rxjs/operators';
 import { User } from 'src/app/database/models/user';
+import {Technician} from '../../../../../database/models/technician';
 
 @Component({
   selector: 'app-jsa-warehouse',
   templateUrl: './jsa-warehouse.component.html',
   styleUrls: ['./jsa-warehouse.component.scss'],
 })
-export class JsaWarehouseComponent extends BaseForm implements OnInit {
+export class JsaWarehouseComponent extends BaseForm implements OnInit, OnAnswer {
   businessUnits$: Observable<Unit[]> | null = null;
   categoriesUnits$: Observable<Category[]> | null = null;
-  technicians$: Observable<User[]> | null = null;
+  technicians$: Observable<Technician[]> | null = null;
 
   commonOptions: { label: string; value: any }[] = [
     {
@@ -270,10 +271,10 @@ export class JsaWarehouseComponent extends BaseForm implements OnInit {
   ];
 
   nopOptionLevelRisk: { label: string; value: any }[] = [
-    { label: 'forms.common.options.low', value: 1 },
-    { label: 'forms.common.options.medium', value: 2 },
-    { label: 'forms.common.options.high', value: 3 },
-    { label: 'forms.common.options.extreme', value: 4 },
+    { label: 'forms.common.labels.low', value: 1 },
+    { label: 'forms.common.labels.medium', value: 2 },
+    { label: 'forms.common.labels.high', value: 3 },
+    { label: 'forms.common.labels.extreme', value: 4 },
   ];
   nopOptionControlled: { label: string; value: any }[] = [
     { label: 'forms.common.options.yes', value: 1 },
@@ -320,106 +321,108 @@ export class JsaWarehouseComponent extends BaseForm implements OnInit {
     hand_cleaning: new FormControl(null, [Validators.required]),
     social_precaution: new FormControl(null, [Validators.required]),
     sanitizer: new FormControl(null, [Validators.required]),
-    warehouse1_quest: new FormControl(null, [Validators.required]),
-    warehouse2_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse3_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse4_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse5_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse6_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse7_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse8_quest: new FormControl(null, [Validators.required]),
-    warehouse9_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse10_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse11_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse12_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse13_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse14_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse15_quest: new FormControl(null, [Validators.required]),
-    warehouse16_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse17_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse18_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse19_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse20_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse21_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse22_quest: new FormControl(null, [Validators.required]),
-    warehouse23_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse24_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse25_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse26_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse27_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse28_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse29_quest: new FormControl(null, [Validators.required]),
-    warehouse30_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse31_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse32_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse33_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse34_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse35_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse36_quest: new FormControl(null, [Validators.required]),
-    warehouse37_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse38_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse39_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse40_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse41_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse42_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse43_quest: new FormControl(null, [Validators.required]),
-    warehouse44_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse45_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse46_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse47_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse48_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse49_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse50_quest: new FormControl(null, [Validators.required]),
-    warehouse51_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse52_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse53_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse54_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse55_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse56_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse57_quest: new FormControl(null, [Validators.required]),
-    warehouse58_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse59_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse60_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse61_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse62_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse63_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse64_quest: new FormControl(null, [Validators.required]),
-    warehouse65_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse66_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse67_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse68_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse69_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse70_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse71_quest: new FormControl(null, [Validators.required]),
-    warehouse71_1_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse72_quest: new FormControl(false),
-    name1_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name2_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse73_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name5_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name6_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse74_quest: new FormControl(false),
-    name7_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name8_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse75_quest: new FormControl(false),
-    name9_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name10_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse76_quest: new FormControl(false),
-    name11_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name12_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse77_quest: new FormControl(false),
-    name13_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name14_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    warehouse78_quest: new FormControl([]),
-    warehouse79_quest: new FormControl([]), /// This Validators changes if the prev formControl has a specific value
-    warehouse80_quest: new FormControl([]), /// This Validators changes if the prev formControl has a specific value
-    warehouse81_quest: new FormControl([]),
-    warehouse82_quest: new FormControl([]),
-    warehouse83_quest: new FormControl([]),
-    warehouse84_quest: new FormControl([]),
-    warehouse85_quest: new FormControl([]),
-    warehouse86_quest: new FormControl([]),
-    different_unusual: new FormControl(null),
+
+    warehouse1_quest: new FormControl(null, []),
+    warehouse2_quest: new FormControl(null, []),
+    warehouse3_quest: new FormControl(null, []),
+    warehouse4_quest: new FormControl(null, []),
+    warehouse5_quest: new FormControl(null, []),
+    warehouse6_quest: new FormControl(null, []),
+    warehouse7_quest: new FormControl(null, []),
+    warehouse8_quest: new FormControl(null, []),
+    warehouse9_quest: new FormControl(null, []),
+    warehouse10_quest: new FormControl(null, []),
+    warehouse11_quest: new FormControl(null, []),
+    warehouse12_quest: new FormControl(null, []),
+    warehouse13_quest: new FormControl(null, []),
+    warehouse14_quest: new FormControl(null, []),
+    warehouse15_quest: new FormControl(null, []),
+    warehouse16_quest: new FormControl(null, []),
+    warehouse17_quest: new FormControl(null, []),
+    warehouse18_quest: new FormControl(null, []),
+    warehouse19_quest: new FormControl(null, []),
+    warehouse20_quest: new FormControl(null, []),
+    warehouse21_quest: new FormControl(null, []),
+    warehouse22_quest: new FormControl(null, []),
+    warehouse23_quest: new FormControl(null, []),
+    warehouse24_quest: new FormControl(null, []),
+    warehouse25_quest: new FormControl(null, []),
+    warehouse26_quest: new FormControl(null, []),
+    warehouse27_quest: new FormControl(null, []),
+    warehouse28_quest: new FormControl(null, []),
+    warehouse29_quest: new FormControl(null, []),
+    warehouse30_quest: new FormControl(null, []),
+    warehouse31_quest: new FormControl(null, []),
+    warehouse32_quest: new FormControl(null, []),
+    warehouse33_quest: new FormControl(null, []),
+    warehouse34_quest: new FormControl(null, []),
+    warehouse35_quest: new FormControl(null, []),
+    warehouse36_quest: new FormControl(null, []),
+    warehouse37_quest: new FormControl(null, []),
+    warehouse38_quest: new FormControl(null, []),
+    warehouse39_quest: new FormControl(null, []),
+    warehouse40_quest: new FormControl(null, []),
+    warehouse41_quest: new FormControl(null, []),
+    warehouse42_quest: new FormControl(null, []),
+    warehouse43_quest: new FormControl(null, []),
+    warehouse44_quest: new FormControl(null, []),
+    warehouse45_quest: new FormControl(null, []),
+    warehouse46_quest: new FormControl(null, []),
+    warehouse47_quest: new FormControl(null, []),
+    warehouse48_quest: new FormControl(null, []),
+    warehouse49_quest: new FormControl(null, []),
+    warehouse50_quest: new FormControl(null, []),
+    warehouse51_quest: new FormControl(null, []),
+    warehouse52_quest: new FormControl(null, []),
+    warehouse53_quest: new FormControl(null, []),
+    warehouse54_quest: new FormControl(null, []),
+    warehouse55_quest: new FormControl(null, []),
+    warehouse56_quest: new FormControl(null, []),
+    warehouse57_quest: new FormControl(null, []),
+    warehouse58_quest: new FormControl(null, []),
+    warehouse59_quest: new FormControl(null, []),
+    warehouse60_quest: new FormControl(null, []),
+    warehouse61_quest: new FormControl(null, []),
+    warehouse62_quest: new FormControl(null, []),
+    warehouse63_quest: new FormControl(null, []),
+    warehouse64_quest: new FormControl(null, []),
+    warehouse65_quest: new FormControl(null, []),
+    warehouse66_quest: new FormControl(null, []),
+    warehouse67_quest: new FormControl(null, []),
+    warehouse68_quest: new FormControl(null, []),
+    warehouse69_quest: new FormControl(null, []),
+    warehouse70_quest: new FormControl(null, []),
+    warehouse71_quest: new FormControl(null, []),
+    warehouse71_1_quest: new FormControl(null, []),
+    warehouse72_quest: new FormControl(null, []),
+    name1_question: new FormControl(null, []),
+    name2_question: new FormControl(null, []),
+    warehouse73_quest: new FormControl(null, []),
+    name5_question: new FormControl(null, []),
+    name6_question: new FormControl(null, []),
+    warehouse74_quest: new FormControl(null, []),
+    name7_question: new FormControl(null, []),
+    name8_question: new FormControl(null, []),
+    warehouse75_quest: new FormControl(null, []),
+    name9_question: new FormControl(null, []),
+    name10_question: new FormControl(null, []),
+    warehouse76_quest: new FormControl(null, []),
+    name11_question: new FormControl(null, []),
+    name12_question: new FormControl(null, []),
+    warehouse77_quest: new FormControl(null, []),
+    name13_question: new FormControl(null, []),
+    name14_question: new FormControl(null, []),
+    warehouse78_quest: new FormControl(null, []),
+    warehouse79_quest: new FormControl(null, []),
+    warehouse80_quest: new FormControl(null, []),
+    warehouse81_quest: new FormControl(null, []),
+    warehouse82_quest: new FormControl(null, []),
+    warehouse83_quest: new FormControl(null, []),
+    warehouse84_quest: new FormControl(null, []),
+    warehouse85_quest: new FormControl(null, []),
+    warehouse86_quest: new FormControl(null, []),
+
+    different_unnusual: new FormControl(null),
     name_manager: new FormControl(null, [Validators.required]),
     phone_manager: new FormControl(null, [Validators.required]),
     lotus_quest: new FormControl(null, [Validators.required]),
@@ -434,13 +437,20 @@ export class JsaWarehouseComponent extends BaseForm implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
     this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
-    this.technicians$ = this.unitOfWorkDatabase.userRepository.all();
+    this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
+  }
+
+  onAnswersUpdated(answers: {[p: string]: any}): void {
+
+    const dateValue: string | null = answers.date;
+    if(!dateValue || dateValue.trim().length < 1) {
+      this.formGroup.controls.date.setValue(DateTime.now().toISODate());
+    }
 
     this.formGroup.controls.date.disable();
-    this.formGroup.controls.date.setValue(moment().format('YYYY-MM-d'));
 
     this.formGroup.controls.name_people.disable();
     this.formGroup.controls.wwid.disable();
@@ -448,12 +458,29 @@ export class JsaWarehouseComponent extends BaseForm implements OnInit {
     this.authService.user.pipe(take(1)).subscribe((user) => {
       this.formGroup.controls.name_people.setValue(user?.name ?? '');
       this.formGroup.controls.wwid.setValue(user?.wwid ?? '');
+      if(user) {
+        this.unitOfWorkDatabase.userRepository.all()
+          .pipe(map(users => {
+            const userIdx = users.findIndex(value => value.wwid === user.supervisor);
+            if (userIdx >= 0) {
+              return users[userIdx];
+            }
+            return null;
+          })).subscribe(supervisor =>{
+          if(supervisor) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.name_manager ? null : this.formGroup.controls.name_manager.setValue(supervisor.name);
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.phone_manager ? null : this.formGroup.controls.phone_manager.setValue(supervisor.phone);
+          }
+        });
+      }
     });
   }
-
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

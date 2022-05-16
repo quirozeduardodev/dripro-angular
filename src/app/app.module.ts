@@ -11,29 +11,29 @@ import {AuthService} from './services/auth.service';
 import {ConfigurationService} from './services/configuration.service';
 import {LocalStorageService} from './services/local-storage.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {AuthGuard} from "./guards/auth.guard";
-import {BootstrapService} from "./services/bootstrap.service";
-import {ReportEndpointService} from "./services/endpoints/report-endpoint.service";
-import {UnitOfWorkDatabase} from "./database/unit-of-work.database";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ManualEndpointService} from "./services/endpoints/manual-endpoint.service";
-import {AnswerEndpointService} from "./services/endpoints/answer-endpoint.service";
-import {CategoryEndpointService} from "./services/endpoints/category-endpoint.service";
-import {ContactEndpointService} from "./services/endpoints/contact-endpoint.service";
-import {CustomerEndpointService} from "./services/endpoints/customer-endpoint.service";
-import {CountryEndpointService} from "./services/endpoints/country-endpoint.service";
-import {DelayEndpointService} from "./services/endpoints/delay-endpoint.service";
-import {GeneratorEndpointService} from "./services/endpoints/generator-endpoint.service";
-import {LocationEndpointService} from "./services/endpoints/location-endpoint.service";
-import {MotorEndpointService} from "./services/endpoints/motor-endpoint.service";
-import {QTAEndpointService} from "./services/endpoints/qta-endpoint.service";
-import {TypeEndpointService} from "./services/endpoints/type-endpoint.service";
-import {UnitEndpointService} from "./services/endpoints/unit-endpoint.service";
-import {UserEndpointService} from "./services/endpoints/user-endpoint.service";
-import {OfflineDataService} from "./services/offline-data.service";
-import {ComponentsModule} from "./components/components.module";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AuthGuard} from './guards/auth.guard';
+import {BootstrapService} from './services/bootstrap.service';
+import {ReportEndpointService} from './services/endpoints/report-endpoint.service';
+import {UnitOfWorkDatabase} from './database/unit-of-work.database';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ManualEndpointService} from './services/endpoints/manual-endpoint.service';
+import {AnswerEndpointService} from './services/endpoints/answer-endpoint.service';
+import {CategoryEndpointService} from './services/endpoints/category-endpoint.service';
+import {ContactEndpointService} from './services/endpoints/contact-endpoint.service';
+import {CustomerEndpointService} from './services/endpoints/customer-endpoint.service';
+import {CountryEndpointService} from './services/endpoints/country-endpoint.service';
+import {DelayEndpointService} from './services/endpoints/delay-endpoint.service';
+import {GeneratorEndpointService} from './services/endpoints/generator-endpoint.service';
+import {LocationEndpointService} from './services/endpoints/location-endpoint.service';
+import {MotorEndpointService} from './services/endpoints/motor-endpoint.service';
+import {QTAEndpointService} from './services/endpoints/qta-endpoint.service';
+import {TypeEndpointService} from './services/endpoints/type-endpoint.service';
+import {UnitEndpointService} from './services/endpoints/unit-endpoint.service';
+import {UserEndpointService} from './services/endpoints/user-endpoint.service';
+import {OfflineDataService} from './services/offline-data.service';
+import {ComponentsModule} from './components/components.module';
 import { ApplicationEndpointService } from './services/endpoints/application-endpoint.service';
 
 
@@ -54,7 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
           mode: 'md'
         }),
         TranslateModule.forRoot({
-            defaultLanguage: 'en_US',
+            defaultLanguage: 'es_MX',
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),

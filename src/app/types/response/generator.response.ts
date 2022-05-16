@@ -1,9 +1,9 @@
-import * as moment from "moment-timezone";
+import {DateTime} from 'luxon';
 
 export interface GeneratorResponse {
   id: number;
   name: string;
   status: boolean;
-  createdAt: moment.Moment | null;
-  updatedAt: moment.Moment | null;
+  createdAt: DateTime | null;
+  updatedAt: DateTime | null;
 }

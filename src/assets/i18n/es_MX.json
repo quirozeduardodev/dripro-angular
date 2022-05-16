@@ -80,7 +80,12 @@
           "title": "Crear reporte"
         },
         "edit": {
-          "title": "Editando reporte"
+          "title": "Editando reporte",
+          "cancel": "Cancelar",
+          "save": "Enviar",
+          "accept": "Aceptar",
+          "savedSuccess": "Reporte guardado con exito",
+          "errorOnSave": "Error al enviar al servidor, el reporte se guardara en local"
         },
         "view": {
           "title": "Reporte de visualización"
@@ -134,7 +139,7 @@
                   "name": "¿Qué tipo de servicio?",
                   "options": {
                     "generic": {
-                      "name": "Genérica"
+                      "name": "Genérico"
                     },
                     "preventiveMaintenance": {
                       "name": "Mantenimiento preventivo"
@@ -183,6 +188,7 @@
         "never": "Nunca",
         "syncAll": "Sincronizar todo",
         "answers":  "Respuestas",
+        "applications": "Aplicaciones",
         "categories": "Categorías",
         "contacts":  "Contactos",
         "countries": "Los paises",
@@ -194,8 +200,8 @@
         "qtas": "QTAs",
         "types":  "Tipos",
         "units": "Unidades",
-        "users":  "Usuarias",
-        "technicians": "Técnicas"
+        "users":  "Usuarios",
+        "technicians": "Tecnicos"
       },
       "settings": {
         "components": {
@@ -210,8 +216,8 @@
         "title": "Ajustes",
         "language": {
           "title": "Idioma",
-          "spanish": "Española",
-          "portuguese": "Portuguesa",
+          "spanish": "Español",
+          "portuguese": "Portugues",
           "english": "Inglesa",
           "chinese": "China"
         },
@@ -228,19 +234,18 @@
   "reports": {
     "common": {
       "names": {
-        "unknown": "Desconocida",
+        "unknown": "Desconocido",
         "jsa": "JSA",
         "jsa-onSite": "En sitio",
         "jsa-onField": "En campo",
-        "jsa-onField-general": "General",
         "jsa-onField-generic": "Genérico",
         "jsa-onField-powerGeneration": "Power Generation",
         "jsa-onField-marine": "Marino",
         "jsa-warehouse": "Almacén",
 
         "service": "Servicio",
-        "service-generice": "Genérica",
-        "service-perventiveMaintenance": "Mantenimiento preventivo",
+        "service-generic": "Genérico",
+        "service-preventiveMaintenance": "Mantenimiento preventivo",
 
         "ingersollRand": "Ingersoll Rand",
         "ingersollRand-rotaryContactCooledRotary": "Rotary Contact Cooled Rotary",
@@ -260,7 +265,7 @@
         "name": "Nombre",
         "wwid": "WWID",
         "bussinesUnit": "Unidad de negocio",
-        "isAccompained": "¿Esta acompañado?",
+        "isAccompained": "¿Está acompañado?",
         "selectYourPartner": "Selecciona a tu(s) compañero(s)",
         "extern": "Externo",
         "taskCategory": "Categoría de la tarea",
@@ -269,6 +274,7 @@
         "riskLevel": "Nivel de riesgo",
         "controlled": "Controlado",
         "analisisCause": "Análisis Causa",
+        "actionTaken": "Acciones tomadas",
         "actionsTaken": "Medidas Tomadas",
         "message": "Mensaje",
         "low": "Bajo",
@@ -277,7 +283,20 @@
         "extreme": "Extremo",
         "details": "Detalles",
         "photography": "Subir evidencia fotográfica",
-        "submit": "Guardar"
+        "submit": "Guardar",
+        "send": "Send",
+        "save": "Save",
+        "cancel": "Cancel",
+        "noJsa": "No. JSA",
+        "client": "Client",
+        "serviceLocation": "Service Location",
+        "locationGps": "GPS location",
+        "contact": "Contact",
+        "phone": "Phone",
+        "branch": "Branch",
+        "jobType": "Job Type",
+        "technician": "Technician",
+        "pickTechnician": "Pick a technician"
       },
       "options": {
         "yes": "Sí",
@@ -306,6 +325,10 @@
         "removed": "Removido",
         "repaired": "Reparado",
         "other": "Otro"
+      },
+      "measurements": {
+        "hrs": "Hrs",
+        "km": "Km"
       }
     },
     "jsa": {
@@ -334,6 +357,26 @@
         }
       },
       "warehouse": {
+        "lonely_job": "Trabajo Solitario",
+        "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
+        "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
+        "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+        "practice": "Poner en práctica Controles Establecidos",
+        "strange": "¿Qué es extraño, inusual o diferente hoy?",
+        "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+        "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
+        "identification": "Identificación de los peligros(dar click si el peligro está presente)",
+        "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+        "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
+        "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+        "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+        "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+        "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
+        "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
+        "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
+        "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
+        "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
         "covidPrevention": {
           "title": "Prevención COVID",
           "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
@@ -351,7 +394,257 @@
         "toolsAndEquipment": {
           "title": "Herramientas y Equipo",
           "question1": "¿Las herramientas y equipos son adecuados y están libre de daños?",
-          "question2": "¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?"
+          "question2": "Se realizaron todas las inspecciones de Montacargas (PIV) y equipos de acceso"
+        },
+        "access": {
+          "title": "Levantamiento y Acceso",
+          "question1": "¿El levantamiento manual de piezas está dentro de su capacidad?",
+          "question2": "¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?",
+          "question3": "¿Hay un acceso seguro a la zona de trabajo y equipos?"
+        },
+          "epp": {
+          "title": "Equipo de Protección Personal (EPP)",
+          "question1": "¿El EPP está disponible para la tarea?",
+          "question2": "¿El EPP es adecuado y está libre de daños?"
+        },
+        "checkboxesP1": {
+          "chbx1": "VEHÍCULOS EN MOVIMIENTO",
+          "chbx2": "PARTES EN MOVIMIENTO",
+          "chbx3": "OPERACIÓN DE LEVANTAMIENTO DE CARGAS",
+          "chbx4": "TRABAJOS DE ALTURA",
+          "chbx5": "INCENDIO, EXPLOSIÓN O ARCO ELECTRICO",
+          "chbx6": "OTRO",
+          "chbx7": "MAQUINARIA EN MOVIMIENTO"
+        },
+        "hazards": {
+          "unnusualDangers": {
+            "title": "Peligros inusuales",
+            "option1": "Gas Natural (GNG/LNG)",
+            "option2": "Animales o insectos",
+            "option3": "Gases de escape",
+            "option4": "Alto nivel de ruido",
+            "option5": "Trabajos en caliente",
+            "option6": "Espacios de trabajo restringido",
+            "option7": "Entrada a espacios confinados",
+            "option8": "Peligros de higiene",
+            "option9": "Gas o liquido inflamable",
+            "option10": "Aire Comprimido",
+            "option11": "Seguridad de la batería"
+          },
+          "access": {
+            "title": "Accesso al (los) Equipo(s)",
+            "option1": "Escalera o Escalera de Mano",
+            "option2": "Plataforma de Acceso Estático",
+            "option3": "Plataforma de Trabajo Móvil",
+            "option4": "Taburete o Grada de Trabajo"
+          },
+          "neat": {
+            "title": "Orden y limpieza",
+            "option1": "Establecer orden en el área de trabajo",
+            "option2": "Disponer / Desechar",
+            "option3": "Limpieza"
+          },
+          "fire": {
+            "title": "Línea de Fuego",
+            "option1": "Golpeado(a) por o contra",
+            "option2": "Atrapado(a) por",
+            "option3": "Energía Peligrosa",
+            "option4": "Polvo o Suciedad",
+            "option5": "Peligro de Proyectil"
+          },
+          "slip": {
+            "title": "Resbalones, Tropiezos, Caídas",
+            "option1": "Suelo Húmedo o Aceitoso",
+            "option2": "Cables sobre el piso",
+            "option3": "Los desniveles del terreno / Grava",
+            "option4": "Área elevada / Mezanine",
+            "option5": "Azotea",
+            "option6": "Nieve, Barro o Hielo",
+            "option7": "Fosa en el Piso"
+          },
+          "interaction": {
+            "title": "Interacción con otras Personas",
+            "option1": "Trabajo con Contratistas",
+            "option2": "Público en General",
+            "option3": "Cliente/Empleados"
+          },
+          "environment": {
+            "title": "Impacto Ambiental",
+            "option1": "Fugas o Derrames",
+            "option2": "Vapores o Humo",
+            "option3": "Eliminación de Residuos",
+            "option4": "Uso de Productos Químicos"
+          },
+          "ergonomic": {
+            "title": "Ergonomía",
+            "option1": "Fuerza Excesiva",
+            "option2": "Trabajo Repetitivo",
+            "option3": "Postura Estresante",
+            "option4": "Estrés de Contacto",
+            "option5": "Arrodillándose / Arrastrándose",
+            "option6": "Vibración",
+            "option7": "Levantamiento de Objetos Pesados"
+          },
+          "weather": {
+            "title": "Condiciones Climáticas",
+            "option1": "Calor Extremo",
+            "option2": "Frío Extremo",
+            "option3": "Fuertes Vientos",
+            "option4": "Condiciones de Tormenta",
+            "option5": "Lluvia",
+            "option6": "Nieve / Hielo",
+            "option7": "Gran Altitud"
+          }
+        },
+        "extra": {
+          "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+          "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
+          "label5": "Identificación de los peligros(dar click si el peligro está presente)",
+          "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+          "label7": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES ",
+          "label8": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+          "label9": "Nombre del Gerente:",
+          "label10": "Teléfono de Contacto del Gerente:",
+          "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+          "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+          "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+          "question1": "Poner en práctica Controles Establecidos",
+          "question2": "¿Qué es extraño, inusual o diferente hoy?"
+        },
+        "unusual_hazards": {
+          "title": "Peligros inusuales",
+          "gas": "Gas Natural (GNG/LNG)",
+          "animals": "Animales o insectos",
+          "gases": "Gases de escape",
+          "high_level": "Alto nivel de ruido",
+          "hot_works": "Trabajos en caliente",
+          "work_space": "Espacios de trabajo restringido",
+          "confined_space": "Entrada a espacios confinados",
+          "hygiene_hazards": "Peligros de higiene",
+          "flammable_gas": "Gas o liquido inflamable",
+          "compressed_air": "Aire Comprimido",
+          "security": "Seguridad de la batería"
+        },
+        "access_equipment": {
+          "title": "Acceso al (los) Equipo(s)",
+          "ladders": "Escalera o Escalera de Mano",
+          "platform_access": "Plataforma de Acceso Estático",
+          "platform_work": "Plataforma de Trabajo Móvil",
+          "stool": "Taburete o Grada de Trabajo"
+        },
+        "hazards_activity": {
+          "title": "Actividades Peligrosas en el Taller",
+          "spray_painting": "Pintura con Pistola",
+          "row_testing": "Celda de Prueba del Motor",
+          "dyno_chassiss": "Dyno Chassiss",
+          "washing_bay": "Bahía de lavado",
+          "chemical_bath": "Baño Químico",
+          "cleaning": "Limpieza",
+          "pit_inspection": "Inspección de Fosas"
+        },
+        "order_cleaning": {
+          "title": "Orden y limpieza",
+          "establishing_work_area": "Establecer orden en el área de trabajo",
+          "dispose_discard": "Disponer / Desechar",
+          "cleaning": "Limpieza"
+        },
+        "fire_line": {
+          "title": "Línea de Fuego",
+          "hit_by_or_against": "Golpeado(a) por o contra",
+          "trapped_by": "Atrapado(a) por",
+          "dangerous_energy": "Energía Peligrosa",
+          "dust_dirt": "Polvo o Suciedad",
+          "proyectile_hazard": "Peligro de Proyectil"
+        },
+        "slips": {
+          "title": "Resbalones, Tropiezos, Caídas",
+          "wet_oily_soil": "Suelo Húmedo o Aceitoso",
+          "cables_on_floor": "Cables sobre el piso",
+          "terrain_unevenness": "Los desniveles del terreno / Grava",
+          "elevated_area": "Área elevada / Mezanine",
+          "rooftop": "Azotea",
+          "snow_mud_or_ice": "Nieve, Barro o Hielo",
+          "pit_in_the_floor": "Fosa en el Piso"
+        },
+        "interaction_other_people": {
+          "title": "Interacción con otras Personas",
+          "job_contractors": "Trabajo con Contratistas",
+          "general_public": "Público en General",
+          "client_employee": "Cliente/Empleados"
+        },
+        "environmental_impact": {
+          "title": "Impacto Ambiental",
+          "leaks_or_spills": "Fugas o Derrames",
+          "fumes_or_smokes": "Vapores o Humo",
+          "waste_disposal": "Eliminación de Residuos",
+          "chemical_products": "Uso de Productos Químicos"
+        },
+        "ergonomic": {
+          "title": "Ergonomía",
+          "excesive_force": "Fuerza Excesiva",
+          "repetitive_job": "Trabajo Repetitivo",
+          "estresful": "Postura Estresante",
+          "contact_stress": "Estrés de Contacto",
+          "kneeling_down": "Arrodillándose / Arrastrándose",
+          "vibrate": "Vibración",
+          "heavy_lifting": "Levantamiento de Objetos Pesados"
+        },
+        "weather_conditions": {
+          "title": "Condiciones Climáticas",
+          "extreme_heat": "Calor Extremo",
+          "extreme_cold": "Frío Extremo",
+          "strong_winds": "Fuertes Vientos",
+          "storm_conditions": "Condiciones de Tormenta",
+          "rain": "Lluvia",
+          "snown": "Nieve / Hielo",
+          "great_altitud": "Gran Altitud"
+        },
+        "supervisor": {
+          "name": "Nombre del Supervisor",
+          "phone": "Teléfono de Contacto del Supervisor"
+        }
+      },
+      "site": {
+        "lonely_job": "Trabajo Solitario",
+        "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
+        "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
+        "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+        "practice": "Poner en práctica Controles Establecidos",
+        "strange": "¿Qué es extraño, inusual o diferente hoy?",
+        "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+        "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
+        "identification": "Identificación de los peligros(dar click si el peligro está presente)",
+        "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+        "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
+        "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+        "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+        "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+        "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
+        "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
+        "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
+        "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
+        "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+        "covidPrevention": {
+          "title": "Prevención COVID",
+          "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
+          "question2": "¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?",
+          "question3": "¿Se cuenta con agua y jabón para la limpieza de manos?",
+          "question4": "¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?",
+          "question5": "¿Cuentas con gel sanitizante para limpieza de manos?"
+        },
+        "preparation": {
+          "title": "Preparación",
+          "question1": "¿Está capacitado y autorizado para realizar todas las tareas necesarias para este trabajo?",
+          "question2": "¿Los arreglos de respuesta a emergencia están implementados y entendidos?",
+          "question3": "¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?"
+        },
+        "toolsAndEquipment": {
+          "title": "Herramientas y Equipo",
+          "question1": "¿Las herramientas y equipos son adecuados y están libre de daños?",
+          "question2": "¿Es requerido el bloqueo y etiquetado y está completa la Lista de Verificación?"
         },
         "access": {
           "title": "Levantamiento y Acceso",
@@ -372,9 +665,977 @@
           "chbx5": "INCENDIO, EXPLOSIÓN O ARCO ELECTRICO",
           "chbx6": "OTRO",
           "chbx7": "MAQUINARIA EN MOVIMIENTO"
+        },
+        "hazards": {
+          "unnusualDangers": {
+            "title": "Peligros inusuales",
+            "option1": "Gas Natural (GNG/LNG)",
+            "option2": "Animales o insectos",
+            "option3": "Gases de escape",
+            "option4": "Alto nivel de ruido",
+            "option5": "Trabajos en caliente",
+            "option6": "Espacios de trabajo restringido",
+            "option7": "Entrada a espacios confinados",
+            "option8": "Peligros de higiene",
+            "option9": "Gas o liquido inflamable",
+            "option10": "Aire Comprimido",
+            "option11": "Seguridad de la batería"
+          },
+          "access": {
+            "title": "Accesso al (los) Equipo(s)",
+            "option1": "Escalera o Escalera de Mano",
+            "option2": "Plataforma de Acceso Estático",
+            "option3": "Plataforma de Trabajo Móvil",
+            "option4": "Taburete o Grada de Trabajo"
+          },
+          "neat": {
+            "title": "Orden y limpieza",
+            "option1": "Establecer orden en el área de trabajo",
+            "option2": "Disponer / Desechar",
+            "option3": "Limpieza"
+          },
+          "fire": {
+            "title": "Línea de Fuego",
+            "option1": "Golpeado(a) por o contra",
+            "option2": "Atrapado(a) por",
+            "option3": "Energía Peligrosa",
+            "option4": "Polvo o Suciedad",
+            "option5": "Peligro de Proyectil"
+          },
+          "slip": {
+            "title": "Resbalones, Tropiezos, Caídas",
+            "option1": "Suelo Húmedo o Aceitoso",
+            "option2": "Cables sobre el piso",
+            "option3": "Los desniveles del terreno / Grava",
+            "option4": "Área elevada / Mezanine",
+            "option5": "Azotea",
+            "option6": "Nieve, Barro o Hielo",
+            "option7": "Fosa en el Piso"
+          },
+          "interaction": {
+            "title": "Interacción con otras Personas",
+            "option1": "Trabajo con Contratistas",
+            "option2": "Público en General",
+            "option3": "Cliente/Empleados"
+          },
+          "environment": {
+            "title": "Impacto Ambiental",
+            "option1": "Fugas o Derrames",
+            "option2": "Vapores o Humo",
+            "option3": "Eliminación de Residuos",
+            "option4": "Uso de Productos Químicos"
+          },
+          "ergonomic": {
+            "title": "Ergonomía",
+            "option1": "Fuerza Excesiva",
+            "option2": "Trabajo Repetitivo",
+            "option3": "Postura Estresante",
+            "option4": "Estrés de Contacto",
+            "option5": "Arrodillándose / Arrastrándose",
+            "option6": "Vibración",
+            "option7": "Levantamiento de Objetos Pesados"
+          },
+          "weather": {
+            "title": "Condiciones Climáticas",
+            "option1": "Calor Extremo",
+            "option2": "Frío Extremo",
+            "option3": "Fuertes Vientos",
+            "option4": "Condiciones de Tormenta",
+            "option5": "Lluvia",
+            "option6": "Nieve / Hielo",
+            "option7": "Gran Altitud"
+          }
+        },
+        "extra": {
+          "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+          "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
+          "label5": "Identificación de los peligros(dar click si el peligro está presente)",
+          "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+          "label7": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES ",
+          "label8": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+          "label9": "Nombre del Gerente:",
+          "label10": "Teléfono de Contacto del Gerente:",
+          "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+          "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+          "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+          "question1": "Poner en práctica Controles Establecidos",
+          "question2": "¿Qué es extraño, inusual o diferente hoy?"
+        },
+        "unusual_hazards": {
+          "title": "Peligros inusuales",
+          "gas": "Gas Natural (GNG/LNG)",
+          "animals": "Animales o insectos",
+          "gases": "Gases de escape",
+          "high_level": "Alto nivel de ruido",
+          "hot_works": "Trabajos en caliente",
+          "work_space": "Espacios de trabajo restringido",
+          "confined_space": "Entrada a espacios confinados",
+          "hygiene_hazards": "Peligros de higiene",
+          "flammable_gas": "Gas o liquido inflamable",
+          "compressed_air": "Aire Comprimido",
+          "security": "Seguridad de la batería"
+        },
+        "access_equipment": {
+          "title": "Acceso al (los) Equipo(s)",
+          "ladders": "Escalera o Escalera de Mano",
+          "platform_access": "Plataforma de Acceso Estático",
+          "platform_work": "Plataforma de Trabajo Móvil",
+          "stool": "Taburete o Grada de Trabajo"
+        },
+        "hazards_activity": {
+          "title": "Actividades Peligrosas en el Taller",
+          "spray_painting": "Pintura con Pistola",
+          "row_testing": "Celda de Prueba del Motor",
+          "dyno_chassiss": "Dyno Chassiss",
+          "washing_bay": "Bahía de lavado",
+          "chemical_bath": "Baño Químico",
+          "cleaning": "Limpieza",
+          "pit_inspection": "Inspección de Fosas"
+        },
+        "order_cleaning": {
+          "title": "Orden y limpieza",
+          "establishing_work_area": "Establecer orden en el área de trabajo",
+          "dispose_discard": "Disponer / Desechar",
+          "cleaning": "Limpieza"
+        },
+        "fire_line": {
+          "title": "Línea de Fuego",
+          "hit_by_or_against": "Golpeado(a) por o contra",
+          "trapped_by": "Atrapado(a) por",
+          "dangerous_energy": "Energía Peligrosa",
+          "dust_dirt": "Polvo o Suciedad",
+          "proyectile_hazard": "Peligro de Proyectil"
+        },
+        "slips": {
+          "title": "Resbalones, Tropiezos, Caídas",
+          "wet_oily_soil": "Suelo Húmedo o Aceitoso",
+          "cables_on_floor": "Cables sobre el piso",
+          "terrain_unevenness": "Los desniveles del terreno / Grava",
+          "elevated_area": "Área elevada / Mezanine",
+          "rooftop": "Azotea",
+          "snow_mud_or_ice": "Nieve, Barro o Hielo",
+          "pit_in_the_floor": "Fosa en el Piso"
+        },
+        "interaction_other_people": {
+          "title": "Interacción con otras Personas",
+          "job_contractors": "Trabajo con Contratistas",
+          "general_public": "Público en General",
+          "client_employee": "Cliente/Empleados"
+        },
+        "environmental_impact": {
+          "title": "Impacto Ambiental",
+          "leaks_or_spills": "Fugas o Derrames",
+          "fumes_or_smokes": "Vapores o Humo",
+          "waste_disposal": "Eliminación de Residuos",
+          "chemical_products": "Uso de Productos Químicos"
+        },
+        "ergonomic": {
+          "title": "Ergonomía",
+          "excesive_force": "Fuerza Excesiva",
+          "repetitive_job": "Trabajo Repetitivo",
+          "estresful": "Postura Estresante",
+          "contact_stress": "Estrés de Contacto",
+          "kneeling_down": "Arrodillándose / Arrastrándose",
+          "vibrate": "Vibración",
+          "heavy_lifting": "Levantamiento de Objetos Pesados"
+        },
+        "weather_conditions": {
+          "title": "Condiciones Climáticas",
+          "extreme_heat": "Calor Extremo",
+          "extreme_cold": "Frío Extremo",
+          "strong_winds": "Fuertes Vientos",
+          "storm_conditions": "Condiciones de Tormenta",
+          "rain": "Lluvia",
+          "snown": "Nieve / Hielo",
+          "great_altitud": "Gran Altitud"
+        },
+        "supervisor": {
+          "name": "Nombre del Supervisor",
+          "phone": "Teléfono de Contacto del Supervisor"
         }
       },
-      "site": {
+      "field": {
+        "generic": {
+          "lonely_job": "Trabajo Solitario",
+          "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
+          "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
+          "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "practice": "Poner en práctica Controles Establecidos",
+          "strange": "¿Qué es extraño, inusual o diferente hoy?",
+          "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+          "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
+          "identification": "Identificación de los peligros(dar click si el peligro está presente)",
+          "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+          "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
+          "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+          "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+          "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+          "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
+          "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
+          "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
+          "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
+          "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+          "covidPrevention": {
+            "title": "Prevención COVID",
+            "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
+            "question2": "¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?",
+            "question3": "¿Se cuenta con agua y jabón para la limpieza de manos?",
+            "question4": "¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?",
+            "question5": "¿Cuentas con gel sanitizante para limpieza de manos?"
+          },
+          "preparation": {
+            "title": "Preparación",
+            "question1": "¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?",
+            "question2": "¿Los arreglos de respuesta a emergencia están implementados y entendidos?",
+            "question3": "¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?"
+          },
+          "toolsAndEquipment": {
+            "title": "Herramientas y Equipo",
+            "question1": "¿Las herramientas y equipos son adecuados y están libre de daños?",
+            "question2": "¿El bloqueo y etiquetado de energías es requerido y la lista de verificacion se ha completado?"
+          },
+          "access": {
+            "title": "Levantamiento y Acceso",
+            "question1": "¿El levantamiento manual de piezas está dentro de su capacidad?",
+            "question2": "¿El plan de izaje de argas está en el sitio y es entendido?",
+            "question3": "¿Hay un acceso seguro a la zona de trabajo y equipos?"
+          },
+          "epp": {
+            "title": "Equipo de Protección Personal (EPP)",
+            "question1": "¿El EPP está disponible para la tarea?",
+            "question2": "¿El EPP es adecuado y está libre de daños?"
+          },
+          "checkboxesP1": {
+            "chbx1": "VEHÍCULOS EN MOVIMIENTO",
+            "chbx2": "TRABAJO CON ELECTRICIDAD",
+            "chbx3": "OPERACIÓN DE LEVANTAMIENTO DE CARGAS",
+            "chbx4": "TRABAJOS DE ALTURA",
+            "chbx5": "INCENDIO, EXPLOSIÓN O ARCO ELECTRICO",
+            "chbx6": "OTRO",
+            "chbx7": "MAQUINARIA EN MOVIMIENTO"
+          },
+          "hazards": {
+            "unnusualDangers": {
+              "title": "Peligros inusuales",
+              "option1": "Gas Natural (GNG/LNG)",
+              "option2": "Animales o insectos",
+              "option3": "Gases de escape",
+              "option4": "Alto nivel de ruido",
+              "option5": "Trabajos en caliente",
+              "option6": "Espacios de trabajo restringido",
+              "option7": "Entrada a espacios confinados",
+              "option8": "Peligros de higiene",
+              "option9": "Gas o liquido inflamable",
+              "option10": "Aire Comprimido",
+              "option11": "Seguridad de la batería"
+            },
+            "access": {
+              "title": "Accesso al (los) Equipo(s)",
+              "option1": "Escalera o Escalera de Mano",
+              "option2": "Plataforma de Acceso Estático",
+              "option3": "Plataforma de Trabajo Móvil",
+              "option4": "Taburete o Grada de Trabajo"
+            },
+            "neat": {
+              "title": "Orden y limpieza",
+              "option1": "Establecer orden en el área de trabajo",
+              "option2": "Disponer / Desechar",
+              "option3": "Limpieza"
+            },
+            "fire": {
+              "title": "Línea de Fuego",
+              "option1": "Golpeado(a) por o contra",
+              "option2": "Atrapado(a) por",
+              "option3": "Energía Peligrosa",
+              "option4": "Polvo o Suciedad",
+              "option5": "Peligro de Proyectil"
+            },
+            "slip": {
+              "title": "Resbalones, Tropiezos, Caídas",
+              "option1": "Suelo Húmedo o Aceitoso",
+              "option2": "Cables sobre el piso",
+              "option3": "Los desniveles del terreno / Grava",
+              "option4": "Área elevada / Mezanine",
+              "option5": "Azotea",
+              "option6": "Nieve, Barro o Hielo",
+              "option7": "Fosa en el Piso"
+            },
+            "interaction": {
+              "title": "Interacción con otras Personas",
+              "option1": "Trabajo con Contratistas",
+              "option2": "Público en General",
+              "option3": "Cliente/Empleados"
+            },
+            "environment": {
+              "title": "Impacto Ambiental",
+              "option1": "Fugas o Derrames",
+              "option2": "Vapores o Humo",
+              "option3": "Eliminación de Residuos",
+              "option4": "Uso de Productos Químicos"
+            },
+            "ergonomic": {
+              "title": "Ergonomía",
+              "option1": "Fuerza Excesiva",
+              "option2": "Trabajo Repetitivo",
+              "option3": "Postura Estresante",
+              "option4": "Estrés de Contacto",
+              "option5": "Arrodillándose / Arrastrándose",
+              "option6": "Vibración",
+              "option7": "Levantamiento de Objetos Pesados"
+            },
+            "weather": {
+              "title": "Condiciones Climáticas",
+              "option1": "Calor Extremo",
+              "option2": "Frío Extremo",
+              "option3": "Fuertes Vientos",
+              "option4": "Condiciones de Tormenta",
+              "option5": "Lluvia",
+              "option6": "Nieve / Hielo",
+              "option7": "Gran Altitud"
+            }
+          },
+          "extra": {
+            "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+            "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+            "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
+            "label5": "Identificación de los peligros(dar click si el peligro está presente)",
+            "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+            "label7": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES ",
+            "label8": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+            "label9": "Nombre del Gerente:",
+            "label10": "Teléfono de Contacto del Gerente:",
+            "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+            "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+            "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+            "question1": "Poner en práctica Controles Establecidos",
+            "question2": "¿Qué es extraño, inusual o diferente hoy?"
+          },
+          "unusual_hazards": {
+            "title": "Peligros inusuales",
+            "gas": "Gas Natural (GNG/LNG)",
+            "animals": "Animales o insectos",
+            "gases": "Gases de escape",
+            "high_level": "Alto nivel de ruido",
+            "hot_works": "Trabajos en caliente",
+            "work_space": "Espacios de trabajo restringido",
+            "confined_space": "Entrada a espacios confinados",
+            "hygiene_hazards": "Peligros de higiene",
+            "flammable_gas": "Gas o liquido inflamable",
+            "compressed_air": "Aire Comprimido",
+            "security": "Seguridad de la batería"
+          },
+          "access_equipment": {
+            "title": "Acceso al (los) Equipo(s)",
+            "ladders": "Escalera o Escalera de Mano",
+            "platform_access": "Plataforma de Acceso Estático",
+            "platform_work": "Plataforma de Trabajo Móvil",
+            "stool": "Taburete o Grada de Trabajo"
+          },
+          "hazards_activity": {
+            "title": "Actividades Peligrosas en el Taller",
+            "spray_painting": "Pintura con Pistola",
+            "row_testing": "Celda de Prueba del Motor",
+            "dyno_chassiss": "Dyno Chassiss",
+            "washing_bay": "Bahía de lavado",
+            "chemical_bath": "Baño Químico",
+            "cleaning": "Limpieza",
+            "pit_inspection": "Inspección de Fosas"
+          },
+          "order_cleaning": {
+            "title": "Orden y limpieza",
+            "establishing_work_area": "Establecer orden en el área de trabajo",
+            "dispose_discard": "Disponer / Desechar",
+            "cleaning": "Limpieza"
+          },
+          "fire_line": {
+            "title": "Línea de Fuego",
+            "hit_by_or_against": "Golpeado(a) por o contra",
+            "trapped_by": "Atrapado(a) por",
+            "dangerous_energy": "Energía Peligrosa",
+            "dust_dirt": "Polvo o Suciedad",
+            "proyectile_hazard": "Peligro de Proyectil"
+          },
+          "slips": {
+            "title": "Resbalones, Tropiezos, Caídas",
+            "wet_oily_soil": "Suelo Húmedo o Aceitoso",
+            "cables_on_floor": "Cables sobre el piso",
+            "terrain_unevenness": "Los desniveles del terreno / Grava",
+            "elevated_area": "Área elevada / Mezanine",
+            "rooftop": "Azotea",
+            "snow_mud_or_ice": "Nieve, Barro o Hielo",
+            "pit_in_the_floor": "Fosa en el Piso"
+          },
+          "interaction_other_people": {
+            "title": "Interacción con otras Personas",
+            "job_contractors": "Trabajo con Contratistas",
+            "general_public": "Público en General",
+            "client_employee": "Cliente/Empleados"
+          },
+          "environmental_impact": {
+            "title": "Impacto Ambiental",
+            "leaks_or_spills": "Fugas o Derrames",
+            "fumes_or_smokes": "Vapores o Humo",
+            "waste_disposal": "Eliminación de Residuos",
+            "chemical_products": "Uso de Productos Químicos"
+          },
+          "ergonomic": {
+            "title": "Ergonomía",
+            "excesive_force": "Fuerza Excesiva",
+            "repetitive_job": "Trabajo Repetitivo",
+            "estresful": "Postura Estresante",
+            "contact_stress": "Estrés de Contacto",
+            "kneeling_down": "Arrodillándose / Arrastrándose",
+            "vibrate": "Vibración",
+            "heavy_lifting": "Levantamiento de Objetos Pesados"
+          },
+          "weather_conditions": {
+            "title": "Condiciones Climáticas",
+            "extreme_heat": "Calor Extremo",
+            "extreme_cold": "Frío Extremo",
+            "strong_winds": "Fuertes Vientos",
+            "storm_conditions": "Condiciones de Tormenta",
+            "rain": "Lluvia",
+            "snown": "Nieve / Hielo",
+            "great_altitud": "Gran Altitud"
+          },
+          "supervisor": {
+            "name": "Nombre del Supervisor",
+            "phone": "Teléfono de Contacto del Supervisor"
+          }
+        },
+        "powerGeneration": {
+          "lonely_job": "Trabajo Solitario",
+          "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
+          "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
+          "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "practice": "Poner en práctica Controles Establecidos",
+          "strange": "¿Qué es extraño, inusual o diferente hoy?",
+          "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+          "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
+          "identification": "Identificación de los peligros(dar click si el peligro está presente)",
+          "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+          "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
+          "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+          "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+          "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+          "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
+          "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
+          "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
+          "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
+          "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+          "covidPrevention": {
+            "title": "Prevención COVID",
+            "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
+            "question2": "¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?",
+            "question3": "¿Se cuenta con agua y jabón para la limpieza de manos?",
+            "question4": "¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?",
+            "question5": "¿Cuentas con gel sanitizante para limpieza de manos?"
+          },
+          "preparation": {
+            "title": "Preparación",
+            "question1": "¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?",
+            "question2": "¿Se está completando el trabajo eléctrico en vivo y se requiere un permiso?",
+            "question3": "¿Los arreglos de respuesta a emergencias están implementados y entendidos?",
+            "question4": "¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?",
+            "question5": "¿Tiene la correctacalificacion y autorización Cummins para completar el trabajo de este equipo?",
+            "question6": "¿El diagrama de cableado está disponible y los puntos de aislamiento identificados para evaluar los controles de bloqueo y etiquetado?",
+            "question7": "Si se esta trabajando con contratistas ¿Ellos participaron en la elaboracion del JSA y los controles han sido comunicados?"
+          },
+          "start": {
+            "title": "Arranque o prueba del banco de carga",
+            "question1": "¿Están todas las puertas cerradas y aseguradas, todas las cubiertas y guardas de los equipos en su lugar y aseguradas?",
+            "question2": "Si la batería está expuesta durante el reinicio o puesta en marcha ¿Tiene l EPP correcto (manta de batería, protector facial, etc.)?"
+          },
+          "toolsAndEquipment": {
+            "title": "Herramientas y Equipo",
+            "question1": "¿El equipo ha sido des-energizado?",
+            "question2": "¿Es requerido el bloqueo y etiquetado y está completa la Lista de Verificación?",
+            "question3": "¿Las herramientas y equipos son adecuados y están libre de daños?"
+          },
+          "access": {
+            "title": "Levantamiento y Acceso",
+            "question1": "¿El levantamiento manual de piezas está dentro de su capacidad?",
+            "question2": "¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?",
+            "question3": "¿Hay un acceso seguro a la zona de trabajo y equipos?"
+          },
+          "epp": {
+            "title": "Equipo de Protección Personal (EPP)",
+            "question1": "¿El EPP está disponible para la tarea?",
+            "question2": "¿El EPP es adecuado y está libre de daños?",
+            "question3": "¿Los guantes aislantes eléctricos tienen el sello o marca de fecha de prueba?"
+          },
+          "checkboxesP1": {
+            "chbx1": "ESPACIO DE TRABAJO RESTRINGIDO",
+            "chbx2": "TRABAJO CON ELECTRICIDAD",
+            "chbx3": "OPERACIÓN DE IZAJE DE CARGAS",
+            "chbx4": "TRABAJOS DE ALTURA",
+            "chbx5": "INCENDIO, EXPLOSIÓN O ARCO ELECTRICO",
+            "chbx6": "OTRO",
+            "chbx7": "MAQUINARIA EN MOVIMIENTO"
+          },
+          "hazards": {
+            "unnusualDangers": {
+              "title": "Peligros inusuales",
+              "option1": "Gas Natural (GNG/LNG)",
+              "option2": "Animales o insectos",
+              "option3": "Gases de escape",
+              "option4": "Alto nivel de ruido",
+              "option5": "Trabajos en caliente",
+              "option6": "Espacios de trabajo restringido",
+              "option7": "Entrada a espacios confinados",
+              "option8": "Peligros de higiene",
+              "option9": "Gas o liquido inflamable",
+              "option10": "Aire Comprimido",
+              "option11": "Seguridad de la batería"
+            },
+            "access": {
+              "title": "Accesso al (los) Equipo(s)",
+              "option1": "Escalera o Escalera de Mano",
+              "option2": "Plataforma de Acceso Estático",
+              "option3": "Plataforma de Trabajo Móvil",
+              "option4": "Taburete o Grada de Trabajo"
+            },
+            "neat": {
+              "title": "Orden y limpieza",
+              "option1": "Establecer orden en el área de trabajo",
+              "option2": "Disponer / Desechar",
+              "option3": "Limpieza"
+            },
+            "fire": {
+              "title": "Línea de Fuego",
+              "option1": "Golpeado(a) por o contra",
+              "option2": "Atrapado(a) por",
+              "option3": "Energía Peligrosa",
+              "option4": "Polvo o Suciedad",
+              "option5": "Peligro de Proyectil"
+            },
+            "slip": {
+              "title": "Resbalones, Tropiezos, Caídas",
+              "option1": "Suelo Húmedo o Aceitoso",
+              "option2": "Cables sobre el piso",
+              "option3": "Los desniveles del terreno / Grava",
+              "option4": "Área elevada / Mezanine",
+              "option5": "Azotea",
+              "option6": "Nieve, Barro o Hielo",
+              "option7": "Fosa en el Piso"
+            },
+            "interaction": {
+              "title": "Interacción con otras Personas",
+              "option1": "Trabajo con Contratistas",
+              "option2": "Público en General",
+              "option3": "Cliente/Empleados"
+            },
+            "environment": {
+              "title": "Impacto Ambiental",
+              "option1": "Fugas o Derrames",
+              "option2": "Vapores o Humo",
+              "option3": "Eliminación de Residuos",
+              "option4": "Uso de Productos Químicos"
+            },
+            "ergonomic": {
+              "title": "Ergonomía",
+              "option1": "Fuerza Excesiva",
+              "option2": "Trabajo Repetitivo",
+              "option3": "Postura Estresante",
+              "option4": "Estrés de Contacto",
+              "option5": "Arrodillándose / Arrastrándose",
+              "option6": "Vibración",
+              "option7": "Levantamiento de Objetos Pesados"
+            },
+            "weather": {
+              "title": "Condiciones Climáticas",
+              "option1": "Calor Extremo",
+              "option2": "Frío Extremo",
+              "option3": "Fuertes Vientos",
+              "option4": "Condiciones de Tormenta",
+              "option5": "Lluvia",
+              "option6": "Nieve / Hielo",
+              "option7": "Gran Altitud"
+            }
+          },
+          "extra": {
+            "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+            "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+            "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
+            "label5": "Identificación de los peligros(dar click si el peligro está presente)",
+            "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+            "label7": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES ",
+            "label8": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+            "label9": "Nombre del Gerente:",
+            "label10": "Teléfono de Contacto del Gerente:",
+            "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+            "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+            "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+            "label14": "Nota: Alta tensión > 1000 VAC",
+            "question1": "Poner en práctica Controles Establecidos",
+            "question2": "¿Qué es extraño, inusual o diferente hoy?",
+            "question3": "Especifique el voltaje del equipo:",
+            "question4": "Datos de advertencia de arco eléctrico, Limite de riesgo de destello (dondee esté disponible)",
+            "question5": "Nivel de Equipo de Protección personal"
+          },
+          "unusual_hazards": {
+            "title": "Peligros inusuales",
+            "gas": "Gas Natural (GNG/LNG)",
+            "animals": "Animales o insectos",
+            "gases": "Gases de escape",
+            "high_level": "Alto nivel de ruido",
+            "hot_works": "Trabajos en caliente",
+            "work_space": "Espacios de trabajo restringido",
+            "confined_space": "Entrada a espacios confinados",
+            "hygiene_hazards": "Peligros de higiene",
+            "flammable_gas": "Gas o liquido inflamable",
+            "compressed_air": "Aire Comprimido",
+            "security": "Seguridad de la batería"
+          },
+          "access_equipment": {
+            "title": "Acceso al (los) Equipo(s)",
+            "ladders": "Escalera o Escalera de Mano",
+            "platform_access": "Plataforma de Acceso Estático",
+            "platform_work": "Plataforma de Trabajo Móvil",
+            "stool": "Taburete o Grada de Trabajo"
+          },
+          "hazards_activity": {
+            "title": "Actividades Peligrosas en el Taller",
+            "spray_painting": "Pintura con Pistola",
+            "row_testing": "Celda de Prueba del Motor",
+            "dyno_chassiss": "Dyno Chassiss",
+            "washing_bay": "Bahía de lavado",
+            "chemical_bath": "Baño Químico",
+            "cleaning": "Limpieza",
+            "pit_inspection": "Inspección de Fosas"
+          },
+          "order_cleaning": {
+            "title": "Orden y limpieza",
+            "establishing_work_area": "Establecer orden en el área de trabajo",
+            "dispose_discard": "Disponer / Desechar",
+            "cleaning": "Limpieza"
+          },
+          "fire_line": {
+            "title": "Línea de Fuego",
+            "hit_by_or_against": "Golpeado(a) por o contra",
+            "trapped_by": "Atrapado(a) por",
+            "dangerous_energy": "Energía Peligrosa",
+            "dust_dirt": "Polvo o Suciedad",
+            "proyectile_hazard": "Peligro de Proyectil"
+          },
+          "slips": {
+            "title": "Resbalones, Tropiezos, Caídas",
+            "wet_oily_soil": "Suelo Húmedo o Aceitoso",
+            "cables_on_floor": "Cables sobre el piso",
+            "terrain_unevenness": "Los desniveles del terreno / Grava",
+            "elevated_area": "Área elevada / Mezanine",
+            "rooftop": "Azotea",
+            "snow_mud_or_ice": "Nieve, Barro o Hielo",
+            "pit_in_the_floor": "Fosa en el Piso"
+          },
+          "interaction_other_people": {
+            "title": "Interacción con otras Personas",
+            "job_contractors": "Trabajo con Contratistas",
+            "general_public": "Público en General",
+            "client_employee": "Cliente/Empleados"
+          },
+          "environmental_impact": {
+            "title": "Impacto Ambiental",
+            "leaks_or_spills": "Fugas o Derrames",
+            "fumes_or_smokes": "Vapores o Humo",
+            "waste_disposal": "Eliminación de Residuos",
+            "chemical_products": "Uso de Productos Químicos"
+          },
+          "ergonomic": {
+            "title": "Ergonomía",
+            "excesive_force": "Fuerza Excesiva",
+            "repetitive_job": "Trabajo Repetitivo",
+            "estresful": "Postura Estresante",
+            "contact_stress": "Estrés de Contacto",
+            "kneeling_down": "Arrodillándose / Arrastrándose",
+            "vibrate": "Vibración",
+            "heavy_lifting": "Levantamiento de Objetos Pesados"
+          },
+          "weather_conditions": {
+            "title": "Condiciones Climáticas",
+            "extreme_heat": "Calor Extremo",
+            "extreme_cold": "Frío Extremo",
+            "strong_winds": "Fuertes Vientos",
+            "storm_conditions": "Condiciones de Tormenta",
+            "rain": "Lluvia",
+            "snown": "Nieve / Hielo",
+            "great_altitud": "Gran Altitud"
+          },
+          "supervisor": {
+            "name": "Nombre del Supervisor",
+            "phone": "Teléfono de Contacto del Supervisor"
+          }
+        },
+        "marine": {
+          "lonely_job": "Trabajo Solitario",
+          "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
+          "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
+          "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "practice": "Poner en práctica Controles Establecidos",
+          "strange": "¿Qué es extraño, inusual o diferente hoy?",
+          "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+          "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
+          "identification": "Identificación de los peligros(dar click si el peligro está presente)",
+          "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+          "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
+          "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+          "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+          "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+          "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
+          "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
+          "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
+          "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
+          "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+          "covidPrevention": {
+            "title": "Prevención COVID",
+            "question1": "¿Cuentas con la mascarilla correcta para el trabajo a realizar?",
+            "question2": "¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?",
+            "question3": "¿Se cuenta con agua y jabón para la limpieza de manos?",
+            "question4": "¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?",
+            "question5": "¿Cuentas con gel sanitizante para limpieza de manos?"
+          },
+          "preparation": {
+            "title": "Preparación",
+            "question1": "¿Se identificaron condiciones seguras oara viajar desde y hacia el barco o la plataforma?",
+            "question2": "¿Si es necesario, ha completado la induicci'on de seguridad y/o comprende las reglas de seguridad del sitio?",
+            "question3": "Al llegar, ¿Se completó la comunicacion con el contacto representante del sitio del buque?",
+            "question4": "¿El acceso a la ubicación del trabajo se identifica como la ruta y el metodo más seguros disponibles?",
+            "question5": "¿Los arreglos de respuesta a emergencias están en el sitio y don entendidos?",
+            "question6": "¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?",
+            "question7": "¿Si se está trabajando con contratistas, ellos participaron en la elaboracion del JSA y los controles han sido comunicados?"
+          },
+          "toolsAndEquipment": {
+            "title": "Herramientas y Equipo",
+            "question1": "¿Las herramientas y equipos son adecuados y están libre de daños?",
+            "question2": "¿Es capaz de transferir de forma segura las herramientas y los equipos?",
+            "question3": "¿El bloqueo y etiquetado de energías es requerido y la lista de verificacion se ha completado?",
+            "question4": "¿Están en el sitio los controles de seguridad para la resolucion de problemas en las actividades implementadas y fueron comunicadas al cliente?"
+          },
+          "access": {
+            "title": "Levantamiento y Acceso",
+            "question1": "¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?",
+            "question2": "¿El levantamiento manual de piezas está dentro de su capacidad?",
+            "question3": "¿Los buques están equipados con dispositivos de seguridad requeridos? (P. Ej. Dispositivos de señalización, bengalas y chalecos salvavidas)",
+            "question4": "¿Fue desarrollada la familiarización con las Slidas del área?",
+            "question5": "¿Se entienden las acciones en caso de un apagón / falla de energía? ¿Antorcha manual / Linterna disponible?"
+          },
+          "epp": {
+            "title": "Equipo de Protección Personal (EPP)",
+            "question1": "¿El EPP está disponible para la tarea?",
+            "question2": "¿El EPP es adecuado y está libre de daños?"
+          },
+          "checkboxesP1": {
+            "chbx1": "CONDICIONES METEOROLÓGICAS ADVERSAS/MAR EMBRAVECIDO",
+            "chbx2": "ASCENDIENDO/DESCENDIENDO",
+            "chbx3": "ÁREA DE TRABAJO RESTRINGIDA",
+            "chbx4": "DEBAJO DE LA CUBIERTA DE VENTILACIÓN/TEMPERATURA",
+            "chbx5": "INCENDIO, EXPLOSIÓN O ARC FLASH",
+            "chbx6": "OTRO",
+            "chbx7": "MAQUINARIA EN MOVIMIENTO"
+          },
+          "hazards": {
+            "unnusualDangers": {
+              "title": "Peligros inusuales",
+              "option1": "Gas Natural (GNG/LNG)",
+              "option2": "Animales o insectos",
+              "option3": "Gases de escape",
+              "option4": "Alto nivel de ruido",
+              "option5": "Trabajos en caliente",
+              "option6": "Espacios de trabajo restringido",
+              "option7": "Entrada a espacios confinados",
+              "option8": "Peligros de higiene",
+              "option9": "Gas o liquido inflamable",
+              "option10": "Aire Comprimido",
+              "option11": "Seguridad de la batería"
+            },
+            "access": {
+              "title": "Accesso al (los) Equipo(s)",
+              "option1": "Escalera o Escalera de Mano",
+              "option2": "Plataforma de Acceso Estático",
+              "option3": "Plataforma de Trabajo Móvil",
+              "option4": "Taburete o Grada de Trabajo"
+            },
+            "neat": {
+              "title": "Orden y limpieza",
+              "option1": "Establecer orden en el área de trabajo",
+              "option2": "Disponer / Desechar",
+              "option3": "Limpieza"
+            },
+            "fire": {
+              "title": "Línea de Fuego",
+              "option1": "Golpeado(a) por o contra",
+              "option2": "Atrapado(a) por",
+              "option3": "Energía Peligrosa",
+              "option4": "Polvo o Suciedad",
+              "option5": "Peligro de Proyectil"
+            },
+            "slip": {
+              "title": "Resbalones, Tropiezos, Caídas",
+              "option1": "Suelo Húmedo o Aceitoso",
+              "option2": "Cables sobre el piso",
+              "option3": "Los desniveles del terreno / Grava",
+              "option4": "Área elevada / Mezanine",
+              "option5": "Azotea",
+              "option6": "Nieve, Barro o Hielo",
+              "option7": "Fosa en el Piso"
+            },
+            "interaction": {
+              "title": "Interacción con otras Personas",
+              "option1": "Trabajo con Contratistas",
+              "option2": "Público en General",
+              "option3": "Cliente/Empleados"
+            },
+            "environment": {
+              "title": "Impacto Ambiental",
+              "option1": "Fugas o Derrames",
+              "option2": "Vapores o Humo",
+              "option3": "Eliminación de Residuos",
+              "option4": "Uso de Productos Químicos"
+            },
+            "ergonomic": {
+              "title": "Ergonomía",
+              "option1": "Fuerza Excesiva",
+              "option2": "Trabajo Repetitivo",
+              "option3": "Postura Estresante",
+              "option4": "Estrés de Contacto",
+              "option5": "Arrodillándose / Arrastrándose",
+              "option6": "Vibración",
+              "option7": "Levantamiento de Objetos Pesados"
+            },
+            "weather": {
+              "title": "Condiciones Climáticas",
+              "option1": "Calor Extremo",
+              "option2": "Frío Extremo",
+              "option3": "Fuertes Vientos",
+              "option4": "Condiciones de Tormenta",
+              "option5": "Lluvia",
+              "option6": "Nieve / Hielo",
+              "option7": "Gran Altitud"
+            }
+          },
+          "extra": {
+            "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
+            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+            "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+            "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
+            "label5": "Identificación de los peligros(dar click si el peligro está presente)",
+            "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
+            "label7": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES ",
+            "label8": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
+            "label9": "Nombre del Gerente:",
+            "label10": "Teléfono de Contacto del Gerente:",
+            "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
+            "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
+            "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
+            "label14": "Nota: Alta tensión > 1000 VAC",
+            "question1": "Poner en práctica Controles Establecidos",
+            "question2": "¿Qué es extraño, inusual o diferente hoy?",
+            "question3": "Especifique el voltaje del equipo:",
+            "question4": "Datos de advertencia de arco eléctrico, Limite de riesgo de destello (dondee esté disponible)",
+            "question5": "Nivel de Equipo de Protección personal"
+          },
+          "unusual_hazards": {
+            "title": "Peligros inusuales",
+            "gas": "Gas Natural (GNG/LNG)",
+            "animals": "Animales o insectos",
+            "gases": "Gases de escape",
+            "high_level": "Alto nivel de ruido",
+            "hot_works": "Trabajos en caliente",
+            "work_space": "Espacios de trabajo restringido",
+            "confined_space": "Entrada a espacios confinados",
+            "hygiene_hazards": "Peligros de higiene",
+            "flammable_gas": "Gas o liquido inflamable",
+            "compressed_air": "Aire Comprimido",
+            "security": "Seguridad de la batería"
+          },
+          "access_equipment": {
+            "title": "Acceso al (los) Equipo(s)",
+            "ladders": "Escalera o Escalera de Mano",
+            "platform_access": "Plataforma de Acceso Estático",
+            "platform_work": "Plataforma de Trabajo Móvil",
+            "stool": "Taburete o Grada de Trabajo"
+          },
+          "hazards_activity": {
+            "title": "Actividades Peligrosas en el Taller",
+            "spray_painting": "Pintura con Pistola",
+            "row_testing": "Celda de Prueba del Motor",
+            "dyno_chassiss": "Dyno Chassiss",
+            "washing_bay": "Bahía de lavado",
+            "chemical_bath": "Baño Químico",
+            "cleaning": "Limpieza",
+            "pit_inspection": "Inspección de Fosas"
+          },
+          "order_cleaning": {
+            "title": "Orden y limpieza",
+            "establishing_work_area": "Establecer orden en el área de trabajo",
+            "dispose_discard": "Disponer / Desechar",
+            "cleaning": "Limpieza"
+          },
+          "fire_line": {
+            "title": "Línea de Fuego",
+            "hit_by_or_against": "Golpeado(a) por o contra",
+            "trapped_by": "Atrapado(a) por",
+            "dangerous_energy": "Energía Peligrosa",
+            "dust_dirt": "Polvo o Suciedad",
+            "proyectile_hazard": "Peligro de Proyectil"
+          },
+          "slips": {
+            "title": "Resbalones, Tropiezos, Caídas",
+            "wet_oily_soil": "Suelo Húmedo o Aceitoso",
+            "cables_on_floor": "Cables sobre el piso",
+            "terrain_unevenness": "Los desniveles del terreno / Grava",
+            "elevated_area": "Área elevada / Mezanine",
+            "rooftop": "Azotea",
+            "snow_mud_or_ice": "Nieve, Barro o Hielo",
+            "pit_in_the_floor": "Fosa en el Piso"
+          },
+          "interaction_other_people": {
+            "title": "Interacción con otras Personas",
+            "job_contractors": "Trabajo con Contratistas",
+            "general_public": "Público en General",
+            "client_employee": "Cliente/Empleados"
+          },
+          "environmental_impact": {
+            "title": "Impacto Ambiental",
+            "leaks_or_spills": "Fugas o Derrames",
+            "fumes_or_smokes": "Vapores o Humo",
+            "waste_disposal": "Eliminación de Residuos",
+            "chemical_products": "Uso de Productos Químicos"
+          },
+          "ergonomic": {
+            "title": "Ergonomía",
+            "excesive_force": "Fuerza Excesiva",
+            "repetitive_job": "Trabajo Repetitivo",
+            "estresful": "Postura Estresante",
+            "contact_stress": "Estrés de Contacto",
+            "kneeling_down": "Arrodillándose / Arrastrándose",
+            "vibrate": "Vibración",
+            "heavy_lifting": "Levantamiento de Objetos Pesados"
+          },
+          "weather_conditions": {
+            "title": "Condiciones Climáticas",
+            "extreme_heat": "Calor Extremo",
+            "extreme_cold": "Frío Extremo",
+            "strong_winds": "Fuertes Vientos",
+            "storm_conditions": "Condiciones de Tormenta",
+            "rain": "Lluvia",
+            "snown": "Nieve / Hielo",
+            "great_altitud": "Gran Altitud"
+          },
+          "supervisor": {
+            "name": "Nombre del Supervisor",
+            "phone": "Teléfono de Contacto del Supervisor"
+          }
+        }
+      },
+      "marine": {
         "lonely_job": "Trabajo Solitario",
         "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
         "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
@@ -491,34 +1752,34 @@
     },
     "service": {
       "generic": {
-        "application": "Aplicación",
-        "equipmentData": "Datos del Equipo",
-        "equipment": "Equipo",
-        "model": "Modelo",
+        "application": "Application",
+        "equipmentData": "Equipment data",
+        "equipment": "Equipment",
+        "model": "Model",
         "measurementNumber": "Measurement Number",
         "measurementType": "Measurement Type",
-        "generatorModel": "Modelo del Generador",
-        "generatorSeriesNumber": "No. de serie del generador",
-        "motorModel": "Modelo del Motor",
-        "motorSeriesNumber":  "No. Serie del Motor",
-        "powerKW": "Potencia KW/HP",
-        "QTAModel":  "Modelo QTA",
-        "QTASeriesNumber": "No.Serie del QTA",
-        "sectionDescription1": "Descripcion del trabajo realizado. Por favor llene completamente este formulario siguiendo los pasos como se describen.",
-        "symptoms": "Síntomas (Qué ocurrio con el componente?):",
-        "problem": "problema (Qué esta generando la falla):",
+        "generatorModel": "generator Model",
+        "generatorSeriesNumber": "Generator Series Number",
+        "motorModel": "Motor model",
+        "motorSeriesNumber":  "Motor series number",
+        "powerKW": "Power KW",
+        "QTAModel":  "QTA Model",
+        "QTASeriesNumber": "QTA Series number",
+        "sectionDescription1": "Description of the realized work: Please fill completely this form following the steps as follows",
+        "symptoms": "Symptoms (What happened with the component?):",
+        "problem": "Problem (Qué esta generando la falla):",
         "cause": "Causa (Cuál es la raíz del problema):",
         "solution": "Soulución (Qué fue realizado para resolver el problema):",
         "pending": "Pendientes (En caso del que el trabajador no haya sido):",
         "equipmentAvailable": "El equipo estaba disponible",
         "photographicEvidence": "Evidencia fotográfica",
         "photographicEvidenceDescription": "Description",
-        "startHour": "Hora Inicio",
-        "endHour": "Hora Fin",
-        "category": "Categoria",
-        "delay": "Retraso",
+        "startHour": "Start Hour",
+        "endHour": "End Hour",
+        "category": "Category",
+        "delay": "Delay",
         "inChargeOfTheClient": "Responsable por parte del cliente",
-        "department" : "Departamento",
+        "department" : "Depramento",
         "emailClient" : "Email del cliente",
         "signatureClient": "Firma del cliente",
         "technician" : "Nombre del técnico",

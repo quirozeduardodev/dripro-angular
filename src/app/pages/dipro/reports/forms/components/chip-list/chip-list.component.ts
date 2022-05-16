@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import {Component, Input, OnInit, Optional, Self} from '@angular/core';
-import {MatChipInputEvent} from "@angular/material/chips";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {ControlValueAccessor, NgControl} from "@angular/forms";
+import {Component, ElementRef, Input, OnInit, Optional, Self, ViewChild} from '@angular/core';
+import {MatChipInputEvent, MatChipList} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {ControlValueAccessor, NgControl} from '@angular/forms';
 
 @Component({
   selector: 'form-chip-list',
@@ -13,10 +13,14 @@ export class ChipListComponent implements ControlValueAccessor {
 
   @Input() placeholder: string | null = null;
 
+  @ViewChild('chipListInput') chipListInput: HTMLInputElement | null = null;
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
   _value: string[] = [];
+
+  textValue: string = '';
 
   // Value Accessor
   private _onChange: ((_: any) => void) = (_: any) => {};
@@ -64,6 +68,14 @@ export class ChipListComponent implements ControlValueAccessor {
     // Clear the input value
     event.chipInput!.clear();
 
+  }
+
+  manualAdd(value: string): void {
+    if (value && value.trim().length > 0) {
+      this._value.push(value);
+      this._onChange(this._value);
+    }
+    this.textValue = '';
   }
 
   remove(fruit: string): void {

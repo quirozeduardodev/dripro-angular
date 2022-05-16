@@ -18,6 +18,7 @@ import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import { BaseForm } from '../base-form';
 import {Delay} from '../../../../../database/models/delay';
+import {Technician} from '../../../../../database/models/technician';
 
 @Component({
   selector: 'app-service-generic',
@@ -31,7 +32,7 @@ export class ServiceGenericComponent extends BaseForm implements OnInit {
   customers$: Observable<Customer[]> | null = null;
   locations$: Observable<Location[]> | null = null;
   contacts$: Observable<Contact[]> | null = null;
-  technicians$: Observable<User[]> | null = null;
+  technicians$: Observable<Technician[]> | null = null;
   jobTypes$: Observable<Type[]> | null = null;
   applications$: Observable<Application[]> | null = null;
   generators$: Observable<Generator[]> | null = null;
@@ -121,6 +122,7 @@ export class ServiceGenericComponent extends BaseForm implements OnInit {
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

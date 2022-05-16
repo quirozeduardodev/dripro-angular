@@ -80,7 +80,9 @@
           "title": "Create report"
         },
         "edit": {
-          "title": "Editing report"
+          "title": "Editing report",
+          "cancel": "Cancel",
+          "save": "Send"
         },
         "view": {
           "title": "Viewing report"
@@ -371,7 +373,7 @@
         "toolsAndEquipment": {
           "title": "Herramientas y Equipo",
           "question1": "¿Las herramientas y equipos son adecuados y están libre de daños?",
-          "question2": "¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?"
+          "question2": "Se realizaron todas las inspaecciones de Montacargas (PIV) y equipos de acceso"
         },
         "access": {
           "title": "Levantamiento y Acceso",

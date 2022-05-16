@@ -1,9 +1,9 @@
-import * as moment from 'moment-timezone';
+import {DateTime} from 'luxon';
 
 export interface ManualResponse {
   id: number;
   name: string;
   url: string;
-  createdAt: moment.Moment | null;
-  updatedAt: moment.Moment | null;
+  createdAt: DateTime | null;
+  updatedAt: DateTime | null;
 }

@@ -1,9 +1,10 @@
-import {forkJoin, from, Observable, of, ReplaySubject, throwError} from "rxjs";
-import {DataBase} from "../database";
-import {Table} from "dexie";
-import * as moment from 'moment-timezone';
-import {catchError, map, mergeMap, take} from "rxjs/operators";
-import {isIterable} from "rxjs/internal-compatibility";
+/* eslint-disable max-len */
+import {forkJoin, from, Observable, of, ReplaySubject, throwError} from 'rxjs';
+import {DataBase} from '../database';
+import {Table} from 'dexie';
+import {catchError, map, mergeMap, take} from 'rxjs/operators';
+import {isIterable} from 'rxjs/internal-compatibility';
+import {DateTime} from 'luxon';
 
 export interface IBaseRepository<T> {
   all(): Observable<T[]>;
@@ -53,19 +54,17 @@ export class BaseRepository<T> implements IBaseRepository<T>{
     // @ts-ignore
     item.id = item.id <= 0 ? undefined : item.id;
     // @ts-ignore
-    item.createdAt = fOptions.replaceTimestamps ? moment().toISOString() : (item.createdAt || moment().toISOString());
+    item.createdAt = fOptions.replaceTimestamps ? DateTime.now().toISO() : (item.createdAt || DateTime.now().toISO());
     // @ts-ignore
-    item.updatedAt = fOptions.replaceTimestamps ? moment().toISOString() : (item.updatedAt || moment().toISOString());
+    item.updatedAt = fOptions.replaceTimestamps ? DateTime.now().toISO() : (item.updatedAt || DateTime.now().toISO());
     return from(this.table.add(item))
-      .pipe(mergeMap(value => {
-        return from(this.table.get(value)).pipe(mergeMap(value1 => {
+      .pipe(mergeMap(value => from(this.table.get(value)).pipe(mergeMap(value1 => {
           if (value1) {
             return of(value1);
           } else {
             return throwError('The item could not be added');
           }
-        }));
-      }));
+        }))));
   }
 
   bulkAdd(items: T[], options?: {replaceTimestamps?: boolean}): Observable<T[]> {
@@ -83,9 +82,9 @@ export class BaseRepository<T> implements IBaseRepository<T>{
       // @ts-ignore
       item.id = item.id <= 0 ? undefined : item.id;
       // @ts-ignore
-      item.createdAt = fOptions.replaceTimestamps ? moment().toISOString() : (item.createdAt || moment().toISOString());
+      item.createdAt = fOptions.replaceTimestamps ? DateTime.now().toISO() : (item.createdAt || DateTime.now().toISO());
       // @ts-ignore
-      item.updatedAt = fOptions.replaceTimestamps ? moment().toISOString() : (item.updatedAt || moment().toISOString());
+      item.updatedAt = fOptions.replaceTimestamps ? DateTime.now().toISO() : (item.updatedAt || DateTime.now().toISO());
       return item;
     });
 
@@ -116,13 +115,13 @@ export class BaseRepository<T> implements IBaseRepository<T>{
     };
 
     // @ts-ignore
-    const itemsId: number[] = items.map(value => value.id != undefined ? value.id : -1);
+    const itemsId: number[] = items.map(value => value.id !== undefined ? value.id : -1);
 
     // @ts-ignore
     return from(this.table.filter(obj => itemsId.includes(obj.id)).toArray())
       .pipe(mergeMap(existing => {
         // @ts-ignore
-        const existingIds: number[] = existing.map(item => item.id != undefined ? item.id : -1);
+        const existingIds: number[] = existing.map(item => item.id !== undefined ? item.id : -1);
 
         const existingItems: T[] = [];
         const newItems: T[] = [];
@@ -131,7 +130,7 @@ export class BaseRepository<T> implements IBaseRepository<T>{
           if (existingIds.includes(item.id)) {
             existingItems.push(item);
           } else {
-            newItems.push(item)
+            newItems.push(item);
           }
         }
         // @ts-ignore
@@ -149,7 +148,7 @@ export class BaseRepository<T> implements IBaseRepository<T>{
       replaceTimestamps: (options === undefined || options.replaceTimestamps === true || options.replaceTimestamps === undefined) /// By default is true
     };
     // @ts-ignore
-    item.updatedAt = fOptions.replaceTimestamps ? moment().toISOString() : (item.updatedAt || moment().toISOString());
+    item.updatedAt = fOptions.replaceTimestamps ? DateTime.now().toISO() : (item.updatedAt || DateTime.now().toISO());
     return from(this.table.put(item))
       .pipe(mergeMap(value => {
         if (value <= 0) {
@@ -171,7 +170,7 @@ export class BaseRepository<T> implements IBaseRepository<T>{
       replaceTimestamps: (options === undefined || options.replaceTimestamps === true || options.replaceTimestamps === undefined) /// By default is true
     };
 
-    const nowString = moment().toISOString();
+    const nowString = DateTime.now().toISO();
 
     for (let i = 0; i < items.length; i++) {
       // @ts-ignore

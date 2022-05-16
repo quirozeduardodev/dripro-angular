@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {EndpointService} from "./endpoint.service";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {AuthService} from "../auth.service";
-import {ReportFiltersRequest} from "../../types/request/report-filters.request";
-import {Observable} from "rxjs";
-import {catchError, flatMap, map, mergeMap} from "rxjs/operators";
-import {TypeBuilder} from "../../util/type-builder";
-import {ManualResponse} from "../../types/response/manual-response";
+import {EndpointService} from './endpoint.service';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {AuthService} from '../auth.service';
+import {ReportFiltersRequest} from '../../types/request/report-filters.request';
+import {Observable} from 'rxjs';
+import {catchError, flatMap, map, mergeMap} from 'rxjs/operators';
+import {TypeBuilder} from '../../util/type-builder';
+import {ManualResponse} from '../../types/response/manual-response';
 
 @Injectable()
 export class ManualEndpointService extends EndpointService {

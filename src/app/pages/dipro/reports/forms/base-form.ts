@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 export declare type Answers = {[q: string]: any};
@@ -28,6 +28,11 @@ export abstract class BaseForm implements OnChanges {
       }
     }
   }
+  protected scrollToFirstInvalidControl(): void {
+    const elements = document.querySelectorAll('form .ng-invalid');
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    elements.length > 0 ? elements[0].scrollIntoView(): null;
+  }
 
   private updateValue(obj: {[p: string]: any}): void {
     for (const [key, value] of Object.entries(obj)) {
@@ -36,7 +41,16 @@ export abstract class BaseForm implements OnChanges {
         this.formGroup.controls[keyEscaped].setValue(value);
       }
     }
+    if ('onAnswersUpdated' in this) {
+      // @ts-ignore
+      this.onAnswersUpdated(obj);
+    }
   }
 
   abstract get formGroup(): FormGroup;
+
+}
+
+export declare interface OnAnswer {
+  onAnswersUpdated(answers: {[p: string]: any}): void;
 }

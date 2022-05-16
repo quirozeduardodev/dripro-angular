@@ -23,6 +23,7 @@ export class IngersollRandRotaryContactCooledRotaryComponent extends BaseForm im
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

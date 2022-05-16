@@ -8,10 +8,17 @@
         <i class="mdi mdi-close-circle remove-icon"></i>
       </button>
     </mat-chip>
-    <input [disabled]="isDisabled"
-      [placeholder]="placeholder ?? ''"
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="add($event)">
+    <div class="relative w-full h-12">
+      <input [(ngModel)]="textValue" #chipListInput class="w-full absolute" [disabled]="isDisabled"
+             [placeholder]="placeholder ?? ''"
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="add($event)">
+      <div *ngIf="!isDisabled" class="absolute right-0 top-2">
+        <button type="button" mat-icon-button (click)="manualAdd(chipListInput.value)">
+          <i class="mdi mdi-plus text-red-500"></i>
+        </button>
+      </div>
+    </div>
   </mat-chip-list>
 </div>

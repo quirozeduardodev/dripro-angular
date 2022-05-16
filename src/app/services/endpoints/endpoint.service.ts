@@ -14,9 +14,9 @@ export class EndpointService {
 
   public getOptions(): { headers: HttpHeaders} {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.token ?? ''}`,
+      Authorization: `Bearer ${this.authService.token ?? ''}`,
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     });
     return {headers};
   }

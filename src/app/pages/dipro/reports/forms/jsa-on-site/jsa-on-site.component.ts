@@ -12,21 +12,22 @@ import { UnitOfWorkDatabase } from '../../../../../database/unit-of-work.databas
 import { Unit } from '../../../../../database/models/unit';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../../../../database/models/category';
-import * as moment from 'moment-timezone';
 import { AuthService } from '../../../../../services/auth.service';
-import { take } from 'rxjs/operators';
-import { BaseForm } from '../base-form';
+import {map, take} from 'rxjs/operators';
+import {BaseForm, OnAnswer} from '../base-form';
 import { User } from '../../../../../database/models/user';
+import {DateTime} from 'luxon';
+import {Technician} from '../../../../../database/models/technician';
 
 @Component({
   selector: 'app-jsa-on-site',
   templateUrl: './jsa-on-site.component.html',
   styleUrls: ['./jsa-on-site.component.scss'],
 })
-export class JsaOnSiteComponent extends BaseForm implements OnInit {
+export class JsaOnSiteComponent extends BaseForm implements OnInit, OnAnswer {
   businessUnits$: Observable<Unit[]> | null = null;
   categoriesUnits$: Observable<Category[]> | null = null;
-  technicians$: Observable<User[]> | null = null;
+  technicians$: Observable<Technician[]> | null = null;
 
   commonOptions: { label: string; value: any }[] = [
     {
@@ -70,39 +71,39 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
     }[];
   }[] = [
     {
-      label: 'forms.jsa.warehouse.covidPrevention.title',
+      label: 'forms.jsa.site.covidPrevention.title',
       questions: [
         {
           label:
-            'forms.jsa.warehouse.covidPrevention.question1',
+            'forms.jsa.site.covidPrevention.question1',
           formControlName: 'skin_face',
         },
         {
           label:
-            'forms.jsa.warehouse.covidPrevention.question2',
+            'forms.jsa.site.covidPrevention.question2',
           formControlName: 'social',
         },
         {
-          label: 'forms.jsa.warehouse.covidPrevention.question3',
+          label: 'forms.jsa.site.covidPrevention.question3',
           formControlName: 'hand_cleaning',
         },
         {
           label:
-            'forms.jsa.warehouse.covidPrevention.question4',
+            'forms.jsa.site.covidPrevention.question4',
           formControlName: 'social_precaution',
         },
         {
-          label: 'forms.jsa.warehouse.covidPrevention.question5',
+          label: 'forms.jsa.site.covidPrevention.question5',
           formControlName: 'sanitizer',
         },
       ],
     },
     {
-      label: 'forms.jsa.warehouse.preparation.title',
+      label: 'forms.jsa.site.preparation.title',
       questions: [
         {
           label:
-            'forms.jsa.warehouse.preparation.question1',
+            'forms.jsa.site.preparation.question1',
           formControlName: 'site1_quest',
           subOptions: {
             fCNRiskLevel: 'site2_quest',
@@ -115,7 +116,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            'forms.jsa.warehouse.preparation.question2',
+            'forms.jsa.site.preparation.question2',
           formControlName: 'site8_quest',
           subOptions: {
             fCNRiskLevel: 'site9_quest',
@@ -128,7 +129,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            'forms.jsa.warehouse.preparation.question3',
+            'forms.jsa.site.preparation.question3',
           formControlName: 'site15_quest',
           subOptions: {
             fCNRiskLevel: 'site16_quest',
@@ -142,11 +143,11 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'forms.jsa.warehouse.toolsAndEquipment.title',
+      label: 'forms.jsa.site.toolsAndEquipment.title',
       questions: [
         {
           label:
-            'forms.jsa.warehouse.toolsAndEquipment.question1',
+            'forms.jsa.site.toolsAndEquipment.question1',
           formControlName: 'site22_quest',
           subOptions: {
             fCNRiskLevel: 'site23_quest',
@@ -159,7 +160,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            'forms.jsa.warehouse.toolsAndEquipment.question2',
+            'forms.jsa.site.toolsAndEquipment.question2',
           formControlName: 'site29_quest',
           subOptions: {
             fCNRiskLevel: 'site30_quest',
@@ -173,11 +174,11 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'forms.jsa.warehouse.access.title',
+      label: 'forms.jsa.site.access.title',
       questions: [
         {
           label:
-            'forms.jsa.warehouse.access.question1',
+            'forms.jsa.site.access.question1',
           formControlName: 'site36_quest',
           subOptions: {
             fCNRiskLevel: 'site37_quest',
@@ -190,7 +191,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            'forms.jsa.warehouse.access.question2',
+            'forms.jsa.site.access.question2',
           formControlName: 'site43_quest',
           subOptions: {
             fCNRiskLevel: 'site44_quest',
@@ -202,7 +203,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
           },
         },
         {
-          label: 'forms.jsa.warehouse.access.question3',
+          label: 'forms.jsa.site.access.question3',
           formControlName: 'site50_quest',
           subOptions: {
             fCNRiskLevel: 'site51_quest',
@@ -225,43 +226,43 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
   }[] = [
     {
       formControlName: 'question12_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx1',
+      label: 'forms.jsa.site.checkboxesP1.chbx1',
       formControlName1: 'name1_question',
       formControlName2: 'name2_question',
     },
     {
       formControlName: 'question13_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx2',
+      label: 'forms.jsa.site.checkboxesP1.chbx2',
       formControlName1: 'name3_question',
       formControlName2: 'name4_question',
     },
     {
       formControlName: 'question14_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx7',
+      label: 'forms.jsa.site.checkboxesP1.chbx7',
       formControlName1: 'name5_question',
       formControlName2: 'name6_question',
     },
     {
       formControlName: 'question15_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx3',
+      label: 'forms.jsa.site.checkboxesP1.chbx3',
       formControlName1: 'name7_question',
       formControlName2: 'name8_question',
     },
     {
       formControlName: 'question16_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx4',
+      label: 'forms.jsa.site.checkboxesP1.chbx4',
       formControlName1: 'name9_question',
       formControlName2: 'name10_question',
     },
     {
       formControlName: 'question17_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx5',
+      label: 'forms.jsa.site.checkboxesP1.chbx5',
       formControlName1: 'name11_question',
       formControlName2: 'name12_question',
     },
     {
       formControlName: 'question18_site',
-      label: 'forms.jsa.warehouse.checkboxesP1.chbx6',
+      label: 'forms.jsa.site.checkboxesP1.chbx6',
       formControlName1: 'name13_question',
       formControlName2: 'name14_question',
     },
@@ -321,110 +322,111 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
     hand_cleaning: new FormControl(null, [Validators.required]),
     social_precaution: new FormControl(null, [Validators.required]),
     sanitizer: new FormControl(null, [Validators.required]),
-    site1_quest: new FormControl(null, [Validators.required]),
-    site2_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site3_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site4_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site5_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site6_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site7_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site8_quest: new FormControl(null, [Validators.required]),
-    site9_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site10_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site11_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site12_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site13_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site14_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site15_quest: new FormControl(null, [Validators.required]),
-    site16_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site17_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site18_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site19_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site20_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site21_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site22_quest: new FormControl(null, [Validators.required]),
-    site23_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site24_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site25_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site26_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site27_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site28_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site29_quest: new FormControl(null, [Validators.required]),
-    site30_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site31_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site32_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site33_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site34_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site35_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site36_quest: new FormControl(null, [Validators.required]),
-    site37_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site38_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site39_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site40_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site41_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site42_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site43_quest: new FormControl(null, [Validators.required]),
-    site44_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site45_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site46_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site47_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site48_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site49_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site50_quest: new FormControl(null, [Validators.required]),
-    site51_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site52_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site53_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site54_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site55_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site56_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site57_quest: new FormControl(null, [Validators.required]),
-    site58_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site59_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site60_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site61_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site62_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site63_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site64_quest: new FormControl(null, [Validators.required]),
-    site65_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site66_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site67_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site68_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site69_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    site70_quest: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question11_site: new FormControl(null, [Validators.required]),
-    question11_1_site: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_site: new FormControl(false),
-    name1_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name2_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question13_site: new FormControl(false),
-    name3_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name4_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question14_site: new FormControl(false),
-    name5_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name6_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question15_site: new FormControl(false),
-    name7_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name8_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question16_site: new FormControl(false),
-    name9_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name10_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question17_site: new FormControl(false),
-    name11_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name12_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question18_site: new FormControl(false),
-    name13_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name14_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question19_site: new FormControl([]),
-    question20_site: new FormControl([]),
-    question21_site: new FormControl([]),
-    question22_site: new FormControl([]),
-    question23_site: new FormControl([]),
-    question24_site: new FormControl([]),
-    question25_site: new FormControl([]),
-    question26_site: new FormControl([]),
-    question27_site: new FormControl([]),
-    question28_site: new FormControl([]),
-    different_unusual: new FormControl(null),
+
+    site1_quest: new FormControl(null, []),
+    site2_quest: new FormControl(null, []),
+    site3_quest: new FormControl(null, []),
+    site4_quest: new FormControl(null, []),
+    site5_quest: new FormControl(null, []),
+    site6_quest: new FormControl(null, []),
+    site7_quest: new FormControl(null, []),
+    site8_quest: new FormControl(null, []),
+    site9_quest: new FormControl(null, []),
+    site10_quest: new FormControl(null, []),
+    site11_quest: new FormControl(null, []),
+    site12_quest: new FormControl(null, []),
+    site13_quest: new FormControl(null, []),
+    site14_quest: new FormControl(null, []),
+    site15_quest: new FormControl(null, []),
+    site16_quest: new FormControl(null, []),
+    site17_quest: new FormControl(null, []),
+    site18_quest: new FormControl(null, []),
+    site19_quest: new FormControl(null, []),
+    site20_quest: new FormControl(null, []),
+    site21_quest: new FormControl(null, []),
+    site22_quest: new FormControl(null, []),
+    site23_quest: new FormControl(null, []),
+    site24_quest: new FormControl(null, []),
+    site25_quest: new FormControl(null, []),
+    site26_quest: new FormControl(null, []),
+    site27_quest: new FormControl(null, []),
+    site28_quest: new FormControl(null, []),
+    site29_quest: new FormControl(null, []),
+    site30_quest: new FormControl(null, []),
+    site31_quest: new FormControl(null, []),
+    site32_quest: new FormControl(null, []),
+    site33_quest: new FormControl(null, []),
+    site34_quest: new FormControl(null, []),
+    site35_quest: new FormControl(null, []),
+    site36_quest: new FormControl(null, []),
+    site37_quest: new FormControl(null, []),
+    site38_quest: new FormControl(null, []),
+    site39_quest: new FormControl(null, []),
+    site40_quest: new FormControl(null, []),
+    site41_quest: new FormControl(null, []),
+    site42_quest: new FormControl(null, []),
+    site43_quest: new FormControl(null, []),
+    site44_quest: new FormControl(null, []),
+    site45_quest: new FormControl(null, []),
+    site46_quest: new FormControl(null, []),
+    site47_quest: new FormControl(null, []),
+    site48_quest: new FormControl(null, []),
+    site49_quest: new FormControl(null, []),
+    site50_quest: new FormControl(null, []),
+    site51_quest: new FormControl(null, []),
+    site52_quest: new FormControl(null, []),
+    site53_quest: new FormControl(null, []),
+    site54_quest: new FormControl(null, []),
+    site55_quest: new FormControl(null, []),
+    site56_quest: new FormControl(null, []),
+    site57_quest: new FormControl(null, []),
+    site58_quest: new FormControl(null, []),
+    site59_quest: new FormControl(null, []),
+    site60_quest: new FormControl(null, []),
+    site61_quest: new FormControl(null, []),
+    site62_quest: new FormControl(null, []),
+    site63_quest: new FormControl(null, []),
+    site64_quest: new FormControl(null, []),
+    site65_quest: new FormControl(null, []),
+    site66_quest: new FormControl(null, []),
+    site67_quest: new FormControl(null, []),
+    site68_quest: new FormControl(null, []),
+    site69_quest: new FormControl(null, []),
+    site70_quest: new FormControl(null, []),
+    question11_site: new FormControl(null, []),
+    question11_1_site: new FormControl(null, []),
+    question12_site: new FormControl(null, []),
+    name1_question: new FormControl(null, []),
+    name2_question: new FormControl(null, []),
+    question13_site: new FormControl(null, []),
+    name3_question: new FormControl(null, []),
+    name4_question: new FormControl(null, []),
+    question14_site: new FormControl(null, []),
+    name5_question: new FormControl(null, []),
+    name6_question: new FormControl(null, []),
+    question15_site: new FormControl(null, []),
+    name7_question: new FormControl(null, []),
+    name8_question: new FormControl(null, []),
+    question16_site: new FormControl(null, []),
+    name9_question: new FormControl(null, []),
+    name10_question: new FormControl(null, []),
+    question17_site: new FormControl(null, []),
+    name11_question: new FormControl(null, []),
+    name12_question: new FormControl(null, []),
+    question18_site: new FormControl(null, []),
+    name13_question: new FormControl(null, []),
+    name14_question: new FormControl(null, []),
+    question19_site: new FormControl(null, []),
+    question20_site: new FormControl(null, []),
+    question21_site: new FormControl(null, []),
+    question22_site: new FormControl(null, []),
+    question23_site: new FormControl(null, []),
+    question24_site: new FormControl(null, []),
+    question25_site: new FormControl(null, []),
+    question26_site: new FormControl(null, []),
+    question27_site: new FormControl(null, []),
+    question28_site: new FormControl(null, []),
+    different_unnusual: new FormControl(null),
     name_manager: new FormControl(null, [Validators.required]),
     phone_manager: new FormControl(null, [Validators.required]),
     lotus_quest: new FormControl(null, [Validators.required]),
@@ -439,13 +441,20 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
     this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
-    this.technicians$ = this.unitOfWorkDatabase.userRepository.all();
+    this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
+  }
+
+  onAnswersUpdated(answers: {[p: string]: any}): void {
+
+    const dateValue: string | null = answers.date;
+    if(!dateValue || dateValue.trim().length < 1) {
+      this.formGroup.controls.date.setValue(DateTime.now().toISODate());
+    }
 
     this.formGroup.controls.date.disable();
-    this.formGroup.controls.date.setValue(moment().format('YYYY-MM-d'));
 
     this.formGroup.controls.name_people.disable();
     this.formGroup.controls.wwid.disable();
@@ -453,12 +462,29 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit {
     this.authService.user.pipe(take(1)).subscribe((user) => {
       this.formGroup.controls.name_people.setValue(user?.name ?? '');
       this.formGroup.controls.wwid.setValue(user?.wwid ?? '');
+      if(user) {
+        this.unitOfWorkDatabase.userRepository.all()
+          .pipe(map(users => {
+            const userIdx = users.findIndex(value => value.wwid === user.supervisor);
+            if (userIdx >= 0) {
+              return users[userIdx];
+            }
+            return null;
+          })).subscribe(supervisor =>{
+          if(supervisor) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.name_manager ? null : this.formGroup.controls.name_manager.setValue(supervisor.name);
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.phone_manager ? null : this.formGroup.controls.phone_manager.setValue(supervisor.phone);
+          }
+        });
+      }
     });
   }
-
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

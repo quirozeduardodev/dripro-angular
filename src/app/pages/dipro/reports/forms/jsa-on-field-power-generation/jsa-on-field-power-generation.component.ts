@@ -1,38 +1,50 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import { Category } from 'src/app/database/models/category';
 import { Unit } from 'src/app/database/models/unit';
 import { User } from 'src/app/database/models/user';
 import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
-import { BaseForm } from '../base-form';
+import {BaseForm, OnAnswer} from '../base-form';
+import {DateTime} from 'luxon';
+import {Technician} from '../../../../../database/models/technician';
 
 @Component({
   selector: 'app-jsa-on-field-power-generation',
   templateUrl: './jsa-on-field-power-generation.component.html',
   styleUrls: ['./jsa-on-field-power-generation.component.scss'],
 })
-export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnInit {
+export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnInit, OnAnswer {
   businessUnits$: Observable<Unit[]> | null = null;
   categoriesUnits$: Observable<Category[]> | null = null;
-  technicians$: Observable<User[]> | null = null;
+  technicians$: Observable<Technician[]> | null = null;
 
   commonOptions: { label: string; value: any }[] = [
     {
-      label: 'Si',
+      label: 'forms.common.options.yes',
       value: 1,
     },
     {
-      label: 'No',
+      label: 'forms.common.options.no',
       value: 2,
     },
     {
-      label: 'N/A',
+      label: 'forms.common.options.na',
       value: 3,
+    },
+  ];
+
+  commonOptionsYesOrNo: { label: string; value: any }[] = [
+    {
+      label: 'forms.common.options.yes',
+      value: 1,
+    },
+    {
+      label: 'forms.common.options.no',
+      value: 2,
     },
   ];
 
@@ -52,176 +64,258 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
     }[];
   }[] = [
     {
-      label: 'Prevención COVID',
+      label: 'forms.jsa.field.powerGeneration.preparation.title',
       questions: [
         {
           label:
-            '¿Cuentas con la mascarilla correcta para el trabajo a realizar?',
-          formControlName: 'skin_face',
-        },
-        {
-          label:
-            '¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?',
-          formControlName: 'social',
-        },
-        {
-          label: '¿Se cuenta con agua y jabón para la limpieza de manos?',
-          formControlName: 'hand_cleaning',
-        },
-        {
-          label:
-            '¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?',
-          formControlName: 'social_precaution',
-        },
-        {
-          label: '¿Cuentas con gel sanitizante para limpieza de manos?',
-          formControlName: 'sanitizer',
-        },
-      ],
-    },
-    {
-      label: 'Preparación',
-      questions: [
-        {
-          label:
-            '¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?',
-          formControlName: 'question1_powergen',
+            'forms.jsa.field.powerGeneration.preparation.question1',
+          formControlName: 'question4_powergen',
           subOptions: {
-            fCNRiskLevel: 'question2_powergen',
-            fCNControlled: 'question3_powergen',
-            fCNCauseAnalysis: 'question4_powergen',
-            fCNCauseAnalysisOther: 'question5_powergen',
-            fCNTaken: 'question6_powergen',
-            fCNTakenOther: 'question7_powergen',
+            fCNRiskLevel: 'question5_powergen',
+            fCNControlled: 'question6_powergen',
+            fCNCauseAnalysis: 'question7_powergen',
+            fCNCauseAnalysisOther: 'question8_powergen',
+            fCNTaken: 'question9_powergen',
+            fCNTakenOther: 'question10_powergen',
           },
         },
         {
           label:
-            '¿Los arreglos de respuesta a emergencia están implementados y entendidos?',
-          formControlName: 'question8_powergen',
+            'forms.jsa.field.powerGeneration.preparation.question2',
+          formControlName: 'question11_powergen',
           subOptions: {
-            fCNRiskLevel: 'question9_powergen',
-            fCNControlled: 'question10_powergen',
-            fCNCauseAnalysis: 'question11_powergen',
-            fCNCauseAnalysisOther: 'question12_powergen',
-            fCNTaken: 'question13_powergen',
-            fCNTakenOther: 'question14_powergen',
+            fCNRiskLevel: 'question12_powergen',
+            fCNControlled: 'question13_powergen',
+            fCNCauseAnalysis: 'question14_powergen',
+            fCNCauseAnalysisOther: 'question15_powergen',
+            fCNTaken: 'question16_powergen',
+            fCNTakenOther: 'question17_powergen',
           },
         },
         {
           label:
-            '¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?',
-          formControlName: 'question15_powergen',
+            'forms.jsa.field.powerGeneration.preparation.question3',
+          formControlName: 'question18_powergen',
           subOptions: {
-            fCNRiskLevel: 'question16_powergen',
-            fCNControlled: 'question17_powergen',
-            fCNCauseAnalysis: 'question18_powergen',
-            fCNCauseAnalysisOther: 'question19_powergen',
-            fCNTaken: 'question20_powergen',
-            fCNTakenOther: 'question21_powergen',
-          },
-        },
-      ],
-    },
-    {
-      label: 'Herramientas y Equipo',
-      questions: [
-        {
-          label:
-            '¿Las herramientas y equipos son adecuados y están libre de daños?',
-          formControlName: 'question22_powergen',
-          subOptions: {
-            fCNRiskLevel: 'question23_powergen',
-            fCNControlled: 'question24_powergen',
-            fCNCauseAnalysis: 'question25_powergen',
-            fCNCauseAnalysisOther: 'question26_powergen',
-            fCNTaken: 'question27_powergen',
-            fCNTakenOther: 'question28_powergen',
+            fCNRiskLevel: 'question19_powergen',
+            fCNControlled: 'question20_powergen',
+            fCNCauseAnalysis: 'question21_powergen',
+            fCNCauseAnalysisOther: 'question22_powergen',
+            fCNTaken: 'question23_powergen',
+            fCNTakenOther: 'question24_powergen',
           },
         },
         {
           label:
-            '¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?',
-          formControlName: 'question29_powergen',
+            'forms.jsa.field.powerGeneration.preparation.question4',
+          formControlName: 'question25_powergen',
           subOptions: {
-            fCNRiskLevel: 'question30_powergen',
-            fCNControlled: 'question31_powergen',
-            fCNCauseAnalysis: 'question32_powergen',
-            fCNCauseAnalysisOther: 'question33_powergen',
-            fCNTaken: 'question34_powergen',
-            fCNTakenOther: 'question35_powergen',
+            fCNRiskLevel: 'question26_powergen',
+            fCNControlled: 'question27_powergen',
+            fCNCauseAnalysis: 'question28_powergen',
+            fCNCauseAnalysisOther: 'question29_powergen',
+            fCNTaken: 'question30_powergen',
+            fCNTakenOther: 'question31_powergen',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.powerGeneration.preparation.question5',
+          formControlName: 'question32_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question33_powergen',
+            fCNControlled: 'question34_powergen',
+            fCNCauseAnalysis: 'question35_powergen',
+            fCNCauseAnalysisOther: 'question36_powergen',
+            fCNTaken: 'question37_powergen',
+            fCNTakenOther: 'question38_powergen',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.powerGeneration.preparation.question6',
+          formControlName: 'question39_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question40_powergen',
+            fCNControlled: 'question41_powergen',
+            fCNCauseAnalysis: 'question42_powergen',
+            fCNCauseAnalysisOther: 'question43_powergen',
+            fCNTaken: 'question44_powergen',
+            fCNTakenOther: 'question45_powergen',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.powerGeneration.preparation.question7',
+          formControlName: 'question46_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question47_powergen',
+            fCNControlled: 'question48_powergen',
+            fCNCauseAnalysis: 'question49_powergen',
+            fCNCauseAnalysisOther: 'question50_powergen',
+            fCNTaken: 'question51_powergen',
+            fCNTakenOther: 'question52_powergen',
           },
         },
       ],
     },
     {
-      label: 'Levantamiento y Acceso',
+      label: 'forms.jsa.field.powerGeneration.start.title',
       questions: [
         {
           label:
-            '¿El levantamiento manual de piezas está dentro de su capacidad?',
-          formControlName: 'question36_powergen',
+            'forms.jsa.field.powerGeneration.start.question1',
+          formControlName: 'question53_powergen',
           subOptions: {
-            fCNRiskLevel: 'question37_powergen',
-            fCNControlled: 'question38_powergen',
-            fCNCauseAnalysis: 'question39_powergen',
-            fCNCauseAnalysisOther: 'question40_powergen',
-            fCNTaken: 'question41_powergen',
-            fCNTakenOther: 'question42_powergen',
+            fCNRiskLevel: 'question54_powergen',
+            fCNControlled: 'question55_powergen',
+            fCNCauseAnalysis: 'question56_powergen',
+            fCNCauseAnalysisOther: 'question57_powergen',
+            fCNTaken: 'question58_powergen',
+            fCNTakenOther: 'question59_powergen',
           },
         },
         {
           label:
-            '¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?',
-          formControlName: 'question43_powergen',
+            'forms.jsa.field.powerGeneration.start.question2',
+          formControlName: 'question60_powergen',
           subOptions: {
-            fCNRiskLevel: 'question44_powergen',
-            fCNControlled: 'question45_powergen',
-            fCNCauseAnalysis: 'question46_powergen',
-            fCNCauseAnalysisOther: 'question47_powergen',
-            fCNTaken: 'question48_powergen',
-            fCNTakenOther: 'question49_powergen',
-          },
-        },
-        {
-          label: '¿Hay un acceso seguro a la zona de trabajo y equipos?',
-          formControlName: 'question50_powergen',
-          subOptions: {
-            fCNRiskLevel: 'question51_powergen',
-            fCNControlled: 'question52_powergen',
-            fCNCauseAnalysis: 'question53_powergen',
-            fCNCauseAnalysisOther: 'question54_powergen',
-            fCNTaken: 'question55_powergen',
-            fCNTakenOther: 'question56_powergen',
+            fCNRiskLevel: 'question61_powergen',
+            fCNControlled: 'question62_powergen',
+            fCNCauseAnalysis: 'question63_powergen',
+            fCNCauseAnalysisOther: 'question64_powergen',
+            fCNTaken: 'question65_powergen',
+            fCNTakenOther: 'question66_powergen',
           },
         },
       ],
     },
     {
-      label: 'Equipo de Proteccion Personal (EPP)',
+      label: 'forms.jsa.field.powerGeneration.toolsAndEquipment.title',
       questions: [
         {
-          label: '¿El EPP está disponible para la tarea?',
-          formControlName: 'question57_powergen',
+          label:
+            'forms.jsa.field.powerGeneration.toolsAndEquipment.question1',
+          formControlName: 'question67_powergen',
           subOptions: {
-            fCNRiskLevel: 'question58_powergen',
-            fCNControlled: 'question59_powergen',
-            fCNCauseAnalysis: 'question60_powergen',
-            fCNCauseAnalysisOther: 'question61_powergen',
-            fCNTaken: 'question62_powergen',
-            fCNTakenOther: 'question63_powergen',
+            fCNRiskLevel: 'question68_powergen',
+            fCNControlled: 'question69_powergen',
+            fCNCauseAnalysis: 'question70_powergen',
+            fCNCauseAnalysisOther: 'question71_powergen',
+            fCNTaken: 'question72_powergen',
+            fCNTakenOther: 'question73_powergen',
           },
         },
         {
-          label: '¿El EPP es adecuado y está libre de daños?',
-          formControlName: 'question64_powergen',
+          label:
+            'forms.jsa.field.powerGeneration.toolsAndEquipment.question2',
+          formControlName: 'question74_powergen',
           subOptions: {
-            fCNRiskLevel: 'question65_powergen',
-            fCNControlled: 'question66_powergen',
-            fCNCauseAnalysis: 'question67_powergen',
-            fCNCauseAnalysisOther: 'question68_powergen',
-            fCNTaken: 'question69_powergen',
-            fCNTakenOther: 'question70_powergen',
+            fCNRiskLevel: 'question75_powergen',
+            fCNControlled: 'question76_powergen',
+            fCNCauseAnalysis: 'question77_powergen',
+            fCNCauseAnalysisOther: 'question78_powergen',
+            fCNTaken: 'question79_powergen',
+            fCNTakenOther: 'question80_powergen',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.powerGeneration.toolsAndEquipment.question3',
+          formControlName: 'question81_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question82_powergen',
+            fCNControlled: 'question83_powergen',
+            fCNCauseAnalysis: 'question84_powergen',
+            fCNCauseAnalysisOther: 'question85_powergen',
+            fCNTaken: 'question86_powergen',
+            fCNTakenOther: 'question87_powergen',
+          },
+        },
+      ],
+    },
+    {
+      label: 'forms.jsa.field.powerGeneration.access.title',
+      questions: [
+        {
+          label:
+            'forms.jsa.field.powerGeneration.access.question1',
+          formControlName: 'question88_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question89_powergen',
+            fCNControlled: 'question90_powergen',
+            fCNCauseAnalysis: 'question91_powergen',
+            fCNCauseAnalysisOther: 'question92_powergen',
+            fCNTaken: 'question93_powergen',
+            fCNTakenOther: 'question94_powergen',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.powerGeneration.access.question2',
+          formControlName: 'question95_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question96_powergen',
+            fCNControlled: 'question97_powergen',
+            fCNCauseAnalysis: 'question98_powergen',
+            fCNCauseAnalysisOther: 'question99_powergen',
+            fCNTaken: 'question100_powergen',
+            fCNTakenOther: 'question101_powergen',
+          },
+        },
+        {
+          label: 'forms.jsa.field.powerGeneration.access.question3',
+          formControlName: 'question102_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question103_powergen',
+            fCNControlled: 'question104_powergen',
+            fCNCauseAnalysis: 'question105_powergen',
+            fCNCauseAnalysisOther: 'question106_powergen',
+            fCNTaken: 'question107_powergen',
+            fCNTakenOther: 'question108_powergen',
+          },
+        },
+      ],
+    },
+    {
+      label: 'forms.jsa.field.powerGeneration.epp.title',
+      questions: [
+        {
+          label:
+            'forms.jsa.field.powerGeneration.epp.question1',
+          formControlName: 'question109_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question110_powergen',
+            fCNControlled: 'question111_powergen',
+            fCNCauseAnalysis: 'question112_powergen',
+            fCNCauseAnalysisOther: 'question113_powergen',
+            fCNTaken: 'question114_powergen',
+            fCNTakenOther: 'question115_powergen',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.powerGeneration.epp.question2',
+          formControlName: 'question116_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question117_powergen',
+            fCNControlled: 'question118_powergen',
+            fCNCauseAnalysis: 'question119_powergen',
+            fCNCauseAnalysisOther: 'question120_powergen',
+            fCNTaken: 'question121_powergen',
+            fCNTakenOther: 'question122_powergen',
+          },
+        },
+        {
+          label: 'forms.jsa.field.powerGeneration.epp.question3',
+          formControlName: 'question123_powergen',
+          subOptions: {
+            fCNRiskLevel: 'question124_powergen',
+            fCNControlled: 'question125_powergen',
+            fCNCauseAnalysis: 'question126_powergen',
+            fCNCauseAnalysisOther: 'question127_powergen',
+            fCNTaken: 'question128_powergen',
+            fCNTakenOther: 'question129_powergen',
           },
         },
       ],
@@ -235,84 +329,84 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
     formControlName2: string;
   }[] = [
     {
-      formControlName: 'question72_powergen',
-      label: 'VEHÍCULOS EN MOVIMIENTO',
+      formControlName: 'question131_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx1',
       formControlName1: 'name1_question',
       formControlName2: 'name2_question',
     },
     {
-      formControlName: 'question73_powergen',
-      label: 'TRABAJO CON ELECTRICIDAD',
+      formControlName: 'question132_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx2',
       formControlName1: 'name3_question',
       formControlName2: 'name4_question',
     },
     {
-      formControlName: 'question74_powergen',
-      label: 'MAQUINARIA EN MOVIMIENTO',
+      formControlName: 'question133_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx7',
       formControlName1: 'name5_question',
       formControlName2: 'name6_question',
     },
     {
-      formControlName: 'question75_powergen',
-      label: 'OPERACIÓN DE LEVANTAMIENTO DE CARGAS',
+      formControlName: 'question134_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx3',
       formControlName1: 'name7_question',
       formControlName2: 'name8_question',
     },
     {
-      formControlName: 'question76_powergen',
-      label: 'TRABAJOS DE ALTURA',
+      formControlName: 'question135_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx4',
       formControlName1: 'name9_question',
       formControlName2: 'name10_question',
     },
     {
-      formControlName: 'question77_powergen',
-      label: 'INCENDIO, EXPLOSIÓN O ARCO ELECTRICO',
+      formControlName: 'question136_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx5',
       formControlName1: 'name11_question',
       formControlName2: 'name12_question',
     },
     {
-      formControlName: 'question78_powergen',
-      label: 'OTRO',
+      formControlName: 'question137_powergen',
+      label: 'forms.jsa.field.powerGeneration.checkboxesP1.chbx6',
       formControlName1: 'name13_question',
       formControlName2: 'name14_question',
     },
   ];
 
   nopOptionLevelRisk: { label: string; value: any }[] = [
-    { label: 'Bajo', value: 1 },
-    { label: 'Medio', value: 2 },
-    { label: 'Alto', value: 3 },
-    { label: 'Extremo', value: 4 },
+    { label: 'forms.common.labels.low', value: 1 },
+    { label: 'forms.common.labels.medium', value: 2 },
+    { label: 'forms.common.labels.high', value: 3 },
+    { label: 'forms.common.labels.extreme', value: 4 },
   ];
   nopOptionControlled: { label: string; value: any }[] = [
-    { label: 'Si', value: 1 },
-    { label: 'No', value: 2 },
+    { label: 'forms.common.options.yes', value: 1 },
+    { label: 'forms.common.options.no', value: 2 },
   ];
   nopOptionCauseAnalysis: { label: string; value: any }[] = [
     {
-      label: 'Ambiente (clima, condiciones de altitud, instalaciones)',
+      label: 'forms.common.analisisCause.atmosphere',
       value: 1,
     },
-    { label: 'Diseño de espacio de trabajo', value: 2 },
-    { label: 'Entrenamiento inadecuado o incompleto', value: 3 },
-    { label: 'Equipos o herramientas dañadas', value: 4 },
-    { label: 'Herramientas/Equipos no disponibles', value: 5 },
-    { label: 'Mantenimiento preventivo sin finalizar', value: 6 },
-    { label: 'Procesos o procedimientos inadecuados', value: 7 },
-    { label: 'Superficies de trabajo o caminos irregulares', value: 8 },
-    { label: 'Otra', value: 9 },
+    { label: 'forms.common.analisisCause.design', value: 2 },
+    { label: 'forms.common.analisisCause.training', value: 3 },
+    { label: 'forms.common.analisisCause.teams', value: 4 },
+    { label: 'forms.common.analisisCause.tools', value: 5 },
+    { label: 'forms.common.analisisCause.maintenance', value: 6 },
+    { label: 'forms.common.analisisCause.process', value: 7 },
+    { label: 'forms.common.analisisCause.surfaces', value: 8 },
+    { label: 'forms.common.analisisCause.other', value: 9 },
   ];
   nopOptinsTaken: { label: string; value: any }[] = [
-    { label: 'Asegurado', value: 1 },
-    { label: 'Bloqueado', value: 2 },
-    { label: 'Empleado entrenado', value: 3 },
-    { label: 'Entrenado, Instalado, Limpiado', value: 4 },
-    { label: 'Protegido', value: 5 },
-    { label: 'Provisto (EPP)', value: 6 },
-    { label: 'Reemplazado', value: 7 },
-    { label: 'Removido', value: 8 },
-    { label: 'Reparado', value: 9 },
-    { label: 'Otro', value: 10 },
+    { label: 'forms.common.actionsTaken.insured', value: 1 },
+    { label: 'forms.common.actionsTaken.locked', value: 2 },
+    { label: 'forms.common.actionsTaken.trained', value: 3 },
+    { label: 'forms.common.actionsTaken.trained_installed', value: 4 },
+    { label: 'forms.common.actionsTaken.protected', value: 5 },
+    { label: 'forms.common.actionsTaken.provided', value: 6 },
+    { label: 'forms.common.actionsTaken.superseded', value: 7 },
+    { label: 'forms.common.actionsTaken.removed', value: 8 },
+    { label: 'forms.common.actionsTaken.repaired', value: 9 },
+    { label: 'forms.common.actionsTaken.other', value: 10 },
   ];
 
   formGroup: FormGroup = new FormGroup({
@@ -332,111 +426,170 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
     hand_cleaning: new FormControl(null, [Validators.required]),
     social_precaution: new FormControl(null, [Validators.required]),
     sanitizer: new FormControl(null, [Validators.required]),
-    question1_powergen: new FormControl(null, [Validators.required]),
-    question2_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question3_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question4_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question5_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question6_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question7_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question8_powergen: new FormControl(null, [Validators.required]),
-    question9_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question10_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question11_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question13_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question14_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question15_powergen: new FormControl(null, [Validators.required]),
-    question16_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question17_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question18_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question19_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question20_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question21_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question22_powergen: new FormControl(null, [Validators.required]),
-    question23_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question24_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question25_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question26_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question27_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question28_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question29_powergen: new FormControl(null, [Validators.required]),
-    question30_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question31_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question32_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question33_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question34_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question35_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question36_powergen: new FormControl(null, [Validators.required]),
-    question37_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question38_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question39_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question40_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question41_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question42_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question43_powergen: new FormControl(null, [Validators.required]),
-    question44_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question45_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question46_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question47_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question48_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question49_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question50_powergen: new FormControl(null, [Validators.required]),
-    question51_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question52_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question53_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question54_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question55_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question56_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question57_powergen: new FormControl(null, [Validators.required]),
-    question58_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question59_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question60_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question61_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question62_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question63_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question64_powergen: new FormControl(null, [Validators.required]),
-    question65_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question66_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question67_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question68_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question69_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question70_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question71_powergen: new FormControl(null, [Validators.required]),
-    question71_1_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_site: new FormControl(false),
-    question72_powergen: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name1_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name2_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question73_powergen: new FormControl(false),
-    name3_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name4_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question74_powergen: new FormControl(false),
-    name5_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name6_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question75_powergen: new FormControl(false),
-    name7_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name8_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question76_powergen: new FormControl(false),
-    name9_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name10_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question77_powergen: new FormControl(false),
-    name11_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name12_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question78_powergen: new FormControl(false),
-    name13_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name14_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question79_powergen: new FormControl([]),
-    question80_powergen: new FormControl([]),
-    question81_powergen: new FormControl([]),
-    question82_powergen: new FormControl([]),
-    question83_powergen: new FormControl([]),
-    question84_powergen: new FormControl([]),
-    question85_powergen: new FormControl([]),
-    question86_powergen: new FormControl([]),
-    question87_powergen: new FormControl([]),
-    question88_powergen: new FormControl([]),
-    different_unusual: new FormControl(null),
+
+    question1_powergen: new FormControl(null, []),
+    question2_powergen: new FormControl(null, []),
+    question3_powergen: new FormControl(null, []),
+    question4_powergen: new FormControl(null, []),
+    question5_powergen: new FormControl(null, []),
+    question6_powergen: new FormControl(null, []),
+    question7_powergen: new FormControl(null, []),
+    question8_powergen: new FormControl(null, []),
+    question9_powergen: new FormControl(null, []),
+    question10_powergen: new FormControl(null, []),
+    question11_powergen: new FormControl(null, []),
+    question12_powergen: new FormControl(null, []),
+    question13_powergen: new FormControl(null, []),
+    question14_powergen: new FormControl(null, []),
+    question15_powergen: new FormControl(null, []),
+    question16_powergen: new FormControl(null, []),
+    question17_powergen: new FormControl(null, []),
+    question18_powergen: new FormControl(null, []),
+    question19_powergen: new FormControl(null, []),
+    question20_powergen: new FormControl(null, []),
+    question21_powergen: new FormControl(null, []),
+    question22_powergen: new FormControl(null, []),
+    question23_powergen: new FormControl(null, []),
+    question24_powergen: new FormControl(null, []),
+    question25_powergen: new FormControl(null, []),
+    question26_powergen: new FormControl(null, []),
+    question27_powergen: new FormControl(null, []),
+    question28_powergen: new FormControl(null, []),
+    question29_powergen: new FormControl(null, []),
+    question30_powergen: new FormControl(null, []),
+    question31_powergen: new FormControl(null, []),
+    question32_powergen: new FormControl(null, []),
+    question33_powergen: new FormControl(null, []),
+    question34_powergen: new FormControl(null, []),
+    question35_powergen: new FormControl(null, []),
+    question36_powergen: new FormControl(null, []),
+    question37_powergen: new FormControl(null, []),
+    question38_powergen: new FormControl(null, []),
+    question39_powergen: new FormControl(null, []),
+    question40_powergen: new FormControl(null, []),
+    question41_powergen: new FormControl(null, []),
+    question42_powergen: new FormControl(null, []),
+    question43_powergen: new FormControl(null, []),
+    question44_powergen: new FormControl(null, []),
+    question45_powergen: new FormControl(null, []),
+    question46_powergen: new FormControl(null, []),
+    question47_powergen: new FormControl(null, []),
+    question48_powergen: new FormControl(null, []),
+    question49_powergen: new FormControl(null, []),
+    question50_powergen: new FormControl(null, []),
+    question51_powergen: new FormControl(null, []),
+    question52_powergen: new FormControl(null, []),
+    question53_powergen: new FormControl(null, []),
+    question54_powergen: new FormControl(null, []),
+    question55_powergen: new FormControl(null, []),
+    question56_powergen: new FormControl(null, []),
+    question57_powergen: new FormControl(null, []),
+    question58_powergen: new FormControl(null, []),
+    question59_powergen: new FormControl(null, []),
+    question60_powergen: new FormControl(null, []),
+    question61_powergen: new FormControl(null, []),
+    question62_powergen: new FormControl(null, []),
+    question63_powergen: new FormControl(null, []),
+    question64_powergen: new FormControl(null, []),
+    question65_powergen: new FormControl(null, []),
+    question66_powergen: new FormControl(null, []),
+    question67_powergen: new FormControl(null, []),
+    question68_powergen: new FormControl(null, []),
+    question69_powergen: new FormControl(null, []),
+    question70_powergen: new FormControl(null, []),
+    question71_powergen: new FormControl(null, []),
+    question72_powergen: new FormControl(null, []),
+    question73_powergen: new FormControl(null, []),
+    question74_powergen: new FormControl(null, []),
+    question75_powergen: new FormControl(null, []),
+    question76_powergen: new FormControl(null, []),
+    question77_powergen: new FormControl(null, []),
+    question78_powergen: new FormControl(null, []),
+    question79_powergen: new FormControl(null, []),
+    question80_powergen: new FormControl(null, []),
+    question81_powergen: new FormControl(null, []),
+    question82_powergen: new FormControl(null, []),
+    question83_powergen: new FormControl(null, []),
+    question84_powergen: new FormControl(null, []),
+    question85_powergen: new FormControl(null, []),
+    question86_powergen: new FormControl(null, []),
+    question87_powergen: new FormControl(null, []),
+    question88_powergen: new FormControl(null, []),
+    question89_powergen: new FormControl(null, []),
+    question90_powergen: new FormControl(null, []),
+    question91_powergen: new FormControl(null, []),
+    question92_powergen: new FormControl(null, []),
+    question93_powergen: new FormControl(null, []),
+    question94_powergen: new FormControl(null, []),
+    question95_powergen: new FormControl(null, []),
+    question96_powergen: new FormControl(null, []),
+    question97_powergen: new FormControl(null, []),
+    question98_powergen: new FormControl(null, []),
+    question99_powergen: new FormControl(null, []),
+    question100_powergen: new FormControl(null, []),
+    question101_powergen: new FormControl(null, []),
+    question102_powergen: new FormControl(null, []),
+    question103_powergen: new FormControl(null, []),
+    question104_powergen: new FormControl(null, []),
+    question105_powergen: new FormControl(null, []),
+    question106_powergen: new FormControl(null, []),
+    question107_powergen: new FormControl(null, []),
+    question108_powergen: new FormControl(null, []),
+    question109_powergen: new FormControl(null, []),
+    question110_powergen: new FormControl(null, []),
+    question111_powergen: new FormControl(null, []),
+    question112_powergen: new FormControl(null, []),
+    question113_powergen: new FormControl(null, []),
+    question114_powergen: new FormControl(null, []),
+    question115_powergen: new FormControl(null, []),
+    question116_powergen: new FormControl(null, []),
+    question117_powergen: new FormControl(null, []),
+    question118_powergen: new FormControl(null, []),
+    question119_powergen: new FormControl(null, []),
+    question120_powergen: new FormControl(null, []),
+    question121_powergen: new FormControl(null, []),
+    question122_powergen: new FormControl(null, []),
+    question123_powergen: new FormControl(null, []),
+    question124_powergen: new FormControl(null, []),
+    question125_powergen: new FormControl(null, []),
+    question126_powergen: new FormControl(null, []),
+    question127_powergen: new FormControl(null, []),
+    question128_powergen: new FormControl(null, []),
+    question129_powergen: new FormControl(null, []),
+    question130_powergen: new FormControl(null, []),
+    question130_1_powergen: new FormControl(null, []),
+    question131_powergen: new FormControl(null, []),
+    name1_question: new FormControl(null, []),
+    name2_question: new FormControl(null, []),
+    question132_powergen: new FormControl(null, []),
+    name3_question: new FormControl(null, []),
+    name4_question: new FormControl(null, []),
+    question133_powergen: new FormControl(null, []),
+    name5_question: new FormControl(null, []),
+    name6_question: new FormControl(null, []),
+    question134_powergen: new FormControl(null, []),
+    name7_question: new FormControl(null, []),
+    name8_question: new FormControl(null, []),
+    question135_powergen: new FormControl(null, []),
+    name9_question: new FormControl(null, []),
+    name10_question: new FormControl(null, []),
+    question136_powergen: new FormControl(null, []),
+    name11_question: new FormControl(null, []),
+    name12_question: new FormControl(null, []),
+    question137_powergen: new FormControl(null, []),
+    name13_question: new FormControl(null, []),
+    name14_question: new FormControl(null, []),
+    question138_powergen: new FormControl(null, []),
+    question139_powergen: new FormControl(null, []),
+    question140_powergen: new FormControl(null, []),
+    question141_powergen: new FormControl(null, []),
+    question143_powergen: new FormControl(null, []),
+    question144_powergen: new FormControl(null, []),
+    question142_powergen: new FormControl(null, []),
+    question145_powergen: new FormControl(null, []),
+    question146_powergen: new FormControl(null, []),
+
+    different_unnusual: new FormControl(null, [Validators.required]),
     name_manager: new FormControl(null, [Validators.required]),
     phone_manager: new FormControl(null, [Validators.required]),
     lotus_quest: new FormControl(null, [Validators.required]),
@@ -451,13 +604,20 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
     this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
-    this.technicians$ = this.unitOfWorkDatabase.userRepository.all();
+    this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
+  }
+
+  onAnswersUpdated(answers: {[p: string]: any}): void {
+
+    const dateValue: string | null = answers.date;
+    if(!dateValue || dateValue.trim().length < 1) {
+      this.formGroup.controls.date.setValue(DateTime.now().toISODate());
+    }
 
     this.formGroup.controls.date.disable();
-    this.formGroup.controls.date.setValue(moment().format('YYYY-MM-d'));
 
     this.formGroup.controls.name_people.disable();
     this.formGroup.controls.wwid.disable();
@@ -465,12 +625,29 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
     this.authService.user.pipe(take(1)).subscribe((user) => {
       this.formGroup.controls.name_people.setValue(user?.name ?? '');
       this.formGroup.controls.wwid.setValue(user?.wwid ?? '');
+      if(user) {
+        this.unitOfWorkDatabase.userRepository.all()
+          .pipe(map(users => {
+            const userIdx = users.findIndex(value => value.wwid === user.supervisor);
+            if (userIdx >= 0) {
+              return users[userIdx];
+            }
+            return null;
+          })).subscribe(supervisor =>{
+          if(supervisor) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.name_manager ? null : this.formGroup.controls.name_manager.setValue(supervisor.name);
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.phone_manager ? null : this.formGroup.controls.phone_manager.setValue(supervisor.phone);
+          }
+        });
+      }
     });
   }
-
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

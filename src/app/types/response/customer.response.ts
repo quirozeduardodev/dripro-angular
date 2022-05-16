@@ -1,4 +1,4 @@
-import * as moment from "moment-timezone";
+import {DateTime} from 'luxon';
 
 export interface CustomerResponse {
   id: number;
@@ -6,6 +6,6 @@ export interface CustomerResponse {
   name: string;
   address: string;
   phone: string;
-  createdAt: moment.Moment | null;
-  updatedAt: moment.Moment | null;
+  createdAt: DateTime | null;
+  updatedAt: DateTime | null;
 }

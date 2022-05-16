@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {ConfigurationService} from '../../services/configuration.service';
-import * as moment from 'moment-timezone';
+import {DateTime} from 'luxon';
 
 @Pipe({
   name: 'tz'
@@ -8,8 +8,9 @@ import * as moment from 'moment-timezone';
 export class TzPipe implements PipeTransform {
   constructor(private configurationService: ConfigurationService) {
   }
-  transform(value: string | moment.Moment | null, format: 'date' | 'datetime' | 'fullDatetime' | string = 'YYYY-MM-DD HH:mm:ss'): string {
-    return this.configurationService.tzToTimeZoneFormat(value, format === 'date' ? 'LL' : format === 'datetime' ? 'LLL' : format === 'fullDatetime' ? 'LLLL' : format);
+  transform(value: string | DateTime | null, format: 'date' | 'datetime' | 'fullDate' | string = 'yyyy-LL-dd HH:mm:ss'): string {
+    // eslint-disable-next-line max-len
+    return this.configurationService.tzToTimeZoneFormat(value, format === 'date' ? 'DD' : format === 'datetime' ? 'ff' : format === 'fullDate' ? 'DDDD' : format);
   }
 
 }

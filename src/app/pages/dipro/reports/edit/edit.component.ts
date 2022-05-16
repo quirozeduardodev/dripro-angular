@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, Observable, of, ReplaySubject, Subscription } from 'rxjs';
+import {combineLatest, Observable, of, ReplaySubject, Subscription, throwError} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormsComponent } from '../forms/forms.component';
 import { LocalReport } from '../../../../database/models/local_report';
@@ -20,10 +20,11 @@ import { Location } from '@angular/common';
 export class EditComponent implements OnInit, OnDestroy {
   @ViewChild('form') form: FormsComponent | null = null;
   @ViewChild('dialogSavedChanges') dialogSavedChanges: BaseDialogComponent | null = null;
+  @ViewChild('dialogError') dialogError: BaseDialogComponent | null = null;
 
   subTitleTr: string = 'reports.common.names.unknown';
 
-  isLoading = true;
+  isLoading = false;
   isReviewing: boolean = false;
   subscriptionParams: Subscription | null = null;
   pauseSubscription: Subscription | null = null;
@@ -86,6 +87,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   saveChanges(): void {
     if (this.localReport) {
+      this.isLoading = true;
       this.localReport.answers = this.form?.value ?? {};
       this.unitOfWorkDatabase.localReportRepository
         .update(this.localReport)
@@ -94,6 +96,7 @@ export class EditComponent implements OnInit, OnDestroy {
           catchError((err) => of(true))
         )
         .subscribe((value) => {
+          this.isLoading = false;
           this.canBack?.next(true);
         });
     } else {
@@ -135,6 +138,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   submitChangesConfirmation(): void {
     if(this.localReport) {
+      this.isLoading = true;
       let type: any = 'unknown';
         switch (this.localReport.type) {
           case 'jsa-onSite':
@@ -179,15 +183,21 @@ export class EditComponent implements OnInit, OnDestroy {
         }
       this.reportEndpointService.save({
         answer: this.localReport.answers ?? {},
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         form_name: type,
         locale: 'es'
-      })
+      }).pipe(catchError(error => {
+        this.isLoading = false;
+        this.dialogError?.open();
+        return throwError(() => error);
+      }))
       .subscribe(response => {
         this.unitOfWorkDatabase.localReportRepository
         .delete(this.localReport?.id ?? 0)
         .pipe(catchError(erro => of(null))).subscribe(x => {
           this.reportsService.reloadAll();
-        this.location.back();
+          this.isLoading = false;
+          this.location.back();
         });
       });
     }

@@ -19,10 +19,10 @@ export class DataBase extends Dexie {
       'locations': '++id, name',
       'motors': '++id, name',
       'qtas': '++id, name',
-      'technicians': '++id, name',
+      'technicians': '++id, name, role',
       'types': '++id, name',
       'units': '++id, name',
-      'users': '++id, name',
+      'users': '++id, name, role, wwid, phone',
       'synchronizations': '++id, table, synchronizedAt'
     });
   }

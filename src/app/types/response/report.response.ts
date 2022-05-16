@@ -1,10 +1,10 @@
-import {Moment} from "moment-timezone";
+import {DateTime} from 'luxon';
 
 export interface BasicReportResponse {
   id: number;
   form: string;
   folio: string;
-  createdAt: Moment | null;
+  createdAt: DateTime | null;
 }
 
 

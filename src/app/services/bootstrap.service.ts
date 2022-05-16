@@ -35,6 +35,7 @@ export class BootstrapService {
 
       this.configurationService.start();
       this.offlineDataService.initialize();
+      this.offlineDataService.synchronizeAll();
 
       return forkJoin([
         from('some')

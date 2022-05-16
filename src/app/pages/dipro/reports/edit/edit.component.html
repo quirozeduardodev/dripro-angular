@@ -3,23 +3,24 @@
 [subTitle]="getSubTitle() | async"
 [canBack]="canBack"
 (onBackPressed)="saveChanges()">
-<div class="flex flex-col">
-  <app-forms #form *ngIf="localReport"
-  [type]="localReport.type"
-  [answers]="localReport?.answers ?? {}"
-  (onSave)="saveChangesConfirmation()"
-  (onSubmit)="submitChanges()"
-  [readOnly]="isReviewing">
-  </app-forms>
-  <div *ngIf="isReviewing" class="w-full flex flex-wrap justify-center py-4">
-    <div class="p-2">
-      <button type="button" class="btn btn-accent btn-stroked w-44" (click)="isReviewing = false">{{'pages.dipro.reports.edit.cancel' | translate}}</button>
-    </div>
-    <div class="p-2">
-      <button type="button" class="btn btn-accent btn-flat w-44" (click)="submitChangesConfirmation()">{{'pages.dipro.reports.edit.save' | translate}}</button>
+  <div class="flex flex-col">
+    <app-forms #form *ngIf="localReport"
+    [type]="localReport.type"
+    [answers]="localReport?.answers ?? {}"
+    (onSave)="saveChangesConfirmation()"
+    (onSubmit)="submitChanges()"
+    [readOnly]="isReviewing">
+    </app-forms>
+    <div *ngIf="isReviewing" class="w-full flex flex-wrap justify-center py-4">
+      <div class="p-2">
+        <button type="button" class="btn btn-accent btn-stroked w-44" (click)="isReviewing = false">{{'pages.dipro.reports.edit.cancel' | translate}}</button>
+      </div>
+      <div class="p-2">
+        <button type="button" class="btn btn-accent btn-flat w-44" (click)="submitChangesConfirmation()">{{'pages.dipro.reports.edit.save' | translate}}</button>
+      </div>
     </div>
   </div>
-</div>
+  <app-center-loading *ngIf="isLoading"></app-center-loading>
 </app-back-layout>
 
 <app-base-dialog #dialogSavedChanges>
@@ -27,6 +28,17 @@
     <span class="text-gray-900">{{'pages.dipro.reports.edit.savedSuccess' | translate}}</span>
     <div class="flex justify-center my-3">
       <button class="btn btn-accent btn-flat" (click)="dialogSavedChanges.close()" type="button">
+        {{'pages.dipro.reports.edit.accept' | translate}}
+      </button>
+    </div>
+  </div>
+</app-base-dialog>
+
+<app-base-dialog #dialogError>
+  <div class="flex flex-col">
+    <span class="text-gray-900">{{'pages.dipro.reports.edit.errorOnSave' | translate}}</span>
+    <div class="flex justify-center my-3">
+      <button class="btn btn-accent btn-flat" (click)="dialogError.close()" type="button">
         {{'pages.dipro.reports.edit.accept' | translate}}
       </button>
     </div>

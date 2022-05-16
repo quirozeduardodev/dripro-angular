@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment-timezone';
 import { BehaviorSubject, combineLatest, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { LocalReport } from 'src/app/database/models/local_report';
@@ -8,12 +7,13 @@ import { ReportEndpointService } from 'src/app/services/endpoints/report-endpoin
 import { PaginateResponse } from 'src/app/types/response/paginate.response';
 import { BasicReportResponse } from 'src/app/types/response/report.response';
 import { FiltersReports } from '../components/filters-sheet/filters-sheet.component';
+import {DateTime} from 'luxon';
 
 export interface MergedReport {
   id: any;
   name: string;
   isOnline: boolean;
-  createdAt: moment.Moment;
+  createdAt: DateTime;
 }
 
 export declare type ServiceState = 'idle' | 'loading';
@@ -65,23 +65,23 @@ export class ReportsService {
 
 
   private async _mergeReportsShort(_localReports: LocalReport[], _onlineReports: BasicReportResponse[]): Promise<MergedReport[]> {
-    const localReports: MergedReport[] = await _localReports.map(item => ({
+    const localReports: MergedReport[] = _localReports.map(item => ({
       id: item.id,
       name: item.type as string,
-      createdAt: item.createdAt ? moment(item.createdAt) : moment(),
+      createdAt: item.createdAt ? DateTime.fromISO(item.createdAt) : DateTime.now(),
       isOnline: false
     }));
-    const onlineReports = await _onlineReports.map(item => ({
+    const onlineReports = _onlineReports.map(item => ({
         id: item.id,
         name: item.folio,
-        createdAt: item.createdAt ? moment(item.createdAt) : moment(),
+        createdAt: item.createdAt ? item.createdAt : DateTime.now(),
         isOnline: true
       }));
     const shortBy = this._filters?.shortBy === 'asc' ? 'asc' : 'desc';
-    const result: MergedReport[] = await [...localReports, ...onlineReports].sort((a, b) => {
-      if (a.createdAt.isBefore(b.createdAt)) {
+    const result: MergedReport[] = [...localReports, ...onlineReports].sort((a, b) => {
+      if (a.createdAt < b.createdAt) {
         return shortBy === 'desc' ? 1 : -1;
-      } else if(a.createdAt.isAfter(b.createdAt)) {
+      } else if(a.createdAt > b.createdAt) {
         return shortBy === 'desc' ? -1 : 1;
       } else {
         return 0;

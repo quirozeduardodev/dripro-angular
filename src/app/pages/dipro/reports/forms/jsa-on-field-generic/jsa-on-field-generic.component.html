@@ -2,218 +2,106 @@
   <div class="w-full flex flex-col">
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.date' | translate}}</label>
-      <form-text-field
-        formControlName="date"
-        [placeholder]="'forms.common.labels.date' | translate"
-      ></form-text-field>
+      <form-text-field formControlName="date" [placeholder]="'forms.common.labels.date' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.jobOrder' | translate}}</label>
-      <form-text-field
-        formControlName="job_order"
-        [placeholder]="'forms.common.labels.jobOrder' | translate"
-      ></form-text-field>
+      <form-text-field formControlName="job_order" [placeholder]="'forms.common.labels.jobOrder' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.name' | translate}}</label>
-      <form-text-field
-        formControlName="name_people"
-        [placeholder]="'forms.common.labels.name' | translate"
-      ></form-text-field>
+      <form-text-field formControlName="name_people" [placeholder]="'forms.common.labels.name' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.common.labels.wwid' | translate}}</label>
-      <form-text-field
-        formControlName="wwid"
-        [placeholder]="'forms.common.labels.wwid' | translate"
-      ></form-text-field>
+      <form-text-field formControlName="wwid" [placeholder]="'forms.common.labels.wwid' | translate"></form-text-field>
     </div>
     <div class="my-2 flex flex-col" *ngIf="businessUnits$">
       <label class="my-1">{{'forms.common.labels.bussinesUnit' | translate}}</label>
-      <form-search-select
-        [placeholder]="'forms.common.labels.bussinesUnit' | translate"
-        formControlName="unidad"
-      >
-        <form-option
-          *ngFor="let option of (businessUnits$ | async) || []"
-          [value]="option.id"
-          [label]="option.name"
-        ></form-option>
+      <form-search-select [placeholder]="'forms.common.labels.bussinesUnit' | translate" formControlName="unidad">
+        <form-option *ngFor="let option of (businessUnits$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
       </form-search-select>
     </div>
     <div class="w-full flex justify-between my-3">
       <span>{{'forms.common.labels.isAccompained' | translate}}</span>
       <mat-slide-toggle formControlName="accompanied"></mat-slide-toggle>
     </div>
-    <div
-      *ngIf="formGroup.controls.accompanied.value === true"
-      class="w-full flex flex-col my-3"
-    >
+    <div *ngIf="formGroup.controls.accompanied.value === true" class="w-full flex flex-col my-3">
       <span>{{'forms.common.labels.selectYourPartner' | translate}}</span>
       <form-multi-select formControlName="teammate_name">
-        <form-option
-          *ngFor="let user of (technicians$ | async) || []"
-          [value]="user.name"
-          [label]="user.name"
-        ></form-option>
+        <form-option *ngFor="let user of (technicians$ | async) || []" [value]="user.name" [label]="user.name"></form-option>
       </form-multi-select>
     </div>
     <div class="w-full flex flex-col justify-between my-3">
       <span>{{'forms.common.labels.extern' | translate}}</span>
-      <form-chip-list
-        [placeholder]="'forms.common.labels.extern' | translate"
-        formControlName="tageditor"
-      ></form-chip-list>
+      <form-chip-list [placeholder]="'forms.common.labels.extern' | translate" formControlName="tageditor"></form-chip-list>
     </div>
     <div class="my-1 flex flex-col" *ngIf="businessUnits$">
       <label class="my-1">{{'forms.common.labels.taskCategory' | translate}}</label>
-      <form-search-select
-        formControlName="task_category_generic"
-        [placeholder]="'forms.common.labels.taskCategory' | translate">
-        <form-option
-          *ngFor="let option of (categoriesUnits$ | async) || []"
-          [value]="option.id"
-          [label]="option.name"
-        ></form-option>
+      <form-search-select formControlName="task_category_generic" [placeholder]="'forms.common.labels.taskCategory' | translate">
+        <form-option *ngFor="let option of (categoriesUnits$ | async) || []"
+                     [value]="option.id"
+                     [label]="option.name"></form-option>
       </form-search-select>
     </div>
     <div class="my-1 flex flex-col">
       <label class="my-1">{{'forms.common.labels.categoryDescription' | translate}}</label>
-      <form-text-field
-        formControlName="task_description"
-        [placeholder]="'forms.common.labels.categoryDescription' | translate"
-      ></form-text-field>
+      <form-text-field formControlName="task_description" [placeholder]="'forms.common.labels.categoryDescription' | translate"></form-text-field>
     </div>
     <div class="my-1 flex flex-col">
       <label class="my-1">{{'forms.common.labels.fillLocation' | translate}}</label>
-      <form-text-field
-        formControlName="location"
-        [placeholder]="'forms.common.labels.fillLocation' | translate"
-      ></form-text-field>
+      <form-location-text-field formControlName="location" [placeholder]="'forms.common.labels.fillLocation' | translate"></form-location-text-field>
     </div>
     <ng-container *ngFor="let section of groupSections">
       <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-        <span class="text-white text-lg font-medium">{{
-          section.label | translate
-        }}</span>
+        <span class="text-white text-lg font-medium">{{section.label | translate}}</span>
       </div>
-      <div
-        class="my-3 flex flex-col"
-        *ngFor="let question of section.questions"
-      >
-        <label class="my-1">{{ question.label | translate }}</label>
-        <form-button-group
-          class="mt-12"
-          [formControlName]="question.formControlName"
-        >
-          <form-option
-            *ngFor="let option of commonOptions"
-            [label]="option.label | translate"
-            [value]="option.value"
-          ></form-option>
+      <div class="my-3 flex flex-col" *ngFor="let question of section.questions">
+        <label class="my-1">{{question.label | translate}}</label>
+        <form-button-group class="mt-12" [formControlName]="question.formControlName">
+          <form-option *ngFor="let option of commonOptions" [label]="option.label | translate" [value]="option.value"></form-option>
         </form-button-group>
         <div *ngIf="question.subOptions" class="w-full flex flex-col px-3">
-          <div
-            *ngIf="
-              question.subOptions.fCNRiskLevel &&
-              formGroup.controls[question.formControlName].value === 2
-            "
-            class="my-2 flex flex-col"
-          >
+          <div *ngIf="question.subOptions.fCNRiskLevel && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
             <span class="my-2">{{'forms.common.labels.riskLevel' | translate}}</span>
-            <form-search-select
-              placeholder=""
-              [formControlName]="question.subOptions.fCNRiskLevel"
-            >
-              <form-option
-                *ngFor="let option of nopOptionLevelRisk"
-                [value]="option.value"
-                [label]="option.label | translate"
-              ></form-option>
+            <form-search-select placeholder="" [formControlName]="question.subOptions.fCNRiskLevel">
+              <form-option *ngFor="let option of nopOptionLevelRisk"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
             </form-search-select>
           </div>
-          <div
-            *ngIf="
-              question.subOptions.fCNControlled &&
-              formGroup.controls[question.formControlName].value === 2
-            "
-            class="my-2 flex flex-col"
-          >
+          <div *ngIf="question.subOptions.fCNControlled && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
             <span class="my-2">{{'forms.common.labels.controlled' | translate}}</span>
-            <form-search-select
-              placeholder=""
-              [formControlName]="question.subOptions.fCNControlled"
-            >
-              <form-option
-                *ngFor="let option of nopOptionControlled"
-                [value]="option.value"
-                [label]="option.label | translate"
-              ></form-option>
+            <form-search-select placeholder="" [formControlName]="question.subOptions.fCNControlled">
+              <form-option *ngFor="let option of nopOptionControlled"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
             </form-search-select>
           </div>
-          <div
-            *ngIf="
-              question.subOptions.fCNCauseAnalysis &&
-              formGroup.controls[question.formControlName].value === 2
-            "
-            class="my-2 flex flex-col"
-          >
+          <div *ngIf="question.subOptions.fCNCauseAnalysis && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
             <span class="my-2">{{'forms.common.labels.analisisCause' | translate}}</span>
-            <form-search-select
-              placeholder=""
-              [formControlName]="question.subOptions.fCNCauseAnalysis"
-            >
-              <form-option
-                *ngFor="let option of nopOptionCauseAnalysis"
-                [value]="option.value"
-                [label]="option.label | translate"
-              ></form-option>
+            <form-search-select placeholder="" [formControlName]="question.subOptions.fCNCauseAnalysis">
+              <form-option *ngFor="let option of nopOptionCauseAnalysis"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
             </form-search-select>
-            <div
-              *ngIf="
-                question.subOptions.fCNCauseAnalysisOther &&
-                formGroup.controls[question.subOptions.fCNCauseAnalysis]
-                  .value === 9
-              "
-              class="my-1 flex flex-col mt-3"
-            >
+            <div *ngIf="question.subOptions.fCNCauseAnalysisOther && formGroup.controls[question.subOptions.fCNCauseAnalysis].value === 9" class="my-1 flex flex-col mt-3">
               <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
-              <form-text-field
-                [formControlName]="question.subOptions.fCNCauseAnalysisOther"
-                [placeholder]="''"
-              ></form-text-field>
+              <form-text-field [formControlName]="question.subOptions.fCNCauseAnalysisOther"  [placeholder]="''"></form-text-field>
             </div>
           </div>
-          <div
-            *ngIf="
-              question.subOptions.fCNTaken &&
-              formGroup.controls[question.formControlName].value === 2
-            "
-            class="my-2 flex flex-col"
-          >
+          <div *ngIf="question.subOptions.fCNTaken && formGroup.controls[question.formControlName].value === 2" class="my-2 flex flex-col">
             <span class="my-2">{{'forms.common.labels.actionTaken' | translate}}</span>
-            <form-search-select
-              placeholder=""
-              [formControlName]="question.subOptions.fCNTaken"
-            >
-              <form-option
-                *ngFor="let option of nopOptinsTaken"
-                [value]="option.value"
-                [label]="option.label | translate"
-              ></form-option>
+            <form-search-select placeholder="" [formControlName]="question.subOptions.fCNTaken">
+              <form-option *ngFor="let option of nopOptinsTaken"
+                           [value]="option.value"
+                           [label]="option.label | translate"></form-option>
             </form-search-select>
-            <div
-              *ngIf="
-                question.subOptions.fCNTakenOther &&
-                formGroup.controls[question.subOptions.fCNTaken].value === 10
-              "
-              class="my-1 flex flex-col mt-3"
-            >
+            <div *ngIf="question.subOptions.fCNTakenOther && formGroup.controls[question.subOptions.fCNTaken].value === 10" class="my-1 flex flex-col mt-3">
               <label class="my-1">{{'forms.common.labels.message' | translate}}</label>
-              <form-text-field
-                [formControlName]="question.subOptions.fCNTakenOther"
-                [placeholder]="''"
-              ></form-text-field>
+              <form-text-field [formControlName]="question.subOptions.fCNTakenOther"  [placeholder]="''"></form-text-field>
             </div>
           </div>
         </div>
@@ -221,524 +109,218 @@
     </ng-container>
     <ng-container>
       <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-        <span class="text-white text-lg font-medium">{{
-          'forms.jsa.warehouse.epp.title' | translate
-        }}</span>
+        <span class="text-white text-lg font-medium">{{'forms.jsa.field.generic.lonely_job' | translate}}</span>
       </div>
       <div class="my-3 flex flex-col">
-        <label class="my-1">{{
-          "forms.jsa.warehouse.epp.question1" | translate
-        }}</label>
+        <label class="my-1">{{'forms.jsa.field.generic.activity' | translate}}</label>
         <form-button-group class="mt-12" [formControlName]="'question71_generic'">
-          <form-option [value]="1" [label]="'Si' | translate"></form-option>
-          <form-option [value]="2" [label]="'No' | translate"></form-option>
+          <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
+          <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
         </form-button-group>
-        <div
-          *ngIf="formGroup.controls.question71_generic.value === 1"
-          class="my-1 flex flex-col mt-3"
-        >
-          <label class="my-1"
-            >Proporcione detalles de medidas especiales de seguridad y plan de
-            emergencia.</label
-          >
-          <form-text-field
-            [formControlName]="'question71_1_generic'"
-            [placeholder]="
-              'Proporcione detalles de medidas especiales de seguridad y plan de emergencia.'
-            "
-          ></form-text-field>
+        <div *ngIf="formGroup.controls.question71_generic.value === 1" class="my-1 flex flex-col m-3">
+          <label class="my-1">{{'forms.jsa.field.generic.details' | translate}}</label>
+          <form-text-field [formControlName]="'question71_1_generic'"  [placeholder]="''"></form-text-field>
         </div>
       </div>
     </ng-container>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium"
-        >EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E
-        IMPLEMENTACION DE CONTROLES</span
-      >
-      <br />
-      <span class="text-white text-sm font-medium"
-        >MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA,
-        TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN</span
-      >
+      <span class="text-white text-lg font-medium">{{'forms.jsa.field.generic.strange_evaluation' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.field.generic.movements' | translate}}</span>
     </div>
-    <div
-      class="border rounded border-gray-500 px-3 py-5 my-2"
-      *ngFor="let item of checkboxesP1">
-      <mat-checkbox class="example-margin"
-        [formControlName]="item.formControlName">{{ item.label | translate }}</mat-checkbox>
-      <div
-        *ngIf="formGroup.controls[item.formControlName].value === true"
-        class="flex flex-col"
-      >
-        <span>Poner en práctica Controles Establecidos</span>
-        <form-text-area
-          [formControlName]="item.formControlName1"
-        ></form-text-area>
-        <span>¿Qué es extraño, inusual o diferente hoy?</span>
-        <form-text-area
-          [formControlName]="item.formControlName2"
-        ></form-text-area>
+    <div class="border rounded border-gray-500 px-3 py-5 my-2" *ngFor="let item of checkboxesP1">
+      <mat-checkbox class="example-margin" [formControlName]="item.formControlName">{{item.label | translate}}</mat-checkbox>
+      <div *ngIf="formGroup.controls[item.formControlName].value === true" class="flex flex-col">
+        <span>{{'forms.jsa.field.generic.practice' | translate}}</span>
+        <form-text-area [formControlName]="item.formControlName1"></form-text-area>
+        <span>{{'forms.jsa.field.generic.strange' | translate}}</span>
+        <form-text-area [formControlName]="item.formControlName2"></form-text-area>
       </div>
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium"
-        >EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE
-        RIESGOS E IMPLEMENTSCIÓN DE CONTROLES
-      </span>
-      <br />
-      <span class="text-white text-sm font-medium"
-        >Cada sitio de trabajo es diferente, así que debe de identificar kis
-        peligros potenciales antes de comenzar la tarea y tambien cuando la
-        tarea cambia significativamente</span
-      >
+      <span class="text-white text-lg font-medium">{{'forms.jsa.field.generic.evaluation' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.field.generic.each_generic' | translate}}</span>
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-sm font-medium"
-        >Identificación de los peligros(dar click si el peligro está
-        presente)</span
-      >
+      <span class="text-white text-sm font-medium">{{'forms.jsa.field.generic.identification' | translate}}</span>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Peligros inusuales</span>
+      <span class="my-2">{{'forms.jsa.field.generic.unusual_hazards.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question79_generic">
-        <form-option
-          [value]="1"
-          [label]="'Gas Natural (GNG/LNG)' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Animales o insectos' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Gases de escape' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Alto nivel de ruido' | translate"
-        ></form-option>
-        <form-option
-          [value]="5"
-          [label]="'Trabajos en caliente' | translate"
-        ></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Espacios de trabajo restringido' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Entrada a espacios confinados' | translate"
-        ></form-option>
-        <form-option
-          [value]="8"
-          [label]="'Peligros de higiene' | translate"
-        ></form-option>
-        <form-option
-          [value]="9"
-          [label]="'Gas o liquido inflamable' | translate"
-        ></form-option>
-        <form-option
-          [value]="10"
-          [label]="'Aire Comprimido' | translate"
-        ></form-option>
-        <form-option
-          [value]="11"
-          [label]="'Seguridad de la batería' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.unusual_hazards.gas' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.unusual_hazards.animals' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.unusual_hazards.gases' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.unusual_hazards.high_level' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.generic.unusual_hazards.hot_works' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.field.generic.unusual_hazards.work_space' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.field.generic.unusual_hazards.confined_space' | translate"></form-option>
+        <form-option [value]="8" [label]="'forms.jsa.field.generic.unusual_hazards.hygiene_hazards' | translate"></form-option>
+        <form-option [value]="9" [label]="'forms.jsa.field.generic.unusual_hazards.flammable_gas' | translate"></form-option>
+        <form-option [value]="10" [label]="'forms.jsa.field.generic.unusual_hazards.compressed_air' | translate"></form-option>
+        <form-option [value]="11" [label]="'forms.jsa.field.generic.unusual_hazards.security' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Accesso al (los) Equipo(s)</span>
+      <span class="my-2">{{'forms.jsa.field.generic.access_equipment.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question80_generic">
-        <form-option
-          [value]="1"
-          [label]="'Escalera o Escalera de Mano' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Plataforma de Acceso Estático' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Plataforma de Trabajo Móvil' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Taburete o Grada de Trabajo' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.access_equipment.ladders' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.access_equipment.platform_access' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.access_equipment.platform_work' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.access_equipment.stool' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Actividades Peligrosas en el Taller</span>
+      <span class="my-2">{{'forms.jsa.field.generic.hazards_activity.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question81_generic">
-        <form-option
-          [value]="1"
-          [label]="'Pintura con Pistola' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Celda de Prueba del Motor' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Dyno Chassiss' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Bahía de lavado' | translate"
-        ></form-option>
-        <form-option
-          [value]="5"
-          [label]="'Baño Químico' | translate"
-        ></form-option>
-        <form-option [value]="6" [label]="'Limpieza' | translate"></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Inspección de Fosas' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.hazards_activity.spray_painting' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.hazards_activity.row_testing' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.hazards_activity.dyno_chassiss' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.hazards_activity.washing_bay' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.generic.hazards_activity.chemical_bath' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.field.generic.hazards_activity.cleaning' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.field.generic.hazards_activity.pit_inspection' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Orden y limpieza</span>
+      <span class="my-2">{{'forms.jsa.field.generic.order_cleaning.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question82_generic">
-        <form-option
-          [value]="1"
-          [label]="'Establecer orden en el área de trabajo' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Disponer / Desechar' | translate"
-        ></form-option>
-        <form-option [value]="3" [label]="'Limpieza' | translate"></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.order_cleaning.establishing_work_area' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.order_cleaning.dispose_discard' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.order_cleaning.cleaning' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Línea de Fuego</span>
+      <span class="my-2">{{'forms.jsa.field.generic.fire_line.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question83_generic">
-        <form-option
-          [value]="1"
-          [label]="'Golpeado(a) por o contra' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Atrapado(a) por' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Energía Peligrosa' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Polvo o Suciedad' | translate"
-        ></form-option>
-        <form-option
-          [value]="5"
-          [label]="'Peligro de Proyectil' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.fire_line.hit_by_or_against' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.fire_line.trapped_by' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.fire_line.dangerous_energy' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.fire_line.dust_dirt' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.generic.fire_line.proyectile_hazard' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Resbalones, Tropiezos, Caídas</span>
+      <span class="my-2">{{'forms.jsa.field.generic.slips.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question84_generic">
-        <form-option
-          [value]="1"
-          [label]="'Suelo Húmedo o Aceitoso' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Cables sobre el piso' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Los desniveles del terreno / Grava' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Área elevada / Mezanine' | translate"
-        ></form-option>
-        <form-option [value]="5" [label]="'Azotea' | translate"></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Nieve, Barro o Hielo' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Fosa en el Piso' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.slips.wet_oily_soil' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.slips.cables_on_floor' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.slips.terrain_unevenness' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.slips.elevated_area' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.generic.slips.rooftop' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.field.generic.slips.snow_mud_or_ice' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.field.generic.slips.pit_in_the_floor' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Interacción con otras Personas</span>
+      <span class="my-2">{{'forms.jsa.field.generic.interaction_other_people.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question85_generic">
-        <form-option
-          [value]="1"
-          [label]="'Trabajo con Contratistas' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Público en General' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Cliente/Empleados' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.interaction_other_people.job_contractors' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.interaction_other_people.general_public' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.interaction_other_people.client_employee' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Impacto Ambiental</span>
+      <span class="my-2">{{'forms.jsa.field.generic.environmental_impact.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question86_generic">
-        <form-option
-          [value]="1"
-          [label]="'Fugas o Derrames' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Vapores o Humo' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Eliminación de Residuos' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Uso de Productos Químicos' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.environmental_impact.leaks_or_spills' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.environmental_impact.fumes_or_smokes' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.environmental_impact.waste_disposal' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.environmental_impact.chemical_products' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Ergonomía</span>
+      <span class="my-2">{{'forms.jsa.field.generic.ergonomic.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question87_generic">
-        <form-option
-          [value]="1"
-          [label]="'Fuerza Excesiva' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Trabajo Repetitivo' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Postura Estresante' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Estrés de Contacto' | translate"
-        ></form-option>
-        <form-option
-          [value]="5"
-          [label]="'Arrodillándose / Arrastrándose' | translate"
-        ></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Vibración' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Levantamiento de Objetos Pesados' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.ergonomic.excesive_force' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.ergonomic.repetitive_job' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.ergonomic.estresful' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.ergonomic.contact_stress' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.generic.ergonomic.kneeling_down' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.field.generic.ergonomic.vibrate' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.field.generic.ergonomic.heavy_lifting' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <span class="my-2">Condiciones Climáticas</span>
+      <span class="my-2">{{'forms.jsa.field.generic.weather_conditions.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question88_generic">
-        <form-option
-          [value]="1"
-          [label]="'Calor Extremo' | translate"
-        ></form-option>
-        <form-option
-          [value]="2"
-          [label]="'Frío Extremo' | translate"
-        ></form-option>
-        <form-option
-          [value]="3"
-          [label]="'Fuertes Vientos' | translate"
-        ></form-option>
-        <form-option
-          [value]="4"
-          [label]="'Condiciones de Tormenta' | translate"
-        ></form-option>
-        <form-option [value]="5" [label]="'Lluvia' | translate"></form-option>
-        <form-option
-          [value]="6"
-          [label]="'Nieve / Hielo' | translate"
-        ></form-option>
-        <form-option
-          [value]="7"
-          [label]="'Gran Altitud' | translate"
-        ></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.generic.weather_conditions.extreme_heat' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.jsa.field.generic.weather_conditions.extreme_cold' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.generic.weather_conditions.strong_winds' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.generic.weather_conditions.storm_conditions' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.generic.weather_conditions.rain' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.field.generic.weather_conditions.snown' | translate"></form-option>
+        <form-option [value]="7" [label]="'forms.jsa.field.generic.weather_conditions.great_altitud' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
-      <label class="my-1"
-        >IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es
-        extraño, inusual o diferente hoy?</label
-      >
-      <form-text-field
-        [formControlName]="'different_unusual'"
-        [placeholder]="''"
-      ></form-text-field>
+      <label class="my-1">{{'forms.jsa.field.generic.different_unusual' | translate}}</label>
+      <form-text-field [formControlName]="'different_unnusual'"  [placeholder]="''"></form-text-field>
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium"
-        >REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES
+      <span class="text-white text-lg font-medium">{{'forms.jsa.field.generic.title_supervisor' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.field.generic.subtitle_supervisor' | translate}}</span>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.jsa.field.generic.supervisor.name' | translate}}</label>
+      <form-text-field [formControlName]="'name_manager'"  [placeholder]="''"></form-text-field>
+    </div>
+    <div class="my-2 flex flex-col">
+      <label class="my-1">{{'forms.jsa.field.generic.supervisor.phone' | translate}}</label>
+      <form-text-field [formControlName]="'phone_manager'"  [placeholder]="''"></form-text-field>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-sm font-medium">{{'forms.jsa.field.generic.emergency' | translate}}</span>
+    </div>
+    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
+      <span class="text-white text-lg font-medium">{{'forms.jsa.field.generic.safety_title' | translate}}</span>
+      <br>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.field.generic.safety_subtitle' | translate}}<br>
+        {{'forms.jsa.field.generic.safety_subtitle_option1' | translate}}<br><br>
+        {{'forms.jsa.field.generic.safety_subtitle_option2' | translate}}<br><br>
+        {{'forms.jsa.field.generic.safety_subtitle_option3' | translate}}<br>
+        {{'forms.jsa.field.generic.safety_subtitle_option4' | translate}}
       </span>
-      <br />
-      <span class="text-white text-sm font-medium"
-        >En el caso de peligro de muerte o de lesiones graves, póngase en
-        contacto con el servicio de emergencias inmediatamente Informe de todos
-        los incidentes a su jefe inmediato - esto puede ser una lesión menor,
-        grave, o un casi incidente</span
-      >
-    </div>
-    <div class="my-2 flex flex-col">
-      <label class="my-1">Nombre del Gerente</label>
-      <form-text-field
-        [formControlName]="'name_manager'"
-        [placeholder]="'Nombre del Gerente'"
-      ></form-text-field>
-    </div>
-    <div class="my-2 flex flex-col">
-      <label class="my-1">Teléfono de Contacto del Gerente:</label>
-      <form-text-field
-        [formControlName]="'phone_manager'"
-        [placeholder]="'Teléfono de Contacto del Gerente'"
-      ></form-text-field>
-    </div>
-    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-sm font-medium"
-        >En una situación de emergencia, también puede ponerse en contacto con
-        el Centro de Respuesta de Cummins para llamada dentro de U.S. +1
-        866.685.4313, para llamada Internacional +1 433.221.4877</span
-      >
-    </div>
-    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium"
-        >EJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES</span
-      >
-      <br />
-      <span class="text-white text-sm font-medium"
-        >¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias
-        y sugerencias de mejora en una de estas tres formas:<br />
-        1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br /><br /><br />
-        Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro
-        desplegable del módulo<br /><br /><br />
-        2. Notificar a su supervisor en persona o levantar un reporte de Casi
-        Incidente<br />
-        3. Comparte tu experiencia durante una Observación de la Seguridad en el
-        Trabajo</span
-      >
     </div>
     <div class="my-3 flex flex-col">
-      <label class="my-1">¿Hacer Loto?</label>
+      <label class="my-1">{{'forms.jsa.common.doesNeedLoto' | translate}}</label>
       <form-button-group class="mt-12" formControlName="lotus_quest">
-        <form-option [value]="1" [label]="'Si' | translate"></form-option>
-        <form-option [value]="2" [label]="'No' | translate"></form-option>
+        <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
+        <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
       </form-button-group>
     </div>
-    <div
-      *ngIf="formGroup.controls.lotus_quest.value === 1"
-      class="flex flex-col"
-    >
+    <div *ngIf="formGroup.controls.lotus_quest.value === 1" class="flex flex-col">
       <div class="my-2 flex flex-col">
-        <span class="my-2">PROCEDIMIENTO DE BLOQUEO Y ETIQUETADO (LOTO)</span>
+        <span class="my-2">{{'forms.jsa.common.lotus.part1.title' | translate}}</span>
         <form-checkbox-group class="ml-3" formControlName="loto">
-          <form-option
-            [value]="1"
-            [label]="1 + ' - ' + ('Entender el equipo' | translate)"
-          ></form-option>
-          <form-option
-            [value]="2"
-            [label]="
-              2 + ' - ' + ('Informar a los Empleados Afectados' | translate)
-            "
-          ></form-option>
-          <form-option
-            [value]="3"
-            [label]="3 + ' - ' + ('Apague y Des-Energize' | translate)"
-          ></form-option>
-          <form-option
-            [value]="4"
-            [label]="
-              4 +
-              ' - ' +
-              ('Aislar la Máquina de todas las Fuentes de Energía' | translate)
-            "
-          ></form-option>
-          <form-option
-            [value]="5"
-            [label]="5 + ' - ' + ('Bloqueo de la Energía' | translate)"
-          ></form-option>
-          <form-option
-            [value]="6"
-            [label]="
-              6 +
-              ' - ' +
-              ('Control de Energía Secundaria o Almacenada' | translate)
-            "
-          ></form-option>
-          <form-option
-            [value]="7"
-            [label]="7 + ' - ' + ('Verificar el Bloqueo' | translate)"
-          ></form-option>
-          <form-option
-            [value]="8"
-            [label]="8 + ' - ' + ('Mantener el Bloqueo' | translate)"
-          ></form-option>
+          <form-option [value]="1" [label]="(1 + ' - ' + ('forms.jsa.common.lotus.part1.step1' | translate))"></form-option>
+          <form-option [value]="2" [label]="(2 + ' - ' + ('forms.jsa.common.lotus.part1.step2' | translate))"></form-option>
+          <form-option [value]="3" [label]="(3 + ' - ' + ('forms.jsa.common.lotus.part1.step3' | translate))"></form-option>
+          <form-option [value]="4" [label]="(4 + ' - ' + ('forms.jsa.common.lotus.part1.step4' | translate))"></form-option>
+          <form-option [value]="5" [label]="(5 + ' - ' + ('forms.jsa.common.lotus.part1.step5' | translate))"></form-option>
+          <form-option [value]="6" [label]="(6 + ' - ' + ('forms.jsa.common.lotus.part1.step6' | translate))"></form-option>
+          <form-option [value]="7" [label]="(7 + ' - ' + ('forms.jsa.common.lotus.part1.step7' | translate))"></form-option>
+          <form-option [value]="8" [label]="(8 + ' - ' + ('forms.jsa.common.lotus.part1.step8' | translate))"></form-option>
         </form-checkbox-group>
       </div>
       <div class="my-2 flex flex-col">
-        <span class="my-2"
-          >5 PASOS PARA LIBERAR EL BLOQUEO Y ETIQUETADO DE ENERGÍAS (LOTO)</span
-        >
+        <span class="my-2">{{'forms.jsa.common.lotus.part2.title' | translate}}</span>
         <form-checkbox-group class="ml-3" formControlName="loto_energies">
-          <form-option
-            [value]="1"
-            [label]="
-              1 +
-              ' - ' +
-              ('Asegúrese de que el área esté libre de personal y herramientas'
-                | translate)
-            "
-          ></form-option>
-          <form-option
-            [value]="2"
-            [label]="2 + ' - ' + ('Retirar los Bloqueos' | translate)"
-          ></form-option>
-          <form-option
-            [value]="3"
-            [label]="
-              3 +
-              ' - ' +
-              ('Notificar a los Empleados Afectados que el bloqueo ha sido eliminado'
-                | translate)
-            "
-          ></form-option>
-          <form-option
-            [value]="4"
-            [label]="4 + ' - ' + ('Prueba la máquina o equipo' | translate)"
-          ></form-option>
-          <form-option
-            [value]="5"
-            [label]="
-              5 +
-              ' - ' +
-              ('Notificar a los empleados afectados que la máquina está lista para ser utilizada'
-                | translate)
-            "
-          ></form-option>
+          <form-option [value]="1" [label]="1 + ' - ' + ( 'forms.jsa.common.lotus.part2.step1' | translate)"></form-option>
+          <form-option [value]="2" [label]="2 + ' - ' + ( 'forms.jsa.common.lotus.part2.step2' | translate)"></form-option>
+          <form-option [value]="3" [label]="3 + ' - ' + ( 'forms.jsa.common.lotus.part2.step3' | translate)"></form-option>
+          <form-option [value]="4" [label]="4 + ' - ' + ( 'forms.jsa.common.lotus.part2.step4' | translate)"></form-option>
+          <form-option [value]="5" [label]="5 + ' - ' + ( 'forms.jsa.common.lotus.part2.step5' | translate)"></form-option>
         </form-checkbox-group>
       </div>
     </div>
     <div class="my-3">
-      <form-image-picker formControlName="photos"></form-image-picker>
+      <span class="my-2">{{'forms.common.labels.photography' | translate}}</span>
+      <form-image-picker [maxImages]="4" formControlName="photos"></form-image-picker>
     </div>
     <div *ngIf="!readOnly" class="w-full flex my-5 px-3">
-      <button
-        type="submit"
-        class="w-full btn btn-flat btn-accent btn-rounded-full"
-      >
-        Submit
-      </button>
+      <button type="submit" class="w-full btn btn-flat btn-accent btn-rounded-full">{{'forms.common.labels.submit' | translate}}</button>
     </div>
   </div>
 </form>

@@ -1,38 +1,50 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import * as moment from 'moment';
+import {DateTime} from 'luxon';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import { Category } from 'src/app/database/models/category';
 import { Unit } from 'src/app/database/models/unit';
 import { User } from 'src/app/database/models/user';
 import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
-import { BaseForm } from '../base-form';
+import {BaseForm, OnAnswer} from '../base-form';
+import {Technician} from '../../../../../database/models/technician';
 
 @Component({
   selector: 'app-jsa-on-field-marine',
   templateUrl: './jsa-on-field-marine.component.html',
   styleUrls: ['./jsa-on-field-marine.component.scss'],
 })
-export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
+export class JsaOnFieldMarineComponent extends BaseForm implements OnInit, OnAnswer {
   businessUnits$: Observable<Unit[]> | null = null;
   categoriesUnits$: Observable<Category[]> | null = null;
-  technicians$: Observable<User[]> | null = null;
+  technicians$: Observable<Technician[]> | null = null;
 
   commonOptions: { label: string; value: any }[] = [
     {
-      label: 'Si',
+      label: 'forms.common.options.yes',
       value: 1,
     },
     {
-      label: 'No',
+      label: 'forms.common.options.no',
       value: 2,
     },
     {
-      label: 'N/A',
+      label: 'forms.common.options.na',
       value: 3,
+    },
+  ];
+
+  commonOptionsYesOrNo: { label: string; value: any }[] = [
+    {
+      label: 'forms.common.options.yes',
+      value: 1,
+    },
+    {
+      label: 'forms.common.options.no',
+      value: 2,
     },
   ];
 
@@ -52,176 +64,249 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     }[];
   }[] = [
     {
-      label: 'Prevención COVID',
+      label: 'forms.jsa.field.marine.covidPrevention.title',
       questions: [
         {
           label:
-            '¿Cuentas con la mascarilla correcta para el trabajo a realizar?',
+            'forms.jsa.field.marine.covidPrevention.question1',
           formControlName: 'skin_face',
         },
         {
           label:
-            '¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?',
+            'forms.jsa.field.marine.covidPrevention.question2',
           formControlName: 'social',
         },
         {
-          label: '¿Se cuenta con agua y jabón para la limpieza de manos?',
+          label: 'forms.jsa.field.marine.covidPrevention.question3',
           formControlName: 'hand_cleaning',
         },
         {
           label:
-            '¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?',
+            'forms.jsa.field.marine.covidPrevention.question4',
           formControlName: 'social_precaution',
         },
         {
-          label: '¿Cuentas con gel sanitizante para limpieza de manos?',
+          label: 'forms.jsa.field.marine.covidPrevention.question5',
           formControlName: 'sanitizer',
         },
       ],
     },
     {
-      label: 'Preparación',
+      label: 'forms.jsa.field.marine.preparation.title',
       questions: [
         {
           label:
-            '¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?',
-          formControlName: 'question1_generic',
+            'forms.jsa.field.marine.preparation.question1',
+          formControlName: 'question1_marine',
           subOptions: {
-            fCNRiskLevel: 'question2_generic',
-            fCNControlled: 'question3_generic',
-            fCNCauseAnalysis: 'question4_generic',
-            fCNCauseAnalysisOther: 'question5_generic',
-            fCNTaken: 'question6_generic',
-            fCNTakenOther: 'question7_generic',
+            fCNRiskLevel: 'question2_marine',
+            fCNControlled: 'question3_marine',
+            fCNCauseAnalysis: 'question4_marine',
+            fCNCauseAnalysisOther: 'question5_marine',
+            fCNTaken: 'question6_marine',
+            fCNTakenOther: 'question7_marine',
           },
         },
         {
           label:
-            '¿Los arreglos de respuesta a emergencia están implementados y entendidos?',
-          formControlName: 'question8_generic',
+            'forms.jsa.field.marine.preparation.question2',
+          formControlName: 'question8_marine',
           subOptions: {
-            fCNRiskLevel: 'question9_generic',
-            fCNControlled: 'question10_generic',
-            fCNCauseAnalysis: 'question11_generic',
-            fCNCauseAnalysisOther: 'question12_generic',
-            fCNTaken: 'question13_generic',
-            fCNTakenOther: 'question14_generic',
+            fCNRiskLevel: 'question9_marine',
+            fCNControlled: 'question10_marine',
+            fCNCauseAnalysis: 'question11_marine',
+            fCNCauseAnalysisOther: 'question12_marine',
+            fCNTaken: 'question13_marine',
+            fCNTakenOther: 'question14_marine',
           },
         },
         {
           label:
-            '¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?',
-          formControlName: 'question15_generic',
+            'forms.jsa.field.marine.preparation.question3',
+          formControlName: 'question15_marine',
           subOptions: {
-            fCNRiskLevel: 'question16_generic',
-            fCNControlled: 'question17_generic',
-            fCNCauseAnalysis: 'question18_generic',
-            fCNCauseAnalysisOther: 'question19_generic',
-            fCNTaken: 'question20_generic',
-            fCNTakenOther: 'question21_generic',
+            fCNRiskLevel: 'question16_marine',
+            fCNControlled: 'question17_marine',
+            fCNCauseAnalysis: 'question18_marine',
+            fCNCauseAnalysisOther: 'question19_marine',
+            fCNTaken: 'question20_marine',
+            fCNTakenOther: 'question21_marine',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.marine.preparation.question4',
+          formControlName: 'question22_marine',
+          subOptions: {
+            fCNRiskLevel: 'question23_marine',
+            fCNControlled: 'question24_marine',
+            fCNCauseAnalysis: 'question25_marine',
+            fCNCauseAnalysisOther: 'question26_marine',
+            fCNTaken: 'question27_marine',
+            fCNTakenOther: 'question28_marine',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.marine.preparation.question5',
+          formControlName: 'question29_marine',
+          subOptions: {
+            fCNRiskLevel: 'question30_marine',
+            fCNControlled: 'question31_marine',
+            fCNCauseAnalysis: 'question32_marine',
+            fCNCauseAnalysisOther: 'question33_marine',
+            fCNTaken: 'question34_marine',
+            fCNTakenOther: 'question35_marine',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.marine.preparation.question6',
+          formControlName: 'question36_marine',
+          subOptions: {
+            fCNRiskLevel: 'question37_marine',
+            fCNControlled: 'question38_marine',
+            fCNCauseAnalysis: 'question39_marine',
+            fCNCauseAnalysisOther: 'question40_marine',
+            fCNTaken: 'question41_marine',
+            fCNTakenOther: 'question42_marine',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.marine.preparation.question7',
+          formControlName: 'question43_marine',
+          subOptions: {
+            fCNRiskLevel: 'question44_marine',
+            fCNControlled: 'question45_marine',
+            fCNCauseAnalysis: 'question46_marine',
+            fCNCauseAnalysisOther: 'question47_marine',
+            fCNTaken: 'question48_marine',
+            fCNTakenOther: 'question49_marine',
           },
         },
       ],
     },
     {
-      label: 'Herramientas y Equipo',
+      label: 'forms.jsa.field.marine.toolsAndEquipment.title',
       questions: [
         {
           label:
-            '¿Las herramientas y equipos son adecuados y están libre de daños?',
-          formControlName: 'question22_generic',
+            'forms.jsa.field.marine.toolsAndEquipment.question1',
+          formControlName: 'question50_marine',
           subOptions: {
-            fCNRiskLevel: 'question23_generic',
-            fCNControlled: 'question24_generic',
-            fCNCauseAnalysis: 'question25_generic',
-            fCNCauseAnalysisOther: 'question26_generic',
-            fCNTaken: 'question27_generic',
-            fCNTakenOther: 'question28_generic',
+            fCNRiskLevel: 'question51_marine',
+            fCNControlled: 'question52_marine',
+            fCNCauseAnalysis: 'question53_marine',
+            fCNCauseAnalysisOther: 'question54_marine',
+            fCNTaken: 'question55_marine',
+            fCNTakenOther: 'question56_marine',
           },
         },
         {
           label:
-            '¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?',
-          formControlName: 'question29_generic',
+            'forms.jsa.field.marine.toolsAndEquipment.question2',
+          formControlName: 'question57_marine',
           subOptions: {
-            fCNRiskLevel: 'question30_generic',
-            fCNControlled: 'question31_generic',
-            fCNCauseAnalysis: 'question32_generic',
-            fCNCauseAnalysisOther: 'question33_generic',
-            fCNTaken: 'question34_generic',
-            fCNTakenOther: 'question35_generic',
+            fCNRiskLevel: 'question58_marine',
+            fCNControlled: 'question59_marine',
+            fCNCauseAnalysis: 'question60_marine',
+            fCNCauseAnalysisOther: 'question61_marine',
+            fCNTaken: 'question62_marine',
+            fCNTakenOther: 'question63_marine',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.marine.toolsAndEquipment.question3',
+          formControlName: 'question64_marine',
+          subOptions: {
+            fCNRiskLevel: 'question65_marine',
+            fCNControlled: 'question66_marine',
+            fCNCauseAnalysis: 'question67_marine',
+            fCNCauseAnalysisOther: 'question68_marine',
+            fCNTaken: 'question69_marine',
+            fCNTakenOther: 'question70_marine',
+          },
+        },
+        {
+          label:
+            'forms.jsa.field.marine.toolsAndEquipment.question4',
+          formControlName: 'question71_marine',
+          subOptions: {
+            fCNRiskLevel: 'question72_marine',
+            fCNControlled: 'question73_marine',
+            fCNCauseAnalysis: 'question74_marine',
+            fCNCauseAnalysisOther: 'question75_marine',
+            fCNTaken: 'question76_marine',
+            fCNTakenOther: 'question77_marine',
           },
         },
       ],
     },
     {
-      label: 'Levantamiento y Acceso',
+      label: 'forms.jsa.field.marine.access.title',
       questions: [
         {
           label:
-            '¿El levantamiento manual de piezas está dentro de su capacidad?',
-          formControlName: 'question36_generic',
+            'forms.jsa.field.marine.access.question1',
+          formControlName: 'question78_marine',
           subOptions: {
-            fCNRiskLevel: 'question37_generic',
-            fCNControlled: 'question38_generic',
-            fCNCauseAnalysis: 'question39_generic',
-            fCNCauseAnalysisOther: 'question40_generic',
-            fCNTaken: 'question41_generic',
-            fCNTakenOther: 'question42_generic',
+            fCNRiskLevel: 'question79_marine',
+            fCNControlled: 'question80_marine',
+            fCNCauseAnalysis: 'question81_marine',
+            fCNCauseAnalysisOther: 'question82_marine',
+            fCNTaken: 'question83_marine',
+            fCNTakenOther: 'question84_marine',
           },
         },
         {
           label:
-            '¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?',
-          formControlName: 'question43_generic',
+            'forms.jsa.field.marine.access.question2',
+          formControlName: 'question85_marine',
           subOptions: {
-            fCNRiskLevel: 'question44_generic',
-            fCNControlled: 'question45_generic',
-            fCNCauseAnalysis: 'question46_generic',
-            fCNCauseAnalysisOther: 'question47_generic',
-            fCNTaken: 'question48_generic',
-            fCNTakenOther: 'question49_generic',
+            fCNRiskLevel: 'question86_marine',
+            fCNControlled: 'question87_marine',
+            fCNCauseAnalysis: 'question88_marine',
+            fCNCauseAnalysisOther: 'question89_marine',
+            fCNTaken: 'question90_marine',
+            fCNTakenOther: 'question91_marine',
           },
         },
         {
-          label: '¿Hay un acceso seguro a la zona de trabajo y equipos?',
-          formControlName: 'question50_generic',
+          label: 'forms.jsa.field.marine.access.question3',
+          formControlName: 'question92_marine',
           subOptions: {
-            fCNRiskLevel: 'question51_generic',
-            fCNControlled: 'question52_generic',
-            fCNCauseAnalysis: 'question53_generic',
-            fCNCauseAnalysisOther: 'question54_generic',
-            fCNTaken: 'question55_generic',
-            fCNTakenOther: 'question56_generic',
-          },
-        },
-      ],
-    },
-    {
-      label: 'Equipo de Proteccion Personal (EPP)',
-      questions: [
-        {
-          label: '¿El EPP está disponible para la tarea?',
-          formControlName: 'question57_generic',
-          subOptions: {
-            fCNRiskLevel: 'question58_generic',
-            fCNControlled: 'question59_generic',
-            fCNCauseAnalysis: 'question60_generic',
-            fCNCauseAnalysisOther: 'question61_generic',
-            fCNTaken: 'question62_generic',
-            fCNTakenOther: 'question63_generic',
+            fCNRiskLevel: 'question93_marine',
+            fCNControlled: 'question94_marine',
+            fCNCauseAnalysis: 'question95_marine',
+            fCNCauseAnalysisOther: 'question96_marine',
+            fCNTaken: 'question97_marine',
+            fCNTakenOther: 'question98_marine',
           },
         },
         {
-          label: '¿El EPP es adecuado y está libre de daños?',
-          formControlName: 'question64_generic',
+          label: 'forms.jsa.field.marine.access.question4',
+          formControlName: 'question99_marine',
           subOptions: {
-            fCNRiskLevel: 'question65_generic',
-            fCNControlled: 'question66_generic',
-            fCNCauseAnalysis: 'question67_generic',
-            fCNCauseAnalysisOther: 'question68_generic',
-            fCNTaken: 'question69_generic',
-            fCNTakenOther: 'question70_generic',
+            fCNRiskLevel: 'question100_marine',
+            fCNControlled: 'question101_marine',
+            fCNCauseAnalysis: 'question102_marine',
+            fCNCauseAnalysisOther: 'question103_marine',
+            fCNTaken: 'question104_marine',
+            fCNTakenOther: 'question105_marine',
+          },
+        },
+        {
+          label: 'forms.jsa.field.marine.access.question5',
+          formControlName: 'question106_marine',
+          subOptions: {
+            fCNRiskLevel: 'question107_marine',
+            fCNControlled: 'question108_marine',
+            fCNCauseAnalysis: 'question109_marine',
+            fCNCauseAnalysisOther: 'question110_marine',
+            fCNTaken: 'question111_marine',
+            fCNTakenOther: 'question112_marine',
           },
         },
       ],
@@ -235,84 +320,84 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     formControlName2: string;
   }[] = [
     {
-      formControlName: 'question72_generic',
-      label: 'VEHÍCULOS EN MOVIMIENTO',
+      formControlName: 'question128_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx1',
       formControlName1: 'name1_question',
       formControlName2: 'name2_question',
     },
     {
-      formControlName: 'question73_generic',
-      label: 'TRABAJO CON ELECTRICIDAD',
+      formControlName: 'question129_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx2',
       formControlName1: 'name3_question',
       formControlName2: 'name4_question',
     },
     {
-      formControlName: 'question74_generic',
-      label: 'MAQUINARIA EN MOVIMIENTO',
+      formControlName: 'question130_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx7',
       formControlName1: 'name5_question',
       formControlName2: 'name6_question',
     },
     {
-      formControlName: 'question75_generic',
-      label: 'OPERACIÓN DE LEVANTAMIENTO DE CARGAS',
+      formControlName: 'question131_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx3',
       formControlName1: 'name7_question',
       formControlName2: 'name8_question',
     },
     {
-      formControlName: 'question76_generic',
-      label: 'TRABAJOS DE ALTURA',
+      formControlName: 'question132_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx4',
       formControlName1: 'name9_question',
       formControlName2: 'name10_question',
     },
     {
-      formControlName: 'question77_generic',
-      label: 'INCENDIO, EXPLOSIÓN O ARCO ELECTRICO',
+      formControlName: 'question133_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx5',
       formControlName1: 'name11_question',
       formControlName2: 'name12_question',
     },
     {
-      formControlName: 'question78_generic',
-      label: 'OTRO',
+      formControlName: 'question134_marine',
+      label: 'forms.jsa.field.marine.checkboxesP1.chbx6',
       formControlName1: 'name13_question',
       formControlName2: 'name14_question',
     },
   ];
 
   nopOptionLevelRisk: { label: string; value: any }[] = [
-    { label: 'Bajo', value: 1 },
-    { label: 'Medio', value: 2 },
-    { label: 'Alto', value: 3 },
-    { label: 'Extremo', value: 4 },
+    { label: 'forms.common.labels.low', value: 1 },
+    { label: 'forms.common.labels.medium', value: 2 },
+    { label: 'forms.common.labels.high', value: 3 },
+    { label: 'forms.common.labels.extreme', value: 4 },
   ];
   nopOptionControlled: { label: string; value: any }[] = [
-    { label: 'Si', value: 1 },
-    { label: 'No', value: 2 },
+    { label: 'forms.common.options.yes', value: 1 },
+    { label: 'forms.common.options.no', value: 2 },
   ];
   nopOptionCauseAnalysis: { label: string; value: any }[] = [
     {
-      label: 'Ambiente (clima, condiciones de altitud, instalaciones)',
+      label: 'forms.common.analisisCause.atmosphere',
       value: 1,
     },
-    { label: 'Diseño de espacio de trabajo', value: 2 },
-    { label: 'Entrenamiento inadecuado o incompleto', value: 3 },
-    { label: 'Equipos o herramientas dañadas', value: 4 },
-    { label: 'Herramientas/Equipos no disponibles', value: 5 },
-    { label: 'Mantenimiento preventivo sin finalizar', value: 6 },
-    { label: 'Procesos o procedimientos inadecuados', value: 7 },
-    { label: 'Superficies de trabajo o caminos irregulares', value: 8 },
-    { label: 'Otra', value: 9 },
+    { label: 'forms.common.analisisCause.design', value: 2 },
+    { label: 'forms.common.analisisCause.training', value: 3 },
+    { label: 'forms.common.analisisCause.teams', value: 4 },
+    { label: 'forms.common.analisisCause.tools', value: 5 },
+    { label: 'forms.common.analisisCause.maintenance', value: 6 },
+    { label: 'forms.common.analisisCause.process', value: 7 },
+    { label: 'forms.common.analisisCause.surfaces', value: 8 },
+    { label: 'forms.common.analisisCause.other', value: 9 },
   ];
   nopOptinsTaken: { label: string; value: any }[] = [
-    { label: 'Asegurado', value: 1 },
-    { label: 'Bloqueado', value: 2 },
-    { label: 'Empleado entrenado', value: 3 },
-    { label: 'Entrenado, Instalado, Limpiado', value: 4 },
-    { label: 'Protegido', value: 5 },
-    { label: 'Provisto (EPP)', value: 6 },
-    { label: 'Reemplazado', value: 7 },
-    { label: 'Removido', value: 8 },
-    { label: 'Reparado', value: 9 },
-    { label: 'Otro', value: 10 },
+    { label: 'forms.common.actionsTaken.insured', value: 1 },
+    { label: 'forms.common.actionsTaken.locked', value: 2 },
+    { label: 'forms.common.actionsTaken.trained', value: 3 },
+    { label: 'forms.common.actionsTaken.trained_installed', value: 4 },
+    { label: 'forms.common.actionsTaken.protected', value: 5 },
+    { label: 'forms.common.actionsTaken.provided', value: 6 },
+    { label: 'forms.common.actionsTaken.superseded', value: 7 },
+    { label: 'forms.common.actionsTaken.removed', value: 8 },
+    { label: 'forms.common.actionsTaken.repaired', value: 9 },
+    { label: 'forms.common.actionsTaken.other', value: 10 },
   ];
 
   formGroup: FormGroup = new FormGroup({
@@ -324,7 +409,7 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     accompanied: new FormControl(false),
     teammate_name: new FormControl([]),
     tageditor: new FormControl([]),
-    task_category_power: new FormControl(null, [Validators.required]),
+    task_category_marine: new FormControl(null, [Validators.required]),
     task_description: new FormControl(null, [Validators.required]),
     location: new FormControl(null, [Validators.required]),
     skin_face: new FormControl(null, [Validators.required]),
@@ -332,111 +417,168 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     hand_cleaning: new FormControl(null, [Validators.required]),
     social_precaution: new FormControl(null, [Validators.required]),
     sanitizer: new FormControl(null, [Validators.required]),
-    question1_generic: new FormControl(null, [Validators.required]),
-    question2_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question3_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question4_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question5_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question6_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question7_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question8_generic: new FormControl(null, [Validators.required]),
-    question9_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question10_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question11_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question13_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question14_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question15_generic: new FormControl(null, [Validators.required]),
-    question16_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question17_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question18_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question19_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question20_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question21_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question22_generic: new FormControl(null, [Validators.required]),
-    question23_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question24_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question25_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question26_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question27_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question28_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question29_generic: new FormControl(null, [Validators.required]),
-    question30_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question31_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question32_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question33_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question34_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question35_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question36_generic: new FormControl(null, [Validators.required]),
-    question37_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question38_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question39_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question40_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question41_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question42_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question43_generic: new FormControl(null, [Validators.required]),
-    question44_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question45_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question46_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question47_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question48_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question49_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question50_generic: new FormControl(null, [Validators.required]),
-    question51_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question52_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question53_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question54_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question55_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question56_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question57_generic: new FormControl(null, [Validators.required]),
-    question58_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question59_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question60_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question61_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question62_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question63_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question64_generic: new FormControl(null, [Validators.required]),
-    question65_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question66_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question67_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question68_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question69_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question70_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question71_generic: new FormControl(null, [Validators.required]),
-    question71_1_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_site: new FormControl(false),
-    question72_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name1_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name2_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question73_generic: new FormControl(false),
-    name3_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name4_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question74_generic: new FormControl(false),
-    name5_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name6_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question75_generic: new FormControl(false),
-    name7_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name8_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question76_generic: new FormControl(false),
-    name9_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name10_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question77_generic: new FormControl(false),
-    name11_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name12_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question78_generic: new FormControl(false),
-    name13_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name14_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question79_generic: new FormControl([]),
-    question80_generic: new FormControl([]),
-    question81_generic: new FormControl([]),
-    question82_generic: new FormControl([]),
-    question83_generic: new FormControl([]),
-    question84_generic: new FormControl([]),
-    question85_generic: new FormControl([]),
-    question86_generic: new FormControl([]),
-    question87_generic: new FormControl([]),
-    question88_generic: new FormControl([]),
-    different_unusual: new FormControl(null),
+
+    question1_marine: new FormControl(null, []),
+    question2_marine: new FormControl(null, []),
+    question3_marine: new FormControl(null, []),
+    question4_marine: new FormControl(null, []),
+    question5_marine: new FormControl(null, []),
+    question6_marine: new FormControl(null, []),
+    question7_marine: new FormControl(null, []),
+    question8_marine: new FormControl(null, []),
+    question9_marine: new FormControl(null, []),
+    question10_marine: new FormControl(null, []),
+    question11_marine: new FormControl(null, []),
+    question12_marine: new FormControl(null, []),
+    question13_marine: new FormControl(null, []),
+    question14_marinee: new FormControl(null, []),
+    question15_marine: new FormControl(null, []),
+    question16_marine: new FormControl(null, []),
+    question17_marine: new FormControl(null, []),
+    question18_marine: new FormControl(null, []),
+    question19_marine: new FormControl(null, []),
+    question20_marine: new FormControl(null, []),
+    question21_marine: new FormControl(null, []),
+    question22_marine: new FormControl(null, []),
+    question23_marine: new FormControl(null, []),
+    question24_marine: new FormControl(null, []),
+    question25_marine: new FormControl(null, []),
+    question26_marine: new FormControl(null, []),
+    question27_marine: new FormControl(null, []),
+    question28_marine: new FormControl(null, []),
+    question29_marine: new FormControl(null, []),
+    question30_marine: new FormControl(null, []),
+    question31_marine: new FormControl(null, []),
+    question32_marine: new FormControl(null, []),
+    question33_marine: new FormControl(null, []),
+    question34_marine: new FormControl(null, []),
+    question35_marine: new FormControl(null, []),
+    question36_marine: new FormControl(null, []),
+    question37_marine: new FormControl(null, []),
+    question38_marine: new FormControl(null, []),
+    question39_marine: new FormControl(null, []),
+    question40_marine: new FormControl(null, []),
+    question41_marine: new FormControl(null, []),
+    question42_marine: new FormControl(null, []),
+    question43_marine: new FormControl(null, []),
+    question44_marine: new FormControl(null, []),
+    question45_marine: new FormControl(null, []),
+    question46_marine: new FormControl(null, []),
+    question47_marine: new FormControl(null, []),
+    question48_marine: new FormControl(null, []),
+    question49_marine: new FormControl(null, []),
+    question50_marine: new FormControl(null, []),
+    question51_marine: new FormControl(null, []),
+    question52_marine: new FormControl(null, []),
+    question53_marine: new FormControl(null, []),
+    question54_marine: new FormControl(null, []),
+    question55_marine: new FormControl(null, []),
+    question56_marine: new FormControl(null, []),
+    question57_marine: new FormControl(null, []),
+    question58_marine: new FormControl(null, []),
+    question59_marine: new FormControl(null, []),
+    question60_marine: new FormControl(null, []),
+    question61_marine: new FormControl(null, []),
+    question62_marine: new FormControl(null, []),
+    question63_marine: new FormControl(null, []),
+    question64_marine: new FormControl(null, []),
+    question65_marine: new FormControl(null, []),
+    question66_marine: new FormControl(null, []),
+    question67_marine: new FormControl(null, []),
+    question68_marine: new FormControl(null, []),
+    question69_marine: new FormControl(null, []),
+    question70_marine: new FormControl(null, []),
+    question71_marine: new FormControl(null, []),
+    question72_marine: new FormControl(null, []),
+    question73_marine: new FormControl(null, []),
+    question74_marine: new FormControl(null, []),
+    question75_marine: new FormControl(null, []),
+    question76_marine: new FormControl(null, []),
+    question77_marine: new FormControl(null, []),
+    question78_marine: new FormControl(null, []),
+    question79_marine: new FormControl(null, []),
+    question80_marine: new FormControl(null, []),
+    question81_marine: new FormControl(null, []),
+    question82_marine: new FormControl(null, []),
+    question83_marine: new FormControl(null, []),
+    question84_marine: new FormControl(null, []),
+    question85_marine: new FormControl(null, []),
+    question86_marine: new FormControl(null, []),
+    question87_marine: new FormControl(null, []),
+    question88_marine: new FormControl(null, []),
+    question89_marine: new FormControl(null, []),
+    question90_marine: new FormControl(null, []),
+    question91_marine: new FormControl(null, []),
+    question92_marine: new FormControl(null, []),
+    question93_marine: new FormControl(null, []),
+    question94_marine: new FormControl(null, []),
+    question95_marine: new FormControl(null, []),
+    question96_marine: new FormControl(null, []),
+    question97_marine: new FormControl(null, []),
+    question98_marine: new FormControl(null, []),
+    question99_marine: new FormControl(null, []),
+    question100_marine: new FormControl(null, []),
+    question101_marine: new FormControl(null, []),
+    question102_marine: new FormControl(null, []),
+    question103_marine: new FormControl(null, []),
+    question104_marine: new FormControl(null, []),
+    question105_marine: new FormControl(null, []),
+    question106_marine: new FormControl(null, []),
+    question107_marine: new FormControl(null, []),
+    question108_marine: new FormControl(null, []),
+    question109_marine: new FormControl(null, []),
+    question110_marine: new FormControl(null, []),
+    question111_marine: new FormControl(null, []),
+    question112_marine: new FormControl(null, []),
+    question113_marine: new FormControl(null, []),
+    question114_marine: new FormControl(null, []),
+    question115_marine: new FormControl(null, []),
+    question116_marine: new FormControl(null, []),
+    question117_marine: new FormControl(null, []),
+    question118_marine: new FormControl(null, []),
+    question119_marine: new FormControl(null, []),
+    question120_marine: new FormControl(null, []),
+    question121_marine: new FormControl(null, []),
+    question122_marine: new FormControl(null, []),
+    question123_marine: new FormControl(null, []),
+    question124_marine: new FormControl(null, []),
+    question125_marine: new FormControl(null, []),
+    question126_marine: new FormControl(null, []),
+    question127_marine: new FormControl(null, []),
+    question127_1_marine: new FormControl(null, []),
+    question128_marine: new FormControl(null, []),
+    name1_question: new FormControl(null, []),
+    name2_question: new FormControl(null, []),
+    question129_marine: new FormControl(null, []),
+    name3_question: new FormControl(null, []),
+    name4_question: new FormControl(null, []),
+    question130_marine: new FormControl(null, []),
+    name5_question: new FormControl(null, []),
+    name6_question: new FormControl(null, []),
+    question131_marine: new FormControl(null, []),
+    name7_question: new FormControl(null, []),
+    name8_question: new FormControl(null, []),
+    question132_marine: new FormControl(null, []),
+    name9_question: new FormControl(null, []),
+    name10_question: new FormControl(null, []),
+    question133_marine: new FormControl(null, []),
+    name11_question: new FormControl(null, []),
+    name12_question: new FormControl(null, []),
+    question134_marine: new FormControl(null, []),
+    name13_question: new FormControl(null, []),
+    name14_question: new FormControl(null, []),
+    question135_marine: new FormControl(null, []),
+    question136_marine: new FormControl(null, []),
+    question137_marine: new FormControl(null, []),
+    question138_marine: new FormControl(null, []),
+    question139_marine: new FormControl(null, []),
+    question140_marine: new FormControl(null, []),
+    question141_marine: new FormControl(null, []),
+    question142_marine: new FormControl(null, []),
+    question143_marine: new FormControl(null, []),
+    question144_marine: new FormControl(null, []),
+
+    different_unnusual: new FormControl(null, [Validators.required]),
     name_manager: new FormControl(null, [Validators.required]),
     phone_manager: new FormControl(null, [Validators.required]),
     lotus_quest: new FormControl(null, [Validators.required]),
@@ -451,13 +593,20 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
     this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
-    this.technicians$ = this.unitOfWorkDatabase.userRepository.all();
+    this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
+  }
+
+  onAnswersUpdated(answers: {[p: string]: any}): void {
+
+    const dateValue: string | null = answers.date;
+    if(!dateValue || dateValue.trim().length < 1) {
+      this.formGroup.controls.date.setValue(DateTime.now().toISODate());
+    }
 
     this.formGroup.controls.date.disable();
-    this.formGroup.controls.date.setValue(moment().format('YYYY-MM-d'));
 
     this.formGroup.controls.name_people.disable();
     this.formGroup.controls.wwid.disable();
@@ -465,12 +614,29 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit {
     this.authService.user.pipe(take(1)).subscribe((user) => {
       this.formGroup.controls.name_people.setValue(user?.name ?? '');
       this.formGroup.controls.wwid.setValue(user?.wwid ?? '');
+      if(user) {
+        this.unitOfWorkDatabase.userRepository.all()
+          .pipe(map(users => {
+            const userIdx = users.findIndex(value => value.wwid === user.supervisor);
+            if (userIdx >= 0) {
+              return users[userIdx];
+            }
+            return null;
+          })).subscribe(supervisor =>{
+          if(supervisor) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.name_manager ? null : this.formGroup.controls.name_manager.setValue(supervisor.name);
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.phone_manager ? null : this.formGroup.controls.phone_manager.setValue(supervisor.phone);
+          }
+        });
+      }
     });
   }
-
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

@@ -2,16 +2,16 @@ import { BaseRepository, IBaseRepository } from './base.repository';
 import { DataBase } from '../database';
 import { Synchronization } from '../models/synchronization';
 import { from, Observable, of } from 'rxjs';
-import * as moment from 'moment-timezone';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import {DateTime} from 'luxon';
 
 export interface ISynchronizationRepository
   extends IBaseRepository<Synchronization> {
-  synchronizedAtByTable(table: string): Observable<moment.Moment | null>;
+  synchronizedAtByTable(table: string): Observable<DateTime | null>;
   updateSynchronizedAtByTable(
     table: string,
-    timestamp: moment.Moment
-  ): Observable<moment.Moment | null>;
+    timestamp: DateTime
+  ): Observable<DateTime | null>;
 }
 
 export class SynchronizationRepository
@@ -24,13 +24,13 @@ export class SynchronizationRepository
 
   public synchronizedAtByTable(
     table: string
-  ): Observable<moment.Moment | null> {
+  ): Observable<DateTime | null> {
     return from(this.table.filter((obj) => obj.table === table).first()).pipe(
       map(
         (result) => {
           if (result && result.synchronizedAt) {
             const updatedAtString = result.synchronizedAt;
-            return moment(updatedAtString);
+            return DateTime.fromISO(updatedAtString);
           }
           return null;
         },
@@ -41,16 +41,16 @@ export class SynchronizationRepository
 
   public updateSynchronizedAtByTable(
     table: string,
-    timestamp: moment.Moment
-  ): Observable<moment.Moment | null> {
+    timestamp: DateTime
+  ): Observable<DateTime | null> {
     return from(this.table.filter((obj) => obj.table === table).first()).pipe(
       mergeMap((result) => {
-        const syncAtString: string = timestamp.toISOString();
+        const syncAtString: string = timestamp.toISO();
         if (result) {
           result.synchronizedAt = syncAtString;
           return this.update(result).pipe(
             map((value) =>
-              value.synchronizedAt ? moment(value.synchronizedAt) : null
+              value.synchronizedAt ? DateTime.fromISO(value.synchronizedAt) : null
             )
           );
         } else {
@@ -60,7 +60,7 @@ export class SynchronizationRepository
             table,
           }).pipe(
             map((value) =>
-              value.synchronizedAt ? moment(value.synchronizedAt) : null
+              value.synchronizedAt ? DateTime.fromISO(value.synchronizedAt) : null
             )
           );
         }

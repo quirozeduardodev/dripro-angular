@@ -11,7 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment-timezone';
+import {DateTime} from 'luxon';
 import { IInfiniteScrollEvent } from 'ngx-infinite-scroll';
 import { combineLatest, Observable, of, ReplaySubject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -21,7 +21,7 @@ export interface InfiniteReportGridItem {
   id: any;
   isOnline: boolean;
   name: string;
-  timestamp: moment.Moment;
+  timestamp: DateTime;
 }
 
 @Component({

@@ -52,7 +52,7 @@
     </div>
     <div class="my-1 flex flex-col">
       <label class="my-1">{{'forms.common.labels.fillLocation' | translate}}</label>
-      <form-text-field formControlName="location" [placeholder]="'forms.common.labels.fillLocation' | translate"></form-text-field>
+      <form-location-text-field formControlName="location" [placeholder]="'forms.common.labels.fillLocation' | translate"></form-location-text-field>
     </div>
     <ng-container *ngFor="let section of groupSections">
       <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
@@ -109,10 +109,10 @@
     </ng-container>
     <ng-container>
       <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-        <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.epp.title' | translate}}</span>
+        <span class="text-white text-lg font-medium">{{'forms.jsa.site.epp.title' | translate}}</span>
       </div>
       <div class="my-3 flex flex-col">
-        <label class="my-1">{{'forms.jsa.warehouse.epp.question1' | translate}}</label>
+        <label class="my-1">{{'forms.jsa.site.epp.question1' | translate}}</label>
         <form-button-group class="mt-12" [formControlName]="'site57_quest'">
           <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
           <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
@@ -197,7 +197,7 @@
         </div>
       </div>
       <div class="my-3 flex flex-col">
-        <label class="my-1">{{'forms.jsa.warehouse.epp.question2' | translate}}</label>
+        <label class="my-1">{{'forms.jsa.site.epp.question2' | translate}}</label>
         <form-button-group class="mt-12" [formControlName]="'site64_quest'">
           <form-option [value]="1" [label]="'forms.common.options.yes' | translate"></form-option>
           <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
@@ -430,11 +430,11 @@
     </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.jsa.site.different_unusual' | translate}}</label>
-      <form-text-field [formControlName]="'different_unusual'"  [placeholder]="''"></form-text-field>
+      <form-text-field [formControlName]="'different_unnusual'"  [placeholder]="''"></form-text-field>
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
       <span class="text-white text-lg font-medium">{{'forms.jsa.site.title_supervisor' | translate}}</span>
-      <br> 
+      <br>
       <span class="text-white text-sm font-medium">{{'forms.jsa.site.subtitle_supervisor' | translate}}</span>
     </div>
     <div class="my-2 flex flex-col">
@@ -492,7 +492,7 @@
     </div>
     <div class="my-3">
       <span class="my-2">{{'forms.common.labels.photography' | translate}}</span>
-      <form-image-picker formControlName="photos"></form-image-picker>
+      <form-image-picker [maxImages]="4" formControlName="photos"></form-image-picker>
     </div>
     <div *ngIf="!readOnly" class="w-full flex my-5 px-3">
       <button type="submit" class="w-full btn btn-flat btn-accent btn-rounded-full">{{'forms.common.labels.submit' | translate}}</button>

@@ -17,14 +17,14 @@ export class SettingsComponent implements OnInit {
       label: 'pages.dipro.settings.language.portuguese',
       language: 'pt_BR'
     },
-    {
-      label: 'pages.dipro.settings.language.english',
-      language: 'en_US'
-    },
-    {
-      label: 'pages.dipro.settings.language.chinese',
-      language: 'zh_CN'
-    }
+    // {
+    //   label: 'pages.dipro.settings.language.english',
+    //   language: 'en_US'
+    // },
+    // {
+    //   label: 'pages.dipro.settings.language.chinese',
+    //   language: 'zh_CN'
+    // }
   ];
 
   constructor(public configurationService: ConfigurationService) { }

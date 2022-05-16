@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {EndpointService} from "./endpoint.service";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {AuthService} from "../auth.service";
-import {Observable} from "rxjs";
-import {catchError, mergeMap} from "rxjs/operators";
-import {TypeBuilder} from "../../util/type-builder";
-import {CategoryResponse} from "../../types/response/category.response";
+import {EndpointService} from './endpoint.service';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {AuthService} from '../auth.service';
+import {Observable} from 'rxjs';
+import {catchError, mergeMap} from 'rxjs/operators';
+import {TypeBuilder} from '../../util/type-builder';
+import {CategoryResponse} from '../../types/response/category.response';
 
 @Injectable()
 export class CategoryEndpointService extends EndpointService {

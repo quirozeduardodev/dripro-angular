@@ -1,5 +1,4 @@
 import { isIterable } from 'rxjs/internal-compatibility';
-import * as moment from 'moment-timezone';
 import { ReportSchemaResponse } from '../types/response/report-schema.response';
 import {
   BasicUserResponse,
@@ -22,6 +21,7 @@ import { QTAResponse } from '../types/response/qta.response';
 import { TypeResponse } from '../types/response/type.response';
 import { UnitResponse } from '../types/response/unit.response';
 import { ApplicationResponse } from '../types/response/application.response';
+import {DateTime} from 'luxon';
 export class TypeBuilder {
   public static async basicAnswer(
     data: any
@@ -34,8 +34,8 @@ export class TypeBuilder {
         countryId: data.country_id,
         reportType: data.report_type,
         folio: data.folio,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -54,8 +54,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -72,8 +72,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -94,8 +94,8 @@ export class TypeBuilder {
         locationId: data.locationId,
         phone: data.phone,
         position: data.position,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -112,8 +112,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         countryCode: data.countryCode,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -132,8 +132,8 @@ export class TypeBuilder {
         phone: data.phone,
         countryId: data.countryId,
         address: data.address,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -150,8 +150,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -168,8 +168,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -189,8 +189,8 @@ export class TypeBuilder {
         countryId: data.countryId,
         city: data.city,
         customerId: data.customerId,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -207,8 +207,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -225,8 +225,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -240,8 +240,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -255,8 +255,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         status: data.status === true,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -274,9 +274,10 @@ export class TypeBuilder {
         email: data.email,
         sitio: data.sitio,
         wwid: data.wwid,
+        role: data.role ?? null,
         formPermissions: await TypeBuilder.userFromPermissions(data.form ? JSON.parse(data.form) : null),
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -294,8 +295,8 @@ export class TypeBuilder {
         id: data.id,
         name: data.name,
         url: data.url,
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -332,9 +333,10 @@ export class TypeBuilder {
         name: data.name,
         wwid: data.wwid,
         passwordChanged: data.change_pass === true,
+        supervisor: data.supervisor ?? null,
         formPermissions: await TypeBuilder.userFromPermissions(data.form ? JSON.parse(data.form) : null),
-        createdAt: data.created_at ? moment(data.created_at) : null,
-        updatedAt: data.updated_at ? moment(data.updated_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
+        updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,
       };
     }
     return null;
@@ -350,7 +352,7 @@ export class TypeBuilder {
         id: data.id,
         folio: data.folio,
         form: data.form,
-        createdAt: data.created_at ? moment(data.created_at) : null,
+        createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
       };
     }
     return null;

@@ -1,13 +1,14 @@
-import * as moment from 'moment-timezone';
+import {DateTime} from 'luxon';
 
 export interface UserResponse {
   id: number;
   name: string;
   wwid: string;
   passwordChanged: boolean;
+  supervisor: string | null;
   formPermissions: FromPermissions;
-  createdAt: moment.Moment | null;
-  updatedAt: moment.Moment | null;
+  createdAt: DateTime | null;
+  updatedAt: DateTime | null;
 }
 
 
@@ -19,9 +20,10 @@ export interface BasicUserResponse {
   email: string;
   sitio: string;
   phone: string;
+  role: string | null;
   formPermissions: FromPermissions;
-  createdAt: moment.Moment | null;
-  updatedAt: moment.Moment | null;
+  createdAt: DateTime | null;
+  updatedAt: DateTime | null;
 }
 
 export interface FromPermissions {

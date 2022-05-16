@@ -21,7 +21,7 @@ export class LocalStorageService {
   private _userMe: UserResponse | null = null;
   private _userMe$: ReplaySubject<UserResponse | null> = new ReplaySubject<UserResponse | null>(1);
 
-  private _language: string = 'en_US';
+  private _language: string = 'es_MX';
   private _language$: ReplaySubject<string> = new ReplaySubject<string>(1);
 
   constructor() {
@@ -39,7 +39,7 @@ export class LocalStorageService {
     this.setAccessToken(accessToken);
     this.setRefreshToken(refreshToken);
     this.setUserMe(userMe);
-    this.setLanguage(language || 'en_US');
+    this.setLanguage(language || 'es_MX');
 
 
   }

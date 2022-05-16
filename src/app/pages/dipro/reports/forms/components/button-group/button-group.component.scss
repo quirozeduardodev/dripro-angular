@@ -28,6 +28,14 @@ $opacity-disabled: var(--dipro-forms-button-group-opacity-disabled, 0.8);
       opacity: $opacity-disabled;
       button {
         cursor: auto;
+        background: $bg-color;
+        border: {
+          color: $primary-color-disabled;
+        };
+        &.button-active {
+          background: $primary-color-disabled;
+          color: $active-text-color;
+        }
       }
     }
 

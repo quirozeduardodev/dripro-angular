@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
+import {DateTime} from 'luxon';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import { Category } from 'src/app/database/models/category';
 import { Unit } from 'src/app/database/models/unit';
 import { User } from 'src/app/database/models/user';
 import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import { BaseForm } from '../base-form';
+import {Technician} from '../../../../../database/models/technician';
 
 @Component({
   selector: 'app-jsa-on-field-generic',
@@ -19,7 +20,7 @@ import { BaseForm } from '../base-form';
 export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
   businessUnits$: Observable<Unit[]> | null = null;
   categoriesUnits$: Observable<Category[]> | null = null;
-  technicians$: Observable<User[]> | null = null;
+  technicians$: Observable<Technician[]> | null = null;
 
   commonOptions: { label: string; value: any }[] = [
     {
@@ -33,6 +34,17 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
     {
       label: 'forms.common.options.na',
       value: 3,
+    },
+  ];
+
+  commonOptionsYesOrNo: { label: string; value: any }[] = [
+    {
+      label: 'forms.common.options.yes',
+      value: 1,
+    },
+    {
+      label: 'forms.common.options.no',
+      value: 2,
     },
   ];
 
@@ -52,39 +64,39 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
     }[];
   }[] = [
     {
-      label: 'Prevención COVID',
+      label: 'forms.jsa.field.generic.covidPrevention.title',
       questions: [
         {
           label:
-            '¿Cuentas con la mascarilla correcta para el trabajo a realizar?',
+            'forms.jsa.field.generic.covidPrevention.question1',
           formControlName: 'skin_face',
         },
         {
           label:
-            '¿En las instalaciones del cliente está implementado el procedimiento de distanciamiento social?',
+            'forms.jsa.field.generic.covidPrevention.question2',
           formControlName: 'social',
         },
         {
-          label: '¿Se cuenta con agua y jabón para la limpieza de manos?',
+          label: 'forms.jsa.field.generic.covidPrevention.question3',
           formControlName: 'hand_cleaning',
         },
         {
           label:
-            '¿Dispone de conos y cinta de precaución para mantener el distanciamiento social en su área de trabajo?',
+            'forms.jsa.field.generic.covidPrevention.question4',
           formControlName: 'social_precaution',
         },
         {
-          label: '¿Cuentas con gel sanitizante para limpieza de manos?',
+          label: 'forms.jsa.field.generic.covidPrevention.question5',
           formControlName: 'sanitizer',
         },
       ],
     },
     {
-      label: 'Preparación',
+      label: 'forms.jsa.field.generic.preparation.title',
       questions: [
         {
           label:
-            '¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?',
+            'forms.jsa.field.generic.preparation.question1',
           formControlName: 'question1_generic',
           subOptions: {
             fCNRiskLevel: 'question2_generic',
@@ -97,7 +109,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Los arreglos de respuesta a emergencia están implementados y entendidos?',
+            'forms.jsa.field.generic.preparation.question2',
           formControlName: 'question8_generic',
           subOptions: {
             fCNRiskLevel: 'question9_generic',
@@ -110,7 +122,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?',
+            'forms.jsa.field.generic.preparation.question3',
           formControlName: 'question15_generic',
           subOptions: {
             fCNRiskLevel: 'question16_generic',
@@ -124,11 +136,11 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'Herramientas y Equipo',
+      label: 'forms.jsa.field.generic.toolsAndEquipment.title',
       questions: [
         {
           label:
-            '¿Las herramientas y equipos son adecuados y están libre de daños?',
+            'forms.jsa.field.generic.toolsAndEquipment.question1',
           formControlName: 'question22_generic',
           subOptions: {
             fCNRiskLevel: 'question23_generic',
@@ -141,7 +153,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Es requerido el bloqueo y etiquetado y está completada la Lista de Verificación?',
+            'forms.jsa.field.generic.toolsAndEquipment.question2',
           formControlName: 'question29_generic',
           subOptions: {
             fCNRiskLevel: 'question30_generic',
@@ -155,11 +167,11 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'Levantamiento y Acceso',
+      label: 'forms.jsa.field.generic.access.title',
       questions: [
         {
           label:
-            '¿El levantamiento manual de piezas está dentro de su capacidad?',
+            'forms.jsa.field.generic.access.question1',
           formControlName: 'question36_generic',
           subOptions: {
             fCNRiskLevel: 'question37_generic',
@@ -172,7 +184,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
         },
         {
           label:
-            '¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?',
+            'forms.jsa.field.generic.access.question2',
           formControlName: 'question43_generic',
           subOptions: {
             fCNRiskLevel: 'question44_generic',
@@ -184,7 +196,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
           },
         },
         {
-          label: '¿Hay un acceso seguro a la zona de trabajo y equipos?',
+          label: 'forms.jsa.field.generic.access.question3',
           formControlName: 'question50_generic',
           subOptions: {
             fCNRiskLevel: 'question51_generic',
@@ -198,10 +210,11 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
       ],
     },
     {
-      label: 'Equipo de Proteccion Personal (EPP)',
+      label: 'forms.jsa.field.generic.epp.title',
       questions: [
         {
-          label: '¿El EPP está disponible para la tarea?',
+          label:
+            'forms.jsa.field.generic.epp.question1',
           formControlName: 'question57_generic',
           subOptions: {
             fCNRiskLevel: 'question58_generic',
@@ -213,7 +226,8 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
           },
         },
         {
-          label: '¿El EPP es adecuado y está libre de daños?',
+          label:
+            'forms.jsa.field.generic.epp.question2',
           formControlName: 'question64_generic',
           subOptions: {
             fCNRiskLevel: 'question65_generic',
@@ -236,83 +250,83 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
   }[] = [
     {
       formControlName: 'question72_generic',
-      label: 'VEHÍCULOS EN MOVIMIENTO',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx1',
       formControlName1: 'name1_question',
       formControlName2: 'name2_question',
     },
     {
       formControlName: 'question73_generic',
-      label: 'TRABAJO CON ELECTRICIDAD',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx2',
       formControlName1: 'name3_question',
       formControlName2: 'name4_question',
     },
     {
       formControlName: 'question74_generic',
-      label: 'MAQUINARIA EN MOVIMIENTO',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx7',
       formControlName1: 'name5_question',
       formControlName2: 'name6_question',
     },
     {
       formControlName: 'question75_generic',
-      label: 'OPERACIÓN DE LEVANTAMIENTO DE CARGAS',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx3',
       formControlName1: 'name7_question',
       formControlName2: 'name8_question',
     },
     {
       formControlName: 'question76_generic',
-      label: 'TRABAJOS DE ALTURA',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx4',
       formControlName1: 'name9_question',
       formControlName2: 'name10_question',
     },
     {
       formControlName: 'question77_generic',
-      label: 'INCENDIO, EXPLOSIÓN O ARCO ELECTRICO',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx5',
       formControlName1: 'name11_question',
       formControlName2: 'name12_question',
     },
     {
       formControlName: 'question78_generic',
-      label: 'OTRO',
+      label: 'forms.jsa.field.generic.checkboxesP1.chbx6',
       formControlName1: 'name13_question',
       formControlName2: 'name14_question',
     },
   ];
 
   nopOptionLevelRisk: { label: string; value: any }[] = [
-    { label: 'Bajo', value: 1 },
-    { label: 'Medio', value: 2 },
-    { label: 'Alto', value: 3 },
-    { label: 'Extremo', value: 4 },
+    { label: 'forms.common.labels.low', value: 1 },
+    { label: 'forms.common.labels.medium', value: 2 },
+    { label: 'forms.common.labels.high', value: 3 },
+    { label: 'forms.common.labels.extreme', value: 4 },
   ];
   nopOptionControlled: { label: string; value: any }[] = [
-    { label: 'Si', value: 1 },
-    { label: 'No', value: 2 },
+    { label: 'forms.common.options.yes', value: 1 },
+    { label: 'forms.common.options.no', value: 2 },
   ];
   nopOptionCauseAnalysis: { label: string; value: any }[] = [
     {
-      label: 'Ambiente (clima, condiciones de altitud, instalaciones)',
+      label: 'forms.common.analisisCause.atmosphere',
       value: 1,
     },
-    { label: 'Diseño de espacio de trabajo', value: 2 },
-    { label: 'Entrenamiento inadecuado o incompleto', value: 3 },
-    { label: 'Equipos o herramientas dañadas', value: 4 },
-    { label: 'Herramientas/Equipos no disponibles', value: 5 },
-    { label: 'Mantenimiento preventivo sin finalizar', value: 6 },
-    { label: 'Procesos o procedimientos inadecuados', value: 7 },
-    { label: 'Superficies de trabajo o caminos irregulares', value: 8 },
-    { label: 'Otra', value: 9 },
+    { label: 'forms.common.analisisCause.design', value: 2 },
+    { label: 'forms.common.analisisCause.training', value: 3 },
+    { label: 'forms.common.analisisCause.teams', value: 4 },
+    { label: 'forms.common.analisisCause.tools', value: 5 },
+    { label: 'forms.common.analisisCause.maintenance', value: 6 },
+    { label: 'forms.common.analisisCause.process', value: 7 },
+    { label: 'forms.common.analisisCause.surfaces', value: 8 },
+    { label: 'forms.common.analisisCause.other', value: 9 },
   ];
   nopOptinsTaken: { label: string; value: any }[] = [
-    { label: 'Asegurado', value: 1 },
-    { label: 'Bloqueado', value: 2 },
-    { label: 'Empleado entrenado', value: 3 },
-    { label: 'Entrenado, Instalado, Limpiado', value: 4 },
-    { label: 'Protegido', value: 5 },
-    { label: 'Provisto (EPP)', value: 6 },
-    { label: 'Reemplazado', value: 7 },
-    { label: 'Removido', value: 8 },
-    { label: 'Reparado', value: 9 },
-    { label: 'Otro', value: 10 },
+    { label: 'forms.common.actionsTaken.insured', value: 1 },
+    { label: 'forms.common.actionsTaken.locked', value: 2 },
+    { label: 'forms.common.actionsTaken.trained', value: 3 },
+    { label: 'forms.common.actionsTaken.trained_installed', value: 4 },
+    { label: 'forms.common.actionsTaken.protected', value: 5 },
+    { label: 'forms.common.actionsTaken.provided', value: 6 },
+    { label: 'forms.common.actionsTaken.superseded', value: 7 },
+    { label: 'forms.common.actionsTaken.removed', value: 8 },
+    { label: 'forms.common.actionsTaken.repaired', value: 9 },
+    { label: 'forms.common.actionsTaken.other', value: 10 },
   ];
 
   formGroup: FormGroup = new FormGroup({
@@ -332,111 +346,112 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
     hand_cleaning: new FormControl(null, [Validators.required]),
     social_precaution: new FormControl(null, [Validators.required]),
     sanitizer: new FormControl(null, [Validators.required]),
+
     question1_generic: new FormControl(null, [Validators.required]),
-    question2_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question3_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question4_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question5_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question6_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question7_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question2_generic: new FormControl(null, [Validators.required]),
+    question3_generic: new FormControl(null, [Validators.required]),
+    question4_generic: new FormControl(null, [Validators.required]),
+    question5_generic: new FormControl(null, [Validators.required]),
+    question6_generic: new FormControl(null, [Validators.required]),
+    question7_generic: new FormControl(null, [Validators.required]),
     question8_generic: new FormControl(null, [Validators.required]),
-    question9_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question10_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question11_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question13_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question14_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question9_generic: new FormControl(null, [Validators.required]),
+    question10_generic: new FormControl(null, [Validators.required]),
+    question11_generic: new FormControl(null, [Validators.required]),
+    question12_generic: new FormControl(null, [Validators.required]),
+    question13_generic: new FormControl(null, [Validators.required]),
+    question14_generic: new FormControl(null, [Validators.required]),
     question15_generic: new FormControl(null, [Validators.required]),
-    question16_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question17_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question18_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question19_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question20_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question21_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question16_generic: new FormControl(null, [Validators.required]),
+    question17_generic: new FormControl(null, [Validators.required]),
+    question18_generic: new FormControl(null, [Validators.required]),
+    question19_generic: new FormControl(null, [Validators.required]),
+    question20_generic: new FormControl(null, [Validators.required]),
+    question21_generic: new FormControl(null, [Validators.required]),
     question22_generic: new FormControl(null, [Validators.required]),
-    question23_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question24_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question25_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question26_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question27_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question28_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question23_generic: new FormControl(null, [Validators.required]),
+    question24_generic: new FormControl(null, [Validators.required]),
+    question25_generic: new FormControl(null, [Validators.required]),
+    question26_generic: new FormControl(null, [Validators.required]),
+    question27_generic: new FormControl(null, [Validators.required]),
+    question28_generic: new FormControl(null, [Validators.required]),
     question29_generic: new FormControl(null, [Validators.required]),
-    question30_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question31_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question32_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question33_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question34_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question35_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question30_generic: new FormControl(null, [Validators.required]),
+    question31_generic: new FormControl(null, [Validators.required]),
+    question32_generic: new FormControl(null, [Validators.required]),
+    question33_generic: new FormControl(null, [Validators.required]),
+    question34_generic: new FormControl(null, [Validators.required]),
+    question35_generic: new FormControl(null, [Validators.required]),
     question36_generic: new FormControl(null, [Validators.required]),
-    question37_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question38_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question39_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question40_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question41_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question42_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question37_generic: new FormControl(null, [Validators.required]),
+    question38_generic: new FormControl(null, [Validators.required]),
+    question39_generic: new FormControl(null, [Validators.required]),
+    question40_generic: new FormControl(null, [Validators.required]),
+    question41_generic: new FormControl(null, [Validators.required]),
+    question42_generic: new FormControl(null, [Validators.required]),
     question43_generic: new FormControl(null, [Validators.required]),
-    question44_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question45_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question46_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question47_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question48_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question49_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question44_generic: new FormControl(null, [Validators.required]),
+    question45_generic: new FormControl(null, [Validators.required]),
+    question46_generic: new FormControl(null, [Validators.required]),
+    question47_generic: new FormControl(null, [Validators.required]),
+    question48_generic: new FormControl(null, [Validators.required]),
+    question49_generic: new FormControl(null, [Validators.required]),
     question50_generic: new FormControl(null, [Validators.required]),
-    question51_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question52_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question53_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question54_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question55_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question56_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question51_generic: new FormControl(null, [Validators.required]),
+    question52_generic: new FormControl(null, [Validators.required]),
+    question53_generic: new FormControl(null, [Validators.required]),
+    question54_generic: new FormControl(null, [Validators.required]),
+    question55_generic: new FormControl(null, [Validators.required]),
+    question56_generic: new FormControl(null, [Validators.required]),
     question57_generic: new FormControl(null, [Validators.required]),
-    question58_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question59_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question60_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question61_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question62_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question63_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question58_generic: new FormControl(null, [Validators.required]),
+    question59_generic: new FormControl(null, [Validators.required]),
+    question60_generic: new FormControl(null, [Validators.required]),
+    question61_generic: new FormControl(null, [Validators.required]),
+    question62_generic: new FormControl(null, [Validators.required]),
+    question63_generic: new FormControl(null, [Validators.required]),
     question64_generic: new FormControl(null, [Validators.required]),
-    question65_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question66_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question67_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question68_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question69_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question70_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
+    question65_generic: new FormControl(null, [Validators.required]),
+    question66_generic: new FormControl(null, [Validators.required]),
+    question67_generic: new FormControl(null, [Validators.required]),
+    question68_generic: new FormControl(null, [Validators.required]),
+    question69_generic: new FormControl(null, [Validators.required]),
+    question70_generic: new FormControl(null, [Validators.required]),
     question71_generic: new FormControl(null, [Validators.required]),
-    question71_1_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question12_site: new FormControl(false),
-    question72_generic: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name1_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name2_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question73_generic: new FormControl(false),
-    name3_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name4_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question74_generic: new FormControl(false),
-    name5_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name6_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question75_generic: new FormControl(false),
-    name7_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name8_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question76_generic: new FormControl(false),
-    name9_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name10_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question77_generic: new FormControl(false),
-    name11_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name12_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question78_generic: new FormControl(false),
-    name13_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    name14_question: new FormControl(null), /// This Validators changes if the prev formControl has a specific value
-    question79_generic: new FormControl([]),
-    question80_generic: new FormControl([]),
-    question81_generic: new FormControl([]),
-    question82_generic: new FormControl([]),
-    question83_generic: new FormControl([]),
-    question84_generic: new FormControl([]),
-    question85_generic: new FormControl([]),
-    question86_generic: new FormControl([]),
-    question87_generic: new FormControl([]),
-    question88_generic: new FormControl([]),
-    different_unusual: new FormControl(null),
+    question71_1_generic: new FormControl(null, [Validators.required]),
+    question72_generic: new FormControl(null, [Validators.required]),
+    name1_question: new FormControl(null, [Validators.required]),
+    name2_question: new FormControl(null, [Validators.required]),
+    question73_generic: new FormControl(null, [Validators.required]),
+    name3_question: new FormControl(null, [Validators.required]),
+    name4_question: new FormControl(null, [Validators.required]),
+    question74_generic: new FormControl(null, [Validators.required]),
+    name5_question: new FormControl(null, [Validators.required]),
+    name6_question: new FormControl(null, [Validators.required]),
+    question75_generic: new FormControl(null, [Validators.required]),
+    name7_question: new FormControl(null, [Validators.required]),
+    name8_question: new FormControl(null, [Validators.required]),
+    question76_generic: new FormControl(null, [Validators.required]),
+    name9_question: new FormControl(null, [Validators.required]),
+    name10_question: new FormControl(null, [Validators.required]),
+    question77_generic: new FormControl(null, [Validators.required]),
+    name11_question: new FormControl(null, [Validators.required]),
+    name12_question: new FormControl(null, [Validators.required]),
+    question78_generic: new FormControl(null, [Validators.required]),
+    name13_question: new FormControl(null, [Validators.required]),
+    name14_question: new FormControl(null, [Validators.required]),
+    question79_generic: new FormControl(null, [Validators.required]),
+    question80_generic: new FormControl(null, [Validators.required]),
+    question81_generic: new FormControl(null, [Validators.required]),
+    question82_generic: new FormControl(null, [Validators.required]),
+    question83_generic: new FormControl(null, [Validators.required]),
+    question84_generic: new FormControl(null, [Validators.required]),
+    question85_generic: new FormControl(null, [Validators.required]),
+    question86_generic: new FormControl(null, [Validators.required]),
+    question87_generic: new FormControl(null, [Validators.required]),
+    question88_generic: new FormControl(null, [Validators.required]),
+
+    different_unnusual: new FormControl(null, [Validators.required]),
     name_manager: new FormControl(null, [Validators.required]),
     phone_manager: new FormControl(null, [Validators.required]),
     lotus_quest: new FormControl(null, [Validators.required]),
@@ -451,13 +466,20 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
     this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
-    this.technicians$ = this.unitOfWorkDatabase.userRepository.all();
+    this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
+  }
+
+  onAnswersUpdated(answers: {[p: string]: any}): void {
+
+    const dateValue: string | null = answers.date;
+    if(!dateValue || dateValue.trim().length < 1) {
+      this.formGroup.controls.date.setValue(DateTime.now().toISODate());
+    }
 
     this.formGroup.controls.date.disable();
-    this.formGroup.controls.date.setValue(moment().format('YYYY-MM-d'));
 
     this.formGroup.controls.name_people.disable();
     this.formGroup.controls.wwid.disable();
@@ -465,12 +487,29 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
     this.authService.user.pipe(take(1)).subscribe((user) => {
       this.formGroup.controls.name_people.setValue(user?.name ?? '');
       this.formGroup.controls.wwid.setValue(user?.wwid ?? '');
+      if(user) {
+        this.unitOfWorkDatabase.userRepository.all()
+          .pipe(map(users => {
+            const userIdx = users.findIndex(value => value.wwid === user.supervisor);
+            if (userIdx >= 0) {
+              return users[userIdx];
+            }
+            return null;
+          })).subscribe(supervisor =>{
+          if(supervisor) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.name_manager ? null : this.formGroup.controls.name_manager.setValue(supervisor.name);
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.answers.phone_manager ? null : this.formGroup.controls.phone_manager.setValue(supervisor.phone);
+          }
+        });
+      }
     });
   }
-
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
       return;
     }
     this.onSubmit.emit(this.formGroup.value);

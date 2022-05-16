@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment-timezone';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { UnitOfWorkDatabase } from '../database/unit-of-work.database';
 import { UserEndpointService } from './endpoints/user-endpoint.service';
@@ -53,6 +52,7 @@ import { Generator } from '../database/models/generator';
 import { ApplicationResponse } from '../types/response/application.response';
 import { Application } from '../database/models/application';
 import { ApplicationEndpointService } from './endpoints/application-endpoint.service';
+import {DateTime} from 'luxon';
 
 @Injectable()
 export class OfflineDataService {
@@ -67,10 +67,7 @@ export class OfflineDataService {
   public locationSync: OfflineSynchronizeHandler<LocationResponse, Location>;
   public motorSync: OfflineSynchronizeHandler<MotorResponse, Motor>;
   public QTASync: OfflineSynchronizeHandler<QTAResponse, QTA>;
-  public technicianSync: OfflineSynchronizeHandler<
-    BasicUserResponse,
-    Technician
-  >;
+  public technicianSync: OfflineSynchronizeHandler<BasicUserResponse, Technician>;
   public typeSync: OfflineSynchronizeHandler<TypeResponse, Type>;
   public unitSync: OfflineSynchronizeHandler<UnitResponse, Unit>;
   public userSync: OfflineSynchronizeHandler<BasicUserResponse, User>;
@@ -92,10 +89,7 @@ export class OfflineDataService {
     private _unitEndpointService: UnitEndpointService,
     private _userEndpointService: UserEndpointService
   ) {
-    this.answerSync = new OfflineSynchronizeHandler<
-      BasicAnswerResponse,
-      Answer
-    >(
+    this.answerSync = new OfflineSynchronizeHandler<BasicAnswerResponse, Answer>(
       this._unitOfWorkDatabase,
       this._unitOfWorkDatabase.answerRepository,
       () => this._answerEndpointService.basicAll(),
@@ -201,7 +195,7 @@ export class OfflineDataService {
       this._unitOfWorkDatabase.technicianRepository,
       () => this._userEndpointService.basicTechnicianAll(),
       'technicians',
-      (item) => ({ id: item.id, name: item.name })
+      (item) => ({ id: item.id, name: item.name, role: item.role })
     );
     this.typeSync = new OfflineSynchronizeHandler<TypeResponse, Type>(
       this._unitOfWorkDatabase,
@@ -222,7 +216,7 @@ export class OfflineDataService {
       this._unitOfWorkDatabase.userRepository,
       () => this._userEndpointService.basicAll(),
       'users',
-      (item) => ({ id: item.id, name: item.name })
+      (item) => ({ id: item.id, name: item.name, role: item.role, wwid: item.wwid, phone: item.phone })
     );
   }
 
@@ -282,8 +276,8 @@ export class OfflineDataService {
 }
 export class OfflineSynchronizeHandler<TResponse, TEntity> {
   private _total$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private _lastSynchronization$: BehaviorSubject<moment.Moment | null> =
-    new BehaviorSubject<moment.Moment | null>(null);
+  private _lastSynchronization$: BehaviorSubject<DateTime | null> =
+    new BehaviorSubject<DateTime | null>(null);
   private _state$: BehaviorSubject<OfflineSynchronizeState> =
     new BehaviorSubject<OfflineSynchronizeState>('idle');
 
@@ -311,7 +305,7 @@ export class OfflineSynchronizeHandler<TResponse, TEntity> {
     return this._total$.asObservable().pipe(distinct());
   }
 
-  public get synchronizedAt(): Observable<moment.Moment | null> {
+  public get synchronizedAt(): Observable<DateTime | null> {
     return this._lastSynchronization$.asObservable();
   }
 
@@ -363,7 +357,7 @@ export class OfflineSynchronizeHandler<TResponse, TEntity> {
         .synchronizedAtByTable(this._keySynchronizationTable)
         .pipe(take(1)),
       currentSynchronization: this._unitOfWorkDatabase.synchronizationRepository
-        .updateSynchronizedAtByTable(this._keySynchronizationTable, moment())
+        .updateSynchronizedAtByTable(this._keySynchronizationTable, DateTime.now())
         .pipe(take(1)),
     }).subscribe((result) => {
       this._total$.next(result.count);

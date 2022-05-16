@@ -31,6 +31,7 @@ export class ImagePickerComponent implements AfterViewInit, OnDestroy, ControlVa
 
 
   @Input() imageQuality: number = 90;
+  @Input() maxImages: number | null = null;
 
   private _value: any[] = [];
   private _isPickingPhoto: boolean = false;
@@ -55,6 +56,10 @@ export class ImagePickerComponent implements AfterViewInit, OnDestroy, ControlVa
 
   get isDisabled(): boolean {
     return this._isDisabled;
+  }
+
+  get canAdd(): boolean {
+    return (this.maxImages ? this._value.length < this.maxImages : true);
   }
 
   get control(): AbstractControl | null {

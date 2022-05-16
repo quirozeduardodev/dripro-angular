@@ -16,7 +16,7 @@ import { SelectComponent } from './select/select.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ChipListComponent } from './chip-list/chip-list.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { TextAreaComponent } from './text-area/text-area.component';
@@ -25,6 +25,7 @@ import { MultiplierFormControlDirective } from './directives/multiplier-form-con
 import { RadioGroupComponent } from './radio-group/radio-group.component';
 import {LocationTextFieldComponent} from './location-text-field/location-text-field.component';
 import {StepperComponent} from './stepper/stepper.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,8 @@ import {StepperComponent} from './stepper/stepper.component';
     MatOptionModule,
     ReactiveFormsModule,
     MatChipsModule,
+    MatButtonModule,
+    FormsModule,
   ],
   exports: [
     ButtonGroupComponent,

@@ -1,4 +1,4 @@
-import * as moment from "moment-timezone";
+import {DateTime} from 'luxon';
 
 export interface BasicAnswerResponse {
   id: number;
@@ -7,6 +7,6 @@ export interface BasicAnswerResponse {
   countryId: number;
   reportType: string;
   folio: string;
-  createdAt: moment.Moment | null;
-  updatedAt: moment.Moment | null;
+  createdAt: DateTime | null;
+  updatedAt: DateTime | null;
 }
