@@ -8,11 +8,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonMenu } from '@ionic/angular';
+import {IonMenu, Platform} from '@ionic/angular';
 import { BaseDialogComponent } from '../../../../components/dialogs/base-dialog/base-dialog.component';
 import { AuthService } from '../../../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { ChangePasswordDialogComponent } from './components/change-password-dialog/change-password-dialog.component';
+import {App} from '@capacitor/app';
 
 @Component({
   selector: 'app-drawer',
@@ -53,10 +54,13 @@ export class DrawerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   userSubscription: Subscription | null = null;
   mainWrapperObserver: ResizeObserver | null = null;
-  constructor(private router: Router, private authService: AuthService) {}
+  backButtonSubscription: Subscription | null = null;
+  constructor(private router: Router, private authService: AuthService, private _platform: Platform) {}
 
   ngOnInit() {
     this.matchUrl();
+    this.backButtonSubscription = this._platform.backButton.subscribe(value => {
+    });
   }
 
   ngAfterViewInit(): void {
@@ -70,6 +74,7 @@ export class DrawerComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.mainWrapperObserver?.disconnect();
     this.userSubscription?.unsubscribe();
+    this.backButtonSubscription?.unsubscribe();
   }
 
   matchUrl(): void {

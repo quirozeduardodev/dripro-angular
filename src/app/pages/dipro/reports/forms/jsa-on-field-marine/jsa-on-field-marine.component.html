@@ -325,7 +325,7 @@
     <div class="my-2 flex flex-col">
       <span class="my-2">{{'forms.jsa.field.marine.unusual_hazards.title' | translate}}</span>
       <form-checkbox-group class="ml-3" formControlName="question135_marine">
-        <form-option [value]="1" [label]="'forms.jsa.field.marine.unusual_hazards.gas' | translate"></form-option>
+        <form-option [value]="1" [label]="'forms.jsa.field.marine.unusual_hazards.burnedPaint' | translate"></form-option>
         <form-option [value]="2" [label]="'forms.jsa.field.marine.unusual_hazards.animals' | translate"></form-option>
         <form-option [value]="3" [label]="'forms.jsa.field.marine.unusual_hazards.gases' | translate"></form-option>
         <form-option [value]="4" [label]="'forms.jsa.field.marine.unusual_hazards.high_level' | translate"></form-option>
@@ -335,7 +335,8 @@
         <form-option [value]="8" [label]="'forms.jsa.field.marine.unusual_hazards.hygiene_hazards' | translate"></form-option>
         <form-option [value]="9" [label]="'forms.jsa.field.marine.unusual_hazards.flammable_gas' | translate"></form-option>
         <form-option [value]="10" [label]="'forms.jsa.field.marine.unusual_hazards.compressed_air' | translate"></form-option>
-        <form-option [value]="11" [label]="'forms.jsa.field.marine.unusual_hazards.security' | translate"></form-option>
+        <form-option [value]="11" [label]="'forms.jsa.field.marine.unusual_hazards.seas' | translate"></form-option>
+        <form-option [value]="12" [label]="'forms.jsa.field.marine.unusual_hazards.security' | translate"></form-option>
       </form-checkbox-group>
     </div>
     <div class="my-2 flex flex-col">
@@ -382,10 +383,11 @@
       <form-checkbox-group class="ml-3" formControlName="question140_marine">
         <form-option [value]="1" [label]="'forms.jsa.field.marine.slips.wet_oily_soil' | translate"></form-option>
         <form-option [value]="2" [label]="'forms.jsa.field.marine.slips.cables_on_floor' | translate"></form-option>
-        <form-option [value]="3" [label]="'forms.jsa.field.marine.slips.terrain_unevenness' | translate"></form-option>
-        <form-option [value]="4" [label]="'forms.jsa.field.marine.slips.elevated_area' | translate"></form-option>
-        <form-option [value]="5" [label]="'forms.jsa.field.marine.slips.rooftop' | translate"></form-option>
-        <form-option [value]="6" [label]="'forms.jsa.field.marine.slips.snow_mud_or_ice' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.marine.slips.pasam' | translate"></form-option>
+        <form-option [value]="3" [label]="'forms.jsa.field.marine.slips.obs' | translate"></form-option>
+        <form-option [value]="4" [label]="'forms.jsa.field.marine.slips.rooftop' | translate"></form-option>
+        <form-option [value]="5" [label]="'forms.jsa.field.marine.slips.snow_mud_or_ice' | translate"></form-option>
+        <form-option [value]="6" [label]="'forms.jsa.field.marine.slips.out' | translate"></form-option>
         <form-option [value]="7" [label]="'forms.jsa.field.marine.slips.pit_in_the_floor' | translate"></form-option>
       </form-checkbox-group>
     </div>

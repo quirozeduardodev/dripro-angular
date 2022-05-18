@@ -96,7 +96,6 @@ export class EditComponent implements OnInit, OnDestroy {
           catchError((err) => of(true))
         )
         .subscribe((value) => {
-          this.isLoading = false;
           this.canBack?.next(true);
         });
     } else {

@@ -127,7 +127,7 @@ export class OfflineDataService {
       this._unitOfWorkDatabase.contactRepository,
       () => this._contactEndpointService.all(),
       'contacts',
-      (item) => ({ id: item.id, name: item.name })
+      (item) => ({ id: item.id, name: item.name, phone: item.phone, locationId: item.locationId })
     );
     this.countrySync = new OfflineSynchronizeHandler<CountryResponse, Country>(
       this._unitOfWorkDatabase,
@@ -171,7 +171,7 @@ export class OfflineDataService {
       this._unitOfWorkDatabase.locationRepository,
       () => this._locationEndpointService.all(),
       'locations',
-      (item) => ({ id: item.id, name: item.name })
+      (item) => ({ id: item.id, name: item.name, customerId: item.customerId })
     );
     this.motorSync = new OfflineSynchronizeHandler<MotorResponse, Motor>(
       this._unitOfWorkDatabase,

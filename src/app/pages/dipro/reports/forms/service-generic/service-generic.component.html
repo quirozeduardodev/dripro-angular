@@ -177,19 +177,6 @@
         <form-option [value]="2" [label]="'forms.common.options.no' | translate"></form-option>
       </form-button-group>
     </div>
-    <span>{{'forms.service.generic.photographicEvidence' | translate}}</span>
-    <div class="w-full p-2 my-1 border flex flex-col"
-      *appMultiplierFormControl="{
-        answers: this.answers,
-        formControls: {
-          photosz: formGroup.controls.photosz,
-          'photo-description': formGroup.controls['photo-description']
-          }
-        };
-      let formGroup">
-      <form-image-picker [formControl]="formGroup.photosz"></form-image-picker>
-      <form-text-field [formControl]="formGroup['photo-description']" [placeholder]="'forms.service.generic.photographicEvidenceDescription' | translate"></form-text-field>
-    </div>
     <div class="w-full p-2 my-1 border flex flex-col"
       *appMultiplierFormControl="{
         answers: this.answers,
@@ -239,6 +226,20 @@
         </div>
       </div>
     </div>
+    <span>{{'forms.service.generic.photographicEvidence' | translate}}</span>
+    <div class="w-full p-2 my-1 border flex flex-col"
+         *appMultiplierFormControl="{
+        answers: this.answers,
+        maxControls: 6,
+        formControls: {
+          photosz: formGroup.controls.photosz,
+          'photo-description': formGroup.controls['photo-description']
+          }
+        };
+      let formGroup">
+      <form-image-picker [maxImages]="1" [formControl]="formGroup.photosz"></form-image-picker>
+      <form-text-field [formControl]="formGroup['photo-description']" [placeholder]="'forms.service.generic.photographicEvidenceDescription' | translate"></form-text-field>
+    </div>
     <div class="my-2 flex flex-col">
       <label class="my-1">{{'forms.service.generic.inChargeOfTheClient' | translate}}</label>
       <form-text-field formControlName="responsable" [placeholder]="'forms.service.generic.inChargeOfTheClient' | translate"></form-text-field>
@@ -250,6 +251,7 @@
     <div class="my-2 flex flex-col"
       *appMultiplierFormControl="{
         answers: this.answers,
+        maxControls: 6,
         formControls: {
           email_client: formGroup.controls.email_client
         }

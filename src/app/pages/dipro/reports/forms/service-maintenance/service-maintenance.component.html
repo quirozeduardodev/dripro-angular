@@ -150,27 +150,32 @@
       <span class="text-white text-sm font-medium">{{'forms.service.preventiveMaintenance.sectionDescription1' | translate}}</span>
     </div>
     <div class="w-full bg-red-600 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium">{{'forms.service.preventiveMaintenance.mechanicalData' | translate}}</span>
+      <span class="text-white text-lg font-medium">{{'forms.service.preventiveMaintenance.mechanicalData.title' | translate}}</span>
     </div>
     <div *ngFor="let item of mechanicalDataSections" class="w-full my-1 flex flex-col">
       <div class="w-full flex justify-between">
         <span class="font-semibold">{{item.title | translate}}</span>
         <div class="w-32 flex justify-between">
-          <span>Si</span>
-          <span>No</span>
-          <span>N/A</span>
+          <span>{{'forms.service.preventiveMaintenance.good' | translate}}</span>
+          <span>{{'forms.service.preventiveMaintenance.bad' | translate}}</span>
+          <span>{{'forms.service.preventiveMaintenance.na' | translate}}</span>
         </div>
       </div>
-      <div *ngFor="let option of item.fControls" class="flex justify-between">
-        <span class="font-light">{{mechanicalDataCommonOptions[option.k] | translate}}</span>
-        <div class="w-32">
-          <mat-radio-group class="w-full flex justify-between" [formControlName]="option.fC">
-            <mat-radio-button [value]="1"></mat-radio-button>
-            <mat-radio-button [value]="2"></mat-radio-button>
-            <mat-radio-button [value]="3"></mat-radio-button>
-          </mat-radio-group>
+      <ng-container *ngFor="let option of item.fControls">
+        <div class="w-full flex flex-col">
+          <div class="flex justify-between">
+            <span class="font-light">{{mechanicalDataCommonOptions[option.k] | translate}}</span>
+            <div class="w-32 flex flex-col">
+              <mat-radio-group class="w-full flex justify-between" [formControlName]="option.fC">
+                <mat-radio-button [value]="1"></mat-radio-button>
+                <mat-radio-button [value]="2"></mat-radio-button>
+                <mat-radio-button [value]="3"></mat-radio-button>
+              </mat-radio-group>
+              <app-validator-message [control]="formGroup.controls[option.fC]"></app-validator-message>
+            </div>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
     <div class="w-full bg-red-600 rounded px-5 py-2 mt-3">
       <span class="text-white text-sm font-medium">{{'forms.service.preventiveMaintenance.sectionDescription2' | translate}}</span>
@@ -189,12 +194,13 @@
     <div *ngFor="let option of electricalDataSections" class="flex flex-col mt-3">
       <div class="w-flex flex justify-between mb-1">
         <span class="font-light">{{option.label| translate}}</span>
-        <div class="w-32">
+        <div class="w-32 flex flex-col">
           <mat-radio-group class="w-full flex justify-between" [formControlName]="option.rFC">
             <mat-radio-button [value]="1"></mat-radio-button>
             <mat-radio-button [value]="2"></mat-radio-button>
             <mat-radio-button [value]="3"></mat-radio-button>
           </mat-radio-group>
+          <app-validator-message [control]="formGroup.controls[option.rFC]"></app-validator-message>
         </div>
       </div>
       <form-text-field [formControlName]="option.tFC" [placeholder]="'forms.service.preventiveMaintenance.condition' | translate"></form-text-field>
@@ -326,6 +332,7 @@
     <div class="w-full p-2 my-1 border flex flex-col"
       *appMultiplierFormControl="{
         answers: this.answers,
+        maxControls: 6,
         formControls: {
           photosz: formGroup.controls.photosz,
           'photo-description': formGroup.controls['photo-description']
@@ -346,6 +353,7 @@
     <div class="my-2 flex flex-col"
     *appMultiplierFormControl="{
         answers: this.answers,
+        maxControls: 6,
         formControls: {
           email_client: formGroup.controls.email_client
         }

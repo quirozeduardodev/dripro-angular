@@ -68,7 +68,6 @@ export class CreateComponent implements OnInit, OnDestroy {
               });
             });
         } catch (e) {
-          console.log(e);
         }
       }
     });

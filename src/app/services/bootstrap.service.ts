@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, forkJoin, from, Observable, of, throwError} from "rxjs";
-import {AuthService} from "./auth.service";
-import {catchError, map, mergeMap} from "rxjs/operators";
-import {LocalStorageService} from "./local-storage.service";
-import {OfflineDataService} from "./offline-data.service";
-import {ConfigurationService} from "./configuration.service";
+import {BehaviorSubject, forkJoin, from, Observable, of, throwError} from 'rxjs';
+import {AuthService} from './auth.service';
+import {catchError, map, mergeMap} from 'rxjs/operators';
+import {LocalStorageService} from './local-storage.service';
+import {OfflineDataService} from './offline-data.service';
+import {ConfigurationService} from './configuration.service';
 
 @Injectable()
 export class BootstrapService {
@@ -35,7 +35,6 @@ export class BootstrapService {
 
       this.configurationService.start();
       this.offlineDataService.initialize();
-      this.offlineDataService.synchronizeAll();
 
       return forkJoin([
         from('some')

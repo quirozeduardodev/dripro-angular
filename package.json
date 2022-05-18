@@ -54,6 +54,7 @@
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.0",
     "signature_pad": "^3.0.0-beta.4",
+    "spinkit": "^2.0.1",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

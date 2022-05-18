@@ -17,6 +17,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 export declare type MultiplierStructure = { [p: string]: AbstractControl };
 export declare type MultiplierFormControlIn = {
   answers?: { [p: string]: AbstractControl } | null;
+  maxControls?: number;
   formControls: MultiplierStructure;
 };
 @Directive({
@@ -100,11 +101,13 @@ export class MultiplierFormControlDirective
         this._applyChanges();
       });
     }
-    const btnRef =
-      this._viewContainer.createComponent<AddMoreComponent>(AddMoreComponent);
-    btnRef.instance.add.subscribe(() => {
-      this.addOneMore();
-    });
+    if(!this.appMultiplierFormControl.maxControls || this._formControls.length + 1 < this.appMultiplierFormControl.maxControls) {
+      const btnRef =
+        this._viewContainer.createComponent<AddMoreComponent>(AddMoreComponent);
+      btnRef.instance.add.subscribe(() => {
+        this.addOneMore();
+      });
+    }
   }
 
   private async tryToLoadRootFormGroup(): Promise<void> {

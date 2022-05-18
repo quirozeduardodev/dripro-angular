@@ -9,7 +9,7 @@
 
     .card-container {
       @apply p-1;
-      
+
       .card-content {
         @apply h-full flex flex-col justify-between p-2 border rounded-md cursor-pointer;
         &:hover {
