@@ -1,4 +1,4 @@
-<app-base-dialog #dialogBase [overlayClose]="false" [visible]="status !== 'idle'">
+<app-base-dialog #dialogBase [overlayClose]="false">
   <div class="flex flex-col mx-3 px-4 py-2 max-w-xs">
     <ng-container *ngIf="status === 'sending'">
       <div class="flex justify-center my-3">
@@ -12,7 +12,7 @@
       </div>
       <span class="text-black text-lg font-medium text-center my-3">{{'pages.auth.forgot_password.components.processStatusDialog.success' | translate}}</span>
       <div class="flex justify-center">
-        <button class="btn btn-primary btn-flat btn-rounded-full" (click)="status = 'idle'">{{'pages.auth.forgot_password.components.processStatusDialog.close' | translate}}</button>
+        <button class="btn btn-primary btn-flat btn-rounded-full" (click)="dialogBase.close()">{{'pages.auth.forgot_password.components.processStatusDialog.close' | translate}}</button>
       </div>
     </ng-container>
     <ng-container *ngIf="status === 'error'">
@@ -21,13 +21,13 @@
       </div>
       <span class="text-black text-lg font-medium text-center my-3">{{'pages.auth.forgot_password.components.processStatusDialog.error' | translate}}</span>
       <div class="flex justify-center">
-        <button class="btn btn-primary btn-flat btn-rounded-full" (click)="status = 'idle'">{{'pages.auth.forgot_password.components.processStatusDialog.close' | translate}}</button>
+        <button class="btn btn-primary btn-flat btn-rounded-full" (click)="dialogBase.close()">{{'pages.auth.forgot_password.components.processStatusDialog.close' | translate}}</button>
       </div>
     </ng-container>
     <ng-container *ngIf="status === 'unknownEmail'">
       <span class="text-black text-lg font-medium text-center my-3">{{'pages.auth.forgot_password.components.processStatusDialog.unknownEmail' | translate}}</span>
       <div class="flex justify-center">
-        <button class="btn btn-primary btn-flat btn-rounded-full" (click)="status = 'idle'">{{'pages.auth.forgot_password.components.processStatusDialog.close' | translate}}</button>
+        <button class="btn btn-primary btn-flat btn-rounded-full" (click)="dialogBase.close()">{{'pages.auth.forgot_password.components.processStatusDialog.close' | translate}}</button>
       </div>
     </ng-container>
   </div>

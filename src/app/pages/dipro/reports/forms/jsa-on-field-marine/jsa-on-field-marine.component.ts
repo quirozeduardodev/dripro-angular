@@ -11,6 +11,7 @@ import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import {BaseForm, OnAnswer} from '../base-form';
 import {Technician} from '../../../../../database/models/technician';
+import {Hardcoded} from '../../hardcoded';
 
 @Component({
   selector: 'app-jsa-on-field-marine',
@@ -595,7 +596,7 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit, OnAns
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
+    this.categoriesUnits$ = Hardcoded.categories();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

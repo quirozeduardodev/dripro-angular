@@ -1,4 +1,4 @@
-<app-drawer [title]="'Manuals'">
+<app-drawer [title]="'pages.dipro.manuals.title' | translate">
   <div class="flex flex-col w-full h-full">
     <app-center-loading *ngIf="isLoading"></app-center-loading>
     <div *ngIf="!isLoading" class="w-full flex flex-wrap justify-start" #mainWrapper>

@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {BaseForm, OnAnswer} from '../base-form';
 import {DateTime} from 'luxon';
 import {Technician} from '../../../../../database/models/technician';
+import {Hardcoded} from '../../hardcoded';
 
 @Component({
   selector: 'app-jsa-on-field-power-generation',
@@ -606,7 +607,7 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
+    this.categoriesUnits$ = Hardcoded.categories();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

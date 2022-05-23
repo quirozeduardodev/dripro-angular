@@ -20,7 +20,7 @@ export class ReportEndpointService extends EndpointService {
   public pagination(
     filters: ReportFiltersRequest,
     page: number = 1,
-    limit: number = 10
+    limit: number = 50
   ): Observable<PaginateResponse<BasicReportResponse>> {
     const url = `${this.apiUrl}/formulary/all?page=${page}&type=${filters.type}&order=${filters.shortByDateTime}&limit=${limit}`;
     return this.httpClient.get<any>(url, this.getOptions()).pipe(
@@ -31,6 +31,15 @@ export class ReportEndpointService extends EndpointService {
 
   public save(request: CreateReportRequest): Observable<any> {
     const url = `${this.apiUrl}/formulary/store`;
+    const noNullAnswers: { [q: string]: any } = {};
+    for (const [key, value] of Object.entries(request.answer)) {
+      if(Array.isArray(value) && value.length > 0) {
+        noNullAnswers[key] = value;
+      } else if(value !== null && value !== undefined) {
+        noNullAnswers[key] = value;
+      }
+    }
+    request.answer = noNullAnswers;
     return this.httpClient.post<any>(url, request, this.getOptions()).pipe(
       catchError((err: HttpErrorResponse) => this.handleError(err)),
       mergeMap((value) => TypeBuilder.paginate(value, TypeBuilder.basicReports))

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import { Answer } from 'src/app/database/models/answer';
 import { Application } from 'src/app/database/models/application';
 import { Category } from 'src/app/database/models/category';
@@ -19,7 +19,7 @@ import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import {BaseForm, OnAnswer} from '../base-form';
 import {Technician} from '../../../../../database/models/technician';
-import {map, mergeMap} from 'rxjs/operators';
+import {distinct, map, mergeMap, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-maintenance',
@@ -343,7 +343,7 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
     sucursal: new FormControl(null, [Validators.required]),
     accompanied: new FormControl(false),
     teammate_name: new FormControl([]),
-    tageditor: new FormControl([], [Validators.required]),
+    tageditor: new FormControl([], []),
     type_job: new FormControl(null, [Validators.required]),
     application: new FormControl(null, [Validators.required]),
     model: new FormControl(null, [Validators.required]),
@@ -356,12 +356,6 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
     potencia: new FormControl(null, [Validators.required]),
     model_qta: new FormControl(null, [Validators.required]),
     num_serie_qta: new FormControl(null, [Validators.required]),
-    symptom: new FormControl(null, [Validators.required]),
-    problem: new FormControl(null, [Validators.required]),
-    cause: new FormControl(null, [Validators.required]),
-    solution: new FormControl(null, [Validators.required]),
-    pending: new FormControl(null, [Validators.required]),
-    available: new FormControl(null, [Validators.required]),
     tanq_comb_niv: new FormControl(null, [Validators.required]),
     tanq_comb_fil: new FormControl(null, [Validators.required]),
     tanq_comb_lim: new FormControl(null, [Validators.required]),
@@ -502,93 +496,93 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
     filters_polea: new FormControl(null, [Validators.required]),
     filters_aspect: new FormControl(null, [Validators.required]),
     filters_cintu: new FormControl(null, [Validators.required]),
-    pre_aquec: new FormControl(null, [Validators.required]),
-    pre_aquec_condition: new FormControl(null, [Validators.required]),
-    m_partida: new FormControl(null, [Validators.required]),
-    m_partida_condition: new FormControl(null, [Validators.required]),
-    solonoide: new FormControl(null, [Validators.required]),
-    solonoide_condition: new FormControl(null, [Validators.required]),
-    ch_partida: new FormControl(null, [Validators.required]),
-    ch_partida_condition: new FormControl(null, [Validators.required]),
-    term_fixo: new FormControl(null, [Validators.required]),
-    term_fixo_condition: new FormControl(null, [Validators.required]),
-    term_reg: new FormControl(null, [Validators.required]),
-    term_reg_condition: new FormControl(null, [Validators.required]),
-    pressostato: new FormControl(null, [Validators.required]),
-    pressostato_condition: new FormControl(null, [Validators.required]),
-    lampda: new FormControl(null, [Validators.required]),
-    lampda_condition: new FormControl(null, [Validators.required]),
-    al_sonoro: new FormControl(null, [Validators.required]),
-    al_sonoro_condition: new FormControl(null, [Validators.required]),
-    ret_alt: new FormControl(null, [Validators.required]),
-    ret_alt_condition: new FormControl(null, [Validators.required]),
-    cab_bat: new FormControl(null, [Validators.required]),
-    cab_bat_condition: new FormControl(null, [Validators.required]),
-    level_sensor: new FormControl(null, [Validators.required]),
-    level_sensor_condition: new FormControl(null, [Validators.required]),
-    amperim: new FormControl(null, [Validators.required]),
-    amperim_condition: new FormControl(null, [Validators.required]),
-    voltim: new FormControl(null, [Validators.required]),
-    voltim_condition: new FormControl(null, [Validators.required]),
-    frequen: new FormControl(null, [Validators.required]),
-    frequen_condition: new FormControl(null, [Validators.required]),
-    horimet: new FormControl(null, [Validators.required]),
-    horimet_condition: new FormControl(null, [Validators.required]),
-    rat: new FormControl(null, [Validators.required]),
-    rat_condition: new FormControl(null, [Validators.required]),
-    rev: new FormControl(null, [Validators.required]),
-    rev_condition: new FormControl(null, [Validators.required]),
-    usca: new FormControl(null, [Validators.required]),
-    usca_condition: new FormControl(null, [Validators.required]),
-    pcc_ii: new FormControl(null, [Validators.required]),
-    pcc_ii_condition: new FormControl(null, [Validators.required]),
-    pcc_i: new FormControl(null, [Validators.required]),
-    pcc_i_condition: new FormControl(null, [Validators.required]),
-    de_12: new FormControl(null, [Validators.required]),
-    de_12_condition: new FormControl(null, [Validators.required]),
-    qta_level: new FormControl(null, [Validators.required]),
-    qta_level_condition: new FormControl(null, [Validators.required]),
-    level_1301: new FormControl(null, [Validators.required]),
-    level_1301_condition: new FormControl(null, [Validators.required]),
-    fase_r_vacio: new FormControl(null, [Validators.required]),
-    fase_r_carga: new FormControl(null, [Validators.required]),
-    fase_s_vacio: new FormControl(null, [Validators.required]),
-    fase_s_carga: new FormControl(null, [Validators.required]),
-    fase_t_vacio: new FormControl(null, [Validators.required]),
-    fase_t_carga: new FormControl(null, [Validators.required]),
-    frequen_vacio: new FormControl(null, [Validators.required]),
-    frequen_carga: new FormControl(null, [Validators.required]),
-    amper_r_vacio: new FormControl(null, [Validators.required]),
-    amper_r_carga: new FormControl(null, [Validators.required]),
-    amper_s_vacio: new FormControl(null, [Validators.required]),
-    amper_s_carga: new FormControl(null, [Validators.required]),
-    amper_t_vacio: new FormControl(null, [Validators.required]),
-    amper_t_carga: new FormControl(null, [Validators.required]),
-    km_vacio: new FormControl(null, [Validators.required]),
-    km_carga: new FormControl(null, [Validators.required]),
-    temp_agua_vacio: new FormControl(null, [Validators.required]),
-    temp_agua_carga: new FormControl(null, [Validators.required]),
-    temp_oleo_vacio: new FormControl(null, [Validators.required]),
-    temp_oleo_carga: new FormControl(null, [Validators.required]),
-    pressao_vacio: new FormControl(null, [Validators.required]),
-    pressao_carga: new FormControl(null, [Validators.required]),
-    tempo_vacio: new FormControl(null, [Validators.required]),
-    tempo_carga: new FormControl(null, [Validators.required]),
-    vs_1: new FormControl(null, [Validators.required]),
-    vs_2: new FormControl(null, [Validators.required]),
-    vs_3: new FormControl(null, [Validators.required]),
-    vs_4: new FormControl(null, [Validators.required]),
-    vs_5: new FormControl(null, [Validators.required]),
-    vs_6: new FormControl(null, [Validators.required]),
-    vs_7: new FormControl(null, [Validators.required]),
-    vs_8: new FormControl(null, [Validators.required]),
-    vs_9: new FormControl(null, [Validators.required]),
-    vs_10: new FormControl(null, [Validators.required]),
-    vs_11: new FormControl(null, [Validators.required]),
-    vs_12: new FormControl(null, [Validators.required]),
-    density_actual: new FormControl(null, [Validators.required]),
-    volt_actual: new FormControl(null, [Validators.required]),
-    comments_actual: new FormControl(null, [Validators.required]),
+    pre_aquec: new FormControl(null, []),
+    pre_aquec_condition: new FormControl(null, []),
+    m_partida: new FormControl(null, []),
+    m_partida_condition: new FormControl(null, []),
+    solonoide: new FormControl(null, []),
+    solonoide_condition: new FormControl(null, []),
+    ch_partida: new FormControl(null, []),
+    ch_partida_condition: new FormControl(null, []),
+    term_fixo: new FormControl(null, []),
+    term_fixo_condition: new FormControl(null, []),
+    term_reg: new FormControl(null, []),
+    term_reg_condition: new FormControl(null, []),
+    pressostato: new FormControl(null, []),
+    pressostato_condition: new FormControl(null, []),
+    lampda: new FormControl(null, []),
+    lampda_condition: new FormControl(null, []),
+    al_sonoro: new FormControl(null, []),
+    al_sonoro_condition: new FormControl(null, []),
+    ret_alt: new FormControl(null, []),
+    ret_alt_condition: new FormControl(null, []),
+    cab_bat: new FormControl(null, []),
+    cab_bat_condition: new FormControl(null, []),
+    level_sensor: new FormControl(null, []),
+    level_sensor_condition: new FormControl(null, []),
+    amperim: new FormControl(null, []),
+    amperim_condition: new FormControl(null, []),
+    voltim: new FormControl(null, []),
+    voltim_condition: new FormControl(null, []),
+    frequen: new FormControl(null, []),
+    frequen_condition: new FormControl(null, []),
+    horimet: new FormControl(null, []),
+    horimet_condition: new FormControl(null, []),
+    rat: new FormControl(null, []),
+    rat_condition: new FormControl(null, []),
+    rev: new FormControl(null, []),
+    rev_condition: new FormControl(null, []),
+    usca: new FormControl(null, []),
+    usca_condition: new FormControl(null, []),
+    pcc_ii: new FormControl(null, []),
+    pcc_ii_condition: new FormControl(null, []),
+    pcc_i: new FormControl(null, []),
+    pcc_i_condition: new FormControl(null, []),
+    de_12: new FormControl(null, []),
+    de_12_condition: new FormControl(null, []),
+    qta_level: new FormControl(null, []),
+    qta_level_condition: new FormControl(null, []),
+    level_1301: new FormControl(null, []),
+    level_1301_condition: new FormControl(null, []),
+    fase_r_vacio: new FormControl(null, []),
+    fase_r_carga: new FormControl(null, []),
+    fase_s_vacio: new FormControl(null, []),
+    fase_s_carga: new FormControl(null, []),
+    fase_t_vacio: new FormControl(null, []),
+    fase_t_carga: new FormControl(null, []),
+    frequen_vacio: new FormControl(null, []),
+    frequen_carga: new FormControl(null, []),
+    amper_r_vacio: new FormControl(null, []),
+    amper_r_carga: new FormControl(null, []),
+    amper_s_vacio: new FormControl(null, []),
+    amper_s_carga: new FormControl(null, []),
+    amper_t_vacio: new FormControl(null, []),
+    amper_t_carga: new FormControl(null, []),
+    km_vacio: new FormControl(null, []),
+    km_carga: new FormControl(null, []),
+    temp_agua_vacio: new FormControl(null, []),
+    temp_agua_carga: new FormControl(null, []),
+    temp_oleo_vacio: new FormControl(null, []),
+    temp_oleo_carga: new FormControl(null, []),
+    pressao_vacio: new FormControl(null, []),
+    pressao_carga: new FormControl(null, []),
+    tempo_vacio: new FormControl(null, []),
+    tempo_carga: new FormControl(null, []),
+    vs_1: new FormControl(null, []),
+    vs_2: new FormControl(null, []),
+    vs_3: new FormControl(null, []),
+    vs_4: new FormControl(null, []),
+    vs_5: new FormControl(null, []),
+    vs_6: new FormControl(null, []),
+    vs_7: new FormControl(null, []),
+    vs_8: new FormControl(null, []),
+    vs_9: new FormControl(null, []),
+    vs_10: new FormControl(null, []),
+    vs_11: new FormControl(null, []),
+    vs_12: new FormControl(null, []),
+    density_actual: new FormControl(null, []),
+    volt_actual: new FormControl(null, []),
+    comments_actual: new FormControl(null, []),
     technician_name: new FormControl(null, [Validators.required]),
     initial_hour: new FormControl(null, [Validators.required]),
     finally_hour: new FormControl(null, [Validators.required]),
@@ -631,6 +625,13 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
   submit(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+
+      for (const name in this.formGroup.controls) {
+        if (this.formGroup.controls[name].invalid) {
+          console.log(name);
+        }
+      }
+
       this.scrollToFirstInvalidControl();
       return;
     }
@@ -698,6 +699,44 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
           }
         });
     });
+
+    combineLatest([
+      this.formGroup.controls.model_gene.valueChanges.pipe(startWith(answers.model_gene ?? null), distinct()),
+      this.formGroup.controls.model_motor.valueChanges.pipe(startWith(answers.model_motor ?? null), distinct()),
+      this.formGroup.controls.model_qta.valueChanges.pipe(startWith(answers.model_qta ?? null), distinct())])
+      .subscribe(([modelGen, modelMotor, modelQTA]) => {
+
+        this.formGroup.controls.model_gene.setValidators(null);
+        this.formGroup.controls.num_serie_gen.setValidators(null);
+
+        this.formGroup.controls.model_motor.setValidators(null);
+        this.formGroup.controls.num_serie_motor.setValidators(null);
+
+        this.formGroup.controls.model_qta.setValidators(null);
+        this.formGroup.controls.num_serie_qta.setValidators(null);
+
+        this.formGroup.controls.model_gene.updateValueAndValidity();
+        this.formGroup.controls.num_serie_gen.updateValueAndValidity();
+        this.formGroup.controls.model_motor.updateValueAndValidity();
+        this.formGroup.controls.num_serie_motor.updateValueAndValidity();
+        this.formGroup.controls.model_qta.updateValueAndValidity();
+        this.formGroup.controls.num_serie_qta.updateValueAndValidity();
+
+        if(!modelGen && !modelMotor) {
+          this.formGroup.controls.model_qta.setValidators([Validators.required]);
+          this.formGroup.controls.num_serie_qta.setValidators([Validators.required]);
+        }
+
+        if(!modelGen && !modelQTA) {
+          this.formGroup.controls.model_motor.setValidators([Validators.required]);
+          this.formGroup.controls.num_serie_motor.setValidators([Validators.required]);
+        }
+
+        if(!modelMotor && !modelQTA) {
+          this.formGroup.controls.model_gene.setValidators([Validators.required]);
+          this.formGroup.controls.num_serie_gen.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
+        }
+      });
   }
 
 }

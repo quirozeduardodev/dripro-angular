@@ -135,6 +135,11 @@ export class EditComponent implements OnInit, OnDestroy {
     }
   }
 
+  savedAndBack(): void {
+    this.dialogSavedChanges?.close();
+    this.location.back();
+  }
+
   submitChangesConfirmation(): void {
     if(this.localReport) {
       this.isLoading = true;

@@ -39,7 +39,7 @@ export class LocalStorageService {
     this.setAccessToken(accessToken);
     this.setRefreshToken(refreshToken);
     this.setUserMe(userMe);
-    this.setLanguage(language || 'es_MX');
+    this.setLanguage(language && ['es_MX', 'pt_BR'].includes(language) ? language : 'es_MX');
 
 
   }

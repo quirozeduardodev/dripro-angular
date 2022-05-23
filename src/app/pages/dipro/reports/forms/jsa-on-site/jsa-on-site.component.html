@@ -43,7 +43,7 @@
       <form-search-select formControlName="task_category_sitio" [placeholder]="'forms.common.labels.taskCategory' | translate">
         <form-option *ngFor="let option of (categoriesUnits$ | async) || []"
                      [value]="option.id"
-                     [label]="option.name"></form-option>
+                     [label]="option.name | translate"></form-option>
       </form-search-select>
     </div>
     <div class="my-1 flex flex-col">

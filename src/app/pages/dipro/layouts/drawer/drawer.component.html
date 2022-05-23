@@ -53,14 +53,14 @@
 <app-base-dialog #logoutDialog>
   <div class="flex flex-col justify-center">
     <div class="p-3 flex justify-center">
-      <span class="text-black font-bold text-lg">Close session</span>
+      <span class="text-black font-bold text-lg">{{'pages.dipro.layouts.drawer.logoutDialog.title' | translate}}</span>
     </div>
     <div class="p-3 flex justify-center">
-      <span class="text-black">Are you sure?</span>
+      <span class="text-black">{{'pages.dipro.layouts.drawer.logoutDialog.areYourSure' | translate}}</span>
     </div>
     <div class="flex">
-      <button class="mx-1 btn btn-primary btn-stroked" (click)="logoutDialog.close()">Cancel</button>
-      <button class="mx-1 btn btn-accent btn-flat" (click)="logout()">Aceptar</button>
+      <button class="mx-1 btn btn-primary btn-stroked" (click)="logoutDialog.close()">{{'pages.dipro.layouts.drawer.logoutDialog.cancel' | translate}}</button>
+      <button class="mx-1 btn btn-accent btn-flat" (click)="logout()">{{'pages.dipro.layouts.drawer.logoutDialog.accept' | translate}}</button>
     </div>
   </div>
 </app-base-dialog>

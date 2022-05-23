@@ -43,7 +43,7 @@
       <form-search-select formControlName="task_category_warehouse" [placeholder]="'forms.common.labels.taskCategory' | translate">
         <form-option *ngFor="let option of (categoriesUnits$ | async) || []"
                      [value]="option.id"
-                     [label]="option.name"></form-option>
+                     [label]="option.name | translate"></form-option>
       </form-search-select>
     </div>
     <div class="my-2 flex flex-col">
@@ -259,12 +259,14 @@
       <form-text-field [formControlName]="'phone_manager'"  [placeholder]="'forms.jsa.warehouse.extra.label10' | translate"></form-text-field>
     </div>
     <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label11' | translate}}</span>
-    </div>
-    <div class="w-full bg-red-500 rounded px-5 py-2 mt-3">
-      <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.extra.label12' | translate}}</span>
+      <span class="text-white text-lg font-medium">{{'forms.jsa.warehouse.safety_title' | translate}}</span>
       <br>
-      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.extra.label13' | translate}}</span>
+      <span class="text-white text-sm font-medium">{{'forms.jsa.warehouse.safety_subtitle' | translate}}<br>
+        {{'forms.jsa.warehouse.safety_subtitle_option1' | translate}}<br><br>
+        {{'forms.jsa.warehouse.safety_subtitle_option2' | translate}}<br><br>
+        {{'forms.jsa.warehouse.safety_subtitle_option3' | translate}}<br>
+        {{'forms.jsa.warehouse.safety_subtitle_option4' | translate}}
+      </span>
     </div>
     <div class="my-3 flex flex-col">
       <label class="my-1">{{'forms.jsa.common.doesNeedLoto' | translate}}</label>

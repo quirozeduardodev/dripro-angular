@@ -1,8 +1,16 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidator,
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 import {DateTime} from 'luxon';
-import { Observable } from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import { Category } from 'src/app/database/models/category';
 import { Unit } from 'src/app/database/models/unit';
@@ -11,6 +19,7 @@ import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import { BaseForm } from '../base-form';
 import {Technician} from '../../../../../database/models/technician';
+import {Hardcoded} from '../../hardcoded';
 
 @Component({
   selector: 'app-jsa-on-field-generic',
@@ -468,7 +477,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
+    this.categoriesUnits$ = Hardcoded.categories();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

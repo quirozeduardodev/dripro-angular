@@ -1,4 +1,4 @@
-<input class="input-text" [ngxTimepicker]="picker" [format]="24" [value]="value" [disabled]="isDisabled"/>
+<input class="input-text" [ngxTimepicker]="picker" [format]="24" [value]="value ?? ''" [disabled]="isDisabled"/>
 <ngx-material-timepicker #picker [theme]="theme"
                          (timeSet)="changed($event)">
 </ngx-material-timepicker>

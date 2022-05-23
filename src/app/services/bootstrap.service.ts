@@ -32,9 +32,9 @@ export class BootstrapService {
     }), mergeMap(value => {
 
       /// This bloc will be Executed after auth is loaded
-
       this.configurationService.start();
       this.offlineDataService.initialize();
+      this.offlineDataService.synchronizeAll();
 
       return forkJoin([
         from('some')

@@ -101,7 +101,7 @@
           <form-search-select [placeholder]="'forms.service.preventiveMaintenance.measurementType' | translate" formControlName="model_type">
             <form-option *ngFor="let option of measurementTypes"
                          [value]="option.id"
-                         [label]="option.name"></form-option>
+                         [label]="option.name | translate"></form-option>
           </form-search-select>
         </div>
       </div>

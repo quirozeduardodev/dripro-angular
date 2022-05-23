@@ -115,16 +115,17 @@ export class BaseRepository<T> implements IBaseRepository<T>{
     };
 
     // @ts-ignore
-    const itemsId: number[] = items.map(value => value.id !== undefined ? value.id : -1);
+    const itemsId: number[] = items.map(value => value.id !== undefined ? value.id : -1).filter(value => value > 0);
 
     // @ts-ignore
-    return from(this.table.filter(obj => itemsId.includes(obj.id)).toArray())
+    return from(this.table.filter(obj => true).toArray())
       .pipe(mergeMap(existing => {
         // @ts-ignore
-        const existingIds: number[] = existing.map(item => item.id !== undefined ? item.id : -1);
+        const existingIds: number[] = existing.map(item => item.id !== undefined ? item.id : -1).filter(item => item > 0);
 
         const existingItems: T[] = [];
         const newItems: T[] = [];
+        const deleteItemsIds: number[] = existingIds.filter(value => !itemsId.includes(value));
         for (const item of items) {
           // @ts-ignore
           if (existingIds.includes(item.id)) {
@@ -138,7 +139,8 @@ export class BaseRepository<T> implements IBaseRepository<T>{
 
         return forkJoin({
           updated: this.bulkUpdate(existingItems, fOptions),
-          inserted: this.bulkAdd(newItems, fOptions)
+          inserted: this.bulkAdd(newItems, fOptions),
+          deleted: this.bulkDelete(deleteItemsIds)
         }).pipe(map(result => [...result.inserted, ...result.updated]));
       }));
   }

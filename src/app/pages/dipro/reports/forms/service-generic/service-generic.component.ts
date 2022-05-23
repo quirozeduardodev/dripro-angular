@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {combineLatest, forkJoin, Observable} from 'rxjs';
 import { Answer } from 'src/app/database/models/answer';
 import { Application } from 'src/app/database/models/application';
 import { Category } from 'src/app/database/models/category';
@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {BaseForm, OnAnswer} from '../base-form';
 import {Delay} from '../../../../../database/models/delay';
 import {Technician} from '../../../../../database/models/technician';
-import {map, mergeMap} from 'rxjs/operators';
+import {distinct, map, mergeMap, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-generic',
@@ -63,7 +63,7 @@ export class ServiceGenericComponent extends BaseForm implements OnInit, OnAnswe
     sucursal: new FormControl(null, [Validators.required]),
     accompanied: new FormControl(false),
     teammate_name: new FormControl([]),
-    tageditor: new FormControl([], [Validators.required]),
+    tageditor: new FormControl([], []),
     type_job: new FormControl(null, [Validators.required]),
     application: new FormControl(null, [Validators.required]),
     model: new FormControl(null, [Validators.required]),
@@ -118,12 +118,6 @@ export class ServiceGenericComponent extends BaseForm implements OnInit, OnAnswe
     this.categories$ = this.unitOfWorkDatabase.categoryRepository.all();
     this.delays$ = this.unitOfWorkDatabase.delayRepository.all();
 
-    this.formGroup.controls.model_gene.valueChanges.subscribe(value => {
-    });
-    this.formGroup.controls.model_motor.valueChanges.subscribe(value => {
-    });
-    this.formGroup.controls.model_qta.valueChanges.subscribe(value => {
-    });
   }
 
   submit(): void {
@@ -196,5 +190,44 @@ export class ServiceGenericComponent extends BaseForm implements OnInit, OnAnswe
           }
         });
     });
+
+
+    combineLatest([
+      this.formGroup.controls.model_gene.valueChanges.pipe(startWith(answers.model_gene ?? null), distinct()),
+      this.formGroup.controls.model_motor.valueChanges.pipe(startWith(answers.model_motor ?? null), distinct()),
+      this.formGroup.controls.model_qta.valueChanges.pipe(startWith(answers.model_qta ?? null), distinct())])
+      .subscribe(([modelGen, modelMotor, modelQTA]) => {
+        console.log(modelGen, modelMotor, modelQTA);
+        this.formGroup.controls.model_gene.setValidators(null);
+        this.formGroup.controls.num_serie_gen.setValidators(null);
+
+        this.formGroup.controls.model_motor.setValidators(null);
+        this.formGroup.controls.num_serie_motor.setValidators(null);
+
+        this.formGroup.controls.model_qta.setValidators(null);
+        this.formGroup.controls.num_serie_qta.setValidators(null);
+
+        this.formGroup.controls.model_gene.updateValueAndValidity();
+        this.formGroup.controls.num_serie_gen.updateValueAndValidity();
+        this.formGroup.controls.model_motor.updateValueAndValidity();
+        this.formGroup.controls.num_serie_motor.updateValueAndValidity();
+        this.formGroup.controls.model_qta.updateValueAndValidity();
+        this.formGroup.controls.num_serie_qta.updateValueAndValidity();
+
+        if(!modelGen && !modelMotor) {
+          this.formGroup.controls.model_qta.setValidators([Validators.required]);
+          this.formGroup.controls.num_serie_qta.setValidators([Validators.required]);
+        }
+
+        if(!modelGen && !modelQTA) {
+          this.formGroup.controls.model_motor.setValidators([Validators.required]);
+          this.formGroup.controls.num_serie_motor.setValidators([Validators.required]);
+        }
+
+        if(!modelMotor && !modelQTA) {
+          this.formGroup.controls.model_gene.setValidators([Validators.required]);
+          this.formGroup.controls.num_serie_gen.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
+        }
+      });
   }
 }

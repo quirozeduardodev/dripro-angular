@@ -2,7 +2,7 @@
 import {Component, ElementRef, Input, OnInit, Optional, Self, ViewChild} from '@angular/core';
 import {MatChipInputEvent, MatChipList} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {AbstractControl, ControlValueAccessor, NgControl} from '@angular/forms';
 
 @Component({
   selector: 'form-chip-list',
@@ -31,6 +31,10 @@ export class ChipListComponent implements ControlValueAccessor {
     if (ngControl) {
       ngControl.valueAccessor = this;
     }
+  }
+
+  get control(): AbstractControl | null {
+    return this.ngControl?.control ?? null;
   }
 
   registerOnChange(fn: any): void {

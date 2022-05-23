@@ -21,12 +21,13 @@
         "email": "Correo electrónico",
         "forgot_password": "Has olvidado tu contraseña",
         "password": "Contraseña",
-        "submit": "Iniiciar sesión"
+        "submit": "Iniiciar sesión",
+        "invalidCredentials": "Credenciales Inválidas"
       },
       "forgot_password": {
         "components": {
           "processStatusDialog": {
-            "close": "Cerca",
+            "close": "Cerrar",
             "error":  "Se ha producido un error, inténtalo de nuevo más tarde",
             "sending":  "Estamos enviando una nueva contraseña a su correo electrónico.",
             "success": "Le hemos enviado una nueva contraseña, por favor verifique su correo electrónico.",
@@ -34,8 +35,13 @@
           }
         },
         "email": "Correo electrónico",
-        "login": "Acceso",
-        "reset_password": "Restablecer la contraseña"
+        "login": "Iniciar Sesión",
+        "reset_password": "Restablecer la contraseña",
+        "emailSend": "Se envio una nueva contraseña a tu correo eléctronio",
+        "unknownEmail": "Este email no existe!",
+        "resetError": "Ops!! Ocurrio un error, intentalo mas tarde",
+        "accept": "Aceptar",
+        "cancel": "Cancelar"
       }
     },
     "dipro": {
@@ -51,6 +57,12 @@
               "title": "Cambia la contraseña"
             }
           },
+          "logoutDialog": {
+            "title":  "Cerrar Sesión",
+            "areYourSure": "¿Estas seguro?",
+            "cancel":  "Cancelar",
+            "accept": "Aceptar"
+          },
           "menu": {
             "reports": "Reportes",
             "manuals": "Manuales",
@@ -60,10 +72,13 @@
           }
         }
       },
+      "manuals": {
+        "title": "Manuales"
+      },
       "reports": {
         "components": {
           "filtersSheet": {
-            "close": "Cerca",
+            "close": "Cerrar",
             "localReports": "Reportes locales",
             "localReportsDisclaimer": "Todos los reportes fuera de línea se mostrarán",
             "offlineReports": "Reportes fuera de línea",
@@ -356,15 +371,31 @@
           }
         }
       },
+      "categories": {
+        "option1": "Autobús-Auto-Camión Auto - RV",
+        "option2": "Auto - Camión de bomberos",
+        "option3": "CNG-LNG",
+        "option4": "Reparación",
+        "option5": "PG - Cliente",
+        "option6": "Otros /Afín",
+        "option7": "Auto / Otros",
+        "option8": "Equipamiento",
+        "option9": "Ensamble de motor",
+        "option10": "Desmontaje del motor",
+        "option11": "Pintura",
+        "option12": "Celda de prueba",
+        "option13": "Limpieza de piezas",
+        "option14": "Carga / Descarga Limpieza del Motor / Vehículo"
+      },
       "warehouse": {
         "lonely_job": "Trabajo Solitario",
         "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
         "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
-        "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+        "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACIÓN DE CONTROLES",
+        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
         "practice": "Poner en práctica Controles Establecidos",
         "strange": "¿Qué es extraño, inusual o diferente hoy?",
-        "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+        "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTACIÓN DE CONTROLES",
         "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
         "identification": "Identificación de los peligros(dar click si el peligro está presente)",
         "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
@@ -498,7 +529,7 @@
         },
         "extra": {
           "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
           "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
           "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
           "label5": "Identificación de los peligros(dar click si el peligro está presente)",
@@ -509,7 +540,6 @@
           "label10": "Teléfono de Contacto del Gerente:",
           "label11": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
           "label12": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
-          "label13": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:<br> 1. QSOL - Levantar un Ticket de Ayuda de Seguridad<br><br><br> Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo<br><br><br> 2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente<br> 3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
           "question1": "Poner en práctica Controles Establecidos",
           "question2": "¿Qué es extraño, inusual o diferente hoy?"
         },
@@ -611,7 +641,7 @@
         "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
         "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
         "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
         "practice": "Poner en práctica Controles Establecidos",
         "strange": "¿Qué es extraño, inusual o diferente hoy?",
         "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
@@ -748,7 +778,7 @@
         },
         "extra": {
           "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
           "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
           "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
           "label5": "Identificación de los peligros(dar click si el peligro está presente)",
@@ -862,7 +892,7 @@
           "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
           "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
           "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
           "practice": "Poner en práctica Controles Establecidos",
           "strange": "¿Qué es extraño, inusual o diferente hoy?",
           "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
@@ -999,7 +1029,7 @@
           },
           "extra": {
             "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
             "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
             "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
             "label5": "Identificación de los peligros(dar click si el peligro está presente)",
@@ -1113,7 +1143,7 @@
           "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
           "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
           "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
           "practice": "Poner en práctica Controles Establecidos",
           "strange": "¿Qué es extraño, inusual o diferente hoy?",
           "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
@@ -1143,7 +1173,7 @@
             "question2": "¿Se está completando el trabajo eléctrico en vivo y se requiere un permiso?",
             "question3": "¿Los arreglos de respuesta a emergencias están implementados y entendidos?",
             "question4": "¿El área de trabajo está libre de otras actividades que pueden afectar a su seguridad?",
-            "question5": "¿Tiene la correctacalificacion y autorización Cummins para completar el trabajo de este equipo?",
+            "question5": "¿Tiene la correcta calificacion y autorización Cummins para completar el trabajo de este equipo?",
             "question6": "¿El diagrama de cableado está disponible y los puntos de aislamiento identificados para evaluar los controles de bloqueo y etiquetado?",
             "question7": "Si se esta trabajando con contratistas ¿Ellos participaron en la elaboracion del JSA y los controles han sido comunicados?"
           },
@@ -1261,7 +1291,7 @@
           },
           "extra": {
             "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
             "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
             "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
             "label5": "Identificación de los peligros(dar click si el peligro está presente)",
@@ -1277,7 +1307,7 @@
             "question1": "Poner en práctica Controles Establecidos",
             "question2": "¿Qué es extraño, inusual o diferente hoy?",
             "question3": "Especifique el voltaje del equipo:",
-            "question4": "Datos de advertencia de arco eléctrico, Limite de riesgo de destello (dondee esté disponible)",
+            "question4": "Datos de advertencia de arco eléctrico, Limite de riesgo de destello (donde esté disponible)",
             "question5": "Nivel de Equipo de Protección personal"
           },
           "unusual_hazards": {
@@ -1379,11 +1409,11 @@
           "lonely_job": "Trabajo Solitario",
           "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
           "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
-          "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+          "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACIÓN DE CONTROLES",
+          "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
           "practice": "Poner en práctica Controles Establecidos",
           "strange": "¿Qué es extraño, inusual o diferente hoy?",
-          "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
+          "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTACIÓN DE CONTROLES",
           "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
           "identification": "Identificación de los peligros(dar click si el peligro está presente)",
           "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
@@ -1406,8 +1436,8 @@
           },
           "preparation": {
             "title": "Preparación",
-            "question1": "¿Se identificaron condiciones seguras oara viajar desde y hacia el barco o la plataforma?",
-            "question2": "¿Si es necesario, ha completado la induicci'on de seguridad y/o comprende las reglas de seguridad del sitio?",
+            "question1": "¿Se identificaron condiciones seguras para viajar desde y hacia el barco o la plataforma?",
+            "question2": "¿Si es necesario, ha completado la inducción de seguridad y/o comprende las reglas de seguridad del sitio?",
             "question3": "Al llegar, ¿Se completó la comunicacion con el contacto representante del sitio del buque?",
             "question4": "¿El acceso a la ubicación del trabajo se identifica como la ruta y el metodo más seguros disponibles?",
             "question5": "¿Los arreglos de respuesta a emergencias están en el sitio y don entendidos?",
@@ -1426,7 +1456,7 @@
             "question1": "¿Hay un plan de levantamiento de equipos en el lugar y es comprendido por todos?",
             "question2": "¿El levantamiento manual de piezas está dentro de su capacidad?",
             "question3": "¿Los buques están equipados con dispositivos de seguridad requeridos? (P. Ej. Dispositivos de señalización, bengalas y chalecos salvavidas)",
-            "question4": "¿Fue desarrollada la familiarización con las Slidas del área?",
+            "question4": "¿Fue desarrollada la familiarización con las Salidas del área?",
             "question5": "¿Se entienden las acciones en caso de un apagón / falla de energía? ¿Antorcha manual / Linterna disponible?"
           },
           "epp": {
@@ -1524,9 +1554,9 @@
             }
           },
           "extra": {
-            "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
-            "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES ",
+            "label1": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACIÓN DE CONTROLES",
+            "label2": "MOVIMIENTO DE VEHÍCULOS, MOVIMIENTO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
+            "label3": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTACIÓN DE CONTROLES ",
             "label4": "Cada sitio de trabajo es diferente, así que debe de identificar kis peligros potenciales antes de comenzar la tarea y tambien cuando la tarea cambia significativamente",
             "label5": "Identificación de los peligros(dar click si el peligro está presente)",
             "label6": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
@@ -1638,120 +1668,6 @@
             "name": "Nombre del Supervisor",
             "phone": "Teléfono de Contacto del Supervisor"
           }
-        }
-      },
-      "marine": {
-        "lonely_job": "Trabajo Solitario",
-        "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
-        "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
-        "strange_evaluation": "EVALUACION DE PELIGROS Y LESIONES GRAVES - IDENTIFICACION DE RIESGOS E IMPLEMENTACION DE CONTROLES",
-        "movements": "MOVIMIENTO DE VEHÍCULOS, MOVIMINETO DE MAQUINARIA, TRABAJO EN ALTURA, TRABAJO DE IZAJE DE CARGAS, INCENDIO, EXPLOSIÓN",
-        "practice": "Poner en práctica Controles Establecidos",
-        "strange": "¿Qué es extraño, inusual o diferente hoy?",
-        "evaluation": "EVALUACION DE PELIGROS EN EL SITIO DE TRABAJO - IDENTIFICACIÓN DE RIESGOS E IMPLEMENTSCIÓN DE CONTROLES",
-        "each_site": "Cada sitio de trabajo es diferente, así que debe de identificar los peligros potenciales antes de comenzar la tarea y también cuando la tarea cambia significativamente",
-        "identification": "Identificación de los peligros(dar click si el peligro está presente)",
-        "different_unusual": "IDENTIFIQUE CUALQUIER MEDIDA DE CONTROL ESPECIAL REQUERIDA - ¿Qué es extraño, inusual o diferente hoy?",
-        "title_supervisor": "REPORTE TODAS LAS LESIONES, ENFERMEDADES Y CASI INCIDENTES",
-        "subtitle_supervisor": "En el caso de peligro de muerte o de lesiones graves, póngase en contacto con el servicio de emergencias inmediatamente Informe de todos los incidentes a su jefe inmediato - esto puede ser una lesión menor, grave, o un casi incidente",
-        "emergency": "En una situación de emergencia, también puede ponerse en contacto con el Centro de Respuesta de Cummins para llamada dentro de U.S. +1 866.685.4313, para llamada Internacional +1 433.221.4877",
-        "safety_title": "MEJORAR LA SEGURIDAD PARA ALCANZAR NUESTRA META LIBRE DE LESIONES",
-        "safety_subtitle": "¿Hay una manera segura de hacer este trabajo? Comparte tus experiencias y sugerencias de mejora en una de estas tres formas:",
-        "safety_subtitle_option1": "1. QSOL - Levantar un Ticket de Ayuda de Seguridad",
-        "safety_subtitle_option2": "Vaya a 'Mis tickets de ayuda QSOL´y seleccione ´Seguridad´en el cuadro desplegable del módulo",
-        "safety_subtitle_option3": "2. Notificar a su supervisor en persona o levantar un reporte de Casi Incidente",
-        "safety_subtitle_option4": "3. Comparte tu experiencia durante una Observación de la Seguridad en el Trabajo",
-        "unusual_hazards": {
-          "title": "Peligros inusuales",
-          "gas": "Gas Natural (GNG/LNG)",
-          "animals": "Animales o insectos",
-          "gases": "Gases de escape",
-          "high_level": "Alto nivel de ruido",
-          "hot_works": "Trabajos en caliente",
-          "work_space": "Espacios de trabajo restringido",
-          "confined_space": "Entrada a espacios confinados",
-          "hygiene_hazards": "Peligros de higiene",
-          "flammable_gas": "Gas o liquido inflamable",
-          "compressed_air": "Aire Comprimido",
-          "security": "Seguridad de la batería"
-        },
-        "access_equipment": {
-          "title": "Acceso al (los) Equipo(s)",
-          "ladders": "Escalera o Escalera de Mano",
-          "platform_access": "Plataforma de Acceso Estático",
-          "platform_work": "Plataforma de Trabajo Móvil",
-          "stool": "Taburete o Grada de Trabajo"
-        },
-        "hazards_activity": {
-          "title": "Actividades Peligrosas en el Taller",
-          "spray_painting": "Pintura con Pistola",
-          "row_testing": "Celda de Prueba del Motor",
-          "dyno_chassiss": "Dyno Chassiss",
-          "washing_bay": "Bahía de lavado",
-          "chemical_bath": "Baño Químico",
-          "cleaning": "Limpieza",
-          "pit_inspection": "Inspección de Fosas"
-        },
-        "order_cleaning": {
-          "title": "Orden y limpieza",
-          "establishing_work_area": "Establecer orden en el área de trabajo",
-          "dispose_discard": "Disponer / Desechar",
-          "cleaning": "Limpieza"
-        },
-        "fire_line": {
-          "title": "Línea de Fuego",
-          "hit_by_or_against": "Golpeado(a) por o contra",
-          "trapped_by": "Atrapado(a) por",
-          "dangerous_energy": "Energía Peligrosa",
-          "dust_dirt": "Polvo o Suciedad",
-          "proyectile_hazard": "Peligro de Proyectil"
-        },
-        "slips": {
-          "title": "Resbalones, Tropiezos, Caídas",
-          "wet_oily_soil": "Suelo Húmedo o Aceitoso",
-          "cables_on_floor": "Cables sobre el piso",
-          "terrain_unevenness": "Los desniveles del terreno / Grava",
-          "elevated_area": "Área elevada / Mezanine",
-          "rooftop": "Azotea",
-          "snow_mud_or_ice": "Nieve, Barro o Hielo",
-          "pit_in_the_floor": "Fosa en el Piso"
-        },
-        "interaction_other_people": {
-          "title": "Interacción con otras Personas",
-          "job_contractors": "Trabajo con Contratistas",
-          "general_public": "Público en General",
-          "client_employee": "Cliente/Empleados"
-        },
-        "environmental_impact": {
-          "title": "Impacto Ambiental",
-          "leaks_or_spills": "Fugas o Derrames",
-          "fumes_or_smokes": "Vapores o Humo",
-          "waste_disposal": "Eliminación de Residuos",
-          "chemical_products": "Uso de Productos Químicos"
-        },
-        "ergonomic": {
-          "title": "Ergonomía",
-          "excesive_force": "Fuerza Excesiva",
-          "repetitive_job": "Trabajo Repetitivo",
-          "estresful": "Postura Estresante",
-          "contact_stress": "Estrés de Contacto",
-          "kneeling_down": "Arrodillándose / Arrastrándose",
-          "vibrate": "Vibración",
-          "heavy_lifting": "Levantamiento de Objetos Pesados"
-        },
-        "weather_conditions": {
-          "title": "Condiciones Climáticas",
-          "extreme_heat": "Calor Extremo",
-          "extreme_cold": "Frío Extremo",
-          "strong_winds": "Fuertes Vientos",
-          "storm_conditions": "Condiciones de Tormenta",
-          "rain": "Lluvia",
-          "snown": "Nieve / Hielo",
-          "great_altitud": "Gran Altitud"
-        },
-        "supervisor": {
-          "name": "Nombre del Supervisor",
-          "phone": "Teléfono de Contacto del Supervisor"
         }
       }
     },

@@ -18,6 +18,7 @@ import {BaseForm, OnAnswer} from '../base-form';
 import { User } from '../../../../../database/models/user';
 import {DateTime} from 'luxon';
 import {Technician} from '../../../../../database/models/technician';
+import {Hardcoded} from '../../hardcoded';
 
 @Component({
   selector: 'app-jsa-on-site',
@@ -443,7 +444,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit, OnAnswer {
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
+    this.categoriesUnits$ = Hardcoded.categories();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

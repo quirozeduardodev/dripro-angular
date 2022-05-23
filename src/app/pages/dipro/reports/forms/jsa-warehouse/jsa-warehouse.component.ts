@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import {BaseForm, OnAnswer} from '../base-form';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { Unit } from '../../../../../database/models/unit';
 import { Category } from '../../../../../database/models/category';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import {DateTime} from 'luxon';
 import {map, take} from 'rxjs/operators';
 import { User } from 'src/app/database/models/user';
 import {Technician} from '../../../../../database/models/technician';
+import {Hardcoded} from '../../hardcoded';
 
 @Component({
   selector: 'app-jsa-warehouse',
@@ -439,8 +440,8 @@ export class JsaWarehouseComponent extends BaseForm implements OnInit, OnAnswer 
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = this.unitOfWorkDatabase.categoryRepository.all();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
+    this.categoriesUnits$ = Hardcoded.categories();
   }
 
   onAnswersUpdated(answers: {[p: string]: any}): void {
