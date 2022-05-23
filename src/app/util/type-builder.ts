@@ -334,6 +334,7 @@ export class TypeBuilder {
         wwid: data.wwid,
         passwordChanged: data.change_pass === true,
         supervisor: data.supervisor ?? null,
+        sitio: data.sitio ?? '',
         formPermissions: await TypeBuilder.userFromPermissions(data.form ? JSON.parse(data.form) : null),
         createdAt: data.created_at ? DateTime.fromISO(data.created_at) : null,
         updatedAt: data.updated_at ? DateTime.fromISO(data.updated_at) : null,

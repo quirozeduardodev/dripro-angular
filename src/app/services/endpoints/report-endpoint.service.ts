@@ -33,8 +33,10 @@ export class ReportEndpointService extends EndpointService {
     const url = `${this.apiUrl}/formulary/store`;
     const noNullAnswers: { [q: string]: any } = {};
     for (const [key, value] of Object.entries(request.answer)) {
-      if(Array.isArray(value) && value.length > 0) {
-        noNullAnswers[key] = value;
+      if(Array.isArray(value)) {
+        if(value.length > 0) {
+          noNullAnswers[key] = value;
+        }
       } else if(value !== null && value !== undefined) {
         noNullAnswers[key] = value;
       }

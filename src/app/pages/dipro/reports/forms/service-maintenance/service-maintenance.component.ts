@@ -19,7 +19,7 @@ import { UnitOfWorkDatabase } from 'src/app/database/unit-of-work.database';
 import { AuthService } from 'src/app/services/auth.service';
 import {BaseForm, OnAnswer} from '../base-form';
 import {Technician} from '../../../../../database/models/technician';
-import {distinct, map, mergeMap, startWith} from 'rxjs/operators';
+import {distinct, map, mergeMap, startWith, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-maintenance',
@@ -699,6 +699,12 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
           }
         });
     });
+
+    if(!answers.sucursal) {
+      this.authService.user.pipe(take(1)).subscribe((user) => {
+        this.formGroup.controls.sucursal.setValue(user?.sitio ?? '');
+      });
+    }
 
     combineLatest([
       this.formGroup.controls.model_gene.valueChanges.pipe(startWith(answers.model_gene ?? null), distinct()),

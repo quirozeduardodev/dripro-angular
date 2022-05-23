@@ -6,6 +6,7 @@ export interface UserResponse {
   wwid: string;
   passwordChanged: boolean;
   supervisor: string | null;
+  sitio: string;
   formPermissions: FromPermissions;
   createdAt: DateTime | null;
   updatedAt: DateTime | null;

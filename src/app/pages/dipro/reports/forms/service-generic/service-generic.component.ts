@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {BaseForm, OnAnswer} from '../base-form';
 import {Delay} from '../../../../../database/models/delay';
 import {Technician} from '../../../../../database/models/technician';
-import {distinct, map, mergeMap, startWith} from 'rxjs/operators';
+import {distinct, map, mergeMap, startWith, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-generic',
@@ -191,6 +191,11 @@ export class ServiceGenericComponent extends BaseForm implements OnInit, OnAnswe
         });
     });
 
+    if(!answers.sucursal) {
+      this.authService.user.pipe(take(1)).subscribe((user) => {
+        this.formGroup.controls.sucursal.setValue(user?.sitio ?? '');
+      });
+    }
 
     combineLatest([
       this.formGroup.controls.model_gene.valueChanges.pipe(startWith(answers.model_gene ?? null), distinct()),
