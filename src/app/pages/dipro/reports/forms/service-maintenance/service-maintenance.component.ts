@@ -693,7 +693,6 @@ export class ServiceMaintenanceComponent extends BaseForm implements OnInit, OnA
           for (const contact of contacts) {
             if(contact.name === value) {
               this.formGroup.controls.phone.setValue(contact.phone);
-              this.formGroup.controls.sucursal.setValue('');
               break;
             }
           }

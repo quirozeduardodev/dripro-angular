@@ -24,7 +24,6 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { MultiplierFormControlDirective } from './directives/multiplier-form-control.directive';
 import { RadioGroupComponent } from './radio-group/radio-group.component';
 import {LocationTextFieldComponent} from './location-text-field/location-text-field.component';
-import {StepperComponent} from './stepper/stepper.component';
 import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
@@ -44,8 +43,7 @@ import {MatButtonModule} from '@angular/material/button';
     SelectComponent,
     ChipListComponent,
     MultiSelectComponent,
-    MultiplierFormControlDirective,
-    StepperComponent
+    MultiplierFormControlDirective
   ],
   imports: [
     CommonModule,
@@ -76,8 +74,7 @@ import {MatButtonModule} from '@angular/material/button';
     SelectComponent,
     ChipListComponent,
     MultiSelectComponent,
-    MultiplierFormControlDirective,
-    StepperComponent
+    MultiplierFormControlDirective
   ],
 })
 export class FormComponentsModule {}

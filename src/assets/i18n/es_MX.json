@@ -91,6 +91,12 @@
             "descendant": "Descendiente"
           }
         },
+        "deleteReport": {
+          "title": "Borrar reporte",
+          "info": "¿Estas seguro que quieres borrar este reporte para siempre?",
+          "cancel":  "Cancelar",
+          "accept": "Aceptar"
+        },
         "create": {
           "title": "Crear reporte"
         },

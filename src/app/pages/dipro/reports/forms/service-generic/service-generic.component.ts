@@ -184,7 +184,6 @@ export class ServiceGenericComponent extends BaseForm implements OnInit, OnAnswe
           for (const contact of contacts) {
             if(contact.name === value) {
               this.formGroup.controls.phone.setValue(contact.phone);
-              this.formGroup.controls.sucursal.setValue('');
               break;
             }
           }

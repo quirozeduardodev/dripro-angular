@@ -7,6 +7,8 @@ export const environment = {
   apiUrl: 'http://138.91.226.69:85/api',
   baseUrl: 'http://138.91.226.69:85',
   databaseName: 'dipro_dev.db',
+  appVersion: '2.0.0',
+  buildVersion: 68
 };
 
 

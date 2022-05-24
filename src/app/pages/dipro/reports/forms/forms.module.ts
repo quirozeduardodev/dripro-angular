@@ -36,6 +36,8 @@ export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/reports/', '.json');
   import {MatRadioModule} from '@angular/material/radio';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule({
@@ -53,19 +55,21 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     IngersollRandRotaryContactCooledRotaryComponent,
     IngersollRandRotaryContactCooledNirvanaComponent,
     IngersollRandRefrigeratedDryerSystemComponent,
-    IngersollRandHlEhHbComponent
+    IngersollRandHlEhHbComponent,
   ],
-  imports: [
-    CommonModule,
-    ComponentsModule,
-    FormComponentsModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    MatSlideToggleModule,
-    MatRadioModule,
-    TranslateModule,
-    ScrollingModule
-  ],
+    imports: [
+        CommonModule,
+        ComponentsModule,
+        FormComponentsModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        MatSlideToggleModule,
+        MatRadioModule,
+        TranslateModule,
+        ScrollingModule,
+        CdkStepperModule,
+        MatStepperModule
+    ],
   exports: [FormsComponent],
 })
 export class FormsModule {}

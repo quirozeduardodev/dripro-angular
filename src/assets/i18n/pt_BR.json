@@ -91,6 +91,12 @@
             "descendant": "Descendente"
           }
         },
+        "deleteReport": {
+          "title": "Limpar relatório",
+          "info": "Tem certeza de que deseja excluir este relatório definitivamente?",
+          "cancel":  "Cancelar",
+          "accept": "Aceitar"
+        },
         "create": {
           "title": "Criar relatório"
         },
@@ -192,15 +198,15 @@
           }
         },
         "title": "Relatórios",
-        "filters": "filtros",
-        "jsa": "jsa",
+        "filters": "Filtros",
+        "jsa": "JSA",
         "service": "Serviço",
-        "ingersollRand": "ingersollRand"
+        "ingersollRand": "IngersollRand"
       },
       "offlineData": {
         "title": "Dados da linha de out",
         "lastUpdated": "Última atualização",
-        "never": "nunca",
+        "never": "Nunca",
         "syncAll": "Sincronize tudo",
         "answers":  "Respostas",
         "applications": "Formulários",
@@ -216,7 +222,7 @@
         "types":  "tipos",
         "units": "unidades",
         "users":  "Comercial",
-        "technicians": "técnicos"
+        "technicians": "Técnicos"
       },
       "settings": {
         "components": {
@@ -230,18 +236,18 @@
         },
         "title": "Definições",
         "language": {
-          "title": "idioma",
-          "spanish": "español",
-          "portuguese": "portugues",
-          "english": "inglesa",
-          "chinese": "china"
+          "title": "Idioma",
+          "spanish": "Español",
+          "portuguese": "Portugues",
+          "english": "Inglesa",
+          "chinese": "China"
         },
         "security": {
           "title":  "Segurança",
           "changePassword": "Mudar minha senha"
         },
         "client": {
-          "title":  "cliente"
+          "title":  "Cliente"
         }
       }
     }
@@ -250,19 +256,19 @@
     "common": {
       "names": {
         "unknown": "Um estranho",
-        "jsa": "jsa",
+        "jsa": "JSA",
         "jsa-onSite": "No sítio",
         "jsa-onField": "Em campo",
-        "jsa-onField-generic": "genérico",
+        "jsa-onField-generic": "Genérico",
         "jsa-onField-powerGeneration": "Geração de energia",
-        "jsa-onField-marine": "marino",
+        "jsa-onField-marine": "Marino",
         "jsa-warehouse": "Estoque",
 
         "service": "Serviço",
         "service-generic": "genérico",
         "service-preventiveMaintenance": "Mantimento preventivo",
 
-        "ingersollRand": "ingersollRand",
+        "ingersollRand": "IngersollRand",
         "ingersollRand-rotaryContactCooledRotary": "Rotário rotativo rotativo rotativo rotativo",
         "ingersollRand-rotaryOilFreeSierra": "Sierra livre de óleo rotativo",
         "ingersollRand-hlEhHb": "Secador dessecante hl-eh-hb",
@@ -282,12 +288,12 @@
         "bussinesUnit": "Unidade de negócio",
         "isAccompained": "Está acompanhado?",
         "selectYourPartner": "Selecione seu (s) parceiro (s)",
-        "extern": "externo",
+        "extern": "Externo",
         "taskCategory": "Categoria de tarefa",
         "categoryDescription": "Descrição da tarefa",
         "fillLocation": "Localização",
         "riskLevel": "Nível de risco",
-        "controlled": "controlado",
+        "controlled": "Controlado",
         "analisisCause": "Análise de causa",
         "actionTaken": "Ações tomadas",
         "actionsTaken": "medidasTomadas",
@@ -301,7 +307,7 @@
         "submit": "Enviar relatório",
         "send": "enviar",
         "save": "Salve o rascunho",
-        "cancel": "cancelar",
+        "cancel": "Cancelar",
         "noJsa": "Não. JSA",
         "client": "cliente",
         "serviceLocation": "Localização do serviço",
@@ -331,14 +337,14 @@
       },
       "actionsTaken": {
         "insured": "Segurado",
-        "locked": "bloqueado",
+        "locked": "Bloqueado",
         "trained": "Funcionário treinado",
         "trained_installed": "Treinado, instalado, limpo",
-        "protected": "protegido",
-        "provided": "provisto (epp)",
+        "protected": "Protegido",
+        "provided": "Provisto (epp)",
         "superseded": "Substituído",
-        "removed": "removido",
-        "repaired": "reparado",
+        "removed": "Removido",
+        "repaired": "Reparado",
         "other": "Outro"
       },
       "measurements": {
@@ -379,7 +385,7 @@
         "option5": "clientePg",
         "option6": "Outros /relacionados",
         "option7": "Auto / outros",
-        "option8": "equipamento",
+        "option8": "Equipamento",
         "option9": "Conjunto do motor",
         "option10": "Desmontagem do motor",
         "option11": "pintura",

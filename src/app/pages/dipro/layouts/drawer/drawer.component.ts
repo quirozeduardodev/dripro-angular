@@ -14,6 +14,7 @@ import { AuthService } from '../../../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { ChangePasswordDialogComponent } from './components/change-password-dialog/change-password-dialog.component';
 import {App} from '@capacitor/app';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-drawer',
@@ -55,6 +56,7 @@ export class DrawerComponent implements OnInit, AfterViewInit, OnDestroy {
   userSubscription: Subscription | null = null;
   mainWrapperObserver: ResizeObserver | null = null;
   backButtonSubscription: Subscription | null = null;
+  appVersion: string = `${environment.appVersion}+${environment.buildVersion}`;
   constructor(private router: Router, private authService: AuthService, private _platform: Platform) {}
 
   ngOnInit() {
