@@ -137,7 +137,7 @@
                         "name": "Qual categoria de serviço de campo será feita?",
                         "options": {
                           "generic": {
-                            "name": "genérico"
+                            "name": "Genérico"
                           },
                           "powerGeneration": {
                             "name": "Geração de energia"
@@ -160,7 +160,7 @@
                   "name": "Que tipo de serviço?",
                   "options": {
                     "generic": {
-                      "name": "genérico"
+                      "name": "Genérico"
                     },
                     "preventiveMaintenance": {
                       "name": "Mantimento preventivo"
@@ -265,7 +265,7 @@
         "jsa-warehouse": "Estoque",
 
         "service": "Serviço",
-        "service-generic": "genérico",
+        "service-generic": "Genérico",
         "service-preventiveMaintenance": "Mantimento preventivo",
 
         "ingersollRand": "IngersollRand",
@@ -377,23 +377,18 @@
           }
         }
       },
-      "categories": {
-        "option1": "Bus-Uuto-Camión-RV de automóveis",
-        "option2": "Auto - caminhão de bombeiros",
-        "option3": "CNG-LNG",
-        "option4": "Reparar",
-        "option5": "clientePg",
-        "option6": "Outros /relacionados",
-        "option7": "Auto / outros",
-        "option8": "Equipamento",
-        "option9": "Conjunto do motor",
-        "option10": "Desmontagem do motor",
-        "option11": "pintura",
-        "option12": "Célula de teste",
-        "option13": "Limpeza da peça",
-        "option14": "Carregar / baixar limpeza / veículo do motor"
-      },
       "warehouse": {
+        "categories": {
+          "option1": "Embalado",
+          "option2": "Desempacado",
+          "option3": "Inventário cíclico",
+          "option4": "Coleta de peças",
+          "option5": "Carregando/Download",
+          "option6": "Preparação de kits",
+          "option7": "Núcleos",
+          "option8": "Operação de empilhadeira",
+          "option9": "Recibo de pedidos de estoque"
+        },
         "lonely_job": "Trabalho solitário",
         "activity": "A tarefa exige trabalhar sozinha ou sem supervisão?",
         "details": "Forneça detalhes de medidas especiais de segurança e plano de emergência.",
@@ -458,7 +453,7 @@
             "title": "Perigos incomuns",
             "option1": "Gas Natural (MNG/LNG)",
             "option2": "Animais ou insetos",
-            "option3": "gasesDeEscape",
+            "option3": "GasesDeEscape",
             "option4": "Alto nível de ruído",
             "option5": "Empregos quentes",
             "option6": "Espaços de trabalho restritos",
@@ -553,7 +548,7 @@
           "title": "Perigos incomuns",
           "gas": "Gas Natural (MNG/LNG)",
           "animals": "Animais ou insetos",
-          "gases": "gasesDeEscape",
+          "gases": "GasesDeEscape",
           "high_level": "Alto nível de ruído",
           "hot_works": "Empregos quentes",
           "work_space": "Espaços de trabalho restritos",
@@ -643,6 +638,22 @@
         }
       },
       "site": {
+        "categories": {
+          "option1": "BUS-UUTO-CAMION AUTO-RV",
+          "option2": "Auto - caminhão de bombeiros",
+          "option3": "CNG-LNG",
+          "option4": "Reparar",
+          "option5": "Pg - cliente",
+          "option6": "Outros /relacionados",
+          "option7": "Auto / outros",
+          "option8": "Equipamento",
+          "option9": "Conjunto do motor",
+          "option10": "Desmontagem do motor",
+          "option11": "Pintura",
+          "option12": "Célula de teste",
+          "option13": "Peças de limpeza",
+          "option14": "Carregar / baixar o motor limpo / veículo"
+        },
         "lonely_job": "Trabalho solitário",
         "activity": "A tarefa exige trabalhar sozinha ou sem supervisão?",
         "details": "Forneça detalhes de medidas especiais de segurança e plano de emergência.",
@@ -707,7 +718,7 @@
             "title": "Perigos incomuns",
             "option1": "Gas Natural (MNG/LNG)",
             "option2": "Animais ou insetos",
-            "option3": "gasesDeEscape",
+            "option3": "GasesDeEscape",
             "option4": "Alto nível de ruído",
             "option5": "Empregos quentes",
             "option6": "Espaços de trabalho restritos",
@@ -803,7 +814,7 @@
           "title": "Perigos incomuns",
           "gas": "Gas Natural (MNG/LNG)",
           "animals": "Animais ou insetos",
-          "gases": "gasesDeEscape",
+          "gases": "GasesDeEscape",
           "high_level": "Alto nível de ruído",
           "hot_works": "Empregos quentes",
           "work_space": "Espaços de trabalho restritos",
@@ -894,6 +905,23 @@
       },
       "field": {
         "generic": {
+          "categories": {
+            "option1": "Agricultura da indústria",
+            "option2": "Isto - pb",
+            "option3": "Auto - outros",
+            "option4": "Auto - caminhão de bombeiros",
+            "option5": "gngGng",
+            "option6": "Reparar",
+            "option7": "PG-Client",
+            "option8": "Outros - relacionados",
+            "option9": "equipamento",
+            "option10": "Conjunto do motor",
+            "option11": "Desmontagem do motor",
+            "option12": "pintura",
+            "option13": "Célula de teste",
+            "option14": "Limpeza da peça",
+            "option15": "Carregar / baixar limpeza / veículo do motor"
+          },
           "lonely_job": "Trabalho solitário",
           "activity": "A tarefa exige trabalhar sozinha ou sem supervisão?",
           "details": "Forneça detalhes de medidas especiais de segurança e plano de emergência.",
@@ -958,7 +986,7 @@
               "title": "Perigos incomuns",
               "option1": "Gas Natural (MNG/LNG)",
               "option2": "Animais ou insetos",
-              "option3": "gasesDeEscape",
+              "option3": "GasesDeEscape",
               "option4": "Alto nível de ruído",
               "option5": "Empregos quentes",
               "option6": "Espaços de trabalho restritos",
@@ -1055,7 +1083,7 @@
             "gas": "Gas Natural (MNG/LNG)",
             "animals": "Animais ou insetos",
             "electrical": "Companhias aéreas de energia elétrica",
-            "gases": "gasesDeEscape",
+            "gases": "GasesDeEscape",
             "high_level": "Alto nível de ruído",
             "hot_works": "Empregos quentes",
             "work_space": "Espaços de trabalho restritos",
@@ -1145,6 +1173,19 @@
           }
         },
         "powerGeneration": {
+          "categories": {
+            "option1": "PG-COMERCIAL->200KW",
+            "option2": "PG-COMERCIAL-<200kW",
+            "option3": "Pg- switches-switchgear",
+            "option4": "Iniciar inicial",
+            "option5": "PG-Rena",
+            "option6": "pgConsumidor",
+            "option7": "Pg-outro",
+            "option8": "PG-Motor (acidade G)",
+            "option9": "pm",
+            "option10": "Chave de transferência automática",
+            "option11": "Teste de carga"
+          },
           "lonely_job": "Trabalho solitário",
           "activity": "A tarefa exige trabalhar sozinha ou sem supervisão?",
           "details": "Forneça detalhes de medidas especiais de segurança e plano de emergência.",
@@ -1220,7 +1261,7 @@
               "title": "Perigos incomuns",
               "option1": "Gas Natural (MNG/LNG)",
               "option2": "Animais ou insetos",
-              "option3": "gasesDeEscape",
+              "option3": "GasesDeEscape",
               "option4": "Alto nível de ruído",
               "option5": "Empregos quentes",
               "option6": "Espaços de trabalho restritos",
@@ -1320,7 +1361,7 @@
             "title": "Perigos incomuns",
             "gas": "Gas Natural (MNG/LNG)",
             "animals": "Animais ou insetos",
-            "gases": "gasesDeEscape",
+            "gases": "GasesDeEscape",
             "electrical": "Companhias aéreas de energia elétrica",
             "high_level": "Alto nível de ruído",
             "hot_works": "Empregos quentes",
@@ -1412,6 +1453,18 @@
           }
         },
         "marine": {
+          "categories": {
+            "option1": "HHP-Marino",
+            "option2": "Marino - sem hhp",
+            "option3": "Barco de recreação",
+            "option4": "Bomba de fogo",
+            "option5": "Guindaste",
+            "option6": "Propulsão",
+            "option7": "pm",
+            "option8": "Gerador",
+            "option9": "Plataforma de petróleo no alto mar",
+            "option10": "Outros"
+          },
           "lonely_job": "Trabalho solitário",
           "activity": "A tarefa exige trabalhar sozinha ou sem supervisão?",
           "details": "Forneça detalhes de medidas especiais de segurança e plano de emergência.",
@@ -1484,7 +1537,7 @@
               "title": "Perigos incomuns",
               "option1": "Gas Natural (MNG/LNG)",
               "option2": "Animais ou insetos",
-              "option3": "gasesDeEscape",
+              "option3": "GasesDeEscape",
               "option4": "Alto nível de ruído",
               "option5": "Empregos quentes",
               "option6": "Espaços de trabalho restritos",
@@ -1584,7 +1637,7 @@
             "title": "Perigos incomuns",
             "burnedPaint": "Tinta queimada - desativada",
             "animals": "Animais ou insetos",
-            "gases": "gasesDeEscape",
+            "gases": "GasesDeEscape",
             "high_level": "Alto nível de ruído",
             "hot_works": "Empregos quentes",
             "work_space": "Espaços de trabalho restritos",

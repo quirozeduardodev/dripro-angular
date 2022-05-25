@@ -596,7 +596,7 @@ export class JsaOnFieldMarineComponent extends BaseForm implements OnInit, OnAns
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = Hardcoded.categories();
+    this.categoriesUnits$ = Hardcoded.jsaCategoriesFieldMarine();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

@@ -377,23 +377,18 @@
           }
         }
       },
-      "categories": {
-        "option1": "Autobús-Auto-Camión Auto - RV",
-        "option2": "Auto - Camión de bomberos",
-        "option3": "CNG-LNG",
-        "option4": "Reparación",
-        "option5": "PG - Cliente",
-        "option6": "Otros /Afín",
-        "option7": "Auto / Otros",
-        "option8": "Equipamiento",
-        "option9": "Ensamble de motor",
-        "option10": "Desmontaje del motor",
-        "option11": "Pintura",
-        "option12": "Celda de prueba",
-        "option13": "Limpieza de piezas",
-        "option14": "Carga / Descarga Limpieza del Motor / Vehículo"
-      },
       "warehouse": {
+        "categories": {
+          "option1": "Empacado",
+          "option2": "Desempacado",
+          "option3": "Inventario cíclico",
+          "option4": "Recolección de partes",
+          "option5": "Cargando/Descargando",
+          "option6": "Preparación de Kits",
+          "option7": "CORES",
+          "option8": "Operación de Montacargas",
+          "option9": "Recibo de Pedido de Stock"
+        },
         "lonely_job": "Trabajo Solitario",
         "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
         "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
@@ -643,6 +638,22 @@
         }
       },
       "site": {
+        "categories": {
+          "option1": "Autobús-Auto-Camión Auto - RV",
+          "option2": "Auto - Camión de bomberos",
+          "option3": "CNG-LNG",
+          "option4": "Reparación",
+          "option5": "PG - Cliente",
+          "option6": "Otros /Afín",
+          "option7": "Auto / Otros",
+          "option8": "Equipamiento",
+          "option9": "Ensamble de motor",
+          "option10": "Desmontaje del motor",
+          "option11": "Pintura",
+          "option12": "Celda de prueba",
+          "option13": "Limpieza de piezas",
+          "option14": "Carga / Descarga Limpieza del Motor / Vehículo"
+        },
         "lonely_job": "Trabajo Solitario",
         "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
         "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
@@ -894,6 +905,23 @@
       },
       "field": {
         "generic": {
+          "categories": {
+            "option1": "Industria- Agricultura",
+            "option2": "Auto - RV",
+            "option3": "Auto - Otros",
+            "option4": "Auto - Camión de bomberos",
+            "option5": "CNG-LNG",
+            "option6": "Reparación",
+            "option7": "PG- Cliente",
+            "option8": "Otros - Afín",
+            "option9": "Equipamiento",
+            "option10": "Ensamble de motor",
+            "option11": "Desmontaje del motor",
+            "option12": "Pintura",
+            "option13": "Celda de prueba",
+            "option14": "Limpieza de piezas",
+            "option15": "Carga / Descarga Limpieza del Motor / Vehículo"
+          },
           "lonely_job": "Trabajo Solitario",
           "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
           "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
@@ -1145,6 +1173,19 @@
           }
         },
         "powerGeneration": {
+          "categories": {
+            "option1": "PG-Comercial->200KW",
+            "option2": "PG-Comercial-<200KW",
+            "option3": "PG- Switches-Switchgear",
+            "option4": "Arranque Inicial",
+            "option5": "PG-Renta ",
+            "option6": "PG-Consumidor",
+            "option7": "PG-Otros",
+            "option8": "PG-Motor (G Drive)",
+            "option9": "PM",
+            "option10": "Interruptor de Transferencia Automática",
+            "option11": "Prueba de carga"
+          },
           "lonely_job": "Trabajo Solitario",
           "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
           "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",
@@ -1412,6 +1453,18 @@
           }
         },
         "marine": {
+          "categories": {
+            "option1": "HHP- Marino",
+            "option2": "Marino - No HHP",
+            "option3": "Barco para recreación",
+            "option4": "Bomba contra incendios",
+            "option5": "Grúa",
+            "option6": "Propulsión",
+            "option7": "PM",
+            "option8": "Generador",
+            "option9": "Plataforma petrolera en alta mar",
+            "option10": "Otros"
+          },
           "lonely_job": "Trabajo Solitario",
           "activity": "¿La tarea requiere trabajar sólo o sin supervisión?",
           "details": "Proporcione detalles de medidas especiales de seguridad y plan de emergencia.",

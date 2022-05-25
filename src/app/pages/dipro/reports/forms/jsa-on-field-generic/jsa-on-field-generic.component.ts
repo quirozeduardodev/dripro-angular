@@ -477,7 +477,7 @@ export class JsaOnFieldGenericComponent extends BaseForm implements OnInit {
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = Hardcoded.categories();
+    this.categoriesUnits$ = Hardcoded.jsaCategoriesFieldGeneric();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

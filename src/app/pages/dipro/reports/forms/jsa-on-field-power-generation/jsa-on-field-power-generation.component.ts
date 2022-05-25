@@ -607,7 +607,7 @@ export class JsaOnFieldPowerGenerationComponent extends BaseForm implements OnIn
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = Hardcoded.categories();
+    this.categoriesUnits$ = Hardcoded.jsaCategoriesFieldPowerGeneration();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

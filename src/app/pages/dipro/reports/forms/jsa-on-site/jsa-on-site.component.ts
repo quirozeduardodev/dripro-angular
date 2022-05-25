@@ -444,7 +444,7 @@ export class JsaOnSiteComponent extends BaseForm implements OnInit, OnAnswer {
 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
-    this.categoriesUnits$ = Hardcoded.categories();
+    this.categoriesUnits$ = Hardcoded.jsaCategoriesSite();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
   }
 

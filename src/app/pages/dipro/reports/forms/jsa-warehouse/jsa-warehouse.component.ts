@@ -441,7 +441,7 @@ export class JsaWarehouseComponent extends BaseForm implements OnInit, OnAnswer 
   ngOnInit(): void {
     this.businessUnits$ = this.unitOfWorkDatabase.unitRepository.all();
     this.technicians$ = this.unitOfWorkDatabase.technicianRepository.all();
-    this.categoriesUnits$ = Hardcoded.categories();
+    this.categoriesUnits$ = Hardcoded.jsaCategoriesWarehouse();
   }
 
   onAnswersUpdated(answers: {[p: string]: any}): void {
